@@ -12,19 +12,19 @@ justify-content:center;
 flex-wrap:wrap;
 `;
 
-const Card = styled.div`
-  background-color: #f0f0f0;
-  border: 1px solid #ccc;
-  padding: 20px;
-  margin:50px;
-  height:350px;
-  width:350px;
-`;
+// const Card = styled.div`
+//   background-color: #f0f0f0;
+//   border: 1px solid #ccc;
+//   padding: 20px;
+//   margin:50px;
+//   height:350px;
+//   width:350px;
+// `;
 const Ecosystem = () => {
   return (
     <Container>
 
-      <Card {} />
+      <Card/>
 {/*
 <Card>1</Card>
 <Card>1</Card>
