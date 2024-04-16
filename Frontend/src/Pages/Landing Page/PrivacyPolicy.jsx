@@ -10,7 +10,7 @@ const Container = styled.div`
 
   @media (max-width: 768px) {
     padding: 1rem;
-    margin: 3rem auto;
+    margin: 3rem 2rem;
   }
 `;
 
@@ -21,7 +21,8 @@ const MainText = styled.h1`
   text-align: center;
 
   @media (max-width: 768px) {
-    font-size: 2rem;
+    font-size: 1rem;
+    margin: 1rem 1rem;
   }
 `;
 const Content = styled.p`

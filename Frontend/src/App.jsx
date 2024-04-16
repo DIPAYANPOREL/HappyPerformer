@@ -1,11 +1,12 @@
-import PrivacyPolicy from "./Pages/Landing Page/PrivacyPolicy";
+import MeetTheTeam from "./Pages/Landing Page/MeetTheTeam";
+
+// import TermsAndConditions from "./Pages/Landing Page/TermsAndConditions";
 
 function App() {
   return (
     <>
-      {/* <Home /> */}
-      {/* <AboutUs /> */}
-      <PrivacyPolicy />
+      <MeetTheTeam />
+      {/* <TermsAndConditions /> */}
     </>
   );
 }
