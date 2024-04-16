@@ -39,23 +39,26 @@ const Logo = styled.h1`
   }
 `;
 
-const GetStarted = styled.div`
-  background-color: #ff8c00;
-  color: white;
-  padding: 15px 32px;
-  text-align: center;
-  text-decoration: none;
+const GetStarted = styled.button`
+{
   display: inline-block;
-  font-size: 16px;
-  margin-left: 25px;
-  border-radius: 4px;
-  cursor: pointer;
-  transition: background-color 0.3s ease;
-
-  &:hover {
-    background-color: #ffc02b;
-  }
-`;
+  border-radius: 50px;
+  transition: all 0.4s ease-in-out;
+  padding: 10px 27px;
+  background-color: transparent;
+  border: 2px solid var(--gray-color);
+  color: var(--text-gray);
+  font-weight: 500;
+  font-size: 14px;
+  text-transform: uppercase;
+  letter-spacing: 2px;
+  text-decoration: none;
+}
+&:hover{
+  background-color: var(--primary-color);
+  border-color: var(--primary-color);
+  color: var(--text-white);
+}`
 
 const Login = styled.div`
   padding: 15px 32px;
