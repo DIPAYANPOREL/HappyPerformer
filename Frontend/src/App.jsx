@@ -1,15 +1,9 @@
-import MeetTheTeam from "./Pages/Landing Page/MeetTheTeam";
+import Login from "./Pages/Software/Login";
 
 function App() {
   return (
     <>
-      <MeetTheTeam />
-      {/* <Home />
-       */}
-      {/* <PrivacyPolicy />
-       */}
-
-      {/* <TermsAndConditions /> */}
+      <Login />
     </>
   );
 }
