@@ -13,7 +13,9 @@ const Container = styled.div`
 `;
 const Footer = () => {
   return (
-    <Container>© All rights reserved. Made by Salahkaar Consultants.</Container>
+    <Container>
+      © All rights reserved - Made by Salahkaar Consultants.
+    </Container>
   );
 };
 
