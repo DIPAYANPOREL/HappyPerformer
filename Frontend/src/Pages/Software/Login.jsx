@@ -10,14 +10,24 @@ const Container = styled.div`
   display: flex;
   align-items: center;
   justify-content: center;
+  @media (max-width: 768px) {
+    height: auto;
+    flex-direction: column;
+  }
 `;
 const Left = styled.div`
   flex: 1;
   display: flex;
   align-items: center;
   justify-content: center;
-  height: 60vh;
+  height: 40vh;
+  @media (max-width: 768px) {
+    width: 100%;
+    height: auto;
+    margin-bottom: 15px;
+  }
 `;
+
 const Center = styled.div`
   flex: 1;
   display: flex;
@@ -29,13 +39,24 @@ const Center = styled.div`
   padding: 10px;
   border-radius: 10px;
   border: 1px solid lightgray;
+  @media (max-width: 768px) {
+    width: 100%;
+    height: auto;
+    margin-bottom: 20px;
+  }
 `;
+
 const Right = styled.div`
   flex: 1;
   display: flex;
   align-items: center;
   justify-content: center;
-  height: 60vh;
+  height: 40vh;
+  @media (max-width: 768px) {
+    width: 100%;
+    height: auto;
+    margin-bottom: 20px;
+  }
 `;
 
 const FormLogin = styled.form`
@@ -59,6 +80,12 @@ const Button = styled.button`
   cursor: pointer;
   margin: 1rem auto;
   border-radius: 9px;
+  &:hover {
+    background-color: #6659e0;
+  }
+  @media (max-width: 768px) {
+    width: 30vw;
+  }
 `;
 
 const Input = styled.input`
@@ -66,6 +93,9 @@ const Input = styled.input`
   margin: 20px 10px 0px 0px;
   padding: 10px;
   width: 25vw;
+  @media (max-width: 768px) {
+    width: 70vw;
+  }
 `;
 
 const ForgotPass = styled.a`
