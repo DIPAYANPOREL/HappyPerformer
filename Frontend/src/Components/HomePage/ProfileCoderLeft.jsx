@@ -4,7 +4,7 @@ import styled from "styled-components";
 const MiniContainer = styled.div`
   display: flex;
   height: 50vh;
-  background-color: #dbe2ef;
+  background-color: #ffecd1;
 `;
 
 const ProfileArea = styled.div`

@@ -1,9 +1,9 @@
-import Login from "./Pages/Software/Login";
-
+import MeetTheTeam from "./Pages/Landing Page/MeetTheTeam";
 function App() {
   return (
     <>
-      <Login />
+      <MeetTheTeam />
+      {/* <Login /> */}
     </>
   );
 }

@@ -40,25 +40,26 @@ const Logo = styled.h1`
 `;
 
 const GetStarted = styled.button`
-{
-  display: inline-block;
-  border-radius: 50px;
-  transition: all 0.4s ease-in-out;
-  padding: 10px 27px;
-  background-color: transparent;
-  border: 2px solid var(--gray-color);
-  color: var(--text-gray);
-  font-weight: 500;
-  font-size: 14px;
-  text-transform: uppercase;
-  letter-spacing: 2px;
-  text-decoration: none;
-}
-&:hover{
-  background-color: var(--primary-color);
-  border-color: var(--primary-color);
-  color: var(--text-white);
-}`
+   {
+    display: inline-block;
+    border-radius: 50px;
+    transition: all 0.4s ease-in-out;
+    padding: 10px 27px;
+    background-color: f79d44;
+    border: 2px solid var(--gray-color);
+    color: var(--text-gray);
+    font-weight: 500;
+    font-size: 14px;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    text-decoration: none;
+  }
+  &:hover {
+    background-color: var(--primary-color);
+    border-color: var(--primary-color);
+    color: var(--text-white);
+  }
+`;
 
 const Login = styled.div`
   padding: 15px 32px;

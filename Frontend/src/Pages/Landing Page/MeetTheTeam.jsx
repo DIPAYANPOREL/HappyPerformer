@@ -4,6 +4,7 @@ import FooterHome from "../../Components/HomePage/FooterHome";
 import NavbarHome from "../../Components/HomePage/NavbarHome";
 import ProfileCoderLeft from "../../Components/HomePage/ProfileCoderLeft";
 import ProfileCoderRight from "../../Components/HomePage/ProfileCoderRight";
+import Akshita from "../../assets/Akshita.png";
 import Anuja from "../../assets/Anuja.png";
 import Lama from "../../assets/Lama.png";
 import Prathmesh from "../../assets/Prathmesh.png";
@@ -17,7 +18,7 @@ const IntroExtro = styled.div`
   justify-content: center;
   align-items: center;
   height: 30vh;
-  background-color: #000;
+  background-color: black;
   color: #fff;
 `;
 const Bottom = styled.div``;
@@ -55,7 +56,7 @@ const MeetTheTeam = () => {
           skills="loreorem ipsum dolor, sit amet consectetur adipisicing elit.
           Architecto a iste nisi minus corrupti quidem sit mollitia? Corporis,
           voluptates pariaturm"
-          photo={Lama}
+          photo={Akshita}
         />
         <ProfileCoderRight
           name="Derek"
