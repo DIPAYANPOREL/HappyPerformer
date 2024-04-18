@@ -114,6 +114,7 @@ const ImageContainer = styled.img`
   max-width: 85%;
 `;
 const MainContainer = styled.div``;
+
 const Login = () => {
   return (
     <MainContainer>
