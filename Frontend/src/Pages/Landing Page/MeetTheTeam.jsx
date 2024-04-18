@@ -1,97 +1,130 @@
 import React from "react";
 import styled from "styled-components";
-import FooterHome from "../../Components/HomePage/FooterHome";
-import NavbarHome from "../../Components/HomePage/NavbarHome";
-import ProfileCoderLeft from "../../Components/HomePage/ProfileCoderLeft";
-import ProfileCoderRight from "../../Components/HomePage/ProfileCoderRight";
-import Anuja from "../../assets/Anuja.png";
-import Lama from "../../assets/Lama.png";
+import ProfileCard from "../../Components/HomePage/ProfileCard";
+import LogoTwo from "../../assets/Login2.svg";
 import Prathmesh from "../../assets/Prathmesh.png";
+import LogoOne from "../../assets/login1.svg";
 
 const Container = styled.div`
-  height: 100vh;
+  background-color: #f3f7ff;
 `;
-const IntroExtro = styled.div`
+const MeetTeam = styled.div`
+  height: 100vh;
+  background-color: #ffecd1;
   display: flex;
-  flex-direction: column;
   justify-content: center;
   align-items: center;
-  height: 30vh;
-  background-color: #000;
-  color: #fff;
 `;
-const Bottom = styled.div``;
-const Title = styled.h1``;
-const Para = styled.p`
-  margin: 1.5rem auto;
+const Left = styled.div`
+  flex: 1;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+`;
+const Center = styled.div`
+  flex: 2;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+`;
+const Right = styled.div`
+  flex: 1;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+`;
+const ImageContainer = styled.img`
+  height: 45vh;
+  max-width: 85%;
 `;
 
+const ColoredContent = styled.h2`
+  color: #0a2463;
+  font-size: 3.5rem;
+`;
+const NormalContent = styled.h2`
+  margin: 2rem auto;
+  font-size: 3rem;
+`;
+
+const HeroSection = styled.div`
+  height: 60vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+`;
+
+const HeroContent = styled.div`
+  flex: 1;
+  margin-left: 2rem;
+  padding: 20px;
+`;
+const HeroContentHead = styled.h2`
+  display: flex;
+  justify-content: center;
+  align-items: center;
+`;
+const HeroContentMini = styled.h4`
+  margin-top: 1rem;
+  text-align: center;
+`;
+
+const HeroImage = styled.div`
+  flex: 1;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+`;
+
+const TeamMembers = styled.div`
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-wrap: wrap;
+  background-color: black;
+  height: 100vh;
+`;
 const MeetTheTeam = () => {
   return (
     <Container>
-      <NavbarHome />
-      <IntroExtro>
-        <Title>Meet The Team</Title>
-        <Para>Team Work n all etc</Para>
-      </IntroExtro>
-      <Bottom>
-        {/* <ProfileCoderLeft
-          name="Superman Shalav"
-          skills="   Batman Better Lorem ipsum dolor sit amet consectetur adipisicing elit.
-          Eum, nam. Lorem ipsum dolor, sit amet consectetur adipisicing elit.
-          Architecto a iste nisi minus corrupti quidem sit mollitia? Corporis,
-          voluptates pariatur."
-          photo={Lama}
-        /> */}
-        <ProfileCoderRight
-          name="Prathmesh"
-          skills="UI UX .. orem ipsum dolor, sit amet consectetur adipisicing elit.
-          Architecto a iste nisi minus corrupti quidem sit mollitia? Corporis,
-          voluptates pariatur."
-          photo={Prathmesh}
+      <MeetTeam>
+        <Left>
+          <ImageContainer src={LogoOne} />
+        </Left>
+        <Center>
+          <ColoredContent>MEET OUR TEAM</ColoredContent>
+          <NormalContent>WHO WORK TO CREAT AN</NormalContent>
+          <ColoredContent>IMPACT</ColoredContent>
+        </Center>
+        <Right>
+          <ImageContainer src={LogoTwo} />
+        </Right>
+      </MeetTeam>
+      {/* Section Second */}
+      <HeroSection>
+        <HeroContent>
+          <HeroContentHead>
+            Our Team Of Creator, Designer And World Class Problem Solver
+          </HeroContentHead>
+          <HeroContentMini>
+            To be the company our customers want us to be, it takes an eclectic
+            group of passionate operators. Get to know the people leading the
+            way at Salahkaar.
+          </HeroContentMini>
+        </HeroContent>
+        <HeroImage>
+          <ImageContainer src={LogoOne} />
+        </HeroImage>
+      </HeroSection>
+      {/* TeamMembers.. */}
+      <TeamMembers>
+        <ProfileCard
+          name="Prathmesh Takalkar"
+          info="Full Stack Developer , UI UX Developer and a team lead"
+          img={Prathmesh}
         />
-        <ProfileCoderLeft
-          name="Akshita"
-          skills="loreorem ipsum dolor, sit amet consectetur adipisicing elit.
-          Architecto a iste nisi minus corrupti quidem sit mollitia? Corporis,
-          voluptates pariaturm"
-          photo={Lama}
-        />
-        <ProfileCoderRight
-          name="Derek"
-          skills="loreorem ipsum dolor, sit amet consectetur adipisicing elit.
-          Architecto a iste nisi minus corrupti quidem sit mollitia? Corporis,
-          voluptates pariaturm"
-          photo={Lama}
-        />
-        <ProfileCoderLeft
-          name="Anuja"
-          skills="loreorem ipsum dolor, sit amet consectetur adipisicing elit.
-          Architecto a iste nisi minus corrupti quidem sit mollitia? Corporis,
-          voluptates pariaturm"
-          photo={Anuja}
-        />
-        <ProfileCoderRight
-          name="Priyank"
-          skills="loreorem ipsum dolor, sit amet consectetur adipisicing elit.
-          Architecto a iste nisi minus corrupti quidem sit mollitia? Corporis,
-          voluptates pariaturm"
-          photo={Lama}
-        />
-        <ProfileCoderLeft
-          name="Shawn"
-          skills="loreorem ipsum dolor, sit amet consectetur adipisicing elit.
-          Architecto a iste nisi minus corrupti quidem sit mollitia? Corporis,
-          voluptates pariaturm"
-          photo={Lama}
-        />
-      </Bottom>
-      <IntroExtro>
-        <Title>And Many More!</Title>
-        <Para>Baki Chutiye bhi to hai</Para>
-      </IntroExtro>
-
-      <FooterHome />
+      </TeamMembers>
     </Container>
   );
 };
