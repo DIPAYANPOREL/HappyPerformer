@@ -5,7 +5,7 @@ import LogoTwo from "../../assets/Login2.svg";
 import LogoOne from "../../assets/login1.svg";
 
 const Container = styled.div`
-  height: 735px;
+  height: 100vh;
   background-color: #e6e6e6;
   display: flex;
   align-items: center;
