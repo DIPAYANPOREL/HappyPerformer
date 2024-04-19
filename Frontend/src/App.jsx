@@ -1,10 +1,16 @@
 import Login from "./Pages/Software/Login";
 
+
 function App() {
   return (
-    <>
-      <Login />
-    </>
+  <>
+  <Routes>
+    <Route path="/" element={<Home />} />
+    <Route path="/register" element={<Register />} />
+    <Route path="/login" element={<Login />} />
+  </Routes>
+
+</>
   );
 }
 
