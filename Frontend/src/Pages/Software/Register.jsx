@@ -102,7 +102,6 @@ const Button = styled.button`
     background-color: #6659e0;
   }
 `;
-
 const PrimaryButton = styled(Button)`
   background-color: #8576ff;
   color: white;

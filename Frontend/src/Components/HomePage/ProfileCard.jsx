@@ -19,7 +19,6 @@ const Container = styled.div`
     padding: 10px;
   }
 `;
-
 const ImageContainer = styled.div`
   width: 255px;
   height: 255px;

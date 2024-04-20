@@ -217,5 +217,4 @@ const MeetTheTeam = () => {
     </Container>
   );
 };
-
 export default MeetTheTeam;

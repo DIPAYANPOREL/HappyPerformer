@@ -1,6 +1,5 @@
-import React from 'react';
-import styled from 'styled-components';
-
+import React from "react";
+import styled from "styled-components";
 
 // Styled Components
 const PricingWrapper = styled.div`
@@ -16,7 +15,6 @@ const PricingTableTitle = styled.h1`
   text-align: center;
   width: 100%;
 `;
-
 const PricingCard = styled.div`
   background-color: #f5f5f5;
   border-radius: 8px;
@@ -24,10 +22,14 @@ const PricingCard = styled.div`
   margin: 1rem;
   width: 300px;
   box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
-  ${props => props.recommended && `
+  ${(props) =>
+    props.recommended &&
+    `
     background-color: #e6f2ff;
   `}
-  ${props => props.best && `
+  ${(props) =>
+    props.best &&
+    `
     background-color: #d9e9ff;
   `}
 `;
@@ -82,49 +84,46 @@ const PricingAction = styled.a`
 
 const PricingPage = (props) => {
   return (
-    
-
-      <PricingWrapper>
-        <PricingCard>
-          <PricingTitle>
-            {props.plantype}
+    <PricingWrapper>
+      <PricingCard>
+        <PricingTitle>
+          {props.plantype}
+          <br />
+          {/* <img src={paperPlaneIcon} alt="Paper Plane" height="50px" width="50px" /> */}
+        </PricingTitle>
+        <Price>
+          {/* <img src={rupeeIcon} alt="Rupee" height="25px" width="25px" /> */}
+          {props.amount}
+          <sup>/ month</sup>
+        </Price>
+        <TableList>
+          <ListItem>
+            Total Number of Employees: <span>{props.numberOfEmployees}</span>
             <br />
-            {/* <img src={paperPlaneIcon} alt="Paper Plane" height="50px" width="50px" /> */}
-          </PricingTitle>
+            Beyond Limit:
+            {/* <img src={rupeeIcon} alt="Rupee" height="13px" width="25px" /> */}
+            <span>{props.employeesPM} per employee</span>
+          </ListItem>
+          <ListItem>Calender Automation</ListItem>
+          <ListItem>KRA Auto Check</ListItem>
+          <ListItem>To-Do-List Automation</ListItem>
+          <ListItem>Manager As Motivator</ListItem>
+          <ListItem className="cross">JD Auto Check</ListItem>
+          <ListItem className="cross">SOP Auto Check</ListItem>
+          <ListItem className="cross">Trainerless Learning</ListItem>
+          <ListItem className="cross">Live Performance Tracking Graph</ListItem>
+        </TableList>
+        <TableBuy>
           <Price>
-            {/* <img src={rupeeIcon} alt="Rupee" height="25px" width="25px" /> */}
-            {props.amount}<sup>/ month</sup>
+            {/* <img src={rupeeIcon} alt="Rupee" height="20px" width="25px" /> */}
+            {props.amount}
+            <sup>/ month</sup>
           </Price>
-          <TableList>
-            <ListItem>
-              Total Number of Employees: <span>{props.numberOfEmployees}</span>
-              <br />
-              Beyond Limit:
-              {/* <img src={rupeeIcon} alt="Rupee" height="13px" width="25px" /> */}
-              <span>{props.employeesPM} per employee</span>
-            </ListItem>
-            <ListItem>Calender Automation</ListItem>
-            <ListItem>KRA Auto Check</ListItem>
-            <ListItem>To-Do-List Automation</ListItem>
-            <ListItem>Manager As Motivator</ListItem>
-            <ListItem className="cross">JD Auto Check</ListItem>
-            <ListItem className="cross">SOP Auto Check</ListItem>
-            <ListItem className="cross">Trainerless Learning</ListItem>
-            <ListItem className="cross">Live Performance Tracking Graph</ListItem>
-          </TableList>
-          <TableBuy>
-            <Price>
-              {/* <img src={rupeeIcon} alt="Rupee" height="20px" width="25px" /> */}
-              {props.amount}<sup>/ month</sup>
-            </Price>
-            <PricingAction >Get Started!</PricingAction>
-          </TableBuy>
-        </PricingCard>
-
-      
-      </PricingWrapper>
-
+          <PricingAction>Get Started!</PricingAction>
+        </TableBuy>
+      </PricingCard>
+    </PricingWrapper>
   );
 };
 
-export default PricingPage;
+export default PricingPage;

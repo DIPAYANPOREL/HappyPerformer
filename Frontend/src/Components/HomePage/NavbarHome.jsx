@@ -60,7 +60,6 @@ const GetStarted = styled.button`
     color: var(--text-white);
   }
 `;
-
 const Login = styled.div`
   padding: 15px 32px;
   text-align: center;

@@ -15,12 +15,10 @@ const HighlightText = styled.h4`
   font-weight: 700;
   margin-bottom: 1rem;
 `;
-
 const Content = styled.p`
   font-size: 1.15rem;
   line-height: 1.5;
   margin-bottom: 2rem;
-
   @media (max-width: 768px) {
     font-size: 1rem;
     margin: 1rem 2rem;
