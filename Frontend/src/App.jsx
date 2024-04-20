@@ -1,8 +1,8 @@
-import Pricing from "./Pages/Software/Pricing";
+import Register from "./Pages/Software/Register";
 function App() {
   return (
     <>
-      <Pricing />
+      <Register />
     </>
   );
 }

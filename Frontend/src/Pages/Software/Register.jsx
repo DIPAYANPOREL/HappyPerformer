@@ -26,7 +26,7 @@ const Center = styled.div`
   border-radius: 10px;
   box-shadow: 0 0 20px rgba(0, 0, 0, 0.1);
   max-width: 95vw;
-  width: 100%;
+  width: 60%;
   position: relative;
 `;
 
@@ -57,9 +57,10 @@ const Divider = styled.div`
   cursor: default;
   user-select: none;
   margin-bottom: 1.5rem;
+  width: inherit;
 `;
 
-const Logo = styled(Link)`
+const Logo = styled.div`
   position: absolute;
   top: 1rem;
   left: 1rem; /* Adjusted left position */
@@ -92,7 +93,7 @@ const ButtonContainer = styled.div`
 const Button = styled.button`
   border: none;
   padding: 11px 15px;
-  background-color: #FF7D00;
+  background-color: #ff7d00;
   color: #fff;
   cursor: pointer;
   border-radius: 9px;
@@ -102,6 +103,7 @@ const Button = styled.button`
     background-color: #6659e0;
   }
 `;
+
 const PrimaryButton = styled(Button)`
   background-color: #8576ff;
   color: white;
@@ -138,62 +140,6 @@ const Input = styled.input`
 `;
 
 const Register = () => {
-  const [departmentInputs, setDepartmentInputs] = useState(["", "Super Manager", "Manager", "HR"]);
-
-  const handleCloneDepartment = () => {
-    const lastDepartmentInput = departmentInputs[departmentInputs.length - 1];
-    const newDepartmentInputs = [...departmentInputs, lastDepartmentInput];
-    setDepartmentInputs(newDepartmentInputs);
-  };
-
-  const handleDeleteDepartment = (index) => {
-    if (index !== 0) {
-      const newDepartmentInputs = [...departmentInputs];
-      newDepartmentInputs.splice(index, 1);
-      setDepartmentInputs(newDepartmentInputs);
-    }
-  };
-
-  const handleInputChange = (index, value) => {
-    const newDepartmentInputs = [...departmentInputs];
-    newDepartmentInputs[index] = value;
-    setDepartmentInputs(newDepartmentInputs);
-  };
-
-  &:hover {
-  background - color: #5d4ac8;
-}
-`;
-
-
-
-const DepartmentInputContainer = styled.div`
-position: relative;
-`;
-
-const DeleteButton = styled.button`
-position: absolute;
-top: calc(50 % - 10px);
-right: -25px;
-transform: translateY(-50 %);
-background - color: red;
-color: white;
-border: none;
-border - radius: 50 %;
-padding: 5px;
-cursor: pointer;
-`;
-
-const Input = styled.input`
-padding: 10px;
-border: 1px solid #ccc;
-border - radius: 4px;
-width: calc(100 % - 30px);
-box - sizing: border - box;
-margin - bottom: 1rem;
-`;
-
-const Register = () => {
   const [departmentInputs, setDepartmentInputs] = useState([
     "",
     "Super Manager",
@@ -222,21 +168,21 @@ const Register = () => {
   };
 
   const ButtonRow = styled.div`
-display: flex;
-justify - content: flex - end;
-align - items: center;
-width: 100 %;
-margin: 0.5rem 5rem 2rem 0.1rem;
-`;
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+    width: 100%;
+    margin: 0.5rem 5rem 2rem 0.1rem;
+  `;
 
   const CloneButton = styled(Button)`
-align - self: flex - end;
-margin: 10px;
-`;
+    align-self: flex-end;
+    margin: 10px;
+  `;
 
   const ResetButton = styled(Button)`
-background - color: #ff0000;
-`;
+    background-color: #ff0000;
+  `;
 
   const handleResetDepartment = () => {
     setDepartmentInputs(["", "Super Manager", "Manager", "HR"]);
