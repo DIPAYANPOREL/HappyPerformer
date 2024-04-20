@@ -1,17 +1,9 @@
-
-import Login from "./Pages/Software/Login";
-
-
+import Pricing from "./Pages/Software/Pricing";
 function App() {
   return (
-  <>
-  <Routes>
-    <Route path="/" element={<Home />} />
-    <Route path="/register" element={<Register />} />
-    <Route path="/login" element={<Login />} />
-  </Routes>
-
-</>
+    <>
+      <Pricing />
+    </>
   );
 }
 
