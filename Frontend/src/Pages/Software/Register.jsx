@@ -1,11 +1,10 @@
-import React, { useState } from 'react';
-import styled from 'styled-components';
+import React, { useState } from "react";
+import styled from "styled-components";
 import Footer from "../../Components/Software Components/Footer";
 import logo2 from "../../assets/logo2.png";
-import { Link } from 'react-router-dom';
 
 const Container = styled.div`
-  min-height: 100vh;
+  min-height: 80vh;
   background-color: #e6e6e6;
   display: flex;
   flex-direction: column;
@@ -112,7 +111,6 @@ const PrimaryButton = styled(Button)`
     background-color: #5d4ac8;
   }
 `;
-
 
 const DepartmentInputContainer = styled.div`
   position: relative;
@@ -235,12 +233,12 @@ const handleResetDepartment = () => {
               <Button>Reset</Button>
               <PrimaryButton>Register</PrimaryButton>
             </ButtonContainer>
-
           </FormLogin>
         </Center>
       </Container>
       <Footer />
     </>
-  );}
+  );
+};
 
 export default Register;
