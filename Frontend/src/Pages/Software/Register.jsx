@@ -161,38 +161,94 @@ const Register = () => {
     setDepartmentInputs(newDepartmentInputs);
   };
 
+  &:hover {
+  background - color: #5d4ac8;
+}
+`;
+
+
+
+const DepartmentInputContainer = styled.div`
+position: relative;
+`;
+
+const DeleteButton = styled.button`
+position: absolute;
+top: calc(50 % - 10px);
+right: -25px;
+transform: translateY(-50 %);
+background - color: red;
+color: white;
+border: none;
+border - radius: 50 %;
+padding: 5px;
+cursor: pointer;
+`;
+
+const Input = styled.input`
+padding: 10px;
+border: 1px solid #ccc;
+border - radius: 4px;
+width: calc(100 % - 30px);
+box - sizing: border - box;
+margin - bottom: 1rem;
+`;
+
+const Register = () => {
+  const [departmentInputs, setDepartmentInputs] = useState([
+    "",
+    "Super Manager",
+    "Manager",
+    "HR",
+  ]);
+
+  const handleCloneDepartment = () => {
+    const lastDepartmentInput = departmentInputs[departmentInputs.length - 1];
+    const newDepartmentInputs = [...departmentInputs, lastDepartmentInput];
+    setDepartmentInputs(newDepartmentInputs);
+  };
+
+  const handleDeleteDepartment = (index) => {
+    if (index !== 0) {
+      const newDepartmentInputs = [...departmentInputs];
+      newDepartmentInputs.splice(index, 1);
+      setDepartmentInputs(newDepartmentInputs);
+    }
+  };
+
+  const handleInputChange = (index, value) => {
+    const newDepartmentInputs = [...departmentInputs];
+    newDepartmentInputs[index] = value;
+    setDepartmentInputs(newDepartmentInputs);
+  };
+
   const ButtonRow = styled.div`
-  display: flex;
-  justify-content:  flex-end;
-  align-items: center;
-  width: 100%;
-  margin: 0.5rem 5rem 2rem 0.1rem ;
+display: flex;
+justify - content: flex - end;
+align - items: center;
+width: 100 %;
+margin: 0.5rem 5rem 2rem 0.1rem;
 `;
 
-const CloneButton = styled(Button)`
-  align-self: flex-end;
-  margin: 10px;
+  const CloneButton = styled(Button)`
+align - self: flex - end;
+margin: 10px;
 `;
 
-
-const ResetButton = styled(Button)`
-  background-color: #ff0000;
+  const ResetButton = styled(Button)`
+background - color: #ff0000;
 `;
 
-
-
-const handleResetDepartment = () => {
-  setDepartmentInputs(["", "Super Manager", "Manager", "HR"]);
-};
-
-
+  const handleResetDepartment = () => {
+    setDepartmentInputs(["", "Super Manager", "Manager", "HR"]);
+  };
 
   return (
     <>
       <Container>
         <Center>
           <FormLogin>
-            <Logo to="/">
+            <Logo>
               <ImageA src={logo2} alt="Logo" />
             </Logo>
             <Title>Company's Registration</Title>
@@ -213,18 +269,29 @@ const handleResetDepartment = () => {
                   onChange={(e) => handleInputChange(index, e.target.value)}
                 />
                 {index !== 0 && (
-                  <DeleteButton onClick={() => handleDeleteDepartment(index)}>Delete</DeleteButton>
+                  <DeleteButton onClick={() => handleDeleteDepartment(index)}>
+                    Delete
+                  </DeleteButton>
                 )}
               </DepartmentInputContainer>
             ))}
 
             <ButtonRow>
-              <ResetButton onClick={handleResetDepartment}>Reset Department</ResetButton>
-              <CloneButton onClick={handleCloneDepartment}>Clone last row and add at end</CloneButton>
+              <ResetButton onClick={handleResetDepartment}>
+                Reset Department
+              </ResetButton>
+              <CloneButton onClick={handleCloneDepartment}>
+                Clone last row and add at end
+              </CloneButton>
             </ButtonRow>
 
             <Divider>Employee Details</Divider>
-            <Input type="text" required placeholder="Employee Name" autoComplete="name" />
+            <Input
+              type="text"
+              required
+              placeholder="Employee Name"
+              autoComplete="name"
+            />
             <Input type="email" required placeholder="Email" />
             <Input type="tel" required placeholder="Phone Number" />
             <Input type="text" required placeholder="Skills" />
