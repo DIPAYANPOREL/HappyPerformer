@@ -108,13 +108,11 @@ const ForgotPass = styled.a`
     text-decoration: underline;
   }
 `;
-
 const ImageContainer = styled.img`
   height: 45vh;
   max-width: 85%;
 `;
 const MainContainer = styled.div``;
-
 const Login = () => {
   return (
     <MainContainer>

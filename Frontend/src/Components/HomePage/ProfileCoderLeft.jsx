@@ -15,7 +15,6 @@ const ProfileArea = styled.div`
   align-items: center;
   justify-content: center;
 `;
-
 const InfoArea = styled.div`
   flex: 1;
   display: flex;

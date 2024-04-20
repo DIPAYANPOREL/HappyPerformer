@@ -37,12 +37,12 @@ const Button = styled.button`
   background-color: teal;
   color: white;
   cursor: pointer;
-  text-align:center;
+  text-align: center;
 `;
 const Title = styled.h1`
   font-size: 24px;
   font-weight: 300;
-text-align:center;
+  text-align: center;
 `;
 
 const GetInTouch = () => {
@@ -57,9 +57,8 @@ const GetInTouch = () => {
           <Input placeholder="Phone Number" />
           <Input placeholder="Message" />
 
-  <Button>CREATE MY ACCOUNT</Button>
+          <Button>CREATE MY ACCOUNT</Button>
         </Form>
-
       </Wrapper>
     </Container>
   );

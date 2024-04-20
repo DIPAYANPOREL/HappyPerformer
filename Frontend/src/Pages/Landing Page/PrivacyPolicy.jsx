@@ -29,7 +29,6 @@ const Content = styled.p`
   font-size: 1.125rem;
   line-height: 1.5;
   margin-bottom: 2rem;
-
   @media (max-width: 768px) {
     font-size: 1rem;
     margin: 1rem 2rem;
