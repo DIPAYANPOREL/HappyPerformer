@@ -4,53 +4,88 @@ import ProfileCard from "../../Components/HomePage/ProfileCard";
 import Akshita from "../../assets/Akshita.png";
 import Anuja from "../../assets/Anuja.png";
 import Lama from "../../assets/Lama.png";
+import Logo3 from "../../assets/Logo3.svg";
 import Prathmesh from "../../assets/Prathmesh.png";
-import Team1 from "../../assets/Team1.svg";
 import Team2 from "../../assets/Team2.svg";
-import Ideas from "../../assets/ideas.svg";
 
 const Container = styled.div`
-  background-color: #f3f7ff;
+  background-color: #fff;
 `;
 const MeetTeam = styled.div`
   height: 920px;
-  background-color: #ffecd1;
+  background-color: black;
   display: flex;
   justify-content: center;
   align-items: center;
   padding: auto 40px;
+  border-bottom-right-radius: 990px;
+  border-radius: ;
+  @media (max-width: 768px) {
+    height: 100%;
+    flex-direction: column;
+  }
 `;
-const Left = styled.div`
-  flex: 1;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-`;
+
 const Center = styled.div`
   flex: 2;
   display: flex;
   justify-content: center;
   align-items: center;
   flex-direction: column;
+
+  @media (max-width: 768px) {
+    flex: 1;
+    margin-top: 40px;
+    h1 {
+      font-size: 2px !important;
+    }
+    p {
+      font-size: 1rem;
+    }
+  }
 `;
+
 const Right = styled.div`
   flex: 1;
   display: flex;
   justify-content: center;
   align-items: center;
+
+  @media (max-width: 768px) {
+    flex: 2;
+    margin-top: 40px;
+    h1 {
+      font-size: 2rem;
+    }
+    p {
+      font-size: 1rem;
+    }
+  }
 `;
 const ImageContainer = styled.img`
   height: 45vh;
   max-width: 85%;
+  @media (max-width: 768px) {
+    height: 20vh;
+  }
 `;
 
 const ColoredContent = styled.h2`
-  color: #0a2463;
+  color: #fff;
   font-size: 3.5rem;
+  @media (max-width: 768px) {
+    font-size: 2rem;
+    padding: 10px;
+  }
 `;
 const NormalContent = styled.h2`
   margin: 2rem auto;
   font-size: 3rem;
+  color: #e6e6e6;
+  @media (max-width: 768px) {
+    font-size: 2rem;
+    padding: 10px;
+  }
 `;
 
 const TeamMembers = styled.div`
@@ -62,7 +97,7 @@ const TeamMembers = styled.div`
   width: 100%;
 
   padding: 30px;
-  background-color: #222831;
+  background-color: #fff;
 `;
 
 const HeroSection = styled.div`
@@ -71,10 +106,13 @@ const HeroSection = styled.div`
   display: flex;
   justify-content: center;
   align-items: center;
-  background-color: #0a2463;
-  color: white;
+  background-color: #fff;
+  color: black;
   padding: 40px;
   margin: auto;
+  @media (max-width: 768px) {
+    flex-direction: column;
+  }
 `;
 const HeroContent = styled.div`
   display: flex;
@@ -101,13 +139,13 @@ const HeroImage = styled.img`
 `;
 
 const Brains = styled.div`
-  height: 100%;
+  height: 230px;
   width: 100%;
   color: white;
   display: flex;
   justify-content: center;
   align-items: center;
-  background-color: #222831;
+  background-color: black;
   padding: 40px;
 `;
 const BrainText = styled.h3`
@@ -121,9 +159,6 @@ const MeetTheTeam = () => {
   return (
     <Container>
       <MeetTeam>
-        <Left>
-          <ImageContainer src={Team1} />
-        </Left>
         <Center>
           <ColoredContent>MEET OUR TEAM</ColoredContent>
           <NormalContent>WHO WORK TO CREAT AN</NormalContent>
@@ -145,7 +180,7 @@ const MeetTheTeam = () => {
             way at Untitled.
           </MiniContent>
         </HeroContent>
-        <HeroImage src={Ideas} />
+        <HeroImage src={Logo3} />
       </HeroSection>
       {/* TeamMembers.. */}
       <Brains>
