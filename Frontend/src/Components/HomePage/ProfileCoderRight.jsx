@@ -27,7 +27,6 @@ const InfoArea = styled.div`
 const NameTag = styled.h1`
   text-align: center;
 `;
-
 const TalentArea = styled.p`
   margin: 15px 6rem;
   text-align: center;

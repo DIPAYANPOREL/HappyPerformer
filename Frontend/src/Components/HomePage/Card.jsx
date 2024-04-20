@@ -6,35 +6,32 @@ const ImageA = styled.img`
   height: 70vh;
   width: 40vw;
   object-fit: fit;
-    
-`
+`;
 
 const ImageB = styled.img`
   width: 16.1vw;
   height: 80px;
-`
+`;
 
 const CardSection = styled.div`
-padding: 1rem;
-margin: 1rem;
-`
+  padding: 1rem;
+  margin: 1rem;
+`;
 
 const CardBody = styled.div`
-display: flex;
-flex-wrap: wrap;
-flex-direction: column;
-align-items: center;
-padding: 1rem;
-margin: 1rem;
-
-
-`
+  display: flex;
+  flex-wrap: wrap;
+  flex-direction: column;
+  align-items: center;
+  padding: 1rem;
+  margin: 1rem;
+`;
 
 const CardTitle = styled.div`
-display: flex;
-font-size: 1rem;
-align-items: center;
-`
+  display: flex;
+  font-size: 1rem;
+  align-items: center;
+`;
 
 const CardHeading = styled.div`
   display: flex;
@@ -54,12 +51,14 @@ export const CardData = [
     title1: "Get Started",
     image_url_arrow: "123.jpg",
     image_url2: "123.jpg",
-  },{
+  },
+  {
     image_url1: "123.jpg",
     title1: "Get Started",
     image_url_arrow: "123.jpg",
     image_url2: "123.jpg",
-  },{
+  },
+  {
     image_url1: "123.jpg",
     title1: "Get Started",
     image_url_arrow: "123.jpg",
@@ -76,7 +75,7 @@ const Card = () => {
           <CardHeading>
             <ImageB src={card.image_url1} />
             <CardTitle>
-                <h2>{card.title1}</h2>
+              <h2>{card.title1}</h2>
             </CardTitle>
             <ImageB src={card.image_url_arrow} />
           </CardHeading>

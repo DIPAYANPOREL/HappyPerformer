@@ -13,7 +13,6 @@ const Container = styled.div`
     margin: 3rem auto;
   }
 `;
-
 const MainText = styled.h1`
   font-size: 2.5rem;
   font-weight: bold;
