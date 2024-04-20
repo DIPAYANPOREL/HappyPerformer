@@ -1,109 +1,79 @@
-import { GitHub, Instagram, LinkedIn } from "@mui/icons-material";
 import React from "react";
 import styled from "styled-components";
 
 const Container = styled.div`
-  max-height: 420px;
-  max-width: 320px;
-  height: 440px;
-  width: 320px;
-  color: #000;
-  background-color: #ffecd1;
+  width: 30%;
   border-radius: 10px;
+  padding: 5px 0;
+  text-align: center;
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  margin: 10px;
-  padding: 25px;
-  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1), 0 10px 20px rgba(0, 0, 0, 0.1);
-
-  @media (min-width: 768px) {
-    max-width: 31.33%;
-    margin: 1%;
+  margin: 5px 2px;
+  height: 420px;
+  @media (max-width: 768px) {
+    width: 70%;
+    height: 300px;
+    margin: 1.2rem 2px;
+    padding: 10px;
   }
 `;
 
 const ImageContainer = styled.div`
-  background-color: #fff;
-  height: 70%;
-  width: 100%;
-  border-radius: 15px;
-  overflow: hidden;
-
-  img {
-    width: 100%;
-    height: auto;
-    border-radius: 10px;
-  }
-`;
-
-const InfoContainer = styled.div`
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  margin-top: 10px;
-  width: 100%;
-  padding: 0 10px;
-`;
-
-const Name = styled.h3`
-  margin: 0.5rem 0;
-  font-size: 24px;
-  font-weight: 600;
-`;
-
-const Position = styled.h4`
-  margin: 0.2rem 0;
-  font-size: 18px;
-  font-weight: 500;
-  color: #000;
-  text-align: center;
-`;
-
-const SocialContainer = styled.div`
-  display: flex;
-  margin: 20px auto;
-`;
-
-const SocialIcon = styled.div`
-  width: 35px;
-  height: 35px;
+  width: 255px;
+  height: 255px;
   border-radius: 50%;
-  color: white;
-  background-color: ${(props) => props.color};
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  margin-right: 20px;
-  transition: fill 0.2s ease-in-out;
- 
+  overflow: hidden;
+  margin: 0 auto;
+  transition: transform 0.3s ease;
   &:hover {
     transform: scale(1.1);
      cursor: pointer;
+  @media (max-width: 768px) {
+    width: 150px;
+    height: 150px;
+  }
+`;
+const Name = styled.h3`
+  margin-top: 20px;
+  font-size: 1.5rem;
+  @media (max-width: 768px) {
+    font-size: 1.2rem;
+  }
+`;
+
+const Role = styled.div`
+  color: #666;
+  font-size: 1rem;
+  line-height: 1.5;
+  margin-top: 7px;
+  @media (max-width: 768px) {
+    font-size: 0.8rem;
+  }
 `;
 
 const ProfileCard = (props) => {
+  const handleClick = () => {
+    window.location.href = "https://www.linkedin.com/in/prathmesh-takalkar/";
+  };
   return (
     <Container>
-      <ImageContainer>
-        <img src={props.img} alt="Profile Picture" />
+      <ImageContainer onClick={handleClick}>
+        <img
+          src={props.img}
+          alt="Profile Picture"
+          style={{
+            objectFit: "cover",
+            width: "100%",
+            height: "100%",
+            margin: "0px",
+            padding: "0px",
+          }}
+        />
       </ImageContainer>
-      <InfoContainer>
-        <Name>{props.name}</Name>
-        <Position>{props.role}</Position>
-        <SocialContainer>
-          <SocialIcon color="#0077b5">
-            <LinkedIn />
-          </SocialIcon>
-          <SocialIcon color="#171515">
-            <GitHub />
-          </SocialIcon>
-          <SocialIcon color="#E4405F">
-            <Instagram />
-          </SocialIcon>
-        </SocialContainer>
-      </InfoContainer>
+      <Name>{props.name}</Name>
+      <Role>{props.role}</Role>
     </Container>
   );
 };
