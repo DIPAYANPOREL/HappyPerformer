@@ -1,9 +1,9 @@
+import Home from "./Pages/Landing Page/Home";
 
-import MeetTheTeam from "./Pages/Landing Page/MeetTheTeam";
 function App() {
   return (
     <>
-      <MeetTheTeam />
+      <Home />
     </>
   );
 }

@@ -26,12 +26,19 @@ const ImageContainer = styled.div`
   overflow: hidden;
   margin: 0 auto;
   transition: transform 0.3s ease;
+  box-shadow: 0px 10px 20px rgba(0, 0, 0, 0.3);
   &:hover {
     transform: scale(1.1);
-     cursor: pointer;
+    cursor: pointer;
+    box-shadow: 0px 15px 30px rgba(0, 0, 0, 0.5);
+  }
   @media (max-width: 768px) {
     width: 150px;
     height: 150px;
+    box-shadow: 0px 5px 10px rgba(0, 0, 0, 0.3);
+    &:hover {
+      box-shadow: 0px 10px 20px rgba(0, 0, 0, 0.5);
+    }
   }
 `;
 const Name = styled.h3`
@@ -54,7 +61,7 @@ const Role = styled.div`
 
 const ProfileCard = (props) => {
   const handleClick = () => {
-    window.location.href = "https://www.linkedin.com/in/prathmesh-takalkar/";
+    window.location.href = props.link;
   };
   return (
     <Container>
