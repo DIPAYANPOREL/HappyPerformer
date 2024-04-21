@@ -1,22 +1,29 @@
 import React from "react";
 import styled from "styled-components";
 import Card from "./Card";
+import cardData from "./cardData";
 
-// Styled components
 const Container = styled.div`
-  width: 300p;
-  height: 100vh;
+  width: 100%;
+  height: 25vh;
   display: flex;
   align-items: center;
-  justify-content: center;
   flex-wrap: wrap;
+`;
+
+const Heading = styled.h1`
+  margin: 20px 50px 2% 50px;
+  text-align: center;
 `;
 
 const Ecosystem = () => {
   return (
-    <Container>
-      <Card />
-    </Container>
+    <>
+      <Heading>How HappyPerformer Works?</Heading>
+      <Container>
+        <Card cardData={cardData} />
+      </Container>
+    </>
   );
 };
 

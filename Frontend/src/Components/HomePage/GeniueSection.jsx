@@ -15,12 +15,14 @@ const Content = styled.div`
   flex-direction: column;
   justify-content: space-evenly;
   align-items: center;
+  margin-bottom: 85px;
 `;
 const VideoSection = styled.div`
   flex: 1;
   display: flex;
   justify-content: space-evenly;
   align-items: center;
+  margin-bottom: 135px;
 `;
 
 const ContentHeader = styled.h1`
@@ -28,12 +30,14 @@ const ContentHeader = styled.h1`
   margin: 30px 0px;
 `;
 const ContentPara = styled.p`
-  text-align: center;
-  margin: 0px 25%;
+  font-size: 18px;
+  text-align: left;
+  margin: 0px 4.5% 0px 20.5%;
+  line-height: 1.2;
 `;
 
 const StartedBtn = styled.button`
-  font-size: 14px;
+  font-size: 15px;
   margin-left: 25px;
   background-color: white;
   border: none;
@@ -46,15 +50,40 @@ const StartedBtn = styled.button`
   margin: 30px 0px;
 `;
 
+const Typewriter = styled.h1`
+  margin-left: 10px;
+  display: inline-block;
+  font-weight: 700;
+  font-size: 32px;
+  overflow: hidden; /* Ensure text doesn't overflow */
+  border-right: 0.15em solid orange;
+  white-space: nowrap;
+  margin-right: 10px;
+
+  animation: typewriter 2s steps(40) forwards;
+
+  @keyframes typewriter {
+    from {
+      width: 0;
+    }
+    to {
+      width: 100%;
+    }
+  }
+`;
+
 const GeniueSection = () => {
   return (
     <Container>
       <Content>
-        <ContentHeader>Your Growth Genie Has Arrived!</ContentHeader>
+        <ContentHeader>
+          <Typewriter>Your Growth Genie Has Arrived!</Typewriter>
+        </ContentHeader>
         <ContentPara>
-          We present HappyPerfomer.com, the world’s first software aimed to
-          bring skyrocketing growth for all stakeholders. The software optimizes
-          business profits, employee’s performances & their happiness.
+          Introducing HappyPerformer.com - where skyrocketing growth meets
+          boundless happiness! Unlocking peak profits, unleashing top-notch
+          employee performance, and spreading joy across your organization. Get
+          ready to thrive like never before! 🚀✨{" "}
         </ContentPara>
         <StartedBtn>GET STARTED</StartedBtn>
       </Content>

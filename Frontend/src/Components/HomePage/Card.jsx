@@ -1,87 +1,62 @@
 import React from "react";
 import styled from "styled-components";
 
+// Styled components
 const ImageA = styled.img`
+  height: 100px;
   width: 100%;
-  height: 70vh;
-  width: 40vw;
-  object-fit: fit;
+  max-height: 70vh;
+  object-fit: cover;
 `;
 
 const ImageB = styled.img`
-  width: 16.1vw;
+  width: 50px;
   height: 80px;
+  margin-right: 10px;
 `;
 
 const CardSection = styled.div`
   padding: 1rem;
-  margin: 1rem;
+  margin: 0 auto;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
 `;
 
 const CardBody = styled.div`
   display: flex;
-  flex-wrap: wrap;
   flex-direction: column;
   align-items: center;
   padding: 1rem;
-  margin: 1rem;
+  margin: 3rem;
+  border: 1px solid #ccc;
+  border-radius: 8px;
+  max-width: 300px;
 `;
 
-const CardTitle = styled.div`
-  display: flex;
+const CardTitle = styled.h2`
   font-size: 1rem;
-  align-items: center;
+  margin: 0;
 `;
 
 const CardHeading = styled.div`
   display: flex;
-  flex-wrap: wrap;
-  flex-direction: row;
+  align-items: center;
 `;
 
-export const CardData = [
-  {
-    image_url1: "123.jpg",
-    title1: "Get Started",
-    image_url_arrow: "123.jpg",
-    image_url2: "123.jpg",
-  },
-  {
-    image_url1: "123.jpg",
-    title1: "Get Started",
-    image_url_arrow: "123.jpg",
-    image_url2: "123.jpg",
-  },
-  {
-    image_url1: "123.jpg",
-    title1: "Get Started",
-    image_url_arrow: "123.jpg",
-    image_url2: "123.jpg",
-  },
-  {
-    image_url1: "123.jpg",
-    title1: "Get Started",
-    image_url_arrow: "123.jpg",
-    image_url2: "123.jpg",
-  },
-];
-
-const Card = () => {
+const Card = ({ cardData }) => {
   return (
     <CardSection>
-      {CardData.map((card, index) => (
+      {cardData.map((card, index) => (
         <CardBody key={index}>
-          {" "}
           <CardHeading>
             <ImageB src={card.image_url1} />
-            <CardTitle>
-              <h2>{card.title1}</h2>
-            </CardTitle>
+            <CardTitle>{card.title1}</CardTitle>
             <ImageB src={card.image_url_arrow} />
           </CardHeading>
           <ImageA src={card.image_url2} />
         </CardBody>
-      ))}{" "}
+      ))}
     </CardSection>
   );
 };

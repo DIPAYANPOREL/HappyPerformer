@@ -17,7 +17,8 @@ const Container = styled.div`
 `;
 
 const TextArea = styled.h1`
-  margin: 30px 50px 10% 50px;
+  margin: 20px 50px 10% 50px;
+  text-align: center;
 `;
 const MiniContainer = styled.div`
   width: 100%;
@@ -41,13 +42,12 @@ const PointsSection = styled.div`
 `;
 const FunctionTD = styled.div`
   display: flex;
-
-  margin-top: 15px;
-  margin-right: 10%;
-  font-size: 1rem;
+  margin-top: 20px;
+  margin-left: 0%;
+  font-size: 1.1rem;
 `;
 const MiniText = styled.div`
-  margin-left: 10%;
+  margin-left: 5%;
   margin-bottom: 40px;
   font-size: 1.3rem;
 `;
@@ -87,30 +87,31 @@ const TodoAgenda = () => {
         </ImageSection>
         <PointsSection>
           <MiniText>
-            By analyzing data patterns and employee feedback, it automatically
-            generates tailored solutions to resolve these issues efficiently.
-            From scheduling conflicts to performance concerns, our system
-            streamlines the process, ensuring that employees receive timely
-            support and organizations achieve desired outcomes with minimal
-            manual intervention.
+            Data-driven insights, seamless solutions. From conflicts to
+            performance, we've got you covered. Effortless support, maximum
+            success. 🚀 #StreamlineSuccess
           </MiniText>
           <FunctionsContainer>
             <FunctionTD>
               {" "}
-              <FindInPageOutlined /> Job Descriptions
+              <FindInPageOutlined style={{ marginRight: "6px" }} /> Job
+              Descriptions
             </FunctionTD>
             <FunctionTD>
               {" "}
-              <AssignmentIndOutlined /> KRA/KPI
+              <AssignmentIndOutlined style={{ marginRight: "6px" }} /> Key
+              Performance Indicator
             </FunctionTD>
             <FunctionTD>
-              <VerifiedOutlined /> SOP
+              <VerifiedOutlined style={{ marginRight: "6px" }} />
+              Statement Of Purpose
             </FunctionTD>
             <FunctionTD>
-              <StorageOutlined /> TO-DO-LIST{" "}
+              <StorageOutlined style={{ marginRight: "6px" }} /> To-Do List{" "}
             </FunctionTD>
             <FunctionTD>
-              <CalendarMonth /> Calendar{" "}
+              <CalendarMonth style={{ marginRight: "6px" }} /> Calendar
+              Scheduler{" "}
             </FunctionTD>
           </FunctionsContainer>
         </PointsSection>
