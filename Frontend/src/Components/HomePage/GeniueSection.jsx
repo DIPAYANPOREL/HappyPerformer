@@ -1,5 +1,7 @@
+import { Source } from "@mui/icons-material";
 import React from "react";
 import styled from "styled-components";
+import video from "../../assets/happyperformer-home.mp4";
 
 const Container = styled.div`
   width: 100%;
@@ -72,6 +74,12 @@ const Typewriter = styled.h1`
   }
 `;
 
+const Video = styled.video`
+
+  width: 80%;
+  height: auto;
+`;
+
 const GeniueSection = () => {
   return (
     <Container>
@@ -87,7 +95,12 @@ const GeniueSection = () => {
         </ContentPara>
         <StartedBtn>GET STARTED</StartedBtn>
       </Content>
-      <VideoSection>Shalav D</VideoSection>
+      <VideoSection>
+        <Video controls autoplay>
+          <source src={video} type="video/mp4" />
+          Your browser does not support the video tag.
+        </Video>
+      </VideoSection>
     </Container>
   );
 };
