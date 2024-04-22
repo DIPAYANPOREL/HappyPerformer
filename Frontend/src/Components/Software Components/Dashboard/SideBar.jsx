@@ -2,6 +2,8 @@ import React from "react";
 import styled from "styled-components";
 import Coder from "../../../assets/coding.svg";
 import Item from "./Item";
+
+
 const Container = styled.div`
   display: flex;
   flex-direction: column;
