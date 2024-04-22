@@ -179,7 +179,7 @@ background: linear-gradient(90deg, hsla(0, 0%, 100%, 1) 0%, hsla(0, 0%, 0%, 1) 1
 
 const Head = styled.div`
   display: flex;
-  height: 600px;
+  height: 550px;
   justify-content: center;
   align-items: center;
   padding: 40px;
@@ -195,6 +195,7 @@ const LeftText = styled.div`
   align-items: center;
   text-align: center;
   font-size: 25px;
+  font-weight: bold;
   @media screen and (max-width: 768px) {
     font-size: 20px;
     font-weight: bold;
@@ -206,7 +207,8 @@ const RightText = styled.div`
   align-items: center;
   text-align: center;
   font-size: 18px;
-  margin: 1rem 0;
+  line-height: 1.8rem;
+  margin: 1.4rem 1.8rem;
   @media screen and (max-width: 768px) {
     font-size: 15px;
     padding: 10px;
@@ -241,7 +243,8 @@ const PhotoSection = styled.img`
 `;
 const Text = styled.div`
   flex: 1;
-  height: 100%;
+  gap:2
+  height: 60%;
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -250,6 +253,24 @@ const Text = styled.div`
     margin-top: 1rem;
   }
 `;
+const DownText = styled.div`
+ display: flex;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  font-size: 24px;
+  line-height: 1rem;
+  font-size:500;
+  font-weight: bold;
+  font-family: "Poppins", sans-serif;
+  margin: 0.7rem 1.4rem;
+  @media screen and (max-width: 768px) {
+    font-size: 15px;
+    padding: 10px;
+    margin: 10px;
+  }
+`
+
 const MeetTheTeam = () => {
   return (
     <Container>
@@ -310,9 +331,10 @@ const MeetTheTeam = () => {
             business which is not done yet as per business heads and owners'
             vision for growth. Shalav with his wide and hands-on experience with
             the technology world's changes heads the project directed at
-            sky-rocketing business profits and people happiness index. We hope
-            you will enjoy the new journey!
+            sky-rocketing business profits and people happiness index.
           </RightText>
+          <DownText>We hope
+            you will enjoy the new journey!</DownText>
         </Text>
       </Head>
       {/* Team Members ithe yenar */}
