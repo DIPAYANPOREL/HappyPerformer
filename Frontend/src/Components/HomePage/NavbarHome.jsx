@@ -4,10 +4,18 @@ import styled from "styled-components";
 const Container = styled.div`
   height: 90px;
   border-bottom: 1px solid rgba(0, 0, 0, 0.1);
+  position: fixed;
+  top: 0;
+  width: 100%;
+  opacity: 1;
+  background-color: white;
 `;
 
 const Wrapper = styled.div`
-  padding: 20px 30px;
+  list-style-type: none;
+  overflow: hidden;
+
+  padding: 26px 30px;
   display: flex;
   align-items: center;
   justify-content: space-between;
@@ -40,34 +48,59 @@ const Logo = styled.h1`
 `;
 
 const GetStarted = styled.button`
-   {
-    display: inline-block;
-    border-radius: 50px;
-    transition: all 0.4s ease-in-out;
-    padding: 10px 27px;
-    background-color: f79d44;
-    border: 2px solid var(--gray-color);
-    color: var(--text-gray);
-    font-weight: 500;
-    font-size: 14px;
-    text-transform: uppercase;
-    letter-spacing: 2px;
-    text-decoration: none;
-  }
+  padding: 10px 27px;
+  display: inline-block;
+  border-radius: 50px;
+  transition: all 0.4s ease-in-out;
+  background-color: #3e92cc;
+  border: none;
+  color: #000;
+  font-weight: 500;
+  font-size: 14px;
+  text-transform: uppercase;
+  letter-spacing: 2px;
+  text-decoration: none;
+  cursor: pointer;
+  margin-left: 15px;
+
   &:hover {
-    background-color: var(--primary-color);
-    border-color: var(--primary-color);
-    color: var(--text-white);
+    background-color: #3e92cc;
+    border-color: #3e92cc;
+    color: white;
+  }
+
+  &:focus {
+    outline: none;
+    box-shadow: 0 0 0 2px rgba(62, 146, 204, 0.5);
   }
 `;
-const Login = styled.div`
-  padding: 15px 32px;
+
+const Login = styled.button`
+  letter-spacing: 2px;
+  border-radius: 50px;
+  background-color: white;
+  display: inline-block;
+  transition: all 0.4s ease-in-out;
+  text-transform: uppercase;
+  border: none;
+  padding: 10px 27px;
   text-align: center;
   text-decoration: none;
   display: inline-block;
-  font-size: 16px;
+  font-weight: 500;
+  font-size: 14px;
   margin-left: 25px;
   cursor: pointer;
+  margin-right: 5px;
+
+  &:hover {
+    background-color: #ffecd1;
+  }
+
+  &:focus {
+    outline: none;
+    box-shadow: 0 0 0 2px #ffecd1;
+  }
 `;
 const NavbarHome = () => {
   return (
