@@ -63,7 +63,7 @@ const Dashboard = () => {
       </TopContainer>
       <MiddleContainer>
         <Cards>
-          <TargetCard type="KRA" percentage={75} backgroundColor="#ffc107" />
+          <TargetCard type="KRA" percentage="100" backgroundColor="#ffc107" />
           <TargetCard percentage="75" type="SOPs" />
           <TargetCard percentage="40" type="JD" />
           <TargetCard percentage="50" type="Tranning" />
