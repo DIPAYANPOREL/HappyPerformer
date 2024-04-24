@@ -9,6 +9,9 @@ const Container = styled.div`
   display: flex;
   justify-content: space-evenly;
   align-items: center;
+  @media (max-width: 720px) {
+    flex-direction: column;
+  }
 `;
 
 const Content = styled.div`
@@ -17,7 +20,8 @@ const Content = styled.div`
   flex-direction: column;
   justify-content: space-evenly;
   align-items: center;
-  margin-bottom: 85px;
+      margin-top: 80px;
+  margin-bottom: 80px;
 `;
 const VideoSection = styled.div`
   flex: 1;
@@ -72,10 +76,14 @@ const Typewriter = styled.h1`
       width: 100%;
     }
   }
+
+  @media (max-width: 720px) {
+    font-size: 25px;
+  }
 `;
 
 const Video = styled.video`
-
+    margin-top: 100px;
   width: 80%;
   height: auto;
 `;
