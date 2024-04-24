@@ -133,19 +133,19 @@ const Card = () => {
 
     useEffect(() => {
         const interval = setInterval(() => {
-            const currentDateTime = new Date().toLocaleString('en-IN', { weekday: 'short', month: 'short', day: 'numeric', year: 'numeric', hour: 'numeric', minute: 'numeric', second: 'numeric', hour12: true });
+            const currentDateTime = new Date().toLocaleString('en-IN', { weekday: 'long', month: 'short', day: 'numeric', year: 'numeric', hour: 'numeric', minute: 'numeric', second: 'numeric', hour12: true });
             setLiveDateTime(currentDateTime);
         }, 1000);
         return () => clearInterval(interval);
     }, []);
 
     const handlePunchInOut = () => {
-        const currentDate = new Date().toLocaleDateString('en-IN', { weekday: 'short', month: 'short', day: 'numeric', year: 'numeric' });
+        const currentDate = new Date().toLocaleDateString('en-IN', { weekday: 'long', month: 'short', day: 'numeric', year: 'numeric' });
         if (!isPunchedIn) {
-            setPunchInTime(`${currentDate} ${liveDateTime}`);
+            setPunchInTime(` ${liveDateTime}`);
             setIsPunchedIn(true);
         } else {
-            setPunchOutTime(`${currentDate} ${liveDateTime}`);
+            setPunchOutTime(` ${liveDateTime}`);
             setIsPunchedIn(false);
 
             // Calculate total hours
