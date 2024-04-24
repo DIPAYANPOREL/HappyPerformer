@@ -1,9 +1,10 @@
 import React, { useState } from "react";
-import styled from "styled-components";
+import styled, { css } from "styled-components";
 import Lama from "../../assets/Lama.png";
-import Personalinfo from "../../Components/Software Components/PersonalInfo";
 import EditNoteIcon from '@mui/icons-material/EditNote';
-
+import { CheckBox } from '@mui/icons-material';
+import { Button, Dialog, DialogContent, DialogTitle, FormControlLabel, IconButton, Stack, TextField } from '@mui/material';
+import CloseIcon from "@mui/icons-material/Close";
 
 const Container = styled.div`
   background-color: #f5f5f5;
@@ -11,6 +12,16 @@ const Container = styled.div`
   display: flex;
   flex-direction: column;
   align-items: center;
+`;
+
+const breakpoints = {
+  mobile: "768px",
+};
+
+const mobileStyles = css`
+  @media (max-width: ${breakpoints.mobile}) {
+    // Mobile styles go here
+  }
 `;
 
 const ProfileSection = styled.div`
@@ -22,6 +33,11 @@ const ProfileSection = styled.div`
   align-items: center;
   max-width: 800px;
   width: 100%;
+
+  ${mobileStyles} {
+    flex-direction: column;
+    padding: 20px;
+  }
 `;
 
 const ProfilePicture = styled.img`
@@ -30,6 +46,11 @@ const ProfilePicture = styled.img`
   border-radius: 50%;
   object-fit: cover;
   margin-right: 40px;
+
+  ${mobileStyles} {
+    margin-right: 0;
+    margin-bottom: 20px;
+  }
 `;
 
 const ProfileDetails = styled.div`
@@ -38,21 +59,43 @@ const ProfileDetails = styled.div`
   align-items: flex-start;
   justify-content: space-between;
   width: 100%;
+
+  ${mobileStyles} {
+    flex-direction: column;
+    align-items: center;
+  }
 `;
 
 const DetailsLeft = styled.div`
   margin-right: 20px;
   flex: 1;
+
+  ${mobileStyles} {
+    margin-right: 0;
+    text-align: center;
+  }
 `;
 
 const DetailsRight = styled.div`
   flex: 1;
+
+  ${mobileStyles} {
+    text-align: center;
+  }
 `;
 
 const Divider = styled.div`
   border-left: 1px solid #ccc;
   height: 100%;
   margin: 0 20px;
+
+  ${mobileStyles} {
+    border-left: none;
+    border-top: 1px solid #ccc;
+    height: 1px;
+    width: 100%;
+    margin: 20px 0;
+  }
 `;
 
 const AdditionalContainer = styled.div`
@@ -65,7 +108,7 @@ const AdditionalContainer = styled.div`
   width: 100%;
 `;
 
-const Button = styled.button`
+const StyledButton = styled.button`
   background-color: #ff8600;
   color: #fff;
   border: none;
@@ -90,19 +133,21 @@ const Card = styled.div`
   flex: 0 0 calc(50% - 20px);
   max-width: calc(50% - 20px);
   width: 100%;
-  background: #aeb8fe;
+  background: linear-gradient(135deg, #aeb8fe, #c9d3fe);
   border-radius: 12px;
   padding: 20px;
   margin-bottom: 20px;
   transition: 0.3s;
   border: 2px solid transparent;
   position: relative;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
 
   &:hover {
     border-color: #faaf72;
+    box-shadow: 0 8px 12px rgba(0, 0, 0, 0.1);
   }
 
-  @media (max-width: 768px) {
+  ${mobileStyles} {
     flex: 0 0 100%;
     max-width: 100%;
   }
@@ -110,12 +155,18 @@ const Card = styled.div`
 
 const PopupIcon = styled.button`
   position: absolute;
-  top: 5px;
-  right: 5px;
+  top: 10px;
+  right: 10px;
   cursor: pointer;
+  background-color: transparent;
+  border: none;
+  color: #333;
+  transition: color 0.3s ease;
+
+  &:hover {
+    color: #ff8600;
+  }
 `;
-
-
 
 function InfoCardComponent() {
   const [infocard] = useState([
@@ -145,9 +196,34 @@ function InfoCardComponent() {
     }
   ]);
 
-  const handlePopupClick = (card) => {
-    alert(`This is ${card.title}`);
+  const [showPopupMenu, setShowPopupMenu] = useState(null);
+  const [popupMenuPosition, setPopupMenuPosition] = useState({ x: 0, y: 0 });
+  const [open, setOpen] = useState(false);
+
+  const handlePopupClick = (card, event) => {
+    setShowPopupMenu(card.title);
+    setPopupMenuPosition({ x: event.clientX, y: event.clientY });
+
+    if (card.title === 'Personal Information') {
+      setOpen(true);
+    }
   };
+
+  const handlePopupMenuItemClick = (menuItem) => {
+    console.log(`Clicked ${menuItem} for ${showPopupMenu}`);
+    setShowPopupMenu(null);
+  };
+
+  const functionOpenPopup = () => {
+    setOpen(true);
+  };
+
+  const closePopup = () => {
+    setOpen(false);
+  };
+
+  const menuItems = ['Edit', 'Delete', 'View Details'];
+
 
   return (
     <InfoCard>
@@ -155,11 +231,44 @@ function InfoCardComponent() {
         <Card key={i}>
           <h3>{card.title}</h3>
           <p>{card.text}</p>
-          <PopupIcon onClick={() => handlePopupClick(card.title)}><EditNoteIcon></EditNoteIcon></PopupIcon>
-          <PopupIcon onClick={() => <Personalinfo/>}><EditNoteIcon></EditNoteIcon></PopupIcon>
-          <PopupIcon onClick={() => handlePopupClick(card)}></PopupIcon>
+          <PopupIcon
+            onClick={(event) => handlePopupClick(card, event)}
+          >
+            <EditNoteIcon></EditNoteIcon>
+          </PopupIcon>
+          {showPopupMenu === card.title && (
+            <PopupMenu
+              menuItems={menuItems}
+              handleMenuItemClick={handlePopupMenuItemClick}
+              position={popupMenuPosition}
+            />
+          )}
         </Card>
       ))}
+
+      {}
+      <Dialog open={open} onClose={closePopup} fullWidth maxWidth="md">
+        <DialogTitle>
+          Personal Information
+          <IconButton onClick={closePopup} style={{ float: 'right' }}>
+            <CloseIcon color='error'></CloseIcon>
+          </IconButton>
+        </DialogTitle>
+        <DialogContent>
+          <Stack spacing={2} margin={2}>
+            <TextField variant="outlined" label="Passport Number"></TextField>
+            <TextField variant="outlined" label="Phone Number"></TextField>
+            <TextField variant="outlined" label="Email"></TextField>
+            <TextField variant="outlined" label="Nationality"></TextField>
+            <TextField variant="outlined" label="Martial Status"></TextField>
+            <TextField variant="outlined" label="Religion"></TextField>
+            <TextField variant="outlined" label="Employment of Spouse"></TextField>
+            <TextField variant="outlined" label="No. of Children"></TextField>
+            <FormControlLabel control={<CheckBox defaultChecked color='primary'></CheckBox>} label="Agree Terms and Conditions"></FormControlLabel>
+            <Button color="primary" variant="contained">Submit</Button>
+          </Stack>
+        </DialogContent>
+      </Dialog>
     </InfoCard>
   );
 }
@@ -170,7 +279,6 @@ const Profile = () => {
   };
 
   return (
-   
     <Container>
       <ProfileSection>
         <ProfilePicture src={Lama} alt="Profile Picture" />

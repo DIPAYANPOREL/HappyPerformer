@@ -17,7 +17,6 @@ const Personalinfo = () => {
         <Dialog open={open} onClose={closepopup} fullWidth maxWidth="md">
         <DialogTitle>Personal Information <IconButton onClick={closepopup} style={{float:'right'}}><CloseIcon color='error'></CloseIcon></IconButton></DialogTitle>
         <DialogContent>
-            {/* <DialogContentText>Do You Want To Close</DialogContentText> */}
             <Stack spacing={2}margin={2}>
                 <TextField variant="outlined" label="Passport Number"></TextField>
                 <TextField variant="outlined" label="Phone Number"></TextField>
@@ -33,7 +32,6 @@ const Personalinfo = () => {
             </Stack>
         </DialogContent>
         <DialogActions>
-            {/* <Button onClick={closepopup} color="error" variant="contained">Close</Button> */}
         </DialogActions>
         </Dialog>
     </div>
