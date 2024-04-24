@@ -178,7 +178,7 @@ const PopupIcon = styled.button`
   }
 `;
 
-function InfoCardComponent() {
+const Profile = () => {
   const [infocard] = useState([
     {
       title: 'Personal Information',
@@ -234,60 +234,6 @@ function InfoCardComponent() {
 
   const menuItems = ['Edit', 'Delete', 'View Details'];
 
-
-  return (
-    <InfoCard>
-      {infocard.map((card, i) => (
-        <Card key={i}>
-          <h3>{card.title}</h3>
-          <p>{card.text}</p>
-          <PopupIcon
-            onClick={(event) => handlePopupClick(card, event)}
-          >
-            <EditNoteIcon></EditNoteIcon>
-          </PopupIcon>
-          {showPopupMenu === card.title && (
-            <PopupMenu
-              menuItems={menuItems}
-              handleMenuItemClick={handlePopupMenuItemClick}
-              position={popupMenuPosition}
-            />
-          )}
-        </Card>
-      ))}
-
-      {}
-      <Dialog open={open} onClose={closePopup} fullWidth maxWidth="md">
-        <DialogTitle>
-          Personal Information
-          <IconButton onClick={closePopup} style={{ float: 'right' }}>
-            <CloseIcon color='error'></CloseIcon>
-          </IconButton>
-        </DialogTitle>
-        <DialogContent>
-          <Stack spacing={2} margin={2}>
-            <TextField variant="outlined" label="Passport Number"></TextField>
-            <TextField variant="outlined" label="Phone Number"></TextField>
-            <TextField variant="outlined" label="Email"></TextField>
-            <TextField variant="outlined" label="Nationality"></TextField>
-            <TextField variant="outlined" label="Martial Status"></TextField>
-            <TextField variant="outlined" label="Religion"></TextField>
-            <TextField variant="outlined" label="Employment of Spouse"></TextField>
-            <TextField variant="outlined" label="No. of Children"></TextField>
-            <FormControlLabel control={<CheckBox defaultChecked color='primary'></CheckBox>} label="Agree Terms and Conditions"></FormControlLabel>
-            <Button color="primary" variant="contained">Submit</Button>
-          </Stack>
-        </DialogContent>
-      </Dialog>
-    </InfoCard>
-  );
-}
-
-const Profile = () => {
-  const handleButtonClick = () => {
-    console.log("Button clicked!");
-  };
-
   return (
     <Container>
       <ProfileSection>
@@ -299,7 +245,7 @@ const Profile = () => {
             <p style={{ marginBottom: '10px' }}>Job Name: Software Engineer</p>
             <p style={{ marginBottom: '10px' }}>Employee ID: 12345</p>
             <p style={{ marginBottom: '10px' }}>Date of Join: January 1, 2024</p>
-            <Button onClick={handleButtonClick}>Click Me</Button>
+            <Button >Click Me</Button>
           </DetailsLeft>
           <Divider />
           <DetailsRight>
@@ -313,7 +259,43 @@ const Profile = () => {
         </ProfileDetails>
       </ProfileSection>
       <AdditionalContainer>
-        <InfoCardComponent/>
+        <InfoCard>
+          {infocard.map((card, i) => (
+            <Card key={i}>
+              <h3>{card.title}</h3>
+              <p>{card.text}</p>
+              <PopupIcon
+                onClick={(event) => handlePopupClick(card, event)}
+              >
+                <EditNoteIcon></EditNoteIcon>
+              </PopupIcon>
+              {showPopupMenu === card.title && (
+                <Dialog open={open} onClose={closePopup} fullWidth maxWidth="md">
+                  <DialogTitle>
+                    Personal Information
+                    <IconButton onClick={closePopup} style={{ float: 'right' }}>
+                      <CloseIcon color='error'></CloseIcon>
+                    </IconButton>
+                  </DialogTitle>
+                  <DialogContent>
+                    <Stack spacing={2} margin={2}>
+                      <TextField variant="outlined" label="Passport Number"></TextField>
+                      <TextField variant="outlined" label="Phone Number"></TextField>
+                      <TextField variant="outlined" label="Email"></TextField>
+                      <TextField variant="outlined" label="Nationality"></TextField>
+                      <TextField variant="outlined" label="Martial Status"></TextField>
+                      <TextField variant="outlined" label="Religion"></TextField>
+                      <TextField variant="outlined" label="Employment of Spouse"></TextField>
+                      <TextField variant="outlined" label="No. of Children"></TextField>
+                      <FormControlLabel control={<CheckBox defaultChecked color='primary'></CheckBox>} label="Agree Terms and Conditions"></FormControlLabel>
+                      <Button color="primary" variant="contained">Submit</Button>
+                    </Stack>
+                  </DialogContent>
+                </Dialog>
+              )}
+            </Card>
+          ))}
+        </InfoCard>
       </AdditionalContainer>
     </Container>
   );
