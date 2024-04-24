@@ -5,11 +5,11 @@ import MeetTheTeam from "./Pages/Landing Page/MeetTheTeam";
 import Dashboard from "./Pages/Software/DashBoard/Dashboard";
 import Profile from "./Pages/Software/Profile";
 import Login from "./Pages/Software/Login";
-import PersonalInfo from "./Components/Software Components/PersonalInfo";
-import EmergencyContact from "./Components/Software Components/EmergencyContact";
-import FamilyInformation from "./Components/Software Components/FamilyInformation";
-import Experience from "./Components/Software Components/Experience";
-import EducationalInformation from "./Components/Software Components/EducationalInformation";
+import PersonalInfo from "./Components/Software Components/Profile/PersonalInfo";
+import EmergencyContact from "./Components/Software Components/Profile/EmergencyContact";
+import FamilyInformation from "./Components/Software Components/Profile/FamilyInformation";
+import Experience from "./Components/Software Components/Profile/Experience";
+import EducationalInformation from "./Components/Software Components/Profile/EducationalInformation";
 function App() {
   return (
     <>
@@ -24,10 +24,10 @@ function App() {
           <Route path="/FamilyInformation" element={<FamilyInformation/>} />
           <Route path="/Experience" element={<Experience/>} />
           <Route path="/EducationalInformation" element={<EducationalInformation/>} />
-        </Routes> 
+        </Routes>
     </>
   );
-  
+
 }
 
 export default App;

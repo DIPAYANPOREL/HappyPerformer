@@ -9,6 +9,8 @@ import CloseIcon from "@mui/icons-material/Close";
 const Container = styled.div`
   background-color: #f5f5f5;
   padding: 20px;
+  width:100%;
+  background-color: #f5f5f5;
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -31,10 +33,9 @@ const ProfileSection = styled.div`
   box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
   display: flex;
   align-items: center;
-  max-width: 800px;
   width: 100%;
 
-  ${mobileStyles} {
+  @media (max-width: ${breakpoints.mobile}) {
     flex-direction: column;
     padding: 20px;
   }
@@ -60,9 +61,11 @@ const ProfileDetails = styled.div`
   justify-content: space-between;
   width: 100%;
 
-  ${mobileStyles} {
+  @media (max-width: ${breakpoints.mobile}) {
     flex-direction: column;
     align-items: center;
+    padding: 0 20px;
+    margin-top: 20px;
   }
 `;
 
@@ -70,8 +73,8 @@ const DetailsLeft = styled.div`
   margin-right: 20px;
   flex: 1;
 
-  ${mobileStyles} {
-    margin-right: 0;
+  @media (max-width: ${breakpoints.mobile}) {
+    margin: 20px 0;
     text-align: center;
   }
 `;
@@ -79,7 +82,8 @@ const DetailsLeft = styled.div`
 const DetailsRight = styled.div`
   flex: 1;
 
-  ${mobileStyles} {
+  @media (max-width: ${breakpoints.mobile}) {
+    margin: 20px 0;
     text-align: center;
   }
 `;
@@ -100,11 +104,14 @@ const Divider = styled.div`
 
 const AdditionalContainer = styled.div`
   background-color: #ffffff;
+  display:flex;
+  align-items: center;
+  justify-content: center;
+  flex-wrap:wrap;
   padding: 30px;
   border-radius: 12px;
   box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-  margin-top: 30px;
-  max-width: 800px;
+  margin: 30px;
   width: 100%;
 `;
 
@@ -127,6 +134,9 @@ const InfoCard = styled.div`
   display: flex;
   flex-wrap: wrap;
   justify-content: space-between;
+  width: 100%;
+  margin: 20px;
+  min-height: 900px ;
 `;
 
 const Card = styled.div`
@@ -147,7 +157,7 @@ const Card = styled.div`
     box-shadow: 0 8px 12px rgba(0, 0, 0, 0.1);
   }
 
-  ${mobileStyles} {
+  @media (max-width: ${breakpoints.mobile}) {
     flex: 0 0 100%;
     max-width: 100%;
   }
@@ -172,7 +182,7 @@ function InfoCardComponent() {
   const [infocard] = useState([
     {
       title: 'Personal Information',
-      text: 'Loren ipsum dolor sit amet consectetur, adipisicing elit. Sit ducimus fuga itaque, ex natus quaerat deserunt asperiores dolore eligendi doloremque?Name: John Doe'
+      text: 'Loren ipsum dolor sit amet consectetur, adipisicing elit. Sit ducimus fuga itaque, ex natus quaerat deserunt asperiores dolore eligendi doloremque?Name: John Doe '
     },
     {
       title: 'Emergency Contact',
