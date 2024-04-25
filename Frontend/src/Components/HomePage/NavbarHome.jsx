@@ -1,4 +1,5 @@
 import React from "react";
+import { Link } from "react-router-dom";
 import styled from "styled-components";
 import logo2 from "../../assets/logo2.png";
 
@@ -41,7 +42,6 @@ const Right = styled.div`
 `;
 
 const Logo = styled.img`
-
   margin-top: 0px;
   width: 200px;
   height: 70px;
@@ -52,14 +52,14 @@ const Logo = styled.img`
   }
 `;
 
-const GetStarted = styled.button`
+const GetStarted = styled(Link)`
   padding: 10px 27px;
   display: inline-block;
   border-radius: 50px;
   transition: all 0.4s ease-in-out;
-  background-color: #3e92cc;
+  background-color: #0a1128;
   border: none;
-  color: #000;
+  color: #fff;
   font-weight: 500;
   font-size: 14px;
   text-transform: uppercase;
@@ -69,18 +69,17 @@ const GetStarted = styled.button`
   margin-left: 15px;
 
   &:hover {
-    background-color: #3e92cc;
-    border-color: #3e92cc;
-    color: white;
+    background-color: #ffecd1;
+    color: black;
   }
 
   &:focus {
     outline: none;
-    box-shadow: 0 0 0 2px rgba(62, 146, 204, 0.5);
+    box-shadow: 0 0 0 2px #ffecd1;
   }
 `;
 
-const Login = styled.button`
+const Login = styled(Link)`
   letter-spacing: 2px;
   border-radius: 50px;
   background-color: white;
@@ -112,11 +111,11 @@ const NavbarHome = () => {
     <Container>
       <Wrapper>
         <Left>
-          <Logo src={ logo2 } />
+          <Logo src={logo2} />
         </Left>
         <Right>
-          <Login>LOGIN</Login>
-          <GetStarted>GET STARTED</GetStarted>
+          <Login to={"/login"}>LOGIN</Login>
+          <GetStarted to={"/register"}>GET STARTED</GetStarted>
         </Right>
       </Wrapper>
     </Container>

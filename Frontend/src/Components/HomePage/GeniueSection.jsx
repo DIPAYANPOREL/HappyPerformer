@@ -1,4 +1,3 @@
-import { Source } from "@mui/icons-material";
 import React from "react";
 import styled from "styled-components";
 import video from "../../assets/happyperformer-home.mp4";
@@ -20,7 +19,7 @@ const Content = styled.div`
   flex-direction: column;
   justify-content: space-evenly;
   align-items: center;
-      margin-top: 80px;
+  margin-top: 80px;
   margin-bottom: 80px;
 `;
 const VideoSection = styled.div`
@@ -40,20 +39,26 @@ const ContentPara = styled.p`
   text-align: left;
   margin: 0px 4.5% 0px 20.5%;
   line-height: 1.2;
+  letter-spacing: 1.5px;
 `;
 
 const StartedBtn = styled.button`
   font-size: 15px;
   margin-left: 25px;
-  background-color: white;
+  background-color: #0a1128;
+  letter-spacing: 2px;
   border: none;
-  background-color: red;
-  padding: 10px 15px;
-  border-radius: 11px;
+  padding: 12px;
+  border-radius: 20px;
+  text-align: center;
   color: white;
   font-weight: 500;
   cursor: pointer;
   margin: 30px 0px;
+  transition: all 0.3s ease-in-out;
+  &:hover {
+    transform: scale(1.1);
+  }
 `;
 
 const Typewriter = styled.h1`
@@ -83,7 +88,7 @@ const Typewriter = styled.h1`
 `;
 
 const Video = styled.video`
-    margin-top: 100px;
+  margin-top: 100px;
   width: 80%;
   height: auto;
 `;
