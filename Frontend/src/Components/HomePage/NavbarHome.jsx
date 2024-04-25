@@ -1,5 +1,6 @@
 import React from "react";
 import styled from "styled-components";
+import logo2 from "../../assets/logo2.png";
 
 const Container = styled.div`
   height: 90px;
@@ -15,10 +16,10 @@ const Wrapper = styled.div`
   list-style-type: none;
   overflow: hidden;
 
-  padding: 26px 30px;
+  padding: 8px 30px;
   display: flex;
   align-items: center;
-  justify-content: space-between;
+  justify-content: center;
 `;
 
 const Left = styled.div`
@@ -39,7 +40,11 @@ const Right = styled.div`
   justify-content: flex-end;
 `;
 
-const Logo = styled.h1`
+const Logo = styled.img`
+
+  margin-top: 0px;
+  width: 200px;
+  height: 70px;
   font-weight: bold;
   cursor: pointer;
   @media (max-width: 600px) {
@@ -107,7 +112,7 @@ const NavbarHome = () => {
     <Container>
       <Wrapper>
         <Left>
-          <Logo>HappyPerformer!</Logo>
+          <Logo src={ logo2 } />
         </Left>
         <Right>
           <Login>LOGIN</Login>
