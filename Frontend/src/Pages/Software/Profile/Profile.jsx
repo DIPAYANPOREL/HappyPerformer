@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import styled, { css } from "styled-components";
-import Lama from "../../assets/Lama.png";
+// import Lama from "../../assets/Lama.png";
 import EditNoteIcon from '@mui/icons-material/EditNote';
 import { CheckBox } from '@mui/icons-material';
 import { Button, Dialog, DialogContent, DialogTitle, FormControlLabel, IconButton, Stack, TextField } from '@mui/material';
