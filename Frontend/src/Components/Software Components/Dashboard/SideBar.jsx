@@ -2,6 +2,7 @@ import React from "react";
 import styled from "styled-components";
 import Coder from "../../../assets/coding.svg";
 import Item from "./Item";
+
 const Container = styled.div`
   display: flex;
   flex-direction: column;
@@ -11,12 +12,9 @@ const Container = styled.div`
   background-color: #0a1128;
   height: 100vh;
   color: white;
-  width: 20%;
-  border-bottom-right-radius: 50px;
-  border-top-right-radius: 50px;
-  border-bottom-left-radius: 50px;
-  border-top-left-radius: 50px;
+      width: 100%;
 `;
+
 const LogoContainer = styled.div`
   display: flex;
   justify-content: center;
@@ -27,15 +25,18 @@ const LogoContainer = styled.div`
   height: 7%;
   border-radius: 50px;
 `;
+
 const MenuItems = styled.div`
   width: 100%;
   height: 60%;
   overflow-y: auto;
 `;
+
 const SVGContainer = styled.img`
   height: 120px;
   width: 100%;
 `;
+
 const SideBar = () => {
   return (
     <Container>
@@ -46,21 +47,7 @@ const SideBar = () => {
         <Item name="To-do-list" icon="📋" />
         <Item name="My Performance" icon="📈" />
         <Item name="Mark Attendance" icon="🕵🏻‍♂️" />
-        <Item name="Option" icon="⚙️" />
-        <Item name="Option" icon="⚙️" />
-        <Item name="Option" icon="⚙️" />
-        <Item name="Option" icon="⚙️" />
-        <Item name="Option" icon="⚙️" />
-        <Item name="Option" icon="⚙️" />
-        <Item name="Option" icon="⚙️" />
-        <Item name="Option" icon="⚙️" />
-        <Item name="Option" icon="⚙️" />
-        <Item name="Option" icon="⚙️" />
-        <Item name="Option" icon="⚙️" />
-        <Item name="Option" icon="⚙️" />
-        <Item name="Option" icon="⚙️" />
-        <Item name="Option" icon="⚙️" />
-        <Item name="Option" icon="⚙️" />
+        {/* Add more items as needed */}
       </MenuItems>
       <SVGContainer src={Coder} />
     </Container>
