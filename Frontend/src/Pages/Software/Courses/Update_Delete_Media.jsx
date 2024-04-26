@@ -1,9 +1,10 @@
-import React from 'react';
-import styled from 'styled-components';
-import SopDisp from '../../../Components/Software Components/Sop&Policies/SopDisp';
+import React from 'react'
+import styled from 'styled-components'
 import Nav from '../../../Components/Software Components/Dashboard/Nav';
 import Footer from '../../../Components/Software Components/Footer';
 import Header from '../../../Components/Software Components/Dashboard/Header';
+import Update_Delete_MediaDisp from '../../../Components/Software Components/Courses/Update_Delete_MediaDisp';
+
 
 const MainWrapper = styled.div`
   display: flex;
@@ -16,19 +17,21 @@ const Content = styled.div`
   flex: 1;
   display: flex;
   flex-direction: column;
+  align-items: center;
 `;
 
-const SopPolicies = () => {
+
+const Update_Delete_Media = () => {
   return (
     <MainWrapper>
       <Nav />
       <Content>
-        <Header title="Sop & Policies"/>
-        <SopDisp />
+        <Header title="Update Training"/>
+        <Update_Delete_MediaDisp/>
       </Content>
       <Footer />
     </MainWrapper>
-  );
-};
+  )
+}
 
-export default SopPolicies;
+export default Update_Delete_Media

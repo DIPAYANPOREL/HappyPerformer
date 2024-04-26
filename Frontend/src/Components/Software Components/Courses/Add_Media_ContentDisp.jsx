@@ -24,47 +24,9 @@ const Card = styled.div`
   padding: 20px;
   margin: 20px;
   width: 96%;
+  font-size: 1.4rem;
   background-color: white;
   box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-`;
-
-const Form = styled.form`
-  display: flex;
-  flex-direction: column;
-  gap: 50px;
-`;
-
-const Label = styled.label`
-  font-weight: bold;
-  margin-bottom: 5px;
-`;
-
-const Input = styled.input`
-  width: 100%;
-  padding: 10px;
-  border: 1px solid #ccc;
-  border-radius: 4px;
-`;
-
-const TextArea = styled.textarea`
-  width: 100%;
-  padding: 10px;
-  border: 1px solid #ccc;
-  border-radius: 4px;
-`;
-
-const Button = styled.button`
-  width: 100%;
-  padding: 12px;
-  background-color: #007bff;
-  color: #fff;
-  border: none;
-  border-radius: 4px;
-  cursor: pointer;
-  transition: background-color 0.3s;
-  &:hover {
-    background-color: #0056b3;
-  }
 `;
 
 const Table = styled.table`
@@ -115,7 +77,12 @@ const CoursesDisp = () => {
               <Thead>
                 <Tr>
                   <Th>Course Title</Th>
-                  <Th colSpan="1">Operations</Th>
+                  <Th>Operations</Th>
+                </Tr>
+                <Tr>
+                  <Td colSpan="2">
+                    <hr />
+                  </Td>
                 </Tr>
               </Thead>
               <tbody>
@@ -123,7 +90,7 @@ const CoursesDisp = () => {
                   <Tr key={course.id}>
                     <Td>{course.title}</Td>
                     <Td>
-{/* Link with course id, to be activate after backend integrated */}
+                      {/* Link with course id, to be activate after backend integrated */}
                       {/* <Link href={`Upload_Media.jsx?&cd=${course.id}`}>ADD</Link> */}
                       <Link href={`Upload_Media`}>ADD</Link>
                     </Td>

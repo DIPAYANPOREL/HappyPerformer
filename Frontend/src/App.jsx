@@ -9,6 +9,7 @@ import SopPolicies from "./Pages/Software/Sop&Policies/SopPolicies";
 import Courses from "./Pages/Software/Courses/Add_Courses";
 import Add_Media_Content from "./Pages/Software/Courses/Add_Media_Content";
 import Upload_Media from "./Pages/Software/Courses/Upload_Media";
+import Update_Delete_Media from "./Pages/Software/Courses/Update_Delete_Media";
 
 function App() {
   return (
@@ -23,6 +24,7 @@ function App() {
           <Route path="/courses" element={<Courses />} />
           <Route path="/add_media" element={<Add_Media_Content />} />
           <Route path="/upload_media" element={<Upload_Media />} />
+          <Route path="/update_delete_media" element={<Update_Delete_Media />} />
         </Routes>
     </>
   );
