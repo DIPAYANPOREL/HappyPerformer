@@ -5,11 +5,11 @@ const ContentContainer = styled.div`
   width: 100%;
   margin-left: auto;
   margin-right: auto;
-`;
+  `;
 
 const PageHeader = styled.div`
   padding: 20px;
-  background-color: #f5f5f5;
+  background-color: white;
   border-bottom: 1px solid #ddd;
 `;
 

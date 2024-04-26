@@ -1,9 +1,9 @@
 import React from 'react';
 import styled from 'styled-components';
-import SopDisp from '../../Components/Software Components/SopDisp';
-import Nav from '../../Components/Software Components/Dashboard/Nav';
-import Footer from '../../Components/Software Components/Footer';
-import Header from '../../Components/Software Components/Dashboard/Header';
+import SopDisp from '../../../Components/Software Components/Sop&Policies/SopDisp';
+import Nav from '../../../Components/Software Components/Dashboard/Nav';
+import Footer from '../../../Components/Software Components/Footer';
+import Header from '../../../Components/Software Components/Dashboard/Header';
 
 const MainWrapper = styled.div`
   display: flex;

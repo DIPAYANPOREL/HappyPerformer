@@ -1,17 +1,18 @@
 import NotificationsNoneOutlinedIcon from "@mui/icons-material/NotificationsNoneOutlined";
 import SearchOutlinedIcon from "@mui/icons-material/SearchOutlined";
 import styled from "styled-components";
+
 const Container = styled.div`
-  background-color: white;
+  background-color: #8576ff;
   color: black;
   padding: 10px;
   display: flex;
   justify-content: space-between;
-  margin-bottom: 1rem;
 `;
 const NameSection = styled.div`
   font-size: 1.5rem;
   font-weight: bold;
+  padding-left: 8px;
 `;
 const MenuItems = styled.div`
   display: flex;
