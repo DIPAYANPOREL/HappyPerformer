@@ -11,6 +11,7 @@ import FamilyInformation from "./Components/Software Components/Profile/FamilyIn
 import Experience from "./Components/Software Components/Profile/Experience";
 import EducationalInformation from "./Components/Software Components/Profile/EducationalInformation";
 import Setting from "./Pages/Software/Profile/Settings/Setting";
+import Training from "./Pages/Software/Training";
 function App() {
   return (
     <>
@@ -26,6 +27,8 @@ function App() {
           <Route path="/Experience" element={<Experience/>} />
           <Route path="/EducationalInformation" element={<EducationalInformation/>} />
           <Route path="/Setting" element={<Setting/>} />
+          <Route path="/Training" element={<Training/>} />
+       
         </Routes>
     </>
   );
