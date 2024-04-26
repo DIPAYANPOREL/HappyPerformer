@@ -3,7 +3,7 @@ import styled from 'styled-components';
 import SopDisp from '../../Components/Software Components/SopDisp';
 import Nav from '../../Components/Software Components/Dashboard/Nav';
 import Footer from '../../Components/Software Components/Footer';
-import SopHeader from '../../Components/Software Components/SopHeader';
+import Header from '../../Components/Software Components/Dashboard/Header';
 
 const MainWrapper = styled.div`
   display: flex;
@@ -24,7 +24,7 @@ const SopPolicies = () => {
     <MainWrapper>
       <Nav />
       <Content>
-        <SopHeader />
+        <Header title="Sop & Policies"/>
         <SopDisp />
       </Content>
       <Footer />

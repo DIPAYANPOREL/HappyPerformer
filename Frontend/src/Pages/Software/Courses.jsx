@@ -2,7 +2,7 @@ import React from 'react';
 import styled from 'styled-components';
 import Nav from '../../Components/Software Components/Dashboard/Nav';
 import Footer from '../../Components/Software Components/Footer';
-import CoursesHeader from '../../Components/Software Components/CoursesHeader';
+import Header from '../../Components/Software Components/Dashboard/Header';
 import CoursesDisp from '../../Components/Software Components/CoursesDisp';
 
 const MainWrapper = styled.div`
@@ -17,8 +17,7 @@ const Content = styled.div`
   flex: 1;
   display: flex;
   flex-direction: column;
-  align-items: center; /* Center content horizontally */
-  padding: 20px; /* Increased padding for better spacing */
+  align-items: center;
 `;
 
 const Courses = () => {
@@ -26,7 +25,7 @@ const Courses = () => {
     <MainWrapper>
       <Nav />
       <Content>
-        <CoursesHeader />
+        <Header title="Add Course"/>
         <CoursesDisp />
       </Content>
       <Footer />

@@ -1,4 +1,4 @@
-import React from 'react'
+import React from 'react';
 import styled from 'styled-components';
 
 const ContentContainer = styled.div`
@@ -44,6 +44,7 @@ const BreadcrumbLink = styled.a`
   color: #007bff;
   text-decoration: none;
   background-color: transparent;
+  transition: color 0.3s, text-decoration 0.3s;
 
   &:hover {
     color: #0056b3;
@@ -51,24 +52,20 @@ const BreadcrumbLink = styled.a`
   }
 `;
 
-const SopHeader = () => {
+const Header = ({title}) => {
+  return (
+    <ContentContainer>
+      <PageHeader>
+        <PageTitle>{title}</PageTitle>
+        <Breadcrumb>
+          <BreadcrumbItem>
+            <BreadcrumbLink href="/">Dashboard</BreadcrumbLink>
+          </BreadcrumbItem>
+          <BreadcrumbItem>{title}</BreadcrumbItem>
+        </Breadcrumb>
+      </PageHeader>
+    </ContentContainer>
+  );
+};
 
-
-    return (
-        <ContentContainer>
-          <PageHeader>
-            <PageTitle>Sop & Policies</PageTitle>
-            <Breadcrumb>
-              <BreadcrumbItem>
-                <BreadcrumbLink >Dashboard</BreadcrumbLink>
-              </BreadcrumbItem>
-              <BreadcrumbItem>Sop & Policies</BreadcrumbItem>
-            </Breadcrumb>
-          </PageHeader>
-        </ContentContainer>
-      );
-    };
-
-export default SopHeader
-
-
+export default Header;
