@@ -91,7 +91,6 @@ const SopDisp = () => {
   ]);
 
   const handleRating = (id, rating) => {
-    // Update the selfRate for the corresponding item in the data array
     setData((prevData) =>
       prevData.map((item) =>
         item.id === id ? { ...item, selfRate: rating } : item
@@ -107,7 +106,6 @@ const SopDisp = () => {
             <CardHeader>
               <CardTitle>
                 Your SOP's list & Company's Policies
-                <i className="align-middle fas fa-clipboard"></i>
               </CardTitle>
             </CardHeader>
 
