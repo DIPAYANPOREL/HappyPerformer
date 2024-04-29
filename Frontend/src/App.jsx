@@ -12,6 +12,9 @@ import Experience from "./Components/Software Components/Profile/Experience";
 import EducationalInformation from "./Components/Software Components/Profile/EducationalInformation";
 import Setting from "./Pages/Software/Profile/Settings/Setting";
 import Training from "./Pages/Software/Training";
+import EnrollEmployee from "./Pages/Management/EnrollEmployee";
+import Table from "./Components/Software Components/Table";
+import ApplyforLeave from "./Pages/Leave Management/ApplyforLeave";
 function App() {
   return (
     <>
@@ -28,6 +31,9 @@ function App() {
           <Route path="/EducationalInformation" element={<EducationalInformation/>} />
           <Route path="/Setting" element={<Setting/>} />
           <Route path="/Training" element={<Training/>} />
+          <Route path="/EnrollEmployee" element={<EnrollEmployee/>} />
+          <Route path="/Table" element={<Table/>} />
+          <Route path="/ApplyforLeave" element={<ApplyforLeave/>} />
        
         </Routes>
     </>
