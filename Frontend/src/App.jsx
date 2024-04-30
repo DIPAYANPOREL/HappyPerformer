@@ -2,9 +2,11 @@ import React from "react";
 import { Route, Routes } from "react-router-dom";
 import Home from "./Pages/Landing Page/Home";
 import MeetTheTeam from "./Pages/Landing Page/MeetTheTeam";
+import CreateCase from "./Pages/Software/CaseManagement/CreateCase";
 import Dashboard from "./Pages/Software/DashBoard/Dashboard";
 import EmployeeMaster from "./Pages/Software/EmployeeMaster/EmployeeMaster";
 import { default as Login, default as Resign } from "./Pages/Software/Login";
+import NewEmployeeRegistry from "./Pages/Software/RegisterEmployee/NewEmployeeRegistry";
 
 function App() {
   return (
@@ -16,6 +18,8 @@ function App() {
         <Route path="/employee-master" element={<EmployeeMaster />} />
         <Route path="/resign" element={<Resign />} />
         <Route path="/login" element={<Login />} />
+        <Route path="/register-employee" element={<NewEmployeeRegistry />} />
+        <Route path="/create-case" element={<CreateCase />} />
       </Routes>
     </>
   );
