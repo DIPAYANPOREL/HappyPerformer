@@ -3,21 +3,28 @@ import SearchOutlinedIcon from "@mui/icons-material/SearchOutlined";
 import styled from "styled-components";
 
 const Container = styled.div`
-  background-color: #8576ff;
-  color: black;
-  padding: 10px;
+  height: 50px;
+  color: white;
+  padding: 40px;
   display: flex;
   justify-content: space-between;
+  align-items: center; /* Center items vertically */
+  margin-bottom: 1rem;
+  background-color: #0a1128; /* Set background color to cover the entire navbar */
 `;
+
 const NameSection = styled.div`
   font-size: 1.5rem;
   font-weight: bold;
   padding-left: 8px;
 `;
+
 const MenuItems = styled.div`
   display: flex;
   justify-content: space-between;
+  width: 100%; /* Set width to cover the entire navbar */
 `;
+
 const InputBar = styled.input`
   padding: 6px;
   border: 1px solid #ccc;
@@ -25,6 +32,7 @@ const InputBar = styled.input`
   margin-right: 10px;
   border: none;
 `;
+
 const NotificationBar = styled.div`
   color: #758bfd;
   padding: 5px;
@@ -43,12 +51,12 @@ const Search = styled.div`
   background-color: white;
   border-radius: 20px;
   margin-right: 10px;
+  margin-left: 80%;
 `;
 
 const Nav = () => {
   return (
     <Container>
-      <NameSection>Hello Prathmesh! </NameSection>
       <MenuItems>
         <Search>
           <InputBar placeholder="Search.." />

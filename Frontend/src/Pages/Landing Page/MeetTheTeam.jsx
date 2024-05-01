@@ -10,6 +10,7 @@ import Brain from "../../assets/Brainnnn.svg";
 import Lama from "../../assets/Lama.png";
 import Logo3 from "../../assets/Logo3.svg";
 import Prathmesh from "../../assets/Prathmesh.png";
+import Shalav from "../../assets/ShalavD.jpeg";
 import Team2 from "../../assets/Team2.svg";
 
 const Container = styled.div`
@@ -19,7 +20,7 @@ const Container = styled.div`
 `;
 const MeetTeam = styled.div`
   height: 760px;
-  background-color: black;
+  background-color: #0a1128;
   display: flex;
   justify-content: center;
   align-items: center;
@@ -132,7 +133,7 @@ const Brains = styled.div`
   display: flex;
   justify-content: center;
   align-items: center;
-  background-color: black;
+  background-color: #0a1128;
   padding: 40px;
 `;
 const BrainText = styled.h3`
@@ -254,13 +255,13 @@ const Text = styled.div`
   }
 `;
 const DownText = styled.div`
- display: flex;
+  display: flex;
   justify-content: center;
   align-items: center;
   text-align: center;
   font-size: 24px;
   line-height: 1rem;
-  font-size:500;
+  font-size: 500;
   font-weight: bold;
   font-family: "Poppins", sans-serif;
   margin: 0.7rem 1.4rem;
@@ -269,7 +270,7 @@ const DownText = styled.div`
     padding: 10px;
     margin: 10px;
   }
-`
+`;
 
 const MeetTheTeam = () => {
   return (
@@ -317,7 +318,7 @@ const MeetTheTeam = () => {
       <Head>
         <PhotoContainer>
           <a href="https://www.linkedin.com/in/icanhelpu/">
-            <PhotoSection src={Prathmesh} />
+            <PhotoSection src={Shalav} />
           </a>
         </PhotoContainer>
         <Text>
@@ -333,8 +334,7 @@ const MeetTheTeam = () => {
             the technology world's changes heads the project directed at
             sky-rocketing business profits and people happiness index.
           </RightText>
-          <DownText>We hope
-            you will enjoy the new journey!</DownText>
+          <DownText>We hope you will enjoy the new journey!</DownText>
         </Text>
       </Head>
       {/* Team Members ithe yenar */}
