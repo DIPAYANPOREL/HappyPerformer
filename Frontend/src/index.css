@@ -1,3 +1,9 @@
+* {
+  padding: 0;
+  margin: 0;
+  box-sizing: border-box;
+  font-family: "Poppins", sans-serif;
+}
 h2 {
     color: #2980b9;
   }
@@ -90,3 +96,4 @@ h2 {
   button:hover {
     background-color: #2980b9;
   }
+

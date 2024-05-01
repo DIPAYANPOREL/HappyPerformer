@@ -2,6 +2,7 @@ import React from "react";
 import { Route, Routes } from "react-router-dom";
 import Home from "./Pages/Landing Page/Home";
 import MeetTheTeam from "./Pages/Landing Page/MeetTheTeam";
+import CreateCase from "./Pages/Software/CaseManagement/CreateCase";
 import Dashboard from "./Pages/Software/DashBoard/Dashboard";
 import Profile from "./Pages/Software/Profile/Profile";
 import Login from "./Pages/Software/Login";
