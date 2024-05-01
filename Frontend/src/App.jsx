@@ -4,13 +4,11 @@ import Home from "./Pages/Landing Page/Home";
 import MeetTheTeam from "./Pages/Landing Page/MeetTheTeam";
 import CreateCase from "./Pages/Software/CaseManagement/CreateCase";
 import Dashboard from "./Pages/Software/DashBoard/Dashboard";
-import EmployeeMaster from "./Pages/Software/EmployeeMaster/EmployeeMaster";
-import { default as Login, default as Resign } from "./Pages/Software/Login";
-import NewEmployeeRegistry from "./Pages/Software/RegisterEmployee/NewEmployeeRegistry";
 
 function App() {
   return (
     <>
+
       <Routes>
         <Route path="/" element={<Home />} />
         <Route path="/meet-the-team" element={<MeetTheTeam />} />
