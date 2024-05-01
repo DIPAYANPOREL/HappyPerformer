@@ -54,17 +54,27 @@ const Label = styled.label`
 `;
 
 const Input = styled.input`
-  width: 100%;
+  width: calc(50% - 10px);
   padding: 10px;
   border: 1px solid #ddd;
   border-radius: 4px;
+  margin-right: 10px;
+
+  &:last-child {
+    margin-right: 0;
+  }
 `;
 
 const Select = styled.select`
-  width: 100%;
+  width: calc(50% - 10px);
   padding: 10px;
   border: 1px solid #ddd;
   border-radius: 4px;
+  margin-right: 10px;
+
+  &:last-child {
+    margin-right: 0;
+  }
 `;
 
 const Textarea = styled.textarea`
@@ -72,6 +82,7 @@ const Textarea = styled.textarea`
   padding: 10px;
   border-radius: 4px;
   resize: none; 
+  margin-bottom: 10px;
 `;
 
 const Button = styled.button`
@@ -79,9 +90,7 @@ const Button = styled.button`
   color: white;
   padding: 10px 20px;
   font-weight: bold;
-  width: 20%;
-  margin: 0 auto; /* Center horizontally */
-  display: block; /* Ensure block level */
+  width: 100%;
   border: none;
   border-radius: 4px;
   cursor: pointer;
@@ -140,15 +149,9 @@ const ApplyforLeave = () => {
       </FormGroup>
       <FormGroup>
         <Label>Date Range</Label>
-        <div style={{ display: 'flex', gap: '40px' }}>
-          <div>
-            <Label htmlFor="fromDate">From Date</Label>
-            <Input type="date" id="fromDate" placeholder="dd/mm/yyyy"/>
-          </div>
-          <div>
-            <Label htmlFor="toDate">To Date</Label>
-            <Input type="date" id="toDate" placeholder="dd/mm/yyyy"/>
-          </div>
+        <div style={{ display: 'flex', flexWrap: 'wrap' }}>
+          <Input type="date" id="fromDate" placeholder="From Date"/>
+          <Input type="date" id="toDate" placeholder="To Date"/>
         </div>
       </FormGroup>
       <FormGroup>
