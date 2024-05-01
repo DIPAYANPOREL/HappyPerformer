@@ -17,6 +17,7 @@ import EnrollEmployee from "./Pages/Management/EnrollEmployee";
 import Table from "./Components/Software Components/Table";
 import ApplyforLeave from "./Pages/Leave Management/ApplyforLeave";
 import LeaveHistory from "./Pages/Leave Management/LeaveHistory";
+import SopForm from "./Pages/Software/EmployeesJobs/SopForm";
 function App() {
   return (
     <>
@@ -37,6 +38,7 @@ function App() {
           <Route path="/Table" element={<Table/>} />
           <Route path="/ApplyforLeave" element={<ApplyforLeave/>} />
           <Route path="/LeaveHistory" element={<LeaveHistory/>} />
+          <Route path="/SopForm" element={<SopForm/>} />
        
         </Routes>
     </>
