@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import styled, { css } from "styled-components";
-// import Lama from "../../assets/Lama.png";
+import Lama from "../../../assets/Lama.png";
 import EditNoteIcon from '@mui/icons-material/EditNote';
 import { CheckBox } from '@mui/icons-material';
 import { Button, Dialog, DialogContent, DialogTitle, FormControlLabel, IconButton, Stack, TextField } from '@mui/material';
@@ -206,35 +206,32 @@ const Profile = () => {
     }
   ]);
 
-  const [showPopupMenu, setShowPopupMenu] = useState(null);
-  const [popupMenuPosition, setPopupMenuPosition] = useState({ x: 0, y: 0 });
-  const [open, setOpen] = useState(false);
+  const [openDialogs, setOpenDialogs] = useState({
+    PersonalInformation: false,
+    EmergencyContact: false,
+    FamilyInformation: false,
+    Qualification: false,
+    Experience: false
+  });
 
-  const handlePopupClick = (card, event) => {
-    setShowPopupMenu(card.title);
-    setPopupMenuPosition({ x: event.clientX, y: event.clientY });
-
-    if (card.title === 'Personal Information') {
-      setOpen(true);
-    }
+  const handlePopupClick = (card) => {
+    setOpenDialogs(prevState => ({
+      ...prevState,
+      [card.title.replace(/\s+/g, '')]: true
+    }));
   };
 
-  const handlePopupMenuItemClick = (menuItem) => {
-    console.log(`Clicked ${menuItem} for ${showPopupMenu}`);
-    setShowPopupMenu(null);
-  };
-
-  const functionOpenPopup = () => {
-    setOpen(true);
-  };
-
-  const closePopup = () => {
-    setOpen(false);
+  const closePopup = (card) => {
+    setOpenDialogs(prevState => ({
+      ...prevState,
+      [card.title.replace(/\s+/g, '')]: false
+    }));
   };
 
   const menuItems = ['Edit', 'Delete', 'View Details'];
 
   return (
+    <>
     <Container>
       <ProfileSection>
         <ProfilePicture src={Lama} alt="Profile Picture" />
@@ -265,39 +262,29 @@ const Profile = () => {
               <h3>{card.title}</h3>
               <p>{card.text}</p>
               <PopupIcon
-                onClick={(event) => handlePopupClick(card, event)}
+                onClick={() => handlePopupClick(card)}
               >
                 <EditNoteIcon></EditNoteIcon>
               </PopupIcon>
-              {showPopupMenu === card.title && (
-                <Dialog open={open} onClose={closePopup} fullWidth maxWidth="md">
-                  <DialogTitle>
-                    Personal Information
-                    <IconButton onClick={closePopup} style={{ float: 'right' }}>
-                      <CloseIcon color='error'></CloseIcon>
-                    </IconButton>
-                  </DialogTitle>
-                  <DialogContent>
-                    <Stack spacing={2} margin={2}>
-                      <TextField variant="outlined" label="Passport Number"></TextField>
-                      <TextField variant="outlined" label="Phone Number"></TextField>
-                      <TextField variant="outlined" label="Email"></TextField>
-                      <TextField variant="outlined" label="Nationality"></TextField>
-                      <TextField variant="outlined" label="Martial Status"></TextField>
-                      <TextField variant="outlined" label="Religion"></TextField>
-                      <TextField variant="outlined" label="Employment of Spouse"></TextField>
-                      <TextField variant="outlined" label="No. of Children"></TextField>
-                      <FormControlLabel control={<CheckBox defaultChecked color='primary'></CheckBox>} label="Agree Terms and Conditions"></FormControlLabel>
-                      <Button color="primary" variant="contained">Submit</Button>
-                    </Stack>
-                  </DialogContent>
-                </Dialog>
-              )}
+              <Dialog open={openDialogs[card.title.replace(/\s+/g, '')]} onClose={() => closePopup(card)} fullWidth maxWidth="md">
+                <DialogTitle>
+                  {card.title}
+                  <IconButton onClick={() => closePopup(card)} style={{ float: 'right' }}>
+                    <CloseIcon color='error'></CloseIcon>
+                  </IconButton>
+                </DialogTitle>
+                <DialogContent>
+                  <Stack spacing={2} margin={2}>
+                    {/* Add dialog content here */}
+                  </Stack>
+                </DialogContent>
+              </Dialog>
             </Card>
           ))}
         </InfoCard>
       </AdditionalContainer>
     </Container>
+    </>
   );
 };
 

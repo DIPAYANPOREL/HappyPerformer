@@ -125,7 +125,7 @@ const Setting = () => {
   return (
 
 // </NavbarHome>
-
+<>
  <Container>  
     <form onSubmit={handleSubmit}>
     <Right>
@@ -186,6 +186,7 @@ const Setting = () => {
     </form>
     {/* <Footer/> */}
   </Container> 
+  </>
  );
 };
 export default Setting;
