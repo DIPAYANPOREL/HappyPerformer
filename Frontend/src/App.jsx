@@ -18,6 +18,9 @@ import Table from "./Components/Software Components/Table";
 import ApplyforLeave from "./Pages/Leave Management/ApplyforLeave";
 import LeaveHistory from "./Pages/Leave Management/LeaveHistory";
 import SopForm from "./Pages/Software/EmployeesJobs/SopForm";
+import Attendance from "./Pages/Software/Attendance/Attendance";
+import EmployeeDetails from "./Pages/Management/Attendance Management/EmployeeDetails";
+import AttendanceDetails from "./Pages/Management/Attendance Management/AttendanceDetails";
 function App() {
   return (
     <>
@@ -39,6 +42,9 @@ function App() {
           <Route path="/ApplyforLeave" element={<ApplyforLeave/>} />
           <Route path="/LeaveHistory" element={<LeaveHistory/>} />
           <Route path="/SopForm" element={<SopForm/>} />
+          <Route path="/Attendance" element={<Attendance/>} />
+          <Route path="/EmployeeDetails" element={<EmployeeDetails/>} />
+          <Route path="/AttendanceDetails" element={<AttendanceDetails/>} />
        
         </Routes>
     </>
