@@ -16,6 +16,7 @@ const Container = styled.div`
 const NameSection = styled.div`
   font-size: 1.5rem;
   font-weight: bold;
+  padding-left: 8px;
 `;
 
 const MenuItems = styled.div`
@@ -56,7 +57,6 @@ const Search = styled.div`
 const Nav = () => {
   return (
     <Container>
-      {/* <NameSection>Hello Prathmesh! </NameSection> */}
       <MenuItems>
         <Search>
           <InputBar placeholder="Search.." />
