@@ -3,13 +3,13 @@ import styled from "styled-components";
 import Nav from "../../../Components/Software Components/Dashboard/Nav";
 import NotificationSec from "../../../Components/Software Components/Dashboard/NotificationSec";
 import ProfileCard from "../../../Components/Software Components/Dashboard/ProfileCard";
-import TargetCard from "../../../Components/Software Components/Dashboard/TargetCard";
 import SideBar from "../../../Components/Software Components/Dashboard/SideBar";
+import TargetCard from "../../../Components/Software Components/Dashboard/TargetCard";
 
 const Container = styled.div`
   display: flex;
   flex-direction: column;
-  height: 100vh; 
+  height: 100vh;
 `;
 
 const ContentContainer = styled.div`
@@ -19,20 +19,20 @@ const ContentContainer = styled.div`
 `;
 
 const SideBarContainer = styled.div`
-  width: 20%; 
-  background-color: #ffffff; 
-  overflow-y: hidden; 
-  position: fixed; 
-  left: 0; 
-  top: 0; 
-  bottom: 0; 
+  width: 20%;
+  background-color: #ffffff;
+  overflow-y: hidden;
+  position: fixed;
+  left: 0;
+  top: 0;
+  bottom: 0;
 `;
 
 const ContentArea = styled.div`
-  flex: 1; /* Occupy the remaining space */
+  flex: 1;
   display: flex;
   flex-direction: column;
-  margin-left: 30%; /* Adjust margin to accommodate the sidebar */
+  margin-left: 30%;
 `;
 
 const MiddleContainer = styled.div`
@@ -42,6 +42,7 @@ const MiddleContainer = styled.div`
   padding: 20px;
   margin: 10px;
   align-items: center;
+  height: 100%;
 `;
 
 const BottomContainer = styled.div`
@@ -61,6 +62,10 @@ const NotificationSection = styled.div`
 `;
 
 const LeaderBoard = styled.div``;
+const Cards = styled.div`
+  display: flex;
+  flex-wrap: wrap;
+`;
 
 const Dashboard = () => {
   return (
@@ -72,12 +77,16 @@ const Dashboard = () => {
         </SideBarContainer>
         <ContentArea>
           <MiddleContainer>
-            <div>
-              <TargetCard type="KRA" percentage="100" backgroundColor="#ffc107" />
+            <Cards>
+              <TargetCard
+                type="KRA"
+                percentage="100"
+                backgroundColor="#ffc107"
+              />
               <TargetCard percentage="75" type="SOPs" />
               <TargetCard percentage="40" type="JD" />
               <TargetCard percentage="50" type="Training" />
-            </div>
+            </Cards>
             <ProfileCard />
           </MiddleContainer>
           <BottomContainer>

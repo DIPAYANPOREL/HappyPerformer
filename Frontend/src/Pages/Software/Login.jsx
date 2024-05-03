@@ -128,7 +128,7 @@ const Login = () => {
             <Input type="email" required placeholder="Email" />
             <Input type="password" required placeholder="Password" />
             <ForgotPass>Forgot Password?</ForgotPass>
-            <Button> Login</Button>
+            <Button>Login</Button>
           </FormLogin>
         </Center>
         <Right>

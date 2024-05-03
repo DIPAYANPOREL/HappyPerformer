@@ -3,6 +3,11 @@ import TaskAltOutlinedIcon from "@mui/icons-material/TaskAltOutlined";
 import React from "react";
 import styled from "styled-components";
 import Footer from "../../Components/Software Components/Footer.jsx";
+import bicycle from "../../assets/bicycle.svg";
+import car from "../../assets/car.svg";
+import airplane from "../../assets/airplane.svg";
+import rupeeIcon from "../../assets/rupee.svg";
+
 // Styled Components
 const PricingWrapper = styled.div`
   display: flex;
@@ -60,11 +65,13 @@ const PricingCard = styled.div`
 
 const PricingTitle = styled.h3`
   display: flex;
+  flex-direction: column;
   align-items: center;
   font-size: 1.5rem;
   margin-bottom: 1rem;
   justify-content: center;
   align-items: center;
+  gap: 0.5rem;
 `;
 
 const Price = styled.div`
@@ -130,17 +137,17 @@ const Pricing = () => {
           <PricingCard>
             <PricingTitle>
               Basic
-              {/* <img src={paperPlaneIcon} alt="Paper Plane" height="50px" width="50px" /> */}
+              <img src={bicycle} alt="Bicycle" height="90px" width="90px" />
             </PricingTitle>
             <Price>
-              {/* <img src={rupeeIcon} alt="Rupee" height="25px" width="25px" /> */}
+              <img src={rupeeIcon} alt="Rupee" height="25px" width="25px" />
               1485<Super>/ month</Super>
             </Price>
             <TableList>
               <ListItem>Total Number of Employees: 50</ListItem>
               <ListItem>
                 Beyond Limit:
-                {/* <img src={rupeeIcon} alt="Rupee" height="13px" width="25px" /> */}
+                <img src={rupeeIcon} alt="Rupee" height="13px" width="25px" />
                 15 per employee
               </ListItem>
               <ListItem>
@@ -181,7 +188,7 @@ const Pricing = () => {
             </TableList>
             <TableBuy>
               <Price>
-                {/* <img src={rupeeIcon} alt="Rupee" height="20px" width="25px" /> */}
+                <img src={rupeeIcon} alt="Rupee" height="20px" width="25px" />
                 1485<Super>/ month</Super>
               </Price>
               <PricingAction>Get Started!</PricingAction>
@@ -192,17 +199,17 @@ const Pricing = () => {
             <PricingTitle>
               Intermediate
               <br />
-              {/* <img src={planeIcon} alt="Plane" height="50px" width="50px" /> */}
+              <img src={car} alt="car" height="90px" width="90px" />
             </PricingTitle>
             <Price>
-              {/* <img src={rupeeIcon} alt="Rupee" height="25px" width="25px" /> */}
+              <img src={rupeeIcon} alt="Rupee" height="25px" width="25px" />
               2485<Super>/ month</Super>
             </Price>
             <TableList>
               <ListItem>Total Number of Employees: 100</ListItem>
               <ListItem>
                 Beyond Limit:
-                {/* <img src={rupeeIcon} alt="Rupee" height="13px" width="25px" /> */}
+                <img src={rupeeIcon} alt="Rupee" height="13px" width="25px" />
                 20 per employee
               </ListItem>
               <ListItem>
@@ -240,7 +247,7 @@ const Pricing = () => {
             </TableList>
             <TableBuy>
               <Price>
-                {/* <img src={rupeeIcon} alt="Rupee" height="20px" width="25px" /> */}
+                <img src={rupeeIcon} alt="Rupee" height="20px" width="25px" />
                 2485<Super>/ month</Super>
               </Price>
               <PricingAction>Get Started!</PricingAction>
@@ -251,17 +258,17 @@ const Pricing = () => {
             <PricingTitle>
               Premium
               <br />
-              {/* <img src={rocketIcon} alt="Rocket" height="50px" width="50px" /> */}
+              <img src={airplane} alt="airplane" height="80px" width="90px" />
             </PricingTitle>
             <Price>
-              {/* <img src={rupeeIcon} alt="Rupee" height="25px" width="25px" /> */}
+              <img src={rupeeIcon} alt="Rupee" height="25px" width="25px" />
               4885<Super>/ month</Super>
             </Price>
             <TableList>
               <ListItem>Total Number of Employees: 200</ListItem>
               <ListItem>
                 Beyond Limit:
-                {/* <img src={rupeeIcon} alt="Rupee" height="13px" width="25px" /> */}
+                <img src={rupeeIcon} alt="Rupee" height="13px" width="25px" />
                 30 per employee
               </ListItem>
               <ListItem>
@@ -299,7 +306,7 @@ const Pricing = () => {
             </TableList>
             <TableBuy>
               <Price>
-                {/* <img src={rupeeIcon} alt="Rupee" height="20px" width="25px" /> */}
+                <img src={rupeeIcon} alt="Rupee" height="20px" width="25px" />
                 4885<Super>/ month</Super>
               </Price>
               <PricingAction>Get Started!</PricingAction>
