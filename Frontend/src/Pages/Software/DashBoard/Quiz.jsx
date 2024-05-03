@@ -1,5 +1,5 @@
-import React from "react";
-
-export const Quiz = () => {
-  return <div>Quiz</div>;
+const Quiz = () => {
+  return <div>Hi</div>;
 };
+
+export default Quiz;
