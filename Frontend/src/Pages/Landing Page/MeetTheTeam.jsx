@@ -1,3 +1,4 @@
+import axios from 'axios';
 import React from "react";
 import styled from "styled-components";
 import Typewriter from "typewriter-effect";
@@ -273,6 +274,14 @@ const DownText = styled.div`
 `;
 
 const MeetTheTeam = () => {
+    axios.post("http://127.0.0.1:8000/meet-the-team/")
+  .then((res)=>{
+    console.log(res)
+  })
+  .catch((err)=>{
+    console.log(err);
+  });
+
   return (
     <Container>
       <TeamHeader />

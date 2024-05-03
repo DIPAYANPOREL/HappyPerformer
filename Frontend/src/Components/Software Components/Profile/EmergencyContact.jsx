@@ -1,7 +1,7 @@
-import { CheckBox, Close } from '@mui/icons-material';
-import { Button, Dialog, DialogActions, DialogContent, DialogContentText, DialogTitle, FormControlLabel, IconButton, Stack, TextField } from '@mui/material'
+// import { CheckBox, Close } from '@mui/icons-material';
 import CloseIcon from "@mui/icons-material/Close";
-import React, { useState } from 'react'
+import { Button, Dialog, DialogActions, DialogContent, DialogTitle, IconButton, Stack, TextField } from '@mui/material';
+import React, { useState } from 'react';
 
 const Personalinfo = () => {
     const [open,openchange]= useState(false);

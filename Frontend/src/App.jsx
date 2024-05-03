@@ -1,31 +1,31 @@
 import React from "react";
 import { Route, Routes } from "react-router-dom";
+import Register from "../src/Pages/Software/Register";
+import EducationalInformation from "./Components/Software Components/Profile/EducationalInformation";
+import EmergencyContact from "./Components/Software Components/Profile/EmergencyContact";
+import Experience from "./Components/Software Components/Profile/Experience";
+import FamilyInformation from "./Components/Software Components/Profile/FamilyInformation";
+import PersonalInfo from "./Components/Software Components/Profile/PersonalInfo";
+import Table from "./Components/Software Components/Table";
 import Home from "./Pages/Landing Page/Home";
 import MeetTheTeam from "./Pages/Landing Page/MeetTheTeam";
-import CreateCase from "./Pages/Software/CaseManagement/CreateCase";
-import Dashboard from "./Pages/Software/DashBoard/Dashboard";
-import EmployeeMaster from "./Pages/Software/EmployeeMaster/EmployeeMaster";
-import PHPTutorials from "./Pages/Software/PHPTutorials/PHPTutorials";
-import LoanPayments from "./Pages/Software/DashBoard/LoanPayments";
-import Quiz from "./Pages/Software/DashBoard/Quiz";
-import FAQ from "./Pages/Software/DashBoard/FAQ";
-import { default as Login, default as Resign } from "./Pages/Software/Login";
-import Profile from "./Pages/Software/Profile/Profile";
-import PersonalInfo from "./Components/Software Components/Profile/PersonalInfo";
-import EmergencyContact from "./Components/Software Components/Profile/EmergencyContact";
-import FamilyInformation from "./Components/Software Components/Profile/FamilyInformation";
-import Experience from "./Components/Software Components/Profile/Experience";
-import EducationalInformation from "./Components/Software Components/Profile/EducationalInformation";
-import Setting from "./Pages/Software/Profile/Settings/Setting";
-import Training from "./Pages/Software/Training";
-import EnrollEmployee from "./Pages/Management/EnrollEmployee";
-import Table from "./Components/Software Components/Table";
 import ApplyforLeave from "./Pages/Leave Management/ApplyforLeave";
 import LeaveHistory from "./Pages/Leave Management/LeaveHistory";
-import SopForm from "./Pages/Software/EmployeesJobs/SopForm";
-import Attendance from "./Pages/Software/Attendance/Attendance";
-import EmployeeDetails from "./Pages/Management/Attendance Management/EmployeeDetails";
 import AttendanceDetails from "./Pages/Management/Attendance Management/AttendanceDetails";
+import EmployeeDetails from "./Pages/Management/Attendance Management/EmployeeDetails";
+import EnrollEmployee from "./Pages/Management/EnrollEmployee";
+import Attendance from "./Pages/Software/Attendance/Attendance";
+import Dashboard from "./Pages/Software/DashBoard/Dashboard";
+import FAQ from "./Pages/Software/DashBoard/FAQ";
+import LoanPayments from "./Pages/Software/DashBoard/LoanPayments";
+import Quiz from "./Pages/Software/DashBoard/Quiz";
+import EmployeeMaster from "./Pages/Software/EmployeeMaster/EmployeeMaster";
+import SopForm from "./Pages/Software/EmployeesJobs/SopForm";
+import { default as Login, default as Resign } from "./Pages/Software/Login";
+import PHPTutorials from "./Pages/Software/PHPTutorials/PHPTutorials";
+import Profile from "./Pages/Software/Profile/Profile";
+import Setting from "./Pages/Software/Profile/Settings/Setting";
+import Training from "./Pages/Software/Training";
 function App() {
   return (
     <>
@@ -40,11 +40,7 @@ function App() {
         <Route path="/loanpayments" element={<LoanPayments />} />
         <Route path="/Quiz" element={<Quiz />} />
         <Route path="/FAQ" element={<FAQ />} />
-        <Route path="/" element={<Home />} />
-        <Route path="/meet-the-team" element={<MeetTheTeam />} />
-        <Route path="/dashboard" element={<Dashboard />} />
         <Route path="/profile" element={<Profile />} />
-        <Route path="/login" element={<Login />} />
         <Route path="/EmergencyContact" element={<EmergencyContact />} />
         <Route path="/PersonalInfo" element={<PersonalInfo />} />
         <Route path="/FamilyInformation" element={<FamilyInformation />} />
@@ -63,6 +59,8 @@ function App() {
         <Route path="/Attendance" element={<Attendance />} />
         <Route path="/EmployeeDetails" element={<EmployeeDetails />} />
         <Route path="/AttendanceDetails" element={<AttendanceDetails />} />
+        <Route path="/register" element={<Register />} />
+
       </Routes>
     </>
   );
