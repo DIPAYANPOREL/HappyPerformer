@@ -21,6 +21,12 @@ import SopForm from "./Pages/Software/EmployeesJobs/SopForm";
 import Attendance from "./Pages/Software/Attendance/Attendance";
 import EmployeeDetails from "./Pages/Management/Attendance Management/EmployeeDetails";
 import AttendanceDetails from "./Pages/Management/Attendance Management/AttendanceDetails";
+import SocialPage from "./Pages/Software/Social/Social";
+import AssignQuiz from "./Pages/Management/AssignQuiz";
+import AllQuizzes from "./Components/Software Components/AssignQuiz/AllQuizzes";
+import LeaveDashboard from "./Pages/Management/Leave Management/LeaveDashboard";
+import LeaveDetails from "./Components/Software Components/LeaveManagement/LeaveDetails";
+import ManageLeaveTypes from "./Pages/Management/Leave Management/ManageLeaveTypes";
 function App() {
   return (
     <>
@@ -45,6 +51,13 @@ function App() {
           <Route path="/Attendance" element={<Attendance/>} />
           <Route path="/EmployeeDetails" element={<EmployeeDetails/>} />
           <Route path="/AttendanceDetails" element={<AttendanceDetails/>} />
+          <Route path="/SocialPage" element={<SocialPage/>} />
+          <Route path="/AssignQuiz" element={<AssignQuiz/>} />
+          <Route path="/AllQuizzes" element={<AllQuizzes/>} />
+          <Route path="/LeaveDashboard" element={<LeaveDashboard/>} />
+          <Route path="/LeaveDetails" element={<LeaveDetails/>} />
+          <Route path="/ManageLeaveTypes" element={<ManageLeaveTypes/>} />
+
        
         </Routes>
     </>
