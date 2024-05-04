@@ -1,4 +1,3 @@
-import React from "react";
 import { Route, Routes } from "react-router-dom";
 import Register from "../src/Pages/Software/Register";
 import EducationalInformation from "./Components/Software Components/Profile/EducationalInformation";
@@ -17,8 +16,11 @@ import LeaveHistory from "./Pages/Leave Management/LeaveHistory";
 import AttendanceDetails from "./Pages/Management/Attendance Management/AttendanceDetails";
 import EmployeeDetails from "./Pages/Management/Attendance Management/EmployeeDetails";
 import EnrollEmployee from "./Pages/Management/EnrollEmployee";
+import Profile from "./Pages/Software/AddDetails/Profile";
 import Attendance from "./Pages/Software/Attendance/Attendance";
 import Dashboard from "./Pages/Software/DashBoard/Dashboard";
+import Training from "./Pages/Training";
+
 import FAQ from "./Pages/Software/DashBoard/FAQ";
 import LoanPayments from "./Pages/Software/DashBoard/LoanPayments";
 import Quiz from "./Pages/Software/DashBoard/Quiz";
@@ -26,9 +28,7 @@ import EmployeeMaster from "./Pages/Software/EmployeeMaster/EmployeeMaster";
 import SopForm from "./Pages/Software/EmployeesJobs/SopForm";
 import { default as Login, default as Resign } from "./Pages/Software/Login";
 import PHPTutorials from "./Pages/Software/PHPTutorials/PHPTutorials";
-import Profile from "./Pages/Software/Profile/Profile";
 import Setting from "./Pages/Software/Profile/Settings/Setting";
-import Training from "./Pages/Software/Training";
 function App() {
   return (
     <>
