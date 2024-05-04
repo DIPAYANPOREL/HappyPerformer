@@ -6,10 +6,11 @@ import LogoOne from "../../assets/login1.svg";
 
 const Container = styled.div`
   height: 100vh;
-  background-color: #e6e6e6;
+  background-color: #fff;
   display: flex;
   align-items: center;
   justify-content: center;
+  overflow: hidden;
   @media (max-width: 768px) {
     height: auto;
     flex-direction: column;
@@ -51,6 +52,7 @@ const Right = styled.div`
   display: flex;
   align-items: center;
   justify-content: center;
+  margin-top: 5rem;
   height: 40vh;
   @media (max-width: 768px) {
     width: 100%;
@@ -62,7 +64,7 @@ const Right = styled.div`
 const FormLogin = styled.form`
   display: flex;
   flex-direction: column;
-  margin: 20px auto;
+  margin: 40px auto;
 `;
 const Title = styled.h2`
   color: #333;
@@ -75,13 +77,13 @@ const Button = styled.button`
   width: 7vw;
   border: none;
   padding: 11px 15px;
-  background-color: #8576ff;
+  background-color: #0a1128;
   color: white;
   cursor: pointer;
   margin: 1rem auto;
   border-radius: 9px;
   &:hover {
-    background-color: #6659e0;
+    transform: scale(1.1);
   }
   @media (max-width: 768px) {
     width: 30vw;
@@ -126,7 +128,7 @@ const Login = () => {
             <Input type="email" required placeholder="Email" />
             <Input type="password" required placeholder="Password" />
             <ForgotPass>Forgot Password?</ForgotPass>
-            <Button> Login</Button>
+            <Button>Login</Button>
           </FormLogin>
         </Center>
         <Right>

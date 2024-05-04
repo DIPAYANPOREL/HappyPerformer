@@ -1,9 +1,11 @@
 import React from "react";
+import { Link } from "react-router-dom";
 import styled from "styled-components";
+
 const Container = styled.div`
   height: 80px;
   width: 100%;
-  background-color: #000;
+  background-color: #00000d;
   color: #fff;
   display: flex;
   align-items: center;
@@ -13,12 +15,23 @@ const Container = styled.div`
   box-shadow: 0 2px 2px rgba(255, 255, 255, 0.1);
 `;
 
-const Logo = styled.div`
+const LogoContainer = styled.div`
   display: flex;
   align-items: center;
   justify-content: center;
   padding: 10px;
   margin: auto 15px;
+  cursor: pointer;
+`;
+const Logo = styled.img`
+  margin-top: 0px;
+  width: 200px;
+  height: 60px;
+  font-weight: bold;
+  cursor: pointer;
+  @media (max-width: 600px) {
+    font-weight: semi-bold;
+  }
 `;
 const MenuItems = styled.div`
   display: flex;
@@ -27,7 +40,10 @@ const MenuItems = styled.div`
   padding: 10px;
   margin: auto 15px;
 `;
-const Item = styled.div`
+const Item = styled(Link)`
+  text-decoration: none;
+  color: white;
+  border: none;
   margin: auto 20px;
   font-size: 14px;
   cursor: pointer;
@@ -44,10 +60,10 @@ const Item = styled.div`
 const TeamHeader = () => {
   return (
     <Container>
-      <Logo>TEAM</Logo>
+      <LogoContainer></LogoContainer>
       <MenuItems>
-        <Item>HOME</Item>
-        <Item>LOGIN</Item>
+        <Item to={"/"}>HOME</Item>
+        <Item to={"/login"}>LOGIN</Item>
       </MenuItems>
     </Container>
   );
