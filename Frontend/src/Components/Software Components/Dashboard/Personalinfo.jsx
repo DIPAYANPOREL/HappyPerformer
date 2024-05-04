@@ -1,7 +1,7 @@
-// import { CheckBox, Close } from '@mui/icons-material';
+import { CheckBox, Close } from '@mui/icons-material';
+import { Button, Dialog, DialogActions, DialogContent, DialogContentText, DialogTitle, FormControlLabel, IconButton, Stack, TextField } from '@mui/material'
 import CloseIcon from "@mui/icons-material/Close";
-import { Button, Dialog, DialogActions, DialogContent, DialogTitle, IconButton, Stack, TextField } from '@mui/material';
-import React, { useState } from 'react';
+import React, { useState } from 'react'
 
 const Personalinfo = () => {
     const [open,openchange]= useState(false);
@@ -19,10 +19,12 @@ const Personalinfo = () => {
         <DialogContent>
             {/* <DialogContentText>Do You Want To Close</DialogContentText> */}
             <Stack spacing={2}margin={2}>
-                <TextField variant="outlined" label="Name"></TextField>
-                <TextField variant="outlined" label="Relationship"></TextField>
-                <TextField variant="outlined" label="Phone"></TextField>
-                <TextField variant="outlined" label="Phone 2"></TextField>
+                <TextField variant="outlined" label="Passport Number"></TextField>
+                <TextField variant="outlined" label="Phone Number"></TextField>
+                <TextField variant="outlined" label="Email"></TextField>
+                <TextField variant="outlined" label="Nationality"></TextField>
+                <TextField variant="outlined" label="Martial Status"></TextField>
+                <FormControlLabel control={<CheckBox defaultChecked color='primary'></CheckBox>} label="Agree Terms and Conditions"></FormControlLabel>
                 <Button color="primary" variant="contained">Submit</Button>
 
             </Stack>

@@ -1,7 +1,9 @@
+import axios from "axios";
 import React from "react";
 import styled from "styled-components";
 import FooterHome from "../../Components/HomePage/FooterHome";
 import NavbarHome from "../../Components/HomePage/NavbarHome";
+
 
 const Container = styled.div`
   max-width: 1290px;
@@ -38,6 +40,13 @@ const Break = styled.br`
   margin: 1.5rem 0;
 `;
 const AboutUs = () => {
+  axios.post("http://127.0.0.1:8000/about/")
+  .then((res)=>{
+    console.log(res)
+  })
+  .catch((err)=>{
+    console.log(err);
+  });
   return (
     <>
       <NavbarHome />

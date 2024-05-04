@@ -1,5 +1,6 @@
 import React from "react";
 
+import axios from "axios";
 import styled from "styled-components";
 import FooterHome from "../../Components/HomePage/FooterHome";
 import InfoTemplate from "../../Components/HomePage/InfoTemplate";
@@ -15,6 +16,15 @@ const MainText = styled.h1`
   }
 `;
 const TermsAndConditions = () => {
+  axios
+    .post("http://127.0.0.1:8000/terms/")
+    .then((res) => {
+      console.log(res);
+    })
+    .catch((err) => {
+      console.log(err);
+    });
+
   return (
     <Container>
       <NavbarHome />
