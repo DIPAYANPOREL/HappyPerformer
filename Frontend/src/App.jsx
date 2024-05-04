@@ -7,8 +7,11 @@ import Experience from "./Components/Software Components/Profile/Experience";
 import FamilyInformation from "./Components/Software Components/Profile/FamilyInformation";
 import PersonalInfo from "./Components/Software Components/Profile/PersonalInfo";
 import Table from "./Components/Software Components/Table";
+import AboutUs from "./Pages/Landing Page/AboutUs";
+import ContactUs from "./Pages/Landing Page/ContactUs";
 import Home from "./Pages/Landing Page/Home";
 import MeetTheTeam from "./Pages/Landing Page/MeetTheTeam";
+import TermsAndConditions from "./Pages/Landing Page/TermsAndConditions";
 import ApplyforLeave from "./Pages/Leave Management/ApplyforLeave";
 import LeaveHistory from "./Pages/Leave Management/LeaveHistory";
 import AttendanceDetails from "./Pages/Management/Attendance Management/AttendanceDetails";
@@ -31,6 +34,7 @@ function App() {
     <>
       <Routes>
         <Route path="/" element={<Home />} />
+        <Route path="/terms" element={<TermsAndConditions />} />
         <Route path="/meet-the-team" element={<MeetTheTeam />} />
         <Route path="/dashboard" element={<Dashboard />} />
         <Route path="/employee-master" element={<EmployeeMaster />} />
@@ -60,7 +64,8 @@ function App() {
         <Route path="/EmployeeDetails" element={<EmployeeDetails />} />
         <Route path="/AttendanceDetails" element={<AttendanceDetails />} />
         <Route path="/register" element={<Register />} />
-
+        <Route path="/contact" element={<ContactUs />} />
+        <Route path="/about" element={<AboutUs />} />
       </Routes>
     </>
   );

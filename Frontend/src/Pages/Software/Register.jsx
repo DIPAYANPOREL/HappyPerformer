@@ -1,3 +1,4 @@
+import axios from "axios";
 import React, { useState } from "react";
 import styled from "styled-components";
 import Footer from "../../Components/Software Components/Footer";
@@ -139,7 +140,25 @@ const Input = styled.input`
   margin-bottom: 1rem;
 `;
 
+const ButtonRow = styled.div`
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+  width: 100%;
+  margin: 0.5rem 5rem 2rem 0.1rem;
+`;
+
+const CloneButton = styled(Button)`
+  align-self: flex-end;
+  margin: 10px;
+`;
+
+const ResetButton = styled(Button)`
+  background-color: #ff0000;
+`;
+
 const Register = () => {
+  // department
   const [departmentInputs, setDepartmentInputs] = useState([
     "",
     "Super Manager",
@@ -167,27 +186,43 @@ const Register = () => {
     setDepartmentInputs(newDepartmentInputs);
   };
 
-  const ButtonRow = styled.div`
-    display: flex;
-    justify-content: flex-end;
-    align-items: center;
-    width: 100%;
-    margin: 0.5rem 5rem 2rem 0.1rem;
-  `;
+  const handleRegister = (e) => {
+    e.preventDefault();
+    const data = {
+      companyName,
+      companyAddress,
+      companyPhone,
+      empName,
+      empMail,
+      empNum,
+      empSkills,
+    };
 
-  const CloneButton = styled(Button)`
-    align-self: flex-end;
-    margin: 10px;
-  `;
+    axios
+      .post("http://127.0.0.1:8000/register/", data)
+      .then((res) => {
+        console.log(res.data);
 
-  const ResetButton = styled(Button)`
-    background-color: #ff0000;
-  `;
+        // navigate("/dashboard");
+      })
+      .catch((err) => {
+        console.log(err);
+        alert("Registering failed. Please check your connection or try again.");
+      });
+  };
 
   const handleResetDepartment = () => {
     setDepartmentInputs(["", "Super Manager", "Manager", "HR"]);
   };
 
+  const [companyName, setCompanyName] = useState("");
+  const [companyAddress, setCompanyAddress] = useState("");
+  const [companyPhone, setCompanyPhone] = useState("");
+
+  const [empName, setEmpName] = useState("");
+  const [empMail, setEmpMail] = useState("");
+  const [empNum, setEmpNum] = useState("");
+  const [empSkills, setEmpSkills] = useState("");
   return (
     <>
       <Container>
@@ -199,9 +234,33 @@ const Register = () => {
             <Title>Company's Registration</Title>
 
             <Divider>Company Details</Divider>
-            <Input type="text" required placeholder="Company Name" />
-            <Input type="address" required placeholder="Address" />
-            <Input type="phone" required placeholder="Contact Number" />
+            <Input
+              type="text"
+              required
+              placeholder="Company Name"
+              value={companyName}
+              onChange={(e) => {
+                setCompanyName(e.target.value);
+              }}
+            />
+            <Input
+              type="address"
+              required
+              placeholder="Address"
+              value={companyAddress}
+              onChange={(e) => {
+                setCompanyAddress(e.target.value);
+              }}
+            />
+            <Input
+              type="phone"
+              required
+              placeholder="Contact Number"
+              value={companyPhone}
+              onChange={(e) => {
+                setCompanyPhone(e.target.value);
+              }}
+            />
 
             <Divider>Department Name</Divider>
             {departmentInputs.map((input, index) => (
@@ -236,14 +295,42 @@ const Register = () => {
               required
               placeholder="Employee Name"
               autoComplete="name"
+              value={empName}
+              onChange={(e) => {
+                setEmpName(e.target.value);
+              }}
             />
-            <Input type="email" required placeholder="Email" />
-            <Input type="tel" required placeholder="Phone Number" />
-            <Input type="text" required placeholder="Skills" />
+            <Input
+              type="email"
+              required
+              placeholder="Email"
+              value={empMail}
+              onChange={(e) => {
+                setEmpMail(e.target.value);
+              }}
+            />
+            <Input
+              type="tel"
+              required
+              placeholder="Phone Number"
+              value={empNum}
+              onChange={(e) => {
+                setEmpNum(e.target.value);
+              }}
+            />
+            <Input
+              type="text"
+              required
+              placeholder="Skills"
+              value={empSkills}
+              onChange={(e) => {
+                setEmpSkills(e.target.value);
+              }}
+            />
 
             <ButtonContainer>
               <Button>Reset</Button>
-              <PrimaryButton>Register</PrimaryButton>
+              <PrimaryButton onClick={handleRegister}>Register</PrimaryButton>
             </ButtonContainer>
           </FormLogin>
         </Center>
