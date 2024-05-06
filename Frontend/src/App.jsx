@@ -35,6 +35,7 @@ import Login from "./Pages/Software/Login";
 import Resign from "./Pages/Software/Resign/Resign";
 import PHPTutorials from "./Pages/Software/PHPTutorials/PHPTutorials";
 import Setting from "./Pages/Software/Profile/Settings/Setting";
+import SopPolicies from "./Pages/Software/Sop&Policies/SopPolicies"
 
 function App() {
   return (
@@ -58,6 +59,7 @@ function App() {
           <Route path="/ApplyforLeave" element={<ApplyforLeave/>} />
           <Route path="/LeaveHistory" element={<LeaveHistory/>} />
           <Route path="/SopForm" element={<SopForm/>} />
+          <Route path="/soppolicies" element={<SopPolicies/>} />
           <Route path="/Attendance" element={<Attendance/>} />
           <Route path="/EmployeeDetails" element={<EmployeeDetails/>} />
           <Route path="/AttendanceDetails" element={<AttendanceDetails/>} />
