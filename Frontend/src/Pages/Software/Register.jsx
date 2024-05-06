@@ -195,6 +195,7 @@ const Register = () => {
       companyName,
       companyAddress,
       companyPhone,
+      deptName: departmentInputs[0],
       empName,
       empMail,
       empNum,
