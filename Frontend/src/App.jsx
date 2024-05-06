@@ -31,7 +31,8 @@ import LoanPayments from "./Pages/Software/DashBoard/LoanPayments";
 import Quiz from "./Pages/Software/DashBoard/Quiz";
 import EmployeeMaster from "./Pages/Software/EmployeeMaster/EmployeeMaster";
 import SopForm from "./Pages/Software/EmployeesJobs/SopForm";
-import { default as Login, default as Resign } from "./Pages/Software/Login";
+import Login from "./Pages/Software/Login";
+import Resign from "./Pages/Software/Resign/Resign";
 import PHPTutorials from "./Pages/Software/PHPTutorials/PHPTutorials";
 import Setting from "./Pages/Software/Profile/Settings/Setting";
 
@@ -39,7 +40,7 @@ function App() {
   return (
     <>
       <Routes>
-     
+
           <Route path="/" element={<Home />} />
           <Route path="/meet-the-team" element={<MeetTheTeam />} />
           <Route path="/dashboard" element={<Dashboard />} />
@@ -96,7 +97,7 @@ function App() {
           <Route path="/register" element={<Register />} />
           <Route path="/contact" element={<ContactUs />} />
           <Route path="/about" element={<AboutUs />} />
-       
+
         </Routes>
 
     </>
