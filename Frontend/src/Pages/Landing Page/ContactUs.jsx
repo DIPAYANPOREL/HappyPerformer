@@ -3,6 +3,7 @@ import React from "react";
 import styled from "styled-components";
 import FooterHome from "../../Components/HomePage/FooterHome";
 import NavbarHome from "../../Components/HomePage/NavbarHome";
+import Footer from "../../Components/Software Components/Footer";
 
 const Container = styled.div`
   max-width: 1290px;
@@ -40,15 +41,14 @@ const Break = styled.br`
   margin: auto;
 `;
 const ContactUs = () => {
-
-    
-axios.post("http://127.0.0.1:8000/contact/")
-  .then((res)=>{
-    console.log(res)
-  })
-  .catch((err)=>{
-    console.log(err);
-  });
+  axios
+    .post("http://127.0.0.1:8000/contact/")
+    .then((res) => {
+      console.log(res);
+    })
+    .catch((err) => {
+      console.log(err);
+    });
 
   return (
     <>
@@ -102,6 +102,7 @@ axios.post("http://127.0.0.1:8000/contact/")
         </Content>
       </Container>
       <FooterHome />
+      <Footer />
     </>
   );
 };

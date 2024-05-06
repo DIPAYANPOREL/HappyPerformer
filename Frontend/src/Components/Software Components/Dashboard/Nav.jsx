@@ -8,9 +8,9 @@ const Container = styled.div`
   padding: 40px;
   display: flex;
   justify-content: space-between;
-  align-items: center; /* Center items vertically */
+  align-items: center;
   margin-bottom: 1rem;
-  background-color: #0a1128; /* Set background color to cover the entire navbar */
+  background-color: #0a1128;
 `;
 
 const NameSection = styled.div`

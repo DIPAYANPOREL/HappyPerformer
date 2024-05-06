@@ -5,14 +5,15 @@ import {
   LocationOnOutlined,
   Mail,
   Phone,
-  Pinterest,
   Twitter,
 } from "@mui/icons-material";
 import React from "react";
+import { Link } from "react-router-dom";
 import styled from "styled-components";
 
 const Container = styled.div`
   display: flex;
+  padding: 10px;
 `;
 
 const Left = styled.div`
@@ -42,6 +43,10 @@ const SocialIcon = styled.div`
   align-items: center;
   justify-content: center;
   margin-right: 20px;
+  &:hover {
+    cursor: pointer;
+    transform: scale(1.2);
+  }
 `;
 
 const Right = styled.div`
@@ -49,7 +54,7 @@ const Right = styled.div`
   padding: 20px;
 `;
 
-const ContactItem = styled.div`
+const ContactItem = styled(Link)`
   margin-bottom: 20px;
   display: flex;
   align-items: center;
@@ -72,15 +77,21 @@ const List = styled.ul`
   flex-wrap: wrap;
 `;
 
-const ListItem = styled.li`
+const ListItem = styled(Link)`
   width: 50%;
   margin-bottom: 10px;
+  color: #000;
+  text-decoration: none;
+  &:hover {
+    color: #000;
+    cursor: pointer;
+  }
 `;
 const FooterHome = () => {
   return (
     <Container>
       <Left>
-        <Logo>.UrbanMart!</Logo>
+        <Logo>Salahkaar Consultants</Logo>
         <Desc>
           Lorem ipsum, dolor sit amet consectetur adipisicing elit. Molestias
           error obcaecati voluptates accusantium iste. Beatae dolorem nostrum
@@ -100,23 +111,19 @@ const FooterHome = () => {
           <SocialIcon color="blue">
             <LinkedIn />
           </SocialIcon>
-          <SocialIcon color="#E60023">
-            <Pinterest />
-          </SocialIcon>
         </SocialContainer>
       </Left>
       <Center>
         <Title>Useful links</Title>
         <List>
-          <ListItem>Home</ListItem>
-          <ListItem>Cart</ListItem>
-          <ListItem>Man Fashion</ListItem>
-          <ListItem>Woman Fashion</ListItem>
-          <ListItem>Accessories</ListItem>
-          <ListItem>My Account</ListItem>
-          <ListItem>Order Tracking</ListItem>
-          <ListItem>Wishlist</ListItem>
-          <ListItem>Terms and Conditions</ListItem>
+          <ListItem to={"/"}>Home</ListItem>
+          <ListItem to={"/about"}>About Us</ListItem>
+          <ListItem to={"/meet-the-team"}>Meet The Team</ListItem>
+          <ListItem to={"/contact"}>Contact Us</ListItem>
+          <ListItem to={"/FrequentQuestions"}>FAQ's</ListItem>
+          <ListItem to={"/privacypolicy"}>Privacy Policy</ListItem>
+          <ListItem to={"/terms"}>Terms and Conditions</ListItem>
+          <ListItem to={"/videoref"}>Video References</ListItem>
         </List>
       </Center>
       <Right>
@@ -125,11 +132,11 @@ const FooterHome = () => {
           <LocationOnOutlined /> Pune,Maharashtra - India
         </ContactItem>
         <ContactItem>
-          <Phone /> +91 1234567890
+          <Phone /> +91 9975012222
         </ContactItem>
         <ContactItem>
-          <Mail />
-          email@gmail.com
+          <Mail type="email" />
+          Ren@SalahkaarConsultants.com
         </ContactItem>
       </Right>
     </Container>

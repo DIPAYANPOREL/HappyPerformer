@@ -12,7 +12,7 @@ const Container = styled.div`
   background-color: #0a1128;
   height: 100vh;
   color: white;
-      width: 100%;
+  width: 100%;
 `;
 
 const LogoContainer = styled.div`

@@ -21,6 +21,7 @@ import Attendance from "./Pages/Software/Attendance/Attendance";
 import Dashboard from "./Pages/Software/DashBoard/Dashboard";
 import Training from "./Pages/Training";
 
+import PrivacyPolicy from "./Pages/Landing Page/PrivacyPolicy";
 import FAQ from "./Pages/Software/DashBoard/FAQ";
 import LoanPayments from "./Pages/Software/DashBoard/LoanPayments";
 import Quiz from "./Pages/Software/DashBoard/Quiz";
@@ -66,6 +67,7 @@ function App() {
         <Route path="/register" element={<Register />} />
         <Route path="/contact" element={<ContactUs />} />
         <Route path="/about" element={<AboutUs />} />
+        <Route path="/privacypolicy" element={<PrivacyPolicy />} />
       </Routes>
     </>
   );
