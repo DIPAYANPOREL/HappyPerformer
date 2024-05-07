@@ -34,7 +34,10 @@ import PHPTutorials from "./Pages/Software/PHPTutorials/PHPTutorials";
 import Setting from "./Pages/Software/Profile/Settings/Setting";
 import SocialPage from "./Pages/Software/Social/Social";
 import Training from "./Pages/Training";
-
+import AllLeaves from "./Pages/Management/Leave Management/AllLeaves";
+import PendingLeaves from "./Pages/Management/Leave Management/PendingLeaves";
+import ApprovedLeaves from "./Pages/Management/Leave Management/ApprovedLeaves";
+import RejectedLeaves from "./Pages/Management/Leave Management/RejectedLeaves";
 function App() {
   return (
     <>
@@ -84,10 +87,7 @@ function App() {
         <Route path="/PersonalInfo" element={<PersonalInfo />} />
         <Route path="/FamilyInformation" element={<FamilyInformation />} />
         <Route path="/Experience" element={<Experience />} />
-        <Route
-          path="/EducationalInformation"
-          element={<EducationalInformation />}
-        />
+        <Route path="/EducationalInformation" element={<EducationalInformation />} />
         <Route path="/Setting" element={<Setting />} />
         <Route path="/Training" element={<Training />} />
         <Route path="/EnrollEmployee" element={<EnrollEmployee />} />
@@ -101,6 +101,10 @@ function App() {
         <Route path="/register" element={<Register />} />
         <Route path="/contact" element={<ContactUs />} />
         <Route path="/about" element={<AboutUs />} />
+        <Route path="/AllLeaves" element={<AllLeaves />} />
+        <Route path="/PendingLeaves" element={<PendingLeaves />} />
+        <Route path="/ApprovedLeaves" element={<ApprovedLeaves />} />
+        <Route path="/RejectedLeaves" element={<RejectedLeaves />} />
       </Routes>
     </>
   );
