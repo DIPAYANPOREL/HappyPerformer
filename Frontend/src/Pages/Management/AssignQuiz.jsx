@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import styled from 'styled-components';
 import { Link } from "react-router-dom";
-// import OtherPage from './OtherPage'; // Assuming you have OtherPage component
+
 
 const QuizFormContainer = styled.div`
   display: flex;

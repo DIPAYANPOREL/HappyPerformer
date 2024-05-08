@@ -31,6 +31,7 @@ import EmployeeMaster from "./Pages/Software/EmployeeMaster/EmployeeMaster";
 import SopForm from "./Pages/Software/EmployeesJobs/SopForm";
 import { default as Login, default as Resign } from "./Pages/Software/Login";
 import PHPTutorials from "./Pages/Software/PHPTutorials/PHPTutorials";
+import CreateCase from "./Pages/Software/CaseManagement/CreateCase";
 import Setting from "./Pages/Software/Profile/Settings/Setting";
 import SocialPage from "./Pages/Software/Social/Social";
 import Training from "./Pages/Training";
@@ -38,6 +39,8 @@ import AllLeaves from "./Pages/Management/Leave Management/AllLeaves";
 import PendingLeaves from "./Pages/Management/Leave Management/PendingLeaves";
 import ApprovedLeaves from "./Pages/Management/Leave Management/ApprovedLeaves";
 import RejectedLeaves from "./Pages/Management/Leave Management/RejectedLeaves";
+import Resignations from "./Pages/Management/Resignations/Resignations";
+import AllCases from "./Pages/Software/CaseManagement/AllCases";
 function App() {
   return (
     <>
@@ -51,10 +54,7 @@ function App() {
         <Route path="/PersonalInfo" element={<PersonalInfo />} />
         <Route path="/FamilyInformation" element={<FamilyInformation />} />
         <Route path="/Experience" element={<Experience />} />
-        <Route
-          path="/EducationalInformation"
-          element={<EducationalInformation />}
-        />
+        <Route path="/EducationalInformation"element={<EducationalInformation />} />
         <Route path="/Setting" element={<Setting />} />
         <Route path="/Training" element={<Training />} />
         <Route path="/EnrollEmployee" element={<EnrollEmployee />} />
@@ -72,6 +72,7 @@ function App() {
         <Route path="/LeaveDetails" element={<LeaveDetails />} />
         <Route path="/ManageLeaveTypes" element={<ManageLeaveTypes />} />
         <Route path="/" element={<Home />} />
+        <Route path="/createcase" element={<CreateCase />} />
         <Route path="/terms" element={<TermsAndConditions />} />
         <Route path="/meet-the-team" element={<MeetTheTeam />} />
         <Route path="/dashboard" element={<Dashboard />} />
@@ -105,6 +106,8 @@ function App() {
         <Route path="/PendingLeaves" element={<PendingLeaves />} />
         <Route path="/ApprovedLeaves" element={<ApprovedLeaves />} />
         <Route path="/RejectedLeaves" element={<RejectedLeaves />} />
+        <Route path="/Resignations" element={<Resignations />} /> 
+        <Route path="/AllCases" element={<AllCases />} />
       </Routes>
     </>
   );

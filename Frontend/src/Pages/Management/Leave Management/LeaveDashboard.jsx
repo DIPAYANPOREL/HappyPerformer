@@ -1,4 +1,3 @@
-// LeaveDashboard.js
 import React, { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import styled from 'styled-components';
@@ -8,20 +7,31 @@ const Container = styled.div`
   margin: 0 auto;
   padding: 20px;
   min-height: 100vh;
+  @media (max-width: 768px) {
+    padding: 10px;
+  }
 `;
 
 const Header = styled.header`
   text-align: center;
   margin-bottom: 40px;
+  @media (max-width: 768px) {
+    margin-bottom: 20px;
+  }
 `;
 
 const Title = styled.h1`
   font-size: 2rem;
   margin-bottom: 10px;
+  @media (max-width: 768px) {
+    font-size: 1.5rem;
+    margin-bottom: 5px;
+  }
 `;
 
 const StatisticsContainer = styled.div`
   display: flex;
+  flex-wrap: wrap;
   justify-content: space-around;
   margin-bottom: 40px;
 `;
@@ -32,6 +42,10 @@ const Statistic = styled.div`
   text-align: center;
   border-radius: 10px;
   flex: 1;
+  margin: 0 10px 20px;
+  @media (max-width: 768px) {
+    margin: 0 5px 10px;
+  }
 `;
 
 const Table = styled.table`
