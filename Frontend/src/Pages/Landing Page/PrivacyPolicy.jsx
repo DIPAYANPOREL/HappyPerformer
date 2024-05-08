@@ -2,6 +2,7 @@ import React from "react";
 import styled from "styled-components";
 import FooterHome from "../../Components/HomePage/FooterHome";
 import NavbarHome from "../../Components/HomePage/NavbarHome";
+import Footer from "../../Components/Software Components/Footer";
 
 const Container = styled.div`
   max-width: 1290px;
@@ -10,7 +11,7 @@ const Container = styled.div`
 
   @media (max-width: 768px) {
     padding: 1rem;
-    margin: 3rem 2rem;
+    margin: 7rem auto;
   }
 `;
 
@@ -27,7 +28,7 @@ const MainText = styled.h1`
 `;
 const Content = styled.p`
   font-size: 1.125rem;
-  line-height: 1.5;
+  line-height: 1.7;
   margin-bottom: 2rem;
   @media (max-width: 768px) {
     font-size: 1rem;
@@ -91,6 +92,7 @@ const PrivacyPolicy = () => {
         </Content>
       </Container>
       <FooterHome />
+      <Footer />
     </>
   );
 };

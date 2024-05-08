@@ -1,5 +1,6 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 import styled from "styled-components";
+import axios from "axios";
 import EmployeeCard from "../../../Components/Software Components/EmployeeMaster/EmployeeCard";
 import Footer from "../../../Components/Software Components/Footer";
 import lama from "../../../assets/Lama.png";
@@ -15,6 +16,7 @@ const EmployeeSection = styled.div`
   flex-direction: column;
   align-items: center;
 `;
+
 const SearchImport = styled.div`
   display: flex;
   justify-content: space-between;
@@ -23,11 +25,13 @@ const SearchImport = styled.div`
   height: 120px;
   align-items: center;
 `;
+
 const Import = styled.div`
   display: flex;
   flex-direction: column;
   margin-left: 50px;
 `;
+
 const ImpBtn = styled.div`
   border-radius: 20px;
   display: flex;
@@ -45,9 +49,11 @@ const ImpBtn = styled.div`
     transform: scale(1.05);
   }
 `;
+
 const Slider = styled.div`
   padding: 10px;
 `;
+
 const SearchBar = styled.input`
   padding: 10px;
   width: 33%;
@@ -78,7 +84,26 @@ const Employees = styled.div`
   align-items: center;
   overflow-y: scroll;
 `;
+
 const EmployeeMaster = () => {
+  const [employees, setEmployees] = useState([]);
+  const [departments, setDepartments] = useState([]);
+
+  useEffect(() => {
+    fetchEmployees();
+  }, []);
+
+  const fetchEmployees = async () => {
+    try {
+      const response = await axios.get("http://127.0.0.1:8000/employee-master/");
+      setEmployees(response.data.employees);
+      setDepartments(response.data.departments);
+    } catch (error) {
+      console.error("Error fetching employees:", error);
+    }
+  };
+
+
   return (
     <Container>
       <EmployeeSection>
@@ -91,90 +116,20 @@ const EmployeeMaster = () => {
           <SearchBar placeholder="Search Employee..." />
         </SearchImport>
         <Employees>
-          <EmployeeCard
-            img={lama}
-            name="Prathmesh Takalkar"
-            department="Software Engineer"
-            phone="+91 7875741706"
-            mail="X3g6v@example.com"
-          />
-          <EmployeeCard
-            img={lama}
-            name="Prathmesh Takalkar"
-            department="Software Engineer"
-            phone="+91 7875741706"
-            mail="X3g6v@example.com"
-          />
-          <EmployeeCard
-            img={lama}
-            name="Prathmesh Takalkar"
-            department="Software Engineer"
-            phone="+91 7875741706"
-            mail="X3g6v@example.com"
-          />
-          <EmployeeCard
-            img={lama}
-            name="Akshita Vijayvergia"
-            department="Software Engineer"
-            phone="+91 1234567890"
-            mail="X3g6v@example.com"
-          />
-          <EmployeeCard
-            img={lama}
-            name="Anuja Sakulkar"
-            department="Software Engineer"
-            phone="+91 7875741706"
-            mail="X3g6v@example.com"
-          />
-          <EmployeeCard
-            img={lama}
-            name="Prathmesh Takalkar"
-            department="Software Engineer"
-            phone="+91 7875741706"
-            mail="X3g6v@example.com"
-          />
-          <EmployeeCard
-            img={lama}
-            name="Prathmesh Takalkar"
-            department="Software Engineer"
-            phone="+91 7875741706"
-            mail="X3g6v@example.com"
-          />
-          <EmployeeCard
-            img={lama}
-            name="Prathmesh Takalkar"
-            department="Software Engineer"
-            phone="+91 7875741706"
-            mail="X3g6v@example.com"
-          />
-          <EmployeeCard
-            img={lama}
-            name="Prathmesh Takalkar"
-            department="Software Engineer"
-            phone="+91 7875741706"
-            mail="X3g6v@example.com"
-          />
-          <EmployeeCard
-            img={lama}
-            name="Akshita Vijayvergia"
-            department="Software Engineer"
-            phone="+91 1234567890"
-            mail="X3g6v@example.com"
-          />
-          <EmployeeCard
-            img={lama}
-            name="Anuja Sakulkar"
-            department="Software Engineer"
-            phone="+91 7875741706"
-            mail="X3g6v@example.com"
-          />
-          <EmployeeCard
-            img={lama}
-            name="Prathmesh Takalkar"
-            department="Software Engineer"
-            phone="+91 7875741706"
-            mail="X3g6v@example.com"
-          />
+          {employees.map((employee, index) => {
+            // Find the department for the current employee
+            const department = departments.find(dep => dep.d_id === employee.d_id);
+            return (
+              <EmployeeCard
+                key={index}
+                img={lama}
+                name={employee.emp_name}
+                department={department ? department.d_name : ""}
+                phone={employee.emp_phone}
+                mail={employee.emp_emailid}
+              />
+            );
+          })}
         </Employees>
       </EmployeeSection>
       <Footer />

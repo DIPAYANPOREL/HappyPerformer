@@ -5,11 +5,16 @@ import styled from "styled-components";
 import FooterHome from "../../Components/HomePage/FooterHome";
 import InfoTemplate from "../../Components/HomePage/InfoTemplate";
 import NavbarHome from "../../Components/HomePage/NavbarHome";
-const Container = styled.div``;
+import Footer from "../../Components/Software Components/Footer";
+const Container = styled.div`
+  display: flex;
+  flex-direction: column;
+`;
 const MainText = styled.h1`
   font-size: 2rem;
   font-weight: bold;
-  margin-bottom: 2rem;
+  margin-bottom: 1rem;
+  margin-top: 10rem;
   text-align: center;
   @media (max-width: 768px) {
     font-size: 2rem;
@@ -31,8 +36,7 @@ const TermsAndConditions = () => {
       <MainText>Terms and Conditions</MainText>
       <InfoTemplate
         title="Terms and Conditions of Use for HR Employee Management SAAS Website"
-        content="Welcome to our HR employee management SAAS website! We are excited to offer our services to help you manage your business’s HR needs. Please read these terms and conditions of use carefully before accessing or using our website. By accessing or using any part of our website, you agree to be bound by these terms and conditions.
-"
+        content="Welcome to our HR employee management SAAS website! We are excited to offer our services to help you manage your business’s HR needs. Please read these terms and conditions of use carefully before accessing or using our website. By accessing or using any part of our website, you agree to be bound by these terms and conditions."
       />
       <InfoTemplate
         title="Access and Use of Our Software"
@@ -40,6 +44,7 @@ const TermsAndConditions = () => {
       />
       <InfoTemplate title="" content="" />
       <FooterHome />
+      <Footer />
     </Container>
   );
 };

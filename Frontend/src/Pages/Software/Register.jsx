@@ -52,13 +52,14 @@ const Title = styled.h2`
 `;
 
 const Divider = styled.div`
-  background-color: #6659e0;
+  background-color: #0a1128;
   color: white;
   padding: 11px 15px;
   cursor: default;
   user-select: none;
   margin-bottom: 1.5rem;
-  width: inherit;
+  width: calc(100% - 30px);
+  border-radius: 7px;
 `;
 
 const Logo = styled.div`
@@ -97,7 +98,7 @@ const Button = styled.button`
   background-color: #ff7d00;
   color: #fff;
   cursor: pointer;
-  border-radius: 9px;
+  border-radius: 7px;
   transition: background-color 0.3s ease;
 
   &:hover {
@@ -106,11 +107,13 @@ const Button = styled.button`
 `;
 
 const PrimaryButton = styled(Button)`
-  background-color: #8576ff;
+  background-color: #0a1128;
   color: white;
+  padding: 10px;
+  border-radius: 7px;
 
   &:hover {
-    background-color: #5d4ac8;
+    background-color: gray;
   }
 `;
 

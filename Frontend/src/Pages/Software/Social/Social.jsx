@@ -1,19 +1,17 @@
 import React, { useState } from 'react';
 import styled from 'styled-components';
 
-
 const Container = styled.div`
   display: flex;
   flex-direction: row;
   height: 100vh;
   background-color: #f0f0f0;
   padding: 1rem;
-  overflow-y: scroll;
 `;
 
 const Sidecontainer = styled.div`
   width: 350px;
-  height: 150vh;
+  height: 100%;
   align-items: center;
   flex-shrink: 0;
   display: flex;
@@ -22,17 +20,7 @@ const Sidecontainer = styled.div`
   background-color: #fff;
   border-radius: 8px;
   box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-  padding: 1rem;
   margin-right: 1rem;
-`;
-
-const Header = styled.header`
-  background-color: #f0f0f0;
-  padding: 1rem;
-  margin-bottom: 1rem;
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
 `;
 
 const Main = styled.main`
@@ -99,9 +87,8 @@ const FeedbackButton = styled.button`
 `;
 
 const LeaveFeedbackSection = styled.section`
-  margin-bottom: 20rem;
+  margin-bottom: 2rem;
   width: 100%;
-
 `;
 
 const FeedbackTextarea = styled.textarea`
@@ -142,7 +129,6 @@ const CategoryLabel = styled.label`
   cursor: pointer;
 `;
 
-
 const FeedbackCategory = ({ category, checked, onChange }) => (
   <CategoryCheckbox>
     <input
@@ -154,7 +140,6 @@ const FeedbackCategory = ({ category, checked, onChange }) => (
     <CategoryLabel htmlFor={category}>{category}</CategoryLabel>
   </CategoryCheckbox>
 );
-
 
 const FeedbackComponent = ({ name, date, feedback }) => (
   <Feedback>
@@ -180,8 +165,7 @@ const SocialPage = () => {
   const [selectedCategories, setSelectedCategories] = useState([]);
 
   const handleFeedbackSubmit = (e) => {
-    e.preventDefault();
-    // Handle feedback submission here
+    e.preventDefault(); // Handle feedback submission here
     console.log('Submitted feedback:', feedback);
     console.log('Selected categories:', selectedCategories);
     setFeedback('');
@@ -216,10 +200,10 @@ const SocialPage = () => {
     'Process Knowledge',
   ];
 
-  const Feedbacks = [
+  const feedbackData = [
     {
       name: 'Shawn Pinto',
-    
+      date: '2023-05-07',
       feedback: 'Feedback for You',
     },
   ];
@@ -247,37 +231,31 @@ const SocialPage = () => {
           </CategoriesSection>
         </ProfileSection>
       </Sidecontainer>
-
-      {/* Main Content */}
-      <div>
-        {/* Header/Navigation */}
-        <Header>
-          <nav>
-            {/* Your navigation components */}
-          </nav>
-        </Header>
-
-        <Main>
-          {/* Leave Feedback */}
-          <LeaveFeedbackSection>
-            <FeedbacksSection>
-              <h3>Feedbacks for You</h3>
-              {Feedbacks.map((Feedback, index) => (
-                <FeedbackComponent
-                  key={index}
-                  name={Feedback.name}
-                  date={Feedback.date}
-                  feedback={Feedback.feedback}
-                />
-              ))}
-            </FeedbacksSection>
-            <h3>Leave Feedback</h3>
-            <form onSubmit={handleFeedbackSubmit}>
-              <FeedbackTextarea
-                placeholder="Type your feedback here..."
-                value={feedback}
-                onChange={(e) => setFeedback(e.target.value)}
+      <Main>
+        <LeaveFeedbackSection>
+          <FeedbacksSection>
+            <h3>Endorsements</h3>
+            {feedbackData.map((feedback, index) => (
+              <FeedbackComponent
+                key={index}
+                name={feedback.name}
+                date={feedback.date}
+                feedback={feedback.feedback}
               />
+            ))}
+          </FeedbacksSection>
+          <h3>Leave Feedback</h3>
+          <form onSubmit={handleFeedbackSubmit}>
+            <FeedbackTextarea
+              placeholder="Write to someone how you feel?"
+              value={feedback}
+              onChange={(e) => setFeedback(e.target.value)}
+            />
+            <CategoriesSection>
+              {selectedCategories.map((category, index) => (
+                <span key={index}>{category}</span>
+              ))}
+            </CategoriesSection>
               <CategoriesSection>
                 {selectedCategories.map((category, index) => (
                   <span key={index}>{category}</span>
@@ -287,7 +265,6 @@ const SocialPage = () => {
             </form>
           </LeaveFeedbackSection>
         </Main>
-      </div>
     </Container>
   );
 };
