@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import styled from 'styled-components';
-import Footer from '../../../Components/Software Components/Footer';
+// import Footer from '../../../Dashboard/Components/Footer';
+// import Nav from '../Components/Software Components/Dashboard/Nav';
 
 const Container = styled.div`
   display: flex;
@@ -163,6 +164,7 @@ const App = () => {
 
   return (
     <>
+      {/* <Nav /> */}
       <Container>
         <h2>All Cases</h2>
         <SearchContainer>
@@ -200,7 +202,7 @@ const App = () => {
           </Table>
         </TableContainer>
       </Container>
-      <Footer />
+      {/* <Footer /> */}
     </>
   );
 };

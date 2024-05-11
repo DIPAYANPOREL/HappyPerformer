@@ -1,5 +1,7 @@
 import React from 'react';
 import styled from 'styled-components';
+// import Footer from '../../Components/Software Components/Footer';
+// import Nav from '../../Components/Software Components/Dashboard/Nav';
 
 const Container = styled.div`
   width: 100%;
@@ -93,6 +95,8 @@ const ButtonContainer = styled.div`
 
 const SopForm = () => {
   return (
+    <>
+      {/* <Nav /> */}
     <Container>
       <StyledSopForm>
         <Header>SOP Form</Header>
@@ -134,6 +138,8 @@ const SopForm = () => {
         </div>
       </StyledSopForm>
     </Container>
+    {/* <Footer /> */}
+    </>
   );
 };
 

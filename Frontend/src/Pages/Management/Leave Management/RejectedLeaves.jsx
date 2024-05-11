@@ -1,6 +1,8 @@
 import React, { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import styled from 'styled-components';
+// import Footer from '../../Components/Software Components/Footer';
+// import Nav from '../../Components/Software Components/Dashboard/Nav';
 
 const Container = styled.div`
   max-width: 1200px;
@@ -111,6 +113,8 @@ const RejectedLeaves = () => {
   };
 
   return (
+    <>
+      {/* <Nav /> */}
     <Container>
       <Header>
         <Title>Rejected Leaves</Title>
@@ -146,6 +150,8 @@ const RejectedLeaves = () => {
         </tbody>
       </Table>
     </Container>
+    {/* <Footer /> */}
+    </>
   );
 };
 

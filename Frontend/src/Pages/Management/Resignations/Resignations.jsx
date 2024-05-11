@@ -1,5 +1,7 @@
 import React from 'react';
 import styled from 'styled-components';
+// import Footer from '../../Components/Software Components/Footer';
+// import Nav from '../../Components/Software Components/Dashboard/Nav'
 
 const Container = styled.div`
   display: flex;
@@ -68,6 +70,8 @@ const Button = styled.button`
 
 const Resignation = () => {
   return (
+    <>
+    {/* <Nav /> */}
     <Container>
       <Header>Resignation</Header>
       <FormContainer>
@@ -169,6 +173,9 @@ const Resignation = () => {
       </FormContainer>
       <Button>SAVE DETAILS</Button>
     </Container>
+    {/* <Footer /> */}
+    </>
+
   );
 };
 

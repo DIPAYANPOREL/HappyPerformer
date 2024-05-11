@@ -42,6 +42,8 @@ import ApprovedLeaves from "./Pages/Management/Leave Management/ApprovedLeaves";
 import RejectedLeaves from "./Pages/Management/Leave Management/RejectedLeaves";
 import Resignations from "./Pages/Management/Resignations/Resignations";
 import AllCases from "./Pages/Software/CaseManagement/AllCases";
+import AllEmployeePerformances from "./Pages/Management/AllEmployeePerformances";
+import MyPerformance from "./Pages/Management/MyPerformance";
 function App() {
   return (
     <>
@@ -77,7 +79,7 @@ function App() {
         <Route path="/terms" element={<TermsAndConditions />} />
         <Route path="/meet-the-team" element={<MeetTheTeam />} />
         <Route path="/dashboard" element={<Dashboard />} />
-        <Route path="/employee-master" element={<EmployeeMaster />} />
+        <Route path="/Employee-master" element={<EmployeeMaster />} />
         <Route path="/resign" element={<Resign />} />
         <Route path="/login" element={<Login />} />
         <Route path="/phptutorials" element={<PHPTutorials />} />
@@ -109,6 +111,8 @@ function App() {
         <Route path="/RejectedLeaves" element={<RejectedLeaves />} />
         <Route path="/Resignations" element={<Resignations />} /> 
         <Route path="/AllCases" element={<AllCases />} />
+        <Route path="/AllEmployeePerformances" element={<AllEmployeePerformances />} />
+        <Route path="/MyPerformance" element={<MyPerformance />} />
       </Routes>
     </>
   );

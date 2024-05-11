@@ -1,6 +1,8 @@
 import React from 'react';
 import styled from 'styled-components';
 import { BsFillTrashFill, BsPencilFill } from 'react-icons/bs';
+// import Footer from '../../Components/Software Components/Footer';
+// import Nav from '../../Components/Software Components/Dashboard/Nav';
 
 const Container = styled.div`
   width: 100%;
@@ -89,6 +91,8 @@ const ManageLeaveTypes = () => {
   ];
 
   return (
+    <>
+      {/* <Nav /> */}
     <Container>
       <Title>Manage Leave Types</Title>
       <Table>
@@ -129,6 +133,8 @@ const ManageLeaveTypes = () => {
         </tbody>
       </Table>
     </Container>
+    {/* <Footer /> */}
+    </>
   );
 };
 

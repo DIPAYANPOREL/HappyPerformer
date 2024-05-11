@@ -1,5 +1,7 @@
 import React, { useState } from 'react';
 import styled from 'styled-components';
+// import Footer from '../../Components/Software Components/Footer';
+// import Nav from '../../Components/Software Components/Dashboard/Nav';
 
 
 
@@ -167,7 +169,8 @@ const EmployeeTable = () => {
   };
 
   return (
-    <div>
+      <>
+      {/* <Nav /> */}
       <MainContainer>
       <h2>Attendance Details</h2>
         <ControlsContainer>
@@ -238,7 +241,8 @@ const EmployeeTable = () => {
           </PaginationButton>
         </PaginationContainer>
       </MainContainer>
-    </div>
+    {/* <Footer/> */}
+    </>
   );
 };
 export default EmployeeTable;
