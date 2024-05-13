@@ -1,27 +1,39 @@
-// LeaveDashboard.js
 import React, { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import styled from 'styled-components';
+// import Footer from '../../Components/Software Components/Footer';
+// import Nav from '../../Components/Software Components/Dashboard/Nav';
 
 const Container = styled.div`
   max-width: 1200px;
   margin: 0 auto;
   padding: 20px;
   min-height: 100vh;
+  @media (max-width: 768px) {
+    padding: 10px;
+  }
 `;
 
 const Header = styled.header`
   text-align: center;
   margin-bottom: 40px;
+  @media (max-width: 768px) {
+    margin-bottom: 20px;
+  }
 `;
 
 const Title = styled.h1`
   font-size: 2rem;
   margin-bottom: 10px;
+  @media (max-width: 768px) {
+    font-size: 1.5rem;
+    margin-bottom: 5px;
+  }
 `;
 
 const StatisticsContainer = styled.div`
   display: flex;
+  flex-wrap: wrap;
   justify-content: space-around;
   margin-bottom: 40px;
 `;
@@ -32,6 +44,10 @@ const Statistic = styled.div`
   text-align: center;
   border-radius: 10px;
   flex: 1;
+  margin: 0 10px 20px;
+  @media (max-width: 768px) {
+    margin: 0 5px 10px;
+  }
 `;
 
 const Table = styled.table`
@@ -88,7 +104,7 @@ const Button = styled.button`
   cursor: pointer;
 `;
 
-// LeaveDashboard Component
+
 const LeaveDashboard = () => {
   const [registeredEmployees, setRegisteredEmployees] = useState(0);
   const [departments, setDepartments] = useState(0);
@@ -96,13 +112,12 @@ const LeaveDashboard = () => {
   const [leaveApplications, setLeaveApplications] = useState([]);
 
   useEffect(() => {
-    // Fetch data from API or other data source
+ 
     fetchData();
   }, []);
 
   const fetchData = async () => {
     try {
-      // Simulating data fetch
       setRegisteredEmployees(60);
       setDepartments(10);
       setLeaveTypes(5);
@@ -142,6 +157,8 @@ const LeaveDashboard = () => {
   };
 
   return (
+    <>
+    {/* <Nav /> */}
     <Container>
       <Header>
         <Title>Leave Dashboard</Title>
@@ -191,6 +208,8 @@ const LeaveDashboard = () => {
         </tbody>
       </Table>
     </Container>
+    {/* < Footer /> */}
+    </>
   );
 };
 

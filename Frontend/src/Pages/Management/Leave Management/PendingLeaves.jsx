@@ -1,7 +1,8 @@
-// LeaveDashboard.js
 import React, { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import styled from 'styled-components';
+// import Footer from '../../Components/Software Components/Footer';
+// import Nav from '../../Components/Software Components/Dashboard/Nav';
 
 const Container = styled.div`
   max-width: 1200px;
@@ -9,31 +10,38 @@ const Container = styled.div`
   padding: 20px;
   min-height: 100vh;
 `;
+
 const Header = styled.header`
   text-align: center;
   margin-bottom: 40px;
 `;
+
 const Title = styled.h1`
   font-size: 2rem;
   margin-bottom: 10px;
 `;
+
 const Table = styled.table`
   width: 100%;
   border-collapse: collapse;
 `;
+
 const TableHead = styled.thead`
   background-color: #f0f0f0;
 `;
+
 const TableRow = styled.tr`
   &:nth-child(even) {
     background-color: #f8f8f8;
   }
 `;
+
 const TableCell = styled.td`
   padding: 15px;
   border-bottom: 1px solid #ddd;
   text-align: center;
 `;
+
 const TableHeader = styled.th`
   padding: 15px;
   border-bottom: 1px solid #ddd;
@@ -42,6 +50,7 @@ const TableHeader = styled.th`
   color: #f8f8f8;
   text-align: center;
 `;
+
 const StatusSpan = styled.span`
   color: ${({ status }) => {
     switch (status) {
@@ -56,6 +65,7 @@ const StatusSpan = styled.span`
     }
   }};
 `;
+
 const Button = styled.button`
   background-color: #4caf50;
   color: white;
@@ -64,6 +74,7 @@ const Button = styled.button`
   border-radius: 5px;
   cursor: pointer;
 `;
+
 const PendingLeaves = () => {
   const [registeredEmployees, setRegisteredEmployees] = useState(0);
   const [departments, setDepartments] = useState(0);
@@ -95,7 +106,9 @@ const PendingLeaves = () => {
   };
 
   return (
-    <Container>
+   <>
+   {/* <Nav/> */}
+   <Container>
       <Header>
         <Title>Pending Leaves</Title>
       </Header>
@@ -130,6 +143,8 @@ const PendingLeaves = () => {
         </tbody>
       </Table>
     </Container>
+    {/* <Footer /> */}
+    </>
   );
 };
 

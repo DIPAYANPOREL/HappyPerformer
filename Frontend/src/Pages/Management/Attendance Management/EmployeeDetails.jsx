@@ -1,5 +1,7 @@
 import React, { useState } from 'react';
 import styled from 'styled-components';
+// import Footer from '../../Components/Software Components/Footer';
+// import Nav from '../../Components/Software Components/Dashboard/Nav';
 
 
 const MainContainer = styled.div`
@@ -126,17 +128,13 @@ const EmployeeTable = () => {
   const [searchTerm, setSearchTerm] = useState('');
   const [sortOrder, setSortOrder] = useState({
     column: null,
-    direction: 'asc', // ascending order by default
+    direction: 'asc',
   });
 
-  // Calculate the total number of pages
   const totalPages = Math.ceil(employees.length / entriesPerPage);
-
-  // Calculate the index range for the current page
   const indexOfLastEntry = currentPage * entriesPerPage;
   const indexOfFirstEntry = indexOfLastEntry - entriesPerPage;
 
-  // Sorting function
   const sortedEmployees = (column, direction) => {
     const sorted = [...employees].sort((a, b) => {
       if (a[column] < b[column]) {
@@ -162,7 +160,7 @@ const EmployeeTable = () => {
   };
   const handleEntriesChange = (e) => {
     setEntriesPerPage(parseInt(e.target.value));
-    setCurrentPage(1); // Reset to the first page when changing entries per page
+    setCurrentPage(1); 
   };
   const handleSort = (column) => {
     setSortOrder({
@@ -172,7 +170,8 @@ const EmployeeTable = () => {
   };
 
   return (
-    <div>
+    <>
+    {/* <Nav/> */}
       <MainContainer>
       <h2>Employee Details</h2>
         <ControlsContainer>
@@ -243,7 +242,8 @@ const EmployeeTable = () => {
           </PaginationButton>
         </PaginationContainer>
       </MainContainer>
-    </div>
+      {/* <Footer /> */}
+      </>
   );
 };
 export default EmployeeTable;

@@ -32,6 +32,7 @@ import SopForm from "./Pages/Software/EmployeesJobs/SopForm";
 import Login from "./Pages/Software/Login";
 import Resign from "./Pages/Software/Resign/Resign";
 import PHPTutorials from "./Pages/Software/PHPTutorials/PHPTutorials";
+import CreateCase from "./Pages/Software/CaseManagement/CreateCase";
 import Setting from "./Pages/Software/Profile/Settings/Setting";
 import SocialPage from "./Pages/Software/Social/Social";
 import Training from "./Pages/Training";
@@ -46,6 +47,10 @@ import AddMediaContent from "./Pages/Software/Courses/Add_Media_Content"
 import UploadMedia from "./Pages/Software/Courses/Upload_Media"
 import UpdateDeleteMedia from "./Pages/Software/Courses/Update_Delete_Media"
 
+import Resignations from "./Pages/Management/Resignations/Resignations";
+import AllCases from "./Pages/Software/CaseManagement/AllCases";
+import AllEmployeePerformances from "./Pages/Management/AllEmployeePerformances";
+import MyPerformance from "./Pages/Management/MyPerformance";
 function App() {
   return (
     <>
@@ -65,6 +70,7 @@ function App() {
         <Route path="/AddMediaContent" element={<AddMediaContent />}/>
         <Route path="/UploadMedia/:course_id" element={<UploadMedia />}/>
         <Route path="/UpdateDeleteMedia" element={<UpdateDeleteMedia />}/>
+        <Route path="/EducationalInformation"element={<EducationalInformation />} />
         <Route path="/Setting" element={<Setting />} />
         <Route path="/Training" element={<Training />} />
         <Route path="/EnrollEmployee" element={<EnrollEmployee />} />
@@ -83,10 +89,11 @@ function App() {
         <Route path="/LeaveDetails" element={<LeaveDetails />} />
         <Route path="/ManageLeaveTypes" element={<ManageLeaveTypes />} />
         <Route path="/" element={<Home />} />
+        <Route path="/createcase" element={<CreateCase />} />
         <Route path="/terms" element={<TermsAndConditions />} />
         <Route path="/meet-the-team" element={<MeetTheTeam />} />
         <Route path="/dashboard" element={<Dashboard />} />
-        <Route path="/employee-master" element={<EmployeeMaster />} />
+        <Route path="/Employee-master" element={<EmployeeMaster />} />
         <Route path="/resign" element={<Resign />} />
         <Route path="/login" element={<Login />} />
         <Route path="/phptutorials" element={<PHPTutorials />} />
@@ -116,6 +123,10 @@ function App() {
         <Route path="/PendingLeaves" element={<PendingLeaves />} />
         <Route path="/ApprovedLeaves" element={<ApprovedLeaves />} />
         <Route path="/RejectedLeaves" element={<RejectedLeaves />} />
+        <Route path="/Resignations" element={<Resignations />} />
+        <Route path="/AllCases" element={<AllCases />} />
+        <Route path="/AllEmployeePerformances" element={<AllEmployeePerformances />} />
+        <Route path="/MyPerformance" element={<MyPerformance />} />
       </Routes>
     </>
   );

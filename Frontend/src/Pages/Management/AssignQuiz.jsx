@@ -1,7 +1,9 @@
 import React, { useState } from 'react';
 import styled from 'styled-components';
 import { Link } from "react-router-dom";
-// import OtherPage from './OtherPage'; // Assuming you have OtherPage component
+import Footer from '../../Components/Software Components/Footer';
+import Nav from '../../Components/Software Components/Dashboard/Nav';
+
 
 const QuizFormContainer = styled.div`
   display: flex;
@@ -118,6 +120,8 @@ const AssignQuiz = () => {
   };
 
   return (
+    <>
+    <Nav />
     <QuizFormContainer>
       <QuizFormStyled onSubmit={handleSubmit}>
         <h2 style={{ textAlign: 'center', marginBottom: '30px' }}>Enter Quiz Details</h2>
@@ -204,6 +208,8 @@ const AssignQuiz = () => {
         </SubmitButton>
       </QuizFormStyled>
     </QuizFormContainer>
+    <Footer />
+    </>
   );
 };
 

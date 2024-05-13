@@ -1,16 +1,22 @@
 import React from 'react';
 import styled from 'styled-components';
-import { BsFillTrashFill, BsPencilFill } from "react-icons/bs";
+import { BsFillTrashFill, BsPencilFill } from 'react-icons/bs';
+// import Footer from '../../Components/Software Components/Footer';
+// import Nav from '../../Components/Software Components/Dashboard/Nav';
 
 const Container = styled.div`
   width: 100%;
   max-width: 1000px;
   margin: 0 auto;
-  padding: 40px;
+  padding: 20px;
   background-color: #fff;
   border-radius: 8px;
   box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+  @media (max-width: 768px) {
+    padding: 10px;
+  }
 `;
+
 const Title = styled.h1`
   font-size: 2rem;
   margin-bottom: 10px;
@@ -60,22 +66,22 @@ const Button = styled.button`
   padding: 8px 16px;
   border: none;
   border-radius: 4px;
-  background-color: ${(props) => (props.danger ? '#fff' : '#2196f3')};
+  background-color: ${props => (props.danger ? '#fff' : '#2196f3')};
   color: #fff;
   font-size: 14px;
   cursor: pointer;
   display: flex;
   align-items: center;
   transition: background-color 0.3s;
-
   &:hover {
-    background-color: ${(props) => (props.danger ? '#c62828' : '#1976d2')};
+    background-color: ${props => (props.danger ? '#c62828' : '#1976d2')};
   }
 `;
 
 const Icon = styled.span`
   margin-right: 5px;
 `;
+
 const ManageLeaveTypes = () => {
   const leaveTypes = [
     { id: 1, name: 'Casual Leave', limit: 16, description: 'Casual Leave', creationDate: '2022-06-01 07:29:50' },
@@ -85,6 +91,8 @@ const ManageLeaveTypes = () => {
   ];
 
   return (
+    <>
+      {/* <Nav /> */}
     <Container>
       <Title>Manage Leave Types</Title>
       <Table>
@@ -99,7 +107,7 @@ const ManageLeaveTypes = () => {
           </TableRow>
         </TableHead>
         <tbody>
-          {leaveTypes.map((leaveType) => (
+          {leaveTypes.map(leaveType => (
             <TableRow key={leaveType.id}>
               <TableData>{leaveType.id}</TableData>
               <TableData>{leaveType.name}</TableData>
@@ -108,8 +116,16 @@ const ManageLeaveTypes = () => {
               <TableData>{leaveType.creationDate}</TableData>
               <TableData>
                 <ActionButtons>
-                  <Button><Icon><BsPencilFill /></Icon></Button>
-                  <Button danger><Icon><BsFillTrashFill /></Icon></Button>
+                  <Button>
+                    <Icon>
+                      <BsPencilFill />
+                    </Icon>
+                  </Button>
+                  <Button danger>
+                    <Icon>
+                      <BsFillTrashFill />
+                    </Icon>
+                  </Button>
                 </ActionButtons>
               </TableData>
             </TableRow>
@@ -117,6 +133,8 @@ const ManageLeaveTypes = () => {
         </tbody>
       </Table>
     </Container>
+    {/* <Footer /> */}
+    </>
   );
 };
 
