@@ -35,7 +35,7 @@ const employees = [
   { id: 18, email: '095432@gmail.com', name: 'Noor', role: 'Employee', phone: 8446090909},
   { id: 19, email: '23487@gmail.com', name: 'Abdullah', role: 'Employee', phone: 9500909090 },
   { id: 20, email: '09090@gmail.com', name: 'Anthony', role: 'Employee', phone: 76909090909 },
-  // Add more employee data here
+  
 ];
 const Table = styled.table`
   width: 100%;
@@ -160,7 +160,7 @@ const EmployeeTable = () => {
   };
   const handleEntriesChange = (e) => {
     setEntriesPerPage(parseInt(e.target.value));
-    setCurrentPage(1); 
+    setCurrentPage(1);
   };
   const handleSort = (column) => {
     setSortOrder({

@@ -46,7 +46,7 @@ import AddCourses from "./Pages/Software/Courses/Add_Courses"
 import AddMediaContent from "./Pages/Software/Courses/Add_Media_Content"
 import UploadMedia from "./Pages/Software/Courses/Upload_Media"
 import UpdateDeleteMedia from "./Pages/Software/Courses/Update_Delete_Media"
-
+import UpdateMedia from "./Pages/Software/Courses/Update_Media"
 import Resignations from "./Pages/Management/Resignations/Resignations";
 import AllCases from "./Pages/Software/CaseManagement/AllCases";
 import AllEmployeePerformances from "./Pages/Management/AllEmployeePerformances";
@@ -70,6 +70,7 @@ function App() {
         <Route path="/AddMediaContent" element={<AddMediaContent />}/>
         <Route path="/UploadMedia/:course_id" element={<UploadMedia />}/>
         <Route path="/UpdateDeleteMedia" element={<UpdateDeleteMedia />}/>
+        <Route path="/UpdateMedia/:course_id" element={<UpdateMedia />}/>
         <Route path="/EducationalInformation"element={<EducationalInformation />} />
         <Route path="/Setting" element={<Setting />} />
         <Route path="/Training" element={<Training />} />
