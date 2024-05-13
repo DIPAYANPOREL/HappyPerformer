@@ -21,11 +21,11 @@ import EmployeeDetails from "./Pages/Management/Attendance Management/EmployeeDe
 import EnrollEmployee from "./Pages/Management/EnrollEmployee";
 import LeaveDashboard from "./Pages/Management/Leave Management/LeaveDashboard";
 import ManageLeaveTypes from "./Pages/Management/Leave Management/ManageLeaveTypes";
-import Profile from "./Pages/Software/AddDetails/Profile";
+import Profile from "./Pages/Software/Profile/Profile";
 import Attendance from "./Pages/Software/Attendance/Attendance";
 import Dashboard from "./Pages/Software/DashBoard/Dashboard";
 import FAQ from "./Pages/Software/DashBoard/FAQ";
-import LoanPayments from "./Pages/Software/DashBoard/LoanPayments";
+// import LoanPayments from "./Pages/Software/DashBoard/LoanPayments";
 import Quiz from "./Pages/Software/DashBoard/Quiz";
 import EmployeeMaster from "./Pages/Software/EmployeeMaster/EmployeeMaster";
 import SopForm from "./Pages/Software/EmployeesJobs/SopForm";
@@ -39,6 +39,13 @@ import AllLeaves from "./Pages/Management/Leave Management/AllLeaves";
 import PendingLeaves from "./Pages/Management/Leave Management/PendingLeaves";
 import ApprovedLeaves from "./Pages/Management/Leave Management/ApprovedLeaves";
 import RejectedLeaves from "./Pages/Management/Leave Management/RejectedLeaves";
+import SopAndPolicies from "./Pages/Software/Sop&Policies/SopPolicies"
+import Pricing from "./Pages/Software/Pricing"
+import AddCourses from "./Pages/Software/Courses/Add_Courses"
+import AddMediaContent from "./Pages/Software/Courses/Add_Media_Content"
+import UploadMedia from "./Pages/Software/Courses/Upload_Media"
+import UpdateDeleteMedia from "./Pages/Software/Courses/Update_Delete_Media"
+
 function App() {
   return (
     <>
@@ -46,16 +53,18 @@ function App() {
         <Route path="/" element={<Home />} />
         <Route path="/meet-the-team" element={<MeetTheTeam />} />
         <Route path="/dashboard" element={<Dashboard />} />
-        <Route path="/profile" element={<Profile />} />
+        <Route path="/Profile/:id" element={<Profile />} />
         <Route path="/login" element={<Login />} />
         <Route path="/EmergencyContact" element={<EmergencyContact />} />
         <Route path="/PersonalInfo" element={<PersonalInfo />} />
         <Route path="/FamilyInformation" element={<FamilyInformation />} />
         <Route path="/Experience" element={<Experience />} />
-        <Route
-          path="/EducationalInformation"
-          element={<EducationalInformation />}
-        />
+        <Route path="/EducationalInformation" element={<EducationalInformation />}/>
+        <Route path="/soppolicies" element={<SopAndPolicies />}/>
+        <Route path="/AddCourses" element={<AddCourses />}/>
+        <Route path="/AddMediaContent" element={<AddMediaContent />}/>
+        <Route path="/UploadMedia/:course_id" element={<UploadMedia />}/>
+        <Route path="/UpdateDeleteMedia" element={<UpdateDeleteMedia />}/>
         <Route path="/Setting" element={<Setting />} />
         <Route path="/Training" element={<Training />} />
         <Route path="/EnrollEmployee" element={<EnrollEmployee />} />
@@ -64,6 +73,7 @@ function App() {
         <Route path="/LeaveHistory" element={<LeaveHistory />} />
         <Route path="/SopForm" element={<SopForm />} />
         <Route path="/Attendance" element={<Attendance />} />
+        <Route path="/Pricing" element={<Pricing />} />
         <Route path="/EmployeeDetails" element={<EmployeeDetails />} />
         <Route path="/AttendanceDetails" element={<AttendanceDetails />} />
         <Route path="/SocialPage" element={<SocialPage />} />
@@ -80,7 +90,7 @@ function App() {
         <Route path="/resign" element={<Resign />} />
         <Route path="/login" element={<Login />} />
         <Route path="/phptutorials" element={<PHPTutorials />} />
-        <Route path="/loanpayments" element={<LoanPayments />} />
+        {/* <Route path="/loanpayments" element={<LoanPayments />} /> */}
         <Route path="/Quiz" element={<Quiz />} />
         <Route path="/FAQ" element={<FAQ />} />
         <Route path="/profile" element={<Profile />} />
