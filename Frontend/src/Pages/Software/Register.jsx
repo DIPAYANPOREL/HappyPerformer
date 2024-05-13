@@ -52,14 +52,13 @@ const Title = styled.h2`
 `;
 
 const Divider = styled.div`
-  background-color: #0a1128;
+  background-color: #6659e0;
   color: white;
   padding: 11px 15px;
   cursor: default;
   user-select: none;
   margin-bottom: 1.5rem;
-  width: calc(100% - 30px);
-  border-radius: 7px;
+  width: inherit;
 `;
 
 const Logo = styled.div`
@@ -98,7 +97,7 @@ const Button = styled.button`
   background-color: #ff7d00;
   color: #fff;
   cursor: pointer;
-  border-radius: 7px;
+  border-radius: 9px;
   transition: background-color 0.3s ease;
 
   &:hover {
@@ -107,13 +106,11 @@ const Button = styled.button`
 `;
 
 const PrimaryButton = styled(Button)`
-  background-color: #0a1128;
+  background-color: #8576ff;
   color: white;
-  padding: 10px;
-  border-radius: 7px;
 
   &:hover {
-    background-color: gray;
+    background-color: #5d4ac8;
   }
 `;
 
@@ -191,11 +188,14 @@ const Register = () => {
 
   const handleRegister = (e) => {
     e.preventDefault();
+
+    const deptNames = departmentInputs.join(', ');
+
     const data = {
       companyName,
       companyAddress,
       companyPhone,
-      deptName: departmentInputs[0],
+      deptName: deptNames,
       empName,
       empMail,
       empNum,

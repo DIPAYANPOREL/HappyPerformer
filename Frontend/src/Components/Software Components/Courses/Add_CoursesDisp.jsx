@@ -1,5 +1,7 @@
 import React, { useState } from 'react';
 import styled from 'styled-components';
+import axios from 'axios';
+import { useNavigate } from 'react-router-dom';
 
 const Card = styled.div`
   border: 1px solid #ccc;
@@ -68,51 +70,78 @@ const RemoveButton = styled.button`
 `;
 
 const CoursesDisp = () => {
-    const [selectedFile, setSelectedFile] = useState(null);
+  const [courseTitle, setCourseTitle] = useState('');
+  const [description, setDescription] = useState('');
+  const [thumbnail, setThumbnail] = useState(null);
+  const navigate = useNavigate();
 
-    const handleFileChange = (event) => {
-        setSelectedFile(event.target.files[0]);
-    };
+  const handleFileChange = (event) => {
+    setThumbnail(event.target.files[0]);
+  };
 
-    const handleRemoveFile = () => {
-        setSelectedFile(null);
-        document.getElementById('file').value = '';
-    };
+  const handleRemoveFile = () => {
+    setThumbnail(null);
+    document.getElementById('file').value = '';
+  };
 
-    return (
-        <Card>
-            <Form>
-                <div>
-                    <Label>COURSE TITLE</Label>
-                    <Input type="text" required />
-                </div>
-                <div>
-                    <Label>SHORT DESCRIPTION</Label>
-                    <TextArea
-                        rows="5"
-                        cols="20"
-                        id="short_description"
-                        placeholder="Enter description"
-                        required
-                    ></TextArea>
-                </div>
-                <div>
-                    <Label>Thumbnail</Label>
-                    <FileInputWrapper>
-                        <Input type="file" id="file" onChange={handleFileChange} required />
-                        {selectedFile && (
-                            <RemoveButton type="button" onClick={handleRemoveFile}>
-                                &times;
-                            </RemoveButton>
-                        )}
-                    </FileInputWrapper>
-                </div>
-                <Button type="submit" >
-                    Add Media
-                </Button>
-            </Form>
-        </Card>
-    );
+  const handleSubmit = async (event) => {
+    event.preventDefault();
+    const formData = new FormData();
+    formData.append('course_title', courseTitle);
+    formData.append('description', description);
+    // if (thumbnail) {
+    //   formData.append('thumbnail', thumbnail);
+    // }
+
+    try {
+      const response = await axios.post('http://127.0.0.1:8000/AddCourses/', formData, {
+        headers: {
+          'Content-Type': 'multipart/form-data',
+        },
+      });
+      const { course_id } = response.data;
+
+      navigate(`/UploadMedia/${course_id}`);
+    } catch (error) {
+      console.error('Error:', error);
+    }
+  };
+
+  return (
+    <Card>
+      <Form onSubmit={handleSubmit}>
+        <div>
+          <Label>COURSE TITLE</Label>
+          <Input
+            type="text"
+            value={courseTitle}
+            onChange={(e) => setCourseTitle(e.target.value)}
+            required
+          />
+        </div>
+        <div>
+          <Label>SHORT DESCRIPTION</Label>
+          <TextArea
+            rows="5"
+            cols="20"
+            id="short_description"
+            placeholder="Enter description"
+            value={description}
+            onChange={(e) => setDescription(e.target.value)}
+            required
+          ></TextArea>
+        </div>
+        <div>
+          <Label>Thumbnail</Label>
+          <FileInputWrapper>
+            <Input type="file" id="file" onChange={handleFileChange} />
+            {thumbnail && <RemoveButton type="button" onClick={handleRemoveFile}>&times;</RemoveButton>}
+          </FileInputWrapper>
+        </div>
+        <Button type="submit">Add Media</Button>
+      </Form>
+    </Card>
+  );
 };
 
 export default CoursesDisp;

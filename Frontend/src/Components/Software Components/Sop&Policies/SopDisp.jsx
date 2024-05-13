@@ -1,6 +1,7 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import styled from 'styled-components';
 import { FaStar } from 'react-icons/fa';
+import axios from 'axios';
 
 const Container = styled.div`
   padding: 20px;
@@ -76,27 +77,48 @@ const StarRating = styled.div`
 `;
 
 const SopDisp = () => {
-  const [count, setCount] = useState(10);
-  const [data, setData] = useState([
-    {
-      id: 1,
-      type: 'SOP',
-      name: 'Example SOP',
-      date: '2023-04-20',
-      selfRate: 4,
-      filename: 'example.pdf',
-      managerRating: 5,
-      managerRemark: 'Good job',
-    },
-  ]);
+  const [data, setData] = useState({ tasks: [], sop: [], files: [] });
 
-  const handleRating = (id, rating) => {
-    setData((prevData) =>
-      prevData.map((item) =>
-        item.id === id ? { ...item, selfRate: rating } : item
-      )
-    );
+  useEffect(() => {
+    fetchData();
+  }, []);
+
+  const fetchData = async () => {
+    try {
+      const response = await axios.get('http://127.0.0.1:8000/soppolicies');
+      setData(response.data);
+    } catch (error) {
+      console.error('Error fetching data:', error);
+    }
   };
+
+  const handleRating = async (sopId, rating) => {
+    try {
+      let newRating = 0;
+      const sopItem = data.sop.find(item => item.sop_id === sopId);
+
+      // If the rating is already set to the clicked value, reset it to 0
+      if (rating === sopItem.selfRate) {
+        newRating = 0;
+      } else {
+        // Otherwise, set the new rating to the clicked value
+        newRating = rating;
+      }
+
+      // Update the selfRating in the frontend state
+      setData(prevData => ({
+        ...prevData,
+        sop: prevData.sop.map(sopItem => sopItem.sop_id === sopId ? { ...sopItem, selfRate: newRating } : sopItem)
+      }));
+
+      // Make a PUT request to update the rating in the backend
+      await axios.put(`http://127.0.0.1:8000/tasks/${sopId}/`, { selfratings: newRating });
+      fetchData();
+    } catch (error) {
+      console.error('Error updating rating:', error);
+    }
+  };
+
 
   return (
     <Container>
@@ -109,7 +131,7 @@ const SopDisp = () => {
               </CardTitle>
             </CardHeader>
 
-            {count === 0 ? (
+            {data.sop.length === 0 ? (
               <NoSOP>
                 <div>
                   <div>
@@ -131,31 +153,32 @@ const SopDisp = () => {
                   </tr>
                 </TableHead>
                 <TableBody>
-                  {data.map((item) => (
-                    <tr key={item.id}>
-                      <td style={{ width: '3em' }}>{item.id}</td>
-                      <td>{`${item.type} - ${item.name}`}</td>
-                      <td>{item.date}</td>
-                      <td>
-                        <StarRating>
-                          {[...Array(5)].map((_, index) => (
-                            <FaStar
-                              key={index}
-                              color={
-                                index < item.selfRate ? '#ffcc00' : '#e4e5e9'
-                              }
-                              onClick={() => handleRating(item.id, index + 1)}
-                            />
-                          ))}
-                        </StarRating>
-                      </td>
-                      <td>
-                        <a href={`uploads/${item.filename}`}>Open File</a>
-                      </td>
-                      <td>{item.managerRating || '-'}</td>
-                      <td>{item.managerRemark || '-'}</td>
-                    </tr>
-                  ))}
+                  {data.sop.map((sopItem) => {
+                    const task = data.tasks.find((taskItem) => taskItem.sop_id === sopItem.sop_id);
+                    return (
+                      <tr key={sopItem.sop_id}>
+                        <td style={{ width: '3em' }}>{sopItem.sop_id}</td>
+                        <td>{`${sopItem.type} - ${sopItem.s_name}`}</td>
+                        <td>{sopItem.sdate}</td>
+                        <td>
+                          <StarRating>
+                            {[...Array(5)].map((_, index) => (
+                              <FaStar
+                                key={index}
+                                color={(index + 1) <= (task ? task.selfratings || 0 : 0) ? '#ffcc00' : '#e4e5e9'}
+                                onClick={() => handleRating(sopItem.sop_id, index + 1)}
+                              />
+                            ))}
+                          </StarRating>
+                        </td>
+                        <td>
+                          <a href={`uploads/${sopItem.file_name}`}>Open File</a>
+                        </td>
+                        <td>{task ? task.ratings || '-' : '-'}</td>
+                        <td>{task ? task.remark || '-' : '-'}</td>
+                      </tr>
+                    );
+                  })}
                 </TableBody>
               </Table>
             )}

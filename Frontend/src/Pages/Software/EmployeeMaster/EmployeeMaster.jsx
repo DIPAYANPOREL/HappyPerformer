@@ -1,17 +1,19 @@
+import axios from "axios";
 import React, { useState, useEffect } from "react";
 import styled from "styled-components";
-import axios from "axios";
+import { useNavigate } from "react-router-dom";
 import EmployeeCard from "../../../Components/Software Components/EmployeeMaster/EmployeeCard";
 import Footer from "../../../Components/Software Components/Footer";
-import lama from "../../../assets/Lama.png";
+
 
 const Container = styled.div`
-  width: 100%;
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
 `;
 
 const EmployeeSection = styled.div`
-  min-height: 600px;
-  width: 100%;
+  flex-grow: 1;
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -79,30 +81,43 @@ const Employees = styled.div`
   flex-wrap: wrap;
   height: 100%;
   width: 100%;
-  display: flex;
   justify-content: center;
   align-items: center;
-  overflow-y: scroll;
+  overflow-y: auto;
+`;
+
+const FooterContainer = styled.footer`
+  margin-top: auto;
 `;
 
 const EmployeeMaster = () => {
   const [employees, setEmployees] = useState([]);
   const [departments, setDepartments] = useState([]);
+  const [loading, setLoading] = useState(true);
+  const url = "http://127.0.0.1:8000/";
+  const navigate = useNavigate();
 
   useEffect(() => {
-    fetchEmployees();
+    axios
+      .get(`${url}/employee-master`)
+      .then((response) => {
+        setEmployees(response.data.employees);
+        setDepartments(response.data.departments);
+        setLoading(false);
+      })
+      .catch((err) => {
+        console.error("Error fetching employee data:", err);
+        setLoading(false);
+      });
   }, []);
 
-  const fetchEmployees = async () => {
-    try {
-      const response = await axios.get("http://127.0.0.1:8000/employee-master/");
-      setEmployees(response.data.employees);
-      setDepartments(response.data.departments);
-    } catch (error) {
-      console.error("Error fetching employees:", error);
-    }
+  const handleProfileClick = (empId) => {
+    navigate(`/Profile/${empId}`);
   };
 
+  if (loading) {
+    return <div>Loading...</div>;
+  }
 
   return (
     <Container>
@@ -117,22 +132,26 @@ const EmployeeMaster = () => {
         </SearchImport>
         <Employees>
           {employees.map((employee, index) => {
-            // Find the department for the current employee
-            const department = departments.find(dep => dep.d_id === employee.d_id);
+            const department = departments.find(
+              (dep) => dep.d_id === employee.d_id
+            );
             return (
               <EmployeeCard
                 key={index}
-                img={lama}
+                id={employee.emp_emailid}
                 name={employee.emp_name}
-                department={department ? department.d_name : ""}
+                department={department.d_name}
                 phone={employee.emp_phone}
                 mail={employee.emp_emailid}
+                onClick={handleProfileClick}
               />
             );
           })}
         </Employees>
       </EmployeeSection>
-      <Footer />
+      <FooterContainer>
+        <Footer />
+      </FooterContainer>
     </Container>
   );
 };
