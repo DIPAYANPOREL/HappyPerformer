@@ -21,7 +21,8 @@ const LogoContainer = styled.div`
   align-items: center;
   width: 80%;
   color: white;
-  background-color: #758bfd;
+  // background-color: #758bfd;
+  background-color: #0077b6;
   height: 7%;
   border-radius: 50px;
 `;

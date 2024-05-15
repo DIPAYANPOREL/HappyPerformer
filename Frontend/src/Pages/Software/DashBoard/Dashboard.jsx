@@ -5,6 +5,7 @@ import NotificationSec from "../../../Components/Software Components/Dashboard/N
 import ProfileCard from "../../../Components/Software Components/Dashboard/ProfileCard";
 import SideBar from "../../../Components/Software Components/Dashboard/SideBar";
 import TargetCard from "../../../Components/Software Components/Dashboard/TargetCard";
+import Footer from "../../../Components/Software Components/Footer";
 
 const Container = styled.div`
   display: flex;
@@ -99,6 +100,7 @@ const Dashboard = () => {
           </BottomContainer>
         </ContentArea>
       </ContentContainer>
+      <Footer />
     </Container>
   );
 };

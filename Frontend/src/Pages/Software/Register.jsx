@@ -52,7 +52,7 @@ const Title = styled.h2`
 `;
 
 const Divider = styled.div`
-  background-color: #6659e0;
+  background-color: #0077b6;
   color: white;
   padding: 11px 15px;
   cursor: default;
@@ -123,7 +123,7 @@ const DeleteButton = styled.button`
   top: calc(50% - 10px);
   right: -25px;
   transform: translateY(-50%);
-  background-color: red;
+  background-color: #b80f0a;
   color: white;
   border: none;
   border-radius: 50%;
@@ -154,7 +154,7 @@ const CloneButton = styled(Button)`
 `;
 
 const ResetButton = styled(Button)`
-  background-color: #ff0000;
+  background-color: #ffbf00;
 `;
 
 const Register = () => {
@@ -189,7 +189,7 @@ const Register = () => {
   const handleRegister = (e) => {
     e.preventDefault();
 
-    const deptNames = departmentInputs.join(', ');
+    const deptNames = departmentInputs.join(", ");
 
     const data = {
       companyName,
@@ -289,7 +289,7 @@ const Register = () => {
                 Reset Department
               </ResetButton>
               <CloneButton onClick={handleCloneDepartment}>
-                Clone last row and add at end
+                Clone Last Row
               </CloneButton>
             </ButtonRow>
 
