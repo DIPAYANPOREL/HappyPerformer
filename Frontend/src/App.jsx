@@ -55,6 +55,8 @@ import ToDoList from "./Pages/Software/ToDoList";
 import CustomForms from "./Pages/Management/CustomForms";
 import Responses from "./Components/Software Components/CustomForms/Responses";
 import Edit from "./Components/Software Components/CustomForms/Edit";
+import CustomLetters from "./Pages/Management/CustomLetters";
+import View from "./Components/CustomLetters/View";
 function App() {
   return (
     <>
@@ -136,6 +138,8 @@ function App() {
         <Route path="/CustomForms" element={<CustomForms />} />
         <Route path="/Responses" element={<Responses />} />
         <Route path="/Edit" element={<Edit />} />
+        <Route path="/CustomLetters" element={<CustomLetters />} />
+        <Route path="/View" element={<View />} />
       </Routes>
     </>
   );

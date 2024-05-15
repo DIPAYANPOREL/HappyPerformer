@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import styled from 'styled-components';
-import { FaBars, FaPen, FaEnvelope, FaTrashAlt } from 'react-icons/fa';
+import { FaPen, FaEnvelope, FaTrashAlt } from 'react-icons/fa';
 import Footer from '../../Components/Software Components/Footer';
 import Nav from '../../Components/Software Components/Dashboard/Nav';
 import { Link } from 'react-router-dom';
@@ -30,20 +30,31 @@ const HeaderTitle = styled.div`
   }
 `;
 const Content = styled.div`
-  flex-grow: 1;
   padding: 20px;
   display: flex;
   justify-content: space-between;
   
 `;
 const YourFormsContainer = styled.div`
-  width: 48%;
-  background-color: white;
-  border-radius: 8px;
-  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-  padding: 20px;
+display: flex; 
+flex-direction: column;
+width: 48%;
+background-color: white;
+border-radius: 8px;
+padding: 20px;
+height: 70%;
+box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+@media (max-width: 768px) {
+  width: 100%;
 `;
-const FormList = styled.div``;
+const FormList = styled.div`
+flex-grow: 1;
+display: flex;
+flex-direction: column;
+overflow-y: scroll;
+@media (max-width: 768px) {
+  width: 100%;
+`;
 
 const FormItem = styled.div`
   display: flex;
@@ -83,6 +94,7 @@ const CreateFormContainer = styled.div`
   border-radius: 8px;
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
   padding: 20px;
+  height: 70%;
 `;
 const CreateFormInput = styled.input`
   padding: 10px;
@@ -104,8 +116,12 @@ const CreateFormButton = styled.button`
     background-color: #2c3e50;
   }
 `;
+const NoFormsText = styled.div`
+  margin-top: 20px;
+  color: #888;
+`;
 const CustomForms = () => {
-  const [forms, setForms] = useState(['Hi Form', 'Disturbance Form', 'Example Form', 'Feedback Form']);
+  const [forms, setForms] = useState(['Hi Form', 'Disturbance Form', 'Example Form', 'Feedback Form', 'Request Form', 'Request Form', 'Request Form', 'Request Form', 'Request Form', 'Request Form', 'Request Form', 'Request Form']);
   const [newFormName, setNewFormName] = useState('');
 
   const handleCreateForm = () => {
@@ -121,6 +137,7 @@ const CustomForms = () => {
     setForms(updatedForms);
   };
 
+
   return (
     <>
     <Nav />
@@ -131,6 +148,9 @@ const CustomForms = () => {
       <Content>
         <YourFormsContainer>
           <h3>Your Forms</h3>
+          {forms.length === 0 ? (
+              <NoFormsText> No letters available. Please create a letter to see it here.</NoFormsText>
+            ) : (
           <FormList>
             {forms.map((form, index) => (
               <FormItem key={index}>
@@ -153,6 +173,7 @@ const CustomForms = () => {
               </FormItem>
             ))}
           </FormList>
+        )}
         </YourFormsContainer>
         <CreateFormContainer>
           <h3>Create A New Form</h3>
