@@ -25,7 +25,7 @@ import Profile from "./Pages/Software/Profile/Profile";
 import Attendance from "./Pages/Software/Attendance/Attendance";
 import Dashboard from "./Pages/Software/DashBoard/Dashboard";
 import FAQ from "./Pages/Software/DashBoard/FAQ";
-// import LoanPayments from "./Pages/Software/DashBoard/LoanPayments";
+import LoanPayments from "./Pages/Software/DashBoard/LoanPayments";
 import Quiz from "./Pages/Software/DashBoard/Quiz";
 import EmployeeMaster from "./Pages/Software/EmployeeMaster/EmployeeMaster";
 import SopForm from "./Pages/Software/EmployeesJobs/SopForm";
@@ -51,6 +51,10 @@ import Resignations from "./Pages/Management/Resignations/Resignations";
 import AllCases from "./Pages/Software/CaseManagement/AllCases";
 import AllEmployeePerformances from "./Pages/Management/AllEmployeePerformances";
 import MyPerformance from "./Pages/Management/MyPerformance";
+import ToDoList from "./Pages/Software/ToDoList";
+import CustomForms from "./Pages/Management/CustomForms";
+import Responses from "./Components/Software Components/CustomForms/Responses";
+import Edit from "./Components/Software Components/CustomForms/Edit";
 function App() {
   return (
     <>
@@ -98,7 +102,7 @@ function App() {
         <Route path="/resign" element={<Resign />} />
         <Route path="/login" element={<Login />} />
         <Route path="/phptutorials" element={<PHPTutorials />} />
-        {/* <Route path="/loanpayments" element={<LoanPayments />} /> */}
+        <Route path="/loanpayments" element={<LoanPayments />} />
         <Route path="/Quiz" element={<Quiz />} />
         <Route path="/FAQ" element={<FAQ />} />
         <Route path="/profile" element={<Profile />} />
@@ -128,6 +132,10 @@ function App() {
         <Route path="/AllCases" element={<AllCases />} />
         <Route path="/AllEmployeePerformances" element={<AllEmployeePerformances />} />
         <Route path="/MyPerformance" element={<MyPerformance />} />
+        <Route path="/ToDoList" element={<ToDoList />} />
+        <Route path="/CustomForms" element={<CustomForms />} />
+        <Route path="/Responses" element={<Responses />} />
+        <Route path="/Edit" element={<Edit />} />
       </Routes>
     </>
   );
