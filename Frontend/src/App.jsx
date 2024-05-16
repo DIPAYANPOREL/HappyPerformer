@@ -57,12 +57,10 @@ import Resign from "./Pages/Software/Resign/Resign";
 import SocialPage from "./Pages/Software/Social/Social";
 import SopAndPolicies from "./Pages/Software/Sop&Policies/SopPolicies";
 import ToDoList from "./Pages/Software/ToDoList";
-import CustomForms from "./Pages/Management/CustomForms";
-import Responses from "./Components/Software Components/CustomForms/Responses";
-import Edit from "./Components/Software Components/CustomForms/Edit";
 import CustomLetters from "./Pages/Management/CustomLetters";
 import View from "./Components/CustomLetters/View";
 import Training from "./Pages/Training";
+
 function App() {
   return (
     <>
@@ -76,58 +74,13 @@ function App() {
         <Route path="/PersonalInfo" element={<PersonalInfo />} />
         <Route path="/FamilyInformation" element={<FamilyInformation />} />
         <Route path="/Experience" element={<Experience />} />
-        <Route
-          path="/EducationalInformation"
-          element={<EducationalInformation />}
-        />
+        <Route path="/EducationalInformation" element={<EducationalInformation />} />
         <Route path="/soppolicies" element={<SopAndPolicies />} />
         <Route path="/AddCourses" element={<AddCourses />} />
         <Route path="/AddMediaContent" element={<AddMediaContent />} />
         <Route path="/UploadMedia/:course_id" element={<UploadMedia />} />
         <Route path="/UpdateDeleteMedia" element={<UpdateDeleteMedia />} />
         <Route path="/UpdateMedia/:course_id" element={<UpdateMedia />} />
-        <Route
-          path="/EducationalInformation"
-          element={<EducationalInformation />}
-        />
-        <Route path="/Setting" element={<Setting />} />
-        <Route path="/Training" element={<Training />} />
-        <Route path="/EnrollEmployee" element={<EnrollEmployee />} />
-        <Route path="/Table" element={<Table />} />
-        <Route path="/ApplyforLeave" element={<ApplyforLeave />} />
-        <Route path="/LeaveHistory" element={<LeaveHistory />} />
-        <Route path="/SopForm" element={<SopForm />} />
-        <Route path="/Attendance" element={<Attendance />} />
-        <Route path="/Pricing" element={<Pricing />} />
-        <Route path="/EmployeeDetails" element={<EmployeeDetails />} />
-        <Route path="/AttendanceDetails" element={<AttendanceDetails />} />
-        <Route path="/SocialPage" element={<SocialPage />} />
-        <Route path="/AssignQuiz" element={<AssignQuiz />} />
-        <Route path="/AllQuizzes" element={<AllQuizzes />} />
-        <Route path="/LeaveDashboard" element={<LeaveDashboard />} />
-        <Route path="/LeaveDetails" element={<LeaveDetails />} />
-        <Route path="/ManageLeaveTypes" element={<ManageLeaveTypes />} />
-        <Route path="/" element={<Home />} />
-        <Route path="/createcase" element={<CreateCase />} />
-        <Route path="/terms" element={<TermsAndConditions />} />
-        <Route path="/meet-the-team" element={<MeetTheTeam />} />
-        <Route path="/dashboard" element={<Dashboard />} />
-        <Route path="/Employee-master" element={<EmployeeMaster />} />
-        <Route path="/resign" element={<Resign />} />
-        <Route path="/login" element={<Login />} />
-        <Route path="/phptutorials" element={<PHPTutorials />} />
-        <Route path="/loanpayments" element={<LoanPayments />} />
-        <Route path="/Quiz" element={<Quiz />} />
-        <Route path="/FAQ" element={<FAQ />} />
-        <Route path="/profile" element={<Profile />} />
-        <Route path="/EmergencyContact" element={<EmergencyContact />} />
-        <Route path="/PersonalInfo" element={<PersonalInfo />} />
-        <Route path="/FamilyInformation" element={<FamilyInformation />} />
-        <Route path="/Experience" element={<Experience />} />
-        <Route
-          path="/EducationalInformation"
-          element={<EducationalInformation />}
-        />
         <Route path="/Setting" element={<Setting />} />
         <Route path="/Training" element={<Training />} />
         <Route path="/EnrollEmployee" element={<EnrollEmployee />} />
@@ -147,10 +100,8 @@ function App() {
         <Route path="/RejectedLeaves" element={<RejectedLeaves />} />
         <Route path="/Resignations" element={<Resignations />} />
         <Route path="/AllCases" element={<AllCases />} />
-        <Route
-          path="/AllEmployeePerformances"
-          element={<AllEmployeePerformances />}
-        />
+        <Route path="/AllEmployeePerformances" element={<AllEmployeePerformances />} />
+        <Route path="/AllQuizzes" element={<AllQuizzes />} />
         <Route path="/MyPerformance" element={<MyPerformance />} />
         <Route path="/ToDoList" element={<ToDoList />} />
         <Route path="/CustomForms" element={<CustomForms />} />
@@ -161,6 +112,29 @@ function App() {
         <Route path="/banktransfer" element={<BankTransfer />} />
         <Route path="/banktransferdetails" element={<BankTransferDetails />} />
         <Route path="/banktransferpayout" element={<BankTransferPayout />} />
+        <Route path="/terms" element={<TermsAndConditions />} />
+        <Route path="/Employee-master" element={<EmployeeMaster />} />
+        <Route path="/phptutorials" element={<PHPTutorials />} />
+        <Route path="/loanpayments" element={<LoanPayments />} />
+        <Route path="/Quiz" element={<Quiz />} />
+        <Route path="/Pricing" element={<Pricing />} />
+        <Route path="/AssignQuiz" element={<AssignQuiz />} />
+        <Route path="/FAQ" element={<FAQ />} />
+        <Route path="/profile" element={<Profile />} />
+        <Route path="/register" element={<Register />} />
+        <Route path="/contact" element={<ContactUs />} />
+        <Route path="/dashboard" element={<Dashboard />} />
+        <Route path="/Resign" element={<Resign />} />
+        <Route path="/SocialPage" element={<SocialPage />} />
+        <Route path="/LeaveDashboard" element={<LeaveDashboard />} />
+        <Route path="/LeaveDetails" element={<LeaveDetails />} />
+        <Route path="/ManageLeaveTypes" element={<ManageLeaveTypes />} />
+        <Route path="/createcase" element={<CreateCase />} />
+        <Route path="/MyPerformance" element={<MyPerformance />} />
+        <Route path="/banktransfer" element={<BankTransfer />} />
+        <Route path="/banktransferdetails" element={<BankTransferDetails />} />
+        <Route path="/banktransferpayout" element={<BankTransferPayout />} />
+
       </Routes>
     </>
   );
