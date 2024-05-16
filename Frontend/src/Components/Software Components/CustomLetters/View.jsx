@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import styled from 'styled-components';
-import Footer from '../../Components/Software Components/Footer';
-import Nav from '../../Components/Software Components/Dashboard/Nav';
+import Footer from '../../../Components/Software Components/Footer';
+import Nav from '../../../Components/Software Components/Dashboard/Nav';
 
 const Header = styled.h1`
   font-size: 18px;

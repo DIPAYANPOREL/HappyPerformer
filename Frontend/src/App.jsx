@@ -59,8 +59,12 @@ import SocialPage from "./Pages/Software/Social/Social";
 import SopAndPolicies from "./Pages/Software/Sop&Policies/SopPolicies";
 import ToDoList from "./Pages/Software/ToDoList";
 import CustomLetters from "./Pages/Management/CustomLetters";
-import View from "./Components/CustomLetters/View";
+import View from "./Components/Software Components/CustomLetters/View";
 import Training from "./Pages/Training";
+import CashChequeTransfer from "./Pages/Management/PayrollManagement/CashChequeTransfer";
+import AddSalary from "./Components/Software Components/PayRoll/AddSalary";
+import RevisionHistory from "./Components/Software Components/PayRoll/RevisionHistory";
+import DisplayDetails from "./Components/Software Components/PayRoll/DisplayDetails";
 
 function App() {
   return (
@@ -92,9 +96,9 @@ function App() {
         <Route path="/Attendance" element={<Attendance />} />
         <Route path="/EmployeeDetails" element={<EmployeeDetails />} />
         <Route path="/AttendanceDetails" element={<AttendanceDetails />} />
-        <Route path="/register" element={<Register />} />
-        <Route path="/contact" element={<ContactUs />} />
-        <Route path="/about" element={<AboutUs />} />
+        <Route path="/Register" element={<Register />} />
+        <Route path="/ContactUs" element={<ContactUs />} />
+        <Route path="/AboutUs" element={<AboutUs />} />
         <Route path="/AllLeaves" element={<AllLeaves />} />
         <Route path="/PendingLeaves" element={<PendingLeaves />} />
         <Route path="/ApprovedLeaves" element={<ApprovedLeaves />} />
@@ -121,10 +125,6 @@ function App() {
         <Route path="/Pricing" element={<Pricing />} />
         <Route path="/AssignQuiz" element={<AssignQuiz />} />
         <Route path="/FAQ" element={<FAQ />} />
-        <Route path="/profile" element={<Profile />} />
-        <Route path="/register" element={<Register />} />
-        <Route path="/contact" element={<ContactUs />} />
-        <Route path="/dashboard" element={<Dashboard />} />
         <Route path="/Resign" element={<Resign />} />
         <Route path="/SocialPage" element={<SocialPage />} />
         <Route path="/LeaveDashboard" element={<LeaveDashboard />} />
@@ -136,6 +136,10 @@ function App() {
         <Route path="/banktransferdetails" element={<BankTransferDetails />} />
         <Route path="/banktransferpayout" element={<BankTransferPayout />} />
         <Route path="/homesalary" element={<HomeSalary />} />
+        <Route path="/CashChequeTransfer" element={<CashChequeTransfer/>} />
+        <Route path="/AddSalary" element={<AddSalary/>} />
+        <Route path="/RevisionHistory" element={<RevisionHistory/>} />
+        <Route path="/DisplayDetails" element={<DisplayDetails/>} />
       </Routes>
     </>
   );
