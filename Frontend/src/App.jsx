@@ -33,6 +33,7 @@ import ManageLeaveTypes from "./Pages/Management/Leave Management/ManageLeaveTyp
 import PendingLeaves from "./Pages/Management/Leave Management/PendingLeaves";
 import RejectedLeaves from "./Pages/Management/Leave Management/RejectedLeaves";
 import MyPerformance from "./Pages/Management/MyPerformance";
+import HomeSalary from "./Pages/Management/PayrollManagement/HomeSalary";
 import Resignations from "./Pages/Management/Resignations/Resignations";
 import Attendance from "./Pages/Software/Attendance/Attendance";
 import AllCases from "./Pages/Software/CaseManagement/AllCases";
@@ -134,7 +135,7 @@ function App() {
         <Route path="/banktransfer" element={<BankTransfer />} />
         <Route path="/banktransferdetails" element={<BankTransferDetails />} />
         <Route path="/banktransferpayout" element={<BankTransferPayout />} />
-
+        <Route path="/homesalary" element={<HomeSalary />} />
       </Routes>
     </>
   );
