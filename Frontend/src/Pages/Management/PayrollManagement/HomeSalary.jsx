@@ -5,9 +5,20 @@ import Nav from "../../../Components/Software Components/Dashboard/Nav";
 import Footer from "../../../Components/Software Components/Footer";
 import AddSalary from "../../../Components/Software Components/PayRoll/AddSalary";
 
-const Container = styled.div``;
-const Wrapper = styled.div``;
-const Title = styled.h1``;
+const Wrapper = styled.div`
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+`;
+
+const Container = styled.div`
+  flex: 1;
+  padding: 20px;
+`;
+
+const Bottom = styled.div`
+  overflow: auto;
+`;
 
 const HomeSalary = () => {
   return (
@@ -15,9 +26,6 @@ const HomeSalary = () => {
       <Nav />
       <Header title="Home Salary" />
       <Container>
-        <Top>
-          <Title>Salary</Title>
-        </Top>
         <Bottom>
           <HAddSalary />
         </Bottom>
