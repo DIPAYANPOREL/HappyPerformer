@@ -25,7 +25,7 @@ import BankTransfer from "./Pages/Management/BankTransfers/BankTransfer";
 import BankTransferDetails from "./Pages/Management/BankTransfers/BankTransferDetails";
 import BankTransferPayout from "./Pages/Management/BankTransfers/BankTransferPayout";
 import CustomForms from "./Pages/Management/CustomForms";
-import EnrollEmployee from "./Pages/Management/EnrollEmployee";
+import EnrollEmployees from "./Pages/Management/EnrollEmployees";
 import AllLeaves from "./Pages/Management/Leave Management/AllLeaves";
 import ApprovedLeaves from "./Pages/Management/Leave Management/ApprovedLeaves";
 import LeaveDashboard from "./Pages/Management/Leave Management/LeaveDashboard";
@@ -65,6 +65,8 @@ import CashChequeTransfer from "./Pages/Management/PayrollManagement/CashChequeT
 import AddSalary from "./Components/Software Components/PayRoll/AddSalary";
 import RevisionHistory from "./Components/Software Components/PayRoll/RevisionHistory";
 import DisplayDetails from "./Components/Software Components/PayRoll/DisplayDetails";
+import HomeSal from "./Components/Software Components/PayRoll/HomeSal";
+import Letters from "./Pages/Letters";
 
 function App() {
   return (
@@ -88,10 +90,10 @@ function App() {
         <Route path="/UpdateMedia/:course_id" element={<UpdateMedia />} />
         <Route path="/Setting" element={<Setting />} />
         <Route path="/Training" element={<Training />} />
-        <Route path="/EnrollEmployee" element={<EnrollEmployee />} />
         <Route path="/Table" element={<Table />} />
         <Route path="/ApplyforLeave" element={<ApplyforLeave />} />
         <Route path="/LeaveHistory" element={<LeaveHistory />} />
+        <Route path="/EnrollEmployees" element={<EnrollEmployees />} />
         <Route path="/SopForm" element={<SopForm />} />
         <Route path="/Attendance" element={<Attendance />} />
         <Route path="/EmployeeDetails" element={<EmployeeDetails />} />
@@ -135,11 +137,12 @@ function App() {
         <Route path="/banktransfer" element={<BankTransfer />} />
         <Route path="/banktransferdetails" element={<BankTransferDetails />} />
         <Route path="/banktransferpayout" element={<BankTransferPayout />} />
-        <Route path="/homesalary" element={<HomeSalary />} />
+        <Route path="/Homesal" element={<HomeSal />} />
         <Route path="/CashChequeTransfer" element={<CashChequeTransfer/>} />
         <Route path="/AddSalary" element={<AddSalary/>} />
         <Route path="/RevisionHistory" element={<RevisionHistory/>} />
         <Route path="/DisplayDetails" element={<DisplayDetails/>} />
+        <Route path="/Letters" element={<Letters/>} />
       </Routes>
     </>
   );
