@@ -3,7 +3,7 @@ import styled from "styled-components";
 import Header from "../../../Components/Software Components/Dashboard/Header";
 import Nav from "../../../Components/Software Components/Dashboard/Nav";
 import Footer from "../../../Components/Software Components/Footer";
-import AddSalary from "../../../Components/Software Components/PayRoll/AddSalary";
+import HomeSal from "../../../Components/Software Components/PayRoll/HomeSal";
 
 const Wrapper = styled.div`
   display: flex;
@@ -27,7 +27,7 @@ const HomeSalary = () => {
       <Header title="Home Salary" />
       <Container>
         <Bottom>
-          <HAddSalary />
+          <HomeSal />
         </Bottom>
       </Container>
       <Footer />

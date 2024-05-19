@@ -4,6 +4,9 @@ import AllQuizzes from "./Components/Software Components/AssignQuiz/AllQuizzes";
 import Edit from "./Components/Software Components/CustomForms/Edit";
 import Responses from "./Components/Software Components/CustomForms/Responses";
 import LeaveDetails from "./Components/Software Components/LeaveManagement/LeaveDetails";
+import AddSalary from "./Components/Software Components/PayRoll/AddSalary";
+import DisplayDetails from "./Components/Software Components/PayRoll/DisplayDetails";
+import RevisionHistory from "./Components/Software Components/PayRoll/RevisionHistory";
 import EducationalInformation from "./Components/Software Components/Profile/EducationalInformation";
 import EmergencyContact from "./Components/Software Components/Profile/EmergencyContact";
 import Experience from "./Components/Software Components/Profile/Experience";
@@ -25,6 +28,7 @@ import BankTransfer from "./Pages/Management/BankTransfers/BankTransfer";
 import BankTransferDetails from "./Pages/Management/BankTransfers/BankTransferDetails";
 import BankTransferPayout from "./Pages/Management/BankTransfers/BankTransferPayout";
 import CustomForms from "./Pages/Management/CustomForms";
+import CustomLetters from "./Pages/Management/CustomLetters";
 import EnrollEmployee from "./Pages/Management/EnrollEmployee";
 import AllLeaves from "./Pages/Management/Leave Management/AllLeaves";
 import ApprovedLeaves from "./Pages/Management/Leave Management/ApprovedLeaves";
@@ -33,6 +37,7 @@ import ManageLeaveTypes from "./Pages/Management/Leave Management/ManageLeaveTyp
 import PendingLeaves from "./Pages/Management/Leave Management/PendingLeaves";
 import RejectedLeaves from "./Pages/Management/Leave Management/RejectedLeaves";
 import MyPerformance from "./Pages/Management/MyPerformance";
+import CashChequeTransfer from "./Pages/Management/PayrollManagement/CashChequeTransfer";
 import HomeSalary from "./Pages/Management/PayrollManagement/HomeSalary";
 import Resignations from "./Pages/Management/Resignations/Resignations";
 import Attendance from "./Pages/Software/Attendance/Attendance";
@@ -58,13 +63,7 @@ import Resign from "./Pages/Software/Resign/Resign";
 import SocialPage from "./Pages/Software/Social/Social";
 import SopAndPolicies from "./Pages/Software/Sop&Policies/SopPolicies";
 import ToDoList from "./Pages/Software/ToDoList";
-import CustomLetters from "./Pages/Management/CustomLetters";
-import View from "./Components/Software Components/CustomLetters/View";
 import Training from "./Pages/Training";
-import CashChequeTransfer from "./Pages/Management/PayrollManagement/CashChequeTransfer";
-import AddSalary from "./Components/Software Components/PayRoll/AddSalary";
-import RevisionHistory from "./Components/Software Components/PayRoll/RevisionHistory";
-import DisplayDetails from "./Components/Software Components/PayRoll/DisplayDetails";
 
 function App() {
   return (
@@ -79,7 +78,10 @@ function App() {
         <Route path="/PersonalInfo" element={<PersonalInfo />} />
         <Route path="/FamilyInformation" element={<FamilyInformation />} />
         <Route path="/Experience" element={<Experience />} />
-        <Route path="/EducationalInformation" element={<EducationalInformation />} />
+        <Route
+          path="/EducationalInformation"
+          element={<EducationalInformation />}
+        />
         <Route path="/soppolicies" element={<SopAndPolicies />} />
         <Route path="/AddCourses" element={<AddCourses />} />
         <Route path="/AddMediaContent" element={<AddMediaContent />} />
@@ -105,7 +107,10 @@ function App() {
         <Route path="/RejectedLeaves" element={<RejectedLeaves />} />
         <Route path="/Resignations" element={<Resignations />} />
         <Route path="/AllCases" element={<AllCases />} />
-        <Route path="/AllEmployeePerformances" element={<AllEmployeePerformances />} />
+        <Route
+          path="/AllEmployeePerformances"
+          element={<AllEmployeePerformances />}
+        />
         <Route path="/AllQuizzes" element={<AllQuizzes />} />
         <Route path="/MyPerformance" element={<MyPerformance />} />
         <Route path="/ToDoList" element={<ToDoList />} />
@@ -132,14 +137,16 @@ function App() {
         <Route path="/ManageLeaveTypes" element={<ManageLeaveTypes />} />
         <Route path="/createcase" element={<CreateCase />} />
         <Route path="/MyPerformance" element={<MyPerformance />} />
+
         <Route path="/banktransfer" element={<BankTransfer />} />
         <Route path="/banktransferdetails" element={<BankTransferDetails />} />
-        <Route path="/banktransferpayout" element={<BankTransferPayout />} />
+        <Route path="/btpayout" element={<BankTransferPayout />} />
+
         <Route path="/homesalary" element={<HomeSalary />} />
-        <Route path="/CashChequeTransfer" element={<CashChequeTransfer/>} />
-        <Route path="/AddSalary" element={<AddSalary/>} />
-        <Route path="/RevisionHistory" element={<RevisionHistory/>} />
-        <Route path="/DisplayDetails" element={<DisplayDetails/>} />
+        <Route path="/CashChequeTransfer" element={<CashChequeTransfer />} />
+        <Route path="/AddSalary" element={<AddSalary />} />
+        <Route path="/RevisionHistory" element={<RevisionHistory />} />
+        <Route path="/DisplayDetails" element={<DisplayDetails />} />
       </Routes>
     </>
   );

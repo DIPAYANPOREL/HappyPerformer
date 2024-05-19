@@ -53,7 +53,7 @@ const Button = styled.button`
   }
 `;
 
-const FormCard = () => {
+const BTDetails = () => {
   const [valueDate, setValueDate] = useState(new Date());
   const [narration, setNarration] = useState("");
   const [debitAccountNumber, setDebitAccountNumber] = useState("");
@@ -105,4 +105,4 @@ const FormCard = () => {
   );
 };
 
-export default FormCard;
+export default BTDetails;
