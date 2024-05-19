@@ -216,7 +216,6 @@ const Social = () => {
 
   const handleSave = () => {
     console.log('Reason:', reason);
-    // Perform any additional logic here
     setReason('');
   };
 
