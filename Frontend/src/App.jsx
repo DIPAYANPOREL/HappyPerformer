@@ -29,7 +29,6 @@ import BankTransferDetails from "./Pages/Management/BankTransfers/BankTransferDe
 import BankTransferPayout from "./Pages/Management/BankTransfers/BankTransferPayout";
 import CustomForms from "./Pages/Management/CustomForms";
 import CustomLetters from "./Pages/Management/CustomLetters";
-import EnrollEmployee from "./Pages/Management/EnrollEmployee";
 import AllLeaves from "./Pages/Management/Leave Management/AllLeaves";
 import ApprovedLeaves from "./Pages/Management/Leave Management/ApprovedLeaves";
 import LeaveDashboard from "./Pages/Management/Leave Management/LeaveDashboard";
@@ -90,10 +89,10 @@ function App() {
         <Route path="/UpdateMedia/:course_id" element={<UpdateMedia />} />
         <Route path="/Setting" element={<Setting />} />
         <Route path="/Training" element={<Training />} />
-        <Route path="/EnrollEmployee" element={<EnrollEmployee />} />
         <Route path="/Table" element={<Table />} />
         <Route path="/ApplyforLeave" element={<ApplyforLeave />} />
         <Route path="/LeaveHistory" element={<LeaveHistory />} />
+        <Route path="/EnrollEmployees" element={<EnrollEmployees />} />
         <Route path="/SopForm" element={<SopForm />} />
         <Route path="/Attendance" element={<Attendance />} />
         <Route path="/EmployeeDetails" element={<EmployeeDetails />} />
