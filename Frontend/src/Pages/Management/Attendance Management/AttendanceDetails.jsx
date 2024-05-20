@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import styled from 'styled-components';
-// import Footer from '../../Components/Software Components/Footer';
-// import Nav from '../../Components/Software Components/Dashboard/Nav';
+import Footer from '../../../Components/Software Components/Footer';
+import Nav from '../../../Components/Software Components/Dashboard/Nav';
 
 
 
@@ -13,7 +13,7 @@ const MainContainer = styled.div`
   box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
   border-radius: 5px;
   overflow: hidden;
-`; 
+`;
 const employees = [
   { id: 1, email: '123@gmail.com', name: 'John', date: 'September 07, 2023', time: '11:46 pm' },
   { id: 2, email: 'a123.salahkaar@gmail.com', name: 'Shawn', date: 'July 03, 2023', time: '12:46 pm' },
@@ -127,7 +127,7 @@ const EmployeeTable = () => {
   const [searchTerm, setSearchTerm] = useState('');
   const [sortOrder, setSortOrder] = useState({
     column: null,
-    direction: 'asc', 
+    direction: 'asc',
   });
   const totalPages = Math.ceil(employees.length / entriesPerPage);
 
@@ -159,7 +159,7 @@ const EmployeeTable = () => {
   };
   const handleEntriesChange = (e) => {
     setEntriesPerPage(parseInt(e.target.value));
-    setCurrentPage(1); 
+    setCurrentPage(1);
   };
   const handleSort = (column) => {
     setSortOrder({
@@ -170,7 +170,7 @@ const EmployeeTable = () => {
 
   return (
       <>
-      {/* <Nav /> */}
+      <Nav />
       <MainContainer>
       <h2>Attendance Details</h2>
         <ControlsContainer>
@@ -241,7 +241,7 @@ const EmployeeTable = () => {
           </PaginationButton>
         </PaginationContainer>
       </MainContainer>
-    {/* <Footer/> */}
+    <Footer/>
     </>
   );
 };
