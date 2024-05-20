@@ -81,7 +81,7 @@ const Update_Delete_MediaDisp = () => {
 
   const handleDelete = async (course_id) => {
     try {
-      await axios.delete(`http://127.0.0.1:8000/DeleteMedia/${course_id}`);
+      await axios.delete(`http://127.0.0.1:8000/UpdateMedia/${course_id}`);
       setData(data.filter((item) => item.course_id !== course_id));
     } catch (error) {
       console.error('Error deleting data:', error);
