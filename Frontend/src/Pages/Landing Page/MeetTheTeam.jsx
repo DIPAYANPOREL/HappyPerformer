@@ -1,10 +1,10 @@
-import axios from 'axios';
+import axios from "axios";
 import React from "react";
 import styled from "styled-components";
 import Typewriter from "typewriter-effect";
 import ProfileCard from "../../Components/HomePage/ProfileCard";
-import TeamFooter from "../../Components/HomePage/TeamFooter";
 import TeamHeader from "../../Components/HomePage/TeamHeader";
+import Footer from "../../Components/Software Components/Footer";
 import Akshita from "../../assets/Akshita.png";
 import Anuja from "../../assets/Anuja.png";
 import Brain from "../../assets/Brainnnn.svg";
@@ -274,13 +274,14 @@ const DownText = styled.div`
 `;
 
 const MeetTheTeam = () => {
-    axios.post("http://127.0.0.1:8000/meet-the-team/")
-  .then((res)=>{
-    console.log(res)
-  })
-  .catch((err)=>{
-    console.log(err);
-  });
+  axios
+    .post("http://127.0.0.1:8000/meet-the-team/")
+    .then((res) => {
+      console.log(res);
+    })
+    .catch((err) => {
+      console.log(err);
+    });
 
   return (
     <Container>
@@ -377,7 +378,7 @@ const MeetTheTeam = () => {
           role="Front End Developer"
         />
       </TeamMembers>
-      <TeamFooter />
+      <Footer />
     </Container>
   );
 };

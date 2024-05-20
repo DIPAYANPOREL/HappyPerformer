@@ -28,10 +28,6 @@ const Left = styled.div`
   display: flex;
   flex-direction: column;
   padding: 20px;
-
-  @media (max-width: 768px) {
-    text-align: center;
-  }
 `;
 
 const Logo = styled.h1``;
@@ -42,9 +38,9 @@ const Desc = styled.p`
 
 const SocialContainer = styled.div`
   display: flex;
-  justify-content: center;
 
   @media (max-width: 768px) {
+    justify-content: center;
     margin-bottom: 20px;
   }
 `;
@@ -72,7 +68,7 @@ const Right = styled.div`
   padding: 20px;
 
   @media (max-width: 768px) {
-    text-align: center;
+    text-align: left;
   }
 `;
 
@@ -92,10 +88,6 @@ const ContactItem = styled(Link)`
 const Center = styled.div`
   flex: 1;
   padding: 20px;
-
-  @media (max-width: 768px) {
-    text-align: center;
-  }
 `;
 
 const Title = styled.h3`
@@ -108,7 +100,11 @@ const List = styled.ul`
   list-style: none;
   display: flex;
   flex-wrap: wrap;
-  justify-content: center;
+
+  @media (max-width: 768px) {
+    flex-direction: column;
+    align-items: flex-start;
+  }
 `;
 
 const ListItem = styled(Link)`
@@ -116,7 +112,6 @@ const ListItem = styled(Link)`
   margin-bottom: 10px;
   color: #000;
   text-decoration: none;
-  text-align: center;
 
   &:hover {
     color: #000;
