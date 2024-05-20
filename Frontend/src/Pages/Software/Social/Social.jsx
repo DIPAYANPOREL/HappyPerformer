@@ -1,185 +1,222 @@
 import React, { useState } from 'react';
 import styled from 'styled-components';
+import Lama from "../../../assets/Lama.png";
+import Footer from '../../../Components/Software Components/Footer';
+import Nav from '../../../Components/Software Components/Dashboard/Nav';
 
 const Container = styled.div`
   display: flex;
-  flex-direction: row;
-  height: 100vh;
-  background-color: #f0f0f0;
-  padding: 1rem;
-`;
+  min-height: 100vh;
+  background-color: #f5f5f5;
+  padding: 2rem;
 
-const Sidecontainer = styled.div`
-  width: 350px;
-  height: 100%;
-  align-items: center;
-  flex-shrink: 0;
-  display: flex;
-  flex-direction: column;
-  padding: 1rem;
+  @media (max-width: 768px) {
+    flex-direction: column;
+    padding: 1rem;
+  }
+`;
+const Sidebar = styled.div`
+  width: 300px;
   background-color: #fff;
   border-radius: 8px;
   box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-  margin-right: 1rem;
-`;
+  padding: 2rem;
+  margin-right: 2rem;
 
-const Main = styled.main`
+  @media (max-width: 768px) {
+    width: 100%;
+    margin-right: 0;
+    margin-bottom: 1rem;
+  }
+`;
+const Main = styled.div`
   flex: 1;
-  display: flex;
-  flex-direction: column;
-  padding: 1rem;
   background-color: #fff;
   border-radius: 8px;
   box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-  margin-bottom: 1rem;
-`;
+  padding: 2rem;
 
-const ProfileSection = styled.section`
+  @media (max-width: 768px) {
+    width: 100%;
+  }
+`;
+const ProfileSection = styled.div`
   display: flex;
   flex-direction: column;
   align-items: center;
   margin-bottom: 2rem;
 `;
-
 const Avatar = styled.div`
-  width: 200px;
-  height: 200px;
+  width: 150px;
+  height: 150px;
   border-radius: 50%;
   background-color: #ccc;
   margin-bottom: 1rem;
+  overflow: hidden;
 `;
-
 const ProfileDetails = styled.div`
   display: flex;
   flex-direction: column;
   align-items: center;
+  text-align: center;
 `;
-
-const FeedbacksSection = styled.section`
+const FeedbacksSection = styled.div`
   margin-bottom: 2rem;
 `;
-
 const Feedback = styled.div`
   border: 1px solid #ccc;
   border-radius: 4px;
   padding: 1rem;
   margin-bottom: 1rem;
-  display: flex;
-  flex-direction: column;
-  align-items: flex-start;
+  background-color: #f7f7f7;
 `;
-
 const FeedbackHeader = styled.div`
   display: flex;
   justify-content: space-between;
   margin-bottom: 0.5rem;
+  font-weight: bold;
 `;
-
 const FeedbackBody = styled.div`
   display: flex;
   justify-content: space-between;
   align-items: center;
-  margin-bottom: 0.5rem;
 `;
-
 const FeedbackButton = styled.button`
   margin-left: 0.5rem;
-`;
+  padding: 0.5rem;
+  border: none;
+  border-radius: 4px;
+  background-color: #3f51b5;
+  color: #fff;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
 
-const LeaveFeedbackSection = styled.section`
+  &:hover {
+    background-color: #283593;
+  }
+`;
+const LeaveFeedbackSection = styled.div`
   margin-bottom: 2rem;
-  width: 100%;
 `;
-
 const FeedbackTextarea = styled.textarea`
   width: 100%;
   height: 100px;
   padding: 0.5rem;
-  margin-bottom: 0.5rem;
+  margin-bottom: 1rem;
   border: 1px solid #ccc;
   border-radius: 4px;
   resize: none;
 `;
-
 const FeedbackSubmitButton = styled.button`
   padding: 0.5rem 1rem;
-  background-color: #007bff;
+  background-color: #3f51b5;
   color: #fff;
   border: none;
   border-radius: 4px;
   cursor: pointer;
-`;
+  transition: background-color 0.3s ease;
 
-const CategoriesSection = styled.section`
-  margin-bottom: 1rem;
-  display: flex;
-  flex-direction: column;
+  &:hover {
+    background-color: #283593;
+  }
+`
+const CategoriesSection = styled.div`
+  margin-bottom: 2rem;
 `;
-
 const CategoryCheckbox = styled.div`
   display: flex;
   align-items: center;
   margin-bottom: 0.5rem;
 `;
-
 const CategoryLabel = styled.label`
   margin-left: 0.5rem;
   font-weight: bold;
   color: #007bff;
   cursor: pointer;
 `;
+const ReasonInput = styled.input`
+  width: 100%;
+  padding: 0.5rem;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  margin-bottom: 1rem;
+`;
+const SaveButton = styled.button`
+  padding: 0.5rem 1rem;
+  background-color: #3f51b5;
+  color: #fff;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
 
-const FeedbackCategory = ({ category, checked, onChange }) => (
-  <CategoryCheckbox>
-    <input
-      type="checkbox"
-      id={category}
-      checked={checked}
-      onChange={() => onChange(category)}
-    />
-    <CategoryLabel htmlFor={category}>{category}</CategoryLabel>
-  </CategoryCheckbox>
-);
+  &:hover {
+    background-color: #283593;
+  }
+`;
+const SelectContainer = styled.div`
+  margin-bottom: 1rem;
 
-const FeedbackComponent = ({ name, date, feedback }) => (
-  <Feedback>
-    <FeedbackHeader>
-      <div>{name}</div>
-      <div>{date}</div>
-    </FeedbackHeader>
-    <FeedbackBody>
-      <div>{feedback}</div>
-      <div>
-        <FeedbackButton>Somewhat Agree</FeedbackButton>
-        <FeedbackButton>Agree</FeedbackButton>
-        <FeedbackButton>Strongly Agree</FeedbackButton>
-        <FeedbackButton>Disagree</FeedbackButton>
-        <FeedbackButton>Needs Work</FeedbackButton>
-      </div>
-    </FeedbackBody>
-  </Feedback>
-);
+  @media (max-width: 768px) {
+    width: 100%;
+  }
+`;
+const Select = styled.select`
+  padding: 0.5rem;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  width: 100%;
+`;
+const EmployeeSelect = styled(SelectContainer)``;
 
-const SocialPage = () => {
+const Social = () => {
   const [feedback, setFeedback] = useState('');
   const [selectedCategories, setSelectedCategories] = useState([]);
+  const [selectedEmployee, setSelectedEmployee] = useState('');
+  const [reason, setReason] = useState('');
+  const [selectedEmployee2, setSelectedEmployee2] = useState('');
+
+  const employees = [
+    { id: 1, name: 'Shawn Pinto' },
+    { id: 2, name: 'Mary Jane' },
+  ];
 
   const handleFeedbackSubmit = (e) => {
-    e.preventDefault(); // Handle feedback submission here
+    e.preventDefault();
+    if (feedback.trim() === '' || selectedEmployee === '') {
+      alert('Please enter feedback and select an employee.');
+      return;
+    }
     console.log('Submitted feedback:', feedback);
     console.log('Selected categories:', selectedCategories);
+    console.log('Selected employee:', selectedEmployee);
+    console.log('Selected employee 2:', selectedEmployee2);
     setFeedback('');
   };
 
   const toggleCategory = (category) => {
-    const index = selectedCategories.indexOf(category);
-    if (index === -1) {
-      setSelectedCategories([...selectedCategories, category]);
-    } else {
-      const newCategories = [...selectedCategories];
-      newCategories.splice(index, 1);
-      setSelectedCategories(newCategories);
-    }
+    setSelectedCategories((prevCategories) =>
+      prevCategories.includes(category)
+        ? prevCategories.filter((c) => c !== category)
+        : [...prevCategories, category]
+    );
+  };
+
+  const handleEmployeeChange = (e) => {
+    setSelectedEmployee(e.target.value);
+  };
+
+  const handleEmployeeChange2 = (e) => {
+    setSelectedEmployee2(e.target.value);
+  };
+
+  const handleReasonChange = (e) => {
+    setReason(e.target.value);
+  };
+
+  const handleSave = () => {
+    console.log('Reason:', reason);
+    setReason('');
   };
 
   const feedbackCategories = [
@@ -200,73 +237,117 @@ const SocialPage = () => {
     'Process Knowledge',
   ];
 
-  const feedbackData = [
+  const Feedbacks = [
     {
-      name: 'Shawn Pinto',
-      date: '2023-05-07',
+      name: 'Spider Man',
+      date: '2024-05-18',
       feedback: 'Feedback for You',
+    },
+    {
+      name: 'Mary Jane',
+      date: '2024-05-17',
+      feedback: 'Great work on the project!',
     },
   ];
 
   return (
+    <>
+    <Nav/>
     <Container>
-      {/* Sidebar */}
-      <Sidecontainer>
-        <h2>Profile Details</h2>
+      <Sidebar>
+        <h2 style={{ textAlign: 'center', marginBottom: '2rem' }}>Profile Details</h2>
         <ProfileSection>
-          <Avatar />
+          <Avatar>
+          <img src={Lama} alt="Profile Avatar" style={{ width: '100%', height: '100%', objectFit: 'cover' }} />
+          </Avatar>
           <ProfileDetails>
-            <h2>Shawn Pinto</h2>
-            <p>Positive feedback by manager</p>
+            <h3>Shawn Pinto</h3>
+            <p>HR</p>
           </ProfileDetails>
-          <CategoriesSection>
-            {feedbackCategories.map((category, index) => (
-              <FeedbackCategory
-                key={index}
-                category={category}
-                checked={selectedCategories.includes(category)}
-                onChange={toggleCategory}
-              />
-            ))}
-          </CategoriesSection>
         </ProfileSection>
-      </Sidecontainer>
+        <h4 style={{ marginBottom: '1rem' }}>Positive Feedback by manager</h4>
+        <br />
+        <h4 style={{ marginBottom: '1rem' }}>Workforce Feedback</h4>
+        <SelectContainer>
+          <Select value={selectedEmployee2} onChange={handleEmployeeChange2}>
+            <option value="">--Select an Employee--</option>
+            {employees.map((employee) => (
+              <option key={employee.id} value={employee.id}>
+                {employee.name}
+              </option>
+            ))}
+          </Select>
+        </SelectContainer>
+        <CategoriesSection>
+          <h5 style={{ marginBottom: '1rem' }}>Categories</h5>
+          {feedbackCategories.map((category, index) => (
+            <CategoryCheckbox key={index}>
+              <input
+                type="checkbox"
+                id={category}
+                checked={selectedCategories.includes(category)}
+                onChange={() => toggleCategory(category)}
+              />
+              <CategoryLabel htmlFor={category}>{category}</CategoryLabel>
+            </CategoryCheckbox>
+          ))}
+          <ReasonInput
+            type="text"
+            placeholder="Reason..."
+            value={reason}
+            onChange={handleReasonChange}
+          />
+          <SaveButton onClick={handleSave}>Save</SaveButton>
+        </CategoriesSection>
+      </Sidebar>
       <Main>
         <LeaveFeedbackSection>
           <FeedbacksSection>
-            <h3>Endorsements</h3>
-            {feedbackData.map((feedback, index) => (
-              <FeedbackComponent
-                key={index}
-                name={feedback.name}
-                date={feedback.date}
-                feedback={feedback.feedback}
-              />
+            <h4 style={{ marginBottom: '1rem' }}>Feedbacks for You</h4>
+            {Feedbacks.map((feedback, index) => (
+              <Feedback key={index}>
+                <FeedbackHeader>
+                  <div>{feedback.name}</div>
+                  <div>{feedback.date}</div>
+                </FeedbackHeader>
+                <FeedbackBody>
+                  <div>{feedback.feedback}</div>
+                  <div>
+                    <FeedbackButton>Customer Focus</FeedbackButton>
+                    <FeedbackButton>Adaptability</FeedbackButton>
+                    <FeedbackButton>Teamwork</FeedbackButton>
+                    <FeedbackButton>Leadership</FeedbackButton>
+                    <FeedbackButton>Ethics & Integrity</FeedbackButton>
+                  </div>
+                </FeedbackBody>
+              </Feedback>
             ))}
           </FeedbacksSection>
-          <h3>Leave Feedback</h3>
+          <h5 style={{ marginBottom: '1rem' }}>Express your feelings to someone...</h5>
           <form onSubmit={handleFeedbackSubmit}>
+            <EmployeeSelect>
+              <Select value={selectedEmployee} onChange={handleEmployeeChange}>
+                <option value="">--Select an Employee--</option>
+                {employees.map((employee) => (
+                  <option key={employee.id} value={employee.id}>
+                    {employee.name}
+                  </option>
+                ))}
+              </Select>
+            </EmployeeSelect>
             <FeedbackTextarea
-              placeholder="Write to someone how you feel?"
+              placeholder="Type your feedback here..."
               value={feedback}
               onChange={(e) => setFeedback(e.target.value)}
             />
-            <CategoriesSection>
-              {selectedCategories.map((category, index) => (
-                <span key={index}>{category}</span>
-              ))}
-            </CategoriesSection>
-              <CategoriesSection>
-                {selectedCategories.map((category, index) => (
-                  <span key={index}>{category}</span>
-                ))}
-              </CategoriesSection>
-              <FeedbackSubmitButton type="submit">Submit Feedback</FeedbackSubmitButton>
-            </form>
-          </LeaveFeedbackSection>
-        </Main>
+            <FeedbackSubmitButton type="submit">Submit</FeedbackSubmitButton>
+          </form>
+        </LeaveFeedbackSection>
+      </Main>
     </Container>
+    <Footer/>
+    </>
   );
 };
 
-export default SocialPage;
+export default Social;

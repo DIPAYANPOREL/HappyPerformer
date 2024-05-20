@@ -1,0 +1,5 @@
+Blue:0077B6
+DarkestBlue:0a1128
+yellow:ffbf00
+red:b80f0a
+green:4caf50
