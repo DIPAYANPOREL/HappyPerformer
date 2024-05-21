@@ -13,6 +13,8 @@ import Update_Media from "./Pages/Software/Courses/Update_Media";
 import BankTransferDetails from "./Pages/Management/BankTransfers/BankTransferDetails";
 import BankTransferPayout from "./Pages/Management/BankTransfers/BankTransferPayout";
 import EmployeeDetails from "./Pages/Management/Attendance Management/EmployeeDetails"
+import Login from "./Pages/Software/Login"
+import Dashboard from "./Pages/Software/DashBoard/Dashboard";
 
 function App() {
   return (
@@ -33,6 +35,8 @@ function App() {
         <Route path="/UpdateMedia/:course_id" element={<Update_Media />} />
         <Route path="/updatedeletemedia/" element={<Update_Delete_Media />} />
         <Route path="/employeedetails/" element={<EmployeeDetails />} />
+        <Route path="/login/" element={<Login />} />
+        <Route path="/Dashboard/" element={<Dashboard />} />
       </Routes>
     </>
   );
