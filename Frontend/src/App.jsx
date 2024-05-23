@@ -15,6 +15,7 @@ import AllCases from "./Pages/Software/CaseManagement/AllCases";
 import EmployeeDetails from "./Pages/Management/Attendance Management/EmployeeDetails";
 import BankTransferDetails from "./Pages/Management/BankTransfers/BankTransferDetails";
 import BankTransferPayout from "./Pages/Management/BankTransfers/BankTransferPayout";
+import CreateCase from "./Pages/Software/CaseManagement/CreateCase";
 import Dashboard from "./Pages/Software/DashBoard/Dashboard";
 import Login from "./Pages/Software/Login";
 
@@ -42,6 +43,7 @@ function App() {
 
         {/* Cases */}
         <Route path="allcases" element={<AllCases />} />
+        <Route path="createcase" element={<CreateCase />} />
       </Routes>
     </>
   );
