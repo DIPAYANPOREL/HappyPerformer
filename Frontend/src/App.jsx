@@ -9,12 +9,14 @@ import TermsAndConditions from "./Pages/Landing Page/TermsAndConditions";
 import Update_Delete_Media from "./Pages/Software/Courses/Update_Delete_Media";
 import Update_Media from "./Pages/Software/Courses/Update_Media";
 // Management
+// Cases
+import AllCases from "./Pages/Software/CaseManagement/AllCases";
 // BankTransfer
+import EmployeeDetails from "./Pages/Management/Attendance Management/EmployeeDetails";
 import BankTransferDetails from "./Pages/Management/BankTransfers/BankTransferDetails";
 import BankTransferPayout from "./Pages/Management/BankTransfers/BankTransferPayout";
-import EmployeeDetails from "./Pages/Management/Attendance Management/EmployeeDetails"
-import Login from "./Pages/Software/Login"
 import Dashboard from "./Pages/Software/DashBoard/Dashboard";
+import Login from "./Pages/Software/Login";
 
 function App() {
   return (
@@ -37,6 +39,9 @@ function App() {
         <Route path="/employeedetails/" element={<EmployeeDetails />} />
         <Route path="/login/" element={<Login />} />
         <Route path="/Dashboard/" element={<Dashboard />} />
+
+        {/* Cases */}
+        <Route path="allcases" element={<AllCases />} />
       </Routes>
     </>
   );
