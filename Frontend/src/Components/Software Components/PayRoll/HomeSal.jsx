@@ -1,4 +1,5 @@
-import React, { useState } from "react";
+import axios from "axios";
+import React, { useEffect, useState } from "react";
 import styled from "styled-components";
 
 const Wrapper = styled.div`
@@ -69,23 +70,22 @@ const ActionButton = styled.button`
 `;
 
 const HomeSal = () => {
-  const dummyData = [
-    {
-      id: 1,
-      name: "John Doe",
-      email: "john@example.com",
-      designation: "Software Engineer",
-    },
-    {
-      id: 2,
-      name: "Jane Smith",
-      email: "jane@example.com",
-      designation: "Software Engineer",
-    },
-  ];
-
+  const [data, setData] = useState([]);
   const [lines, setLines] = useState(10);
   const [searchQuery, setSearchQuery] = useState("");
+
+  useEffect(() => {
+    const fetchData = async () => {
+      try {
+        const response = await axios.get("your_backend_api_url");
+        setData(response.data);
+      } catch (error) {
+        console.error("Error fetching data:", error);
+      }
+    };
+
+    fetchData();
+  }, []);
 
   const handleSelectChange = (e) => {
     setLines(parseInt(e.target.value));
@@ -95,13 +95,12 @@ const HomeSal = () => {
     setSearchQuery(e.target.value);
   };
 
-  const filteredData = dummyData.filter(
+  const filteredData = data.filter(
     (row) =>
       row.name.toLowerCase().includes(searchQuery.toLowerCase()) ||
       row.email.toLowerCase().includes(searchQuery.toLowerCase()) ||
       row.designation.toLowerCase().includes(searchQuery.toLowerCase())
   );
-
   return (
     <Wrapper>
       <Container>
@@ -118,32 +117,36 @@ const HomeSal = () => {
         </Select>
       </Container>
       <TableWrapper>
-        <Table>
-          <TableHeader>
-            <TableRow>
-              <TableHeadCell>ID</TableHeadCell>
-              <TableHeadCell>Name</TableHeadCell>
-              <TableHeadCell>Email</TableHeadCell>
-              <TableHeadCell>Designation</TableHeadCell>
-              <TableHeadCell>Actions</TableHeadCell>
-            </TableRow>
-          </TableHeader>
-          <tbody>
-            {filteredData.slice(0, lines).map((row) => (
-              <TableRow key={row.id}>
-                <TableCell>{row.id}</TableCell>
-                <TableCell>{row.name}</TableCell>
-                <TableCell>{row.email}</TableCell>
-                <TableCell>{row.designation}</TableCell>
-                <TableCell>
-                  <ActionButton primary>Add Salary</ActionButton>
-                  <ActionButton>Revision History</ActionButton>
-                  <ActionButton primary>Display Details</ActionButton>
-                </TableCell>
+        {filteredData.length === 0 ? (
+          <p>No data available</p>
+        ) : (
+          <Table>
+            <TableHeader>
+              <TableRow>
+                <TableHeadCell>ID</TableHeadCell>
+                <TableHeadCell>Name</TableHeadCell>
+                <TableHeadCell>Email</TableHeadCell>
+                <TableHeadCell>Designation</TableHeadCell>
+                <TableHeadCell>Actions</TableHeadCell>
               </TableRow>
-            ))}
-          </tbody>
-        </Table>
+            </TableHeader>
+            <tbody>
+              {filteredData.slice(0, lines).map((row) => (
+                <TableRow key={row.id}>
+                  <TableCell>{row.id}</TableCell>
+                  <TableCell>{row.name}</TableCell>
+                  <TableCell>{row.email}</TableCell>
+                  <TableCell>{row.designation}</TableCell>
+                  <TableCell>
+                    <ActionButton primary>Add Salary</ActionButton>
+                    <ActionButton>Revision History</ActionButton>
+                    <ActionButton primary>Display Details</ActionButton>
+                  </TableCell>
+                </TableRow>
+              ))}
+            </tbody>
+          </Table>
+        )}
       </TableWrapper>
     </Wrapper>
   );

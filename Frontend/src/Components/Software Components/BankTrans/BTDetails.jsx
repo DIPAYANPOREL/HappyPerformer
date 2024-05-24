@@ -1,6 +1,8 @@
+import axios from "axios";
 import React, { useState } from "react";
 import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
+import { useParams } from "react-router-dom";
 import styled from "styled-components";
 
 const Container = styled.div`
@@ -54,6 +56,7 @@ const Button = styled.button`
 `;
 
 const BTDetails = () => {
+  const { month } = useParams();
   const [valueDate, setValueDate] = useState(new Date());
   const [narration, setNarration] = useState("");
   const [debitAccountNumber, setDebitAccountNumber] = useState("");
@@ -61,6 +64,23 @@ const BTDetails = () => {
 
   const handleSubmit = (e) => {
     e.preventDefault();
+
+    const payload = {
+      month,
+      valueDate,
+      narration,
+      debitAccountNumber,
+      fileNameStart,
+    };
+
+    axios
+      .post("/api/bank-transfer-details", payload)
+      .then((response) => {
+        console.log("Data submitted successfully:", response.data);
+      })
+      .catch((error) => {
+        console.error("There was an error submitting the data!", error);
+      });
   };
 
   return (
