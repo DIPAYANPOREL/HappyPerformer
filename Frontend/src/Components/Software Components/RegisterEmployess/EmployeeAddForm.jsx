@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import styled from "styled-components";
 
 const Container = styled.div`
@@ -71,12 +71,12 @@ const SubmitBtn = styled.button`
   padding: 10px;
   border: none;
   border-radius: 5px;
-  background-color: #4caf50;
+  background-color: #0077b6;
   color: #fff;
   font-size: 16px;
   cursor: pointer;
   &:hover {
-    background-color: #333;
+    background-color: #0077b4;
   }
   @media (max-width: 768px) {
     height: 30px;
@@ -94,25 +94,66 @@ const PlanDetails = styled.div`
 `;
 
 const EmployeeAddForm = () => {
+  const [formData, setFormData] = useState({
+    fullName: "",
+    email: "",
+    phone: "",
+    department: "",
+    skills: "",
+  });
+
+  const handleChange = (e) => {
+    setFormData({ ...formData, [e.target.name]: e.target.value });
+  };
+
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+
+    try {
+      const response = await axios.post("localhostkaaddress", formData);
+      console.log("Employee registered successfully:", response.data);
+    } catch (error) {
+      console.error("Error registering employee:", error);
+    }
+  };
+
   return (
     <Container>
-      <FormCont>
+      <FormCont onSubmit={handleSubmit}>
         <TextBar>Full Name</TextBar>
-        <InputBar />
+        <InputBar
+          name="fullName"
+          value={formData.fullName}
+          onChange={handleChange}
+        />
+
         <TextBar>Email</TextBar>
-        <InputBar />
+        <InputBar name="email" value={formData.email} onChange={handleChange} />
+
         <TextBar>Phone</TextBar>
-        <InputBar />
+        <InputBar name="phone" value={formData.phone} onChange={handleChange} />
+
         <TextBar>Department</TextBar>
-        <DeptSelect>
+        <DeptSelect
+          name="department"
+          value={formData.department}
+          onChange={handleChange}
+        >
           <option value="">SuperManager</option>
           <option value="">HR</option>
           <option value="">Manager</option>
           <option value="">Employee</option>
         </DeptSelect>
+
         <TextBar>Skills</TextBar>
-        <InputBar />
-        <SubmitBtn>Register</SubmitBtn>
+        <InputBar
+          name="skills"
+          value={formData.skills}
+          onChange={handleChange}
+        />
+
+        <SubmitBtn type="submit">Register</SubmitBtn>
+
         <PlanDetails>Your ongoing plan: premium</PlanDetails>
         <PlanDetails>Total employees registered in the portal: 29</PlanDetails>
         <PlanDetails>Total employee limit of your plan: 50</PlanDetails>
@@ -120,5 +161,4 @@ const EmployeeAddForm = () => {
     </Container>
   );
 };
-
 export default EmployeeAddForm;

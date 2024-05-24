@@ -87,9 +87,16 @@ const CreateCaseForm = () => {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
+
     try {
-      const response = await axios.post("localhost", formData);
+      // Replace 'http://your-server-endpoint.com/create-case' with your server endpoint URL
+      const response = await axios.post(
+        "http://your-server-endpoint.com/create-case",
+        formData
+      );
       console.log("Case created successfully:", response.data);
+
+      // Reset form data or perform any additional actions after successful submission
       setFormData({
         createFor: "",
         caseTitle: "",
@@ -111,12 +118,14 @@ const CreateCaseForm = () => {
           value={formData.createFor}
           onChange={handleChange}
         />
+
         <Label>Case Title</Label>
         <Input
           name="caseTitle"
           value={formData.caseTitle}
           onChange={handleChange}
         />
+
         <Label>Case Type</Label>
         <CaseSelect
           name="caseType"
@@ -129,12 +138,14 @@ const CreateCaseForm = () => {
             Compensation and Payroll
           </Option>
         </CaseSelect>
+
         <Label>Detailed Description</Label>
         <Input
           name="detailedDescription"
           value={formData.detailedDescription}
           onChange={handleChange}
         />
+
         <Button type="submit">Create Case</Button>
       </Form>
     </Container>
