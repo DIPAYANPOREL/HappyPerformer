@@ -89,14 +89,9 @@ const CreateCaseForm = () => {
     e.preventDefault();
 
     try {
-      // Replace 'http://your-server-endpoint.com/create-case' with your server endpoint URL
-      const response = await axios.post(
-        "http://your-server-endpoint.com/create-case",
-        formData
-      );
+      const response = await axios.post("localhost", formData);
       console.log("Case created successfully:", response.data);
 
-      // Reset form data or perform any additional actions after successful submission
       setFormData({
         createFor: "",
         caseTitle: "",
