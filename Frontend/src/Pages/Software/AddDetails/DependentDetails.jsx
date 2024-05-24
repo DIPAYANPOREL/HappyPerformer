@@ -1,8 +1,89 @@
 import React, { useState } from 'react';
+import styled from 'styled-components';
+import Footer from '../../../Components/Software Components/Footer'
+import Nav from '../../../Components/Software Components/Dashboard/Nav'
+
+const DependentDetailsStyled = styled.div`
+  background-color: #f5f5f5;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 100%;
+  max-width: 98%;
+  border-radius: 5px;
+  box-shadow: 0px 5px 10px rgba(0, 0, 0, 0.2);
+`;
+
+const Table = styled.table`
+  width: 100%;
+  border-collapse: collapse;
+  margin-top: 30px;
+  margin-bottom: 30px;
+  border: 1px solid #ddd;
+  th,
+  td {
+    padding: 12px 15px;
+    text-align: left;
+    border-bottom: 1px solid #ddd;
+  }
+  th {
+    background-color: #0b2447;
+    color: #fff;
+  }
+`;
+
+const Button = styled.button`
+  padding: 10px 20px;
+  margin-top: 20px;
+  margin-bottom: 20px;
+  background-color: #007bff;
+  color: #fff;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  display: block;
+  margin: 0 auto;
+`;
+
+const Form = styled.form`
+  margin-top: 20px;
+  padding: 20px;
+  background-color: #fff;
+  border: 1px solid #ddd;
+  border-radius: 5px;
+  box-shadow: 0px 5px 10px rgba(0, 0, 0, 0.2);
+  display: ${(props) => (props.show ? 'block' : 'none')};
+`;
+
+const FormSection = styled.div`
+  margin-bottom: 10px;
+`;
+
+const FormLabel = styled.label`
+  font-weight: bold;
+  margin-bottom: 8px;
+`;
+
+const FormInput = styled.input`
+  width: 100%;
+  height: 36px;
+  padding: 10px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+`;
+
+const FormSelect = styled.select`
+  width: 100%;
+  height: 30px;
+  padding: 10px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+`;
 
 const DependentDetails = () => {
   const [showForm, setShowForm] = useState(false);
-  const [dependentDetails, setDependentDetails] = useState([]);
+  const [DependentDetails, setDependentDetails] = useState([]);
 
   const toggleForm = () => {
     setShowForm((prevState) => !prevState);
@@ -27,112 +108,103 @@ const DependentDetails = () => {
   };
 
   const deleteItem = (index) => {
-    const newList = [...dependentDetails];
+    const newList = [...DependentDetails];
     newList.splice(index, 1);
     setDependentDetails(newList);
   };
 
   return (
-    <div className="workcontainer">
-      <table className="tbl-work">
-        <thead>
-          <tr>
-            <th>Name</th>
-            <th>Gender</th>
-            <th>DOB</th>
-            <th>Relation</th>
-            <th>Description</th>
-            <th>Edit</th>
-            <th>Delete</th>
-          </tr>
-        </thead>
-        <tbody>
-          {dependentDetails.map((detail, index) => (
-            <tr key={index}>
-              <td>{detail.name}</td>
-              <td>{detail.dependentgender}</td>
-              <td>{detail.date}</td>
-              <td>{detail.relation}</td>
-              <td>{detail.description}</td>
-              <td>
-                <button
-                  onClick={() => {
-                    const newDetails = { ...detail };
-                    alert(JSON.stringify(newDetails));
-                  }}
-                >
-                  Edit
-                </button>
-              </td>
-              <td>
-                <button onClick={() => deleteItem(index)}>Delete</button>
-              </td>
-            </tr>
-          ))}
-        </tbody>
-      </table>
+    <>
+      <Nav />
+      <DependentDetailsStyled>
+        <div className="workcontainer">
+          {!showForm && (
+            <Table>
+              <thead>
+                <tr>
+                  <th>Name</th>
+                  <th>Gender</th>
+                  <th>DOB</th>
+                  <th>Relation</th>
+                  <th>Description</th>
+                  <th>Edit</th>
+                  <th>Delete</th>
+                </tr>
+              </thead>
+              <tbody>
+                {DependentDetails.map((detail, index) => (
+                  <tr key={index}>
+                    <td>{detail.name}</td>
+                    <td>{detail.dependentgender}</td>
+                    <td>{detail.date}</td>
+                    <td>{detail.relation}</td>
+                    <td>{detail.description}</td>
+                    <td>
+                      <Button
+                        onClick={() => {
+                          const newDetails = { ...detail };
+                          alert(JSON.stringify(newDetails));
+                        }}
+                      >
+                        Edit
+                      </Button>
+                    </td>
+                    <td>
+                      <Button onClick={() => deleteItem(index)}>Delete</Button>
+                    </td>
+                  </tr>
+                ))}
+              </tbody>
+            </Table>
+          )}
 
-      <button
-        className="btn-right"
-        style={{ width: '15%', marginLeft: '25px', marginTop: '20px' }}
-        onClick={toggleForm}
-      >
-        {showForm ? 'Close Form' : 'Add Details'}
-      </button>
-      {showForm && (
-        <div
-          className="dependentform"
-          style={{
-            position: 'absolute',
-            top: '50%',
-            left: '20%',
-            transform: 'translateY(-50%)',
-            width: '60%',
-            borderRadius: '5px',
-            boxShadow: '0px 5px 10px rgba(0,0,0,0.2)',
-          }}
-        >
-          <form onSubmit={saveDetails}>
-            <h1 className="text-center" style={{ marginBottom: '40px' }}>
-              Dependent Details
-            </h1>
-            <div className='casefield' style={{ marginBottom: '30px' }}>
-              <label>Name <span className='Mandatory'>*</span></label>
-              <input type='text' name='depname' placeholder='Name of Dependent' required></input>
-              <span className='Error'>This field is mandatory</span>
-            </div>
-            <div className='casefield' style={{ marginBottom: '25px' }}>
-              <label>Dependent Gender </label>
-              <select name='depgender' style={{ width: "41rem", height:"2.6rem", borderRadius: "4px", marginBottom:'8px'}} >
-                <option value="" disabled selected hidden>Please Select</option>
-                <option value="Female">Female</option>
-                <option value="Male">Male</option>
-                <option value="Others">Others</option>
-              </select>
-            </div>
-            <div className='casefield' style={{ marginBottom: '25px' }}>
-              <label>Dependent DOB</label>
-              <input type='date' name='depdob' placeholder='dd-mm-yyyy'></input>
-            </div>
-            <div className='casefield' style={{ marginBottom: '25px' }}>
-              <label>Relation</label>
-              <input type='text' name='deprelation' placeholder='Relation with Dependent'></input>
-            </div>
-            <div className='casefield' style={{ marginBottom: '25px' }}>
-              <label>Description</label>
-              <input type='text' name='depdescription' placeholder='Description'></input>
-            </div>
-            <button
-              className="btn"
-              style={{ width: '100%' }}
-              type='submit'
-            >
-              Save Details
-            </button>
-          </form>
+          <Button onClick={toggleForm}>
+            {showForm ? 'Close Form' : 'Add Details'}
+          </Button>
+
+          {showForm && (
+            <Form show={showForm} onSubmit={saveDetails}>
+              <div style={{ display: 'flex', justifyContent: 'center' }}>
+                <h1 style={{ marginBottom: '20px' }}>Dependent Details</h1>
+              </div>
+              <FormSection style={{ display: 'flex', justifyContent: 'space-between', gap: '10px' }}>
+                <div style={{ width: '100%' }}>
+                  <label>Name<span style={{ color: 'red' }}>*</span></label>
+                  <FormInput type='text' name='depname' placeholder='Enter Name Of Dependent' required/>
+                </div>
+              </FormSection>
+              <FormSection style={{ height: '40px', marginBottom:'28px' }}>
+                <FormLabel>Gender</FormLabel>
+                <FormSelect name="depgender" style={{ height: '100%' }}>
+                  <option value="">Select Gender</option>
+                  <option value="Male">Male</option>
+                  <option value="Female">Female</option>
+                  <option value="Other">Other</option>
+                </FormSelect>
+              </FormSection>
+              <FormSection>
+                <FormLabel>Dependent Date Of Birth</FormLabel>
+                <FormInput type="date" name="depdob" placeholder="dd-mm-yyyy" />
+              </FormSection>
+              <FormSection>
+                <FormLabel>Relation</FormLabel>
+                <FormInput type="text" name="deprelation" placeholder="Relation With Dependent" />
+              </FormSection>
+              <FormSection>
+                <FormLabel>Description</FormLabel>
+                <FormInput type="text" name="depdescription" placeholder="Description" />
+              </FormSection>
+              <Button style={{ width: '100%' }} type="submit">
+                Save Details
+              </Button>
+            </Form>
+          )}
         </div>
-      )}
-    </div>
+      </DependentDetailsStyled>
+      <div style={{ position: 'fixed', left: 0, bottom: 0, width: '100%' }}>
+        <Footer />
+      </div>
+    </>
   );
 };
 

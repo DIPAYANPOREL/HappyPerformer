@@ -16,11 +16,10 @@ import LeaveHistory from "./Pages/Leave Management/LeaveHistory";
 import AttendanceDetails from "./Pages/Management/Attendance Management/AttendanceDetails";
 import EmployeeDetails from "./Pages/Management/Attendance Management/EmployeeDetails";
 import EnrollEmployee from "./Pages/Management/EnrollEmployee";
-import Profile from "./Pages/Software/AddDetails/Profile";
+import Profile from "./Pages/Software/AddDetails/Personaldetails";
 import Attendance from "./Pages/Software/Attendance/Attendance";
 import Dashboard from "./Pages/Software/DashBoard/Dashboard";
 import Training from "./Pages/Training";
-
 import FAQ from "./Pages/Software/DashBoard/FAQ";
 import LoanPayments from "./Pages/Software/DashBoard/LoanPayments";
 import Quiz from "./Pages/Software/DashBoard/Quiz";
@@ -29,6 +28,26 @@ import SopForm from "./Pages/Software/EmployeesJobs/SopForm";
 import { default as Login, default as Resign } from "./Pages/Software/Login";
 import PHPTutorials from "./Pages/Software/PHPTutorials/PHPTutorials";
 import Setting from "./Pages/Software/Profile/Settings/Setting";
+import WorkExperience from "./Pages/Software/AddDetails/WorkExperience"
+import IdentityDetials from "./Pages/Software/AddDetails/IdentityDetials";
+import BankDetails from "./Pages/Software/AddDetails/BankDetails";
+import CreateCase1 from "./Pages/Software/Case Management/CreateCase1";
+import DependentDetails from "./Pages/Software/AddDetails/DependentDetails";
+import JobDetails from "./Pages/Software/AddDetails/JobDetails";
+import PersonalDetails from "./Pages/Software/AddDetails/Personaldetails";
+import QualificationDetails from "./Pages/Software/AddDetails/QualificationDetails";
+import FamilyDetails from "./Pages/Software/AddDetails/FamilyDetails";
+import ITdeclaration from "./Pages/ITdeclaration";
+import LeaveEncashment from "./Pages/Software/Payroll Management/LeaveEncashment";
+import OffcyclePayment from "./Pages/Software/Payroll Management/OffcyclePayment";
+import BulkUpload from "./Pages/Management/BulkUpload";
+import ViewEncashment from "./Pages/Software/Payroll Management/ViewEncashment";
+import MyCase from "./Pages/Software/Case Management/MyCase";
+import DelUpdateRegistry from "./Pages/Software/RegisterEmployee/DelUpdateRegistry";
+import HoldSalary from "./Pages/Software/Payroll Management/HoldSalary";
+import Poi from "./Pages/Software/Payroll Management/Poi";
+import AttritionReport from "./Pages/Management/AttritionReport";
+import SideBar from "./Components/Software Components/Dashboard/SideBar";
 function App() {
   return (
     <>
@@ -66,6 +85,26 @@ function App() {
         <Route path="/register" element={<Register />} />
         <Route path="/contact" element={<ContactUs />} />
         <Route path="/about" element={<AboutUs />} />
+        <Route path="/workexperience" element={<WorkExperience/>} />
+        <Route path="/identitydetails" element={<IdentityDetials/>} />
+        <Route path="/bankdetails" element={<BankDetails/>} />
+        <Route path="/createcase1" element={<CreateCase1/>} />
+        <Route path="/dependentdetails" element={<DependentDetails/>} />
+        <Route path="/jobdetails" element={<JobDetails/>} />
+        <Route path="/personaldetails" element={<PersonalDetails/>} />
+        <Route path="/qualificationdetails" element={<QualificationDetails/>} />
+        <Route path="/familydetails" element={<FamilyDetails/>} />
+        <Route path="/itdeclaration" element={<ITdeclaration/>} />
+        <Route path="/leaveencashment" element={<LeaveEncashment/>} />
+        <Route path="/offcyclepayment" element={<OffcyclePayment/>} />
+        <Route path="/bulkupload" element={<BulkUpload/>} />
+        <Route path="/viewencashment" element={<ViewEncashment/>} />
+        <Route path="/mycase" element={<MyCase/>} />
+        <Route path="/delupdateregistry" element={<DelUpdateRegistry/>} />
+        <Route path="/holdsalary" element={<HoldSalary/>} />
+        <Route path="/poi" element={<Poi/>} />
+        <Route path="/attritionreport" element={<AttritionReport/>} />
+        <Route path="/sidebar" element={<SideBar/>} />
       </Routes>
     </>
   );

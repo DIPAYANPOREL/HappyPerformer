@@ -3,6 +3,7 @@ import styled from 'styled-components';
 import Footer from '../../../Components/Software Components/Footer'
 import Nav from '../../../Components/Software Components/Dashboard/Nav'
 
+
 const CaseContainer = styled.div`
   display: flex;
   justify-content: center;
@@ -12,10 +13,10 @@ const CaseContainer = styled.div`
 `;
 
 const Form = styled.form`
-  width: 95%; /* Adjusted width to 90% */
-  max-width: 900px; /* Set a max-width for responsiveness */
+  width: 90%; /* Adjusted width to 90% */
+  max-width: 660px; /* Set a max-width for responsiveness */
   margin: 0 auto; /* Center the form horizontally */
-  padding: 10px; /* Adjusted padding */
+  padding: 20px; /* Adjusted padding */
 `;
 
 const UIDivider = styled.div`
@@ -26,9 +27,8 @@ const UIForm = styled.div`
   background-color: #fff;
   border-radius: 8px;
   box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
-  padding: 1.5rem; /* Adjusted padding */
-  width: 80%; /* Adjusted width to make the card smaller */
-  margin: 0 auto; /* Center the card horizontally */
+  padding: 2rem; /* Adjusted padding */
+  width: 100%;
 `;
 
 const Title = styled.h1`
@@ -36,9 +36,6 @@ const Title = styled.h1`
 `;
 
 const CaseField = styled.div`
-  display: flex;
-  flex-wrap: wrap;
-  justify-content: space-between;
   margin-bottom: 1.5rem; /* Adjusted margin */
 `;
 
@@ -46,11 +43,10 @@ const Label = styled.label`
   display: block;
   font-weight: bold;
   margin-bottom: 0.5rem; /* Adjusted margin */
-  width: 45%; /* Adjusted width for labels */
 `;
 
 const Input = styled.input`
-  width: 50%; /* Adjusted width for two columns */
+  width: 100%;
   padding: 0.75rem; /* Adjusted padding */
   border: 1px solid #ccc;
   border-radius: 4px;
@@ -58,7 +54,7 @@ const Input = styled.input`
 `;
 
 const Select = styled.select`
-  width: 50%; /* Adjusted width for two columns */
+  width: 100%;
   padding: 0.75rem; /* Adjusted padding */
   border: 1px solid #ccc;
   border-radius: 4px;
@@ -90,8 +86,7 @@ const SubmitButton = styled.button`
     background-color: #0056b3;
   }
 `;
-
-const BankDetails = () => {
+const CreateCase1 = () => {
   return (
     <>
     <Nav/>
@@ -99,41 +94,39 @@ const BankDetails = () => {
       <Form>
         <UIDivider />
         <UIForm>
-          <Title style={{ textAlign: 'center'}}>Bank Details </Title>
+          <Title style={{ textAlign: 'center'}}>Create Case</Title>
           <CaseField>
-            <Label>Account Holder's Name</Label>
+            <Label>
+              Create Case For <Mandatory>*</Mandatory>
+            </Label>
             <Input
               type="text"
-              name="AccountName"
-              placeholder="Account Holder's Name"
-              style={{ width: '100%' }} // Full width for Account Holder's Name
+              name="createcase"
+              placeholder="Create Case For"
+              required
             />
+            <Error style={{ display: 'none' }}>
+              This field is mandatory
+            </Error>
           </CaseField>
-          <CaseField>
-            <Label>Name Of Bank</Label>
-            <Input type="text" name="bankName" placeholder="Name Of Bank" />
-            <Label>Account Number</Label>
-            <Input type="text" name="accountNumber" placeholder="Account Number" />
-          </CaseField>
-          <CaseField>
-            <Label>Branch (City)</Label>
-            <Input type="text" name="branch" placeholder="Branch" />
-            <Label>Bank Account Type</Label>
+          <CaseField style={{ width: '35rem', borderRadius: '4px' }}>
+            <Label>Case Type</Label>
             <Select name="casetype">
               <option value="case-dropdown" selected disabled>
                 Select
               </option>
-              <option value="">Savings Account</option>
-              <option value="">Current Accounts</option>
-              <option value="">Fixed Deposit Account</option>
-              <option value="">Recurring Deposit Account</option>
+              <option value="Benefits">Benefits</option>
+              <option value="CompensationPayroll">Compensation and Payroll</option>
+              <option value="TravelExpense">Travel and Expense</option>
             </Select>
           </CaseField>
           <CaseField>
-            <Label>Branch Code (IFSC) Number</Label>
-            <Input type="text" name="branchcode" placeholder="Branch Code (IFSC) Number" />
-            <Label>PAN Number</Label>
-            <Input type="text" name="panNumber" placeholder="Pan Number" />
+            <Label>Case Title</Label>
+            <Input type="text" name="casetitle" placeholder="Case Title" />
+          </CaseField>
+          <CaseField>
+            <Label>Detailed Description</Label>
+            <Input type="text" name="description" placeholder="Description" />
           </CaseField>
           <SubmitButton onClick={() => validateForm()}>Submit</SubmitButton>
         </UIForm>
@@ -155,4 +148,4 @@ function validateForm() {
   }
 }
 
-export default BankDetails;
+export default CreateCase1;
