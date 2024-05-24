@@ -1,16 +1,22 @@
-import React, { useState } from "react";
-import styled, { css } from "styled-components";
-import Lama from "../../../assets/Lama.png";
-import EditNoteIcon from '@mui/icons-material/EditNote';
-import { CheckBox } from '@mui/icons-material';
-import { Button, Dialog, DialogContent, DialogTitle, FormControlLabel, IconButton, Stack, TextField } from '@mui/material';
 import CloseIcon from "@mui/icons-material/Close";
+import EditNoteIcon from "@mui/icons-material/EditNote";
+import {
+  Button,
+  Dialog,
+  DialogContent,
+  DialogTitle,
+  IconButton,
+  Stack,
+} from "@mui/material";
+import axios from "axios";
+import { useEffect, useState } from "react";
+import { useParams } from "react-router-dom";
+import styled, { css } from "styled-components";
 
 const Container = styled.div`
   background-color: #f5f5f5;
   padding: 20px;
-  width:100%;
-  background-color: #f5f5f5;
+  width: 100%;
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -22,7 +28,6 @@ const breakpoints = {
 
 const mobileStyles = css`
   @media (max-width: ${breakpoints.mobile}) {
-    // Mobile styles go here
   }
 `;
 
@@ -104,10 +109,10 @@ const Divider = styled.div`
 
 const AdditionalContainer = styled.div`
   background-color: #ffffff;
-  display:flex;
+  display: flex;
   align-items: center;
   justify-content: center;
-  flex-wrap:wrap;
+  flex-wrap: wrap;
   padding: 30px;
   border-radius: 12px;
   box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
@@ -136,7 +141,7 @@ const InfoCard = styled.div`
   justify-content: space-between;
   width: 100%;
   margin: 20px;
-  min-height: 900px ;
+  min-height: 900px;
 `;
 
 const Card = styled.div`
@@ -179,79 +184,106 @@ const PopupIcon = styled.button`
 `;
 
 const Profile = () => {
-  const [infocard] = useState([
-    {
-      title: 'Personal Information',
-      text: 'Loren ipsum dolor sit amet consectetur, adipisicing elit. Sit ducimus fuga itaque, ex natus quaerat deserunt asperiores dolore eligendi doloremque?Name: John Doe '
-    },
-    {
-      title: 'Emergency Contact',
-      text: 'Lorem ipsum color sit amet consectetur, adipisicing elit. Sit ducimus fuga itaque, ex natus quaerat deserunt asperiores dolore eligendi doloremque?Name: John Doe'
-    },
-    {
-      title: 'Bank Information',
-      text: 'Lorem ipsum dolor sit amet consectetur, adipisicing elit. Sit ducimus fuga itaque, ex natus quaerat deserunt asperiores dolore eligendi doloremque?Name: John Doe'
-    },
-    {
-      title: 'Family Information',
-      text: 'Lorem ipsum dolor sit amet consectetur, adipisicing elit. Sit ducimus fuga itaque, ex natus quaerat deserunt asperiores dolore eligendi doloremque?Name: John Doe'
-    },
-    {
-      title: 'Qualification',
-      text: 'Lorem ipsum dolor sit amet consectetur, adipisicing elit. Sit ducimus fuga itaque, ex natus quaerat deserunt asperiores dolore eligendi doloremque?Name: John Doe'
-    },
-    {
-      title: 'Experience',
-      text: 'Lorem ipsum dolor sit amet consectetur, adipisicing elit. Sit ducimus fuga itaque, ex natus quaerat deserunt asperiores dolore eligendi doloremque?Name: John Doe'
-    }
-  ]);
-
+  const { id } = useParams();
+  const [profileData, setProfileData] = useState(null);
+  const [loading, setLoading] = useState(true);
+  const [personalDetails, setPersonalDetails] = useState(null);
   const [openDialogs, setOpenDialogs] = useState({
     PersonalInformation: false,
-    EmergencyContact: false,
-    FamilyInformation: false,
-    Qualification: false,
-    Experience: false
+    // Add other dialog states here as needed
   });
+  const [infocard, setInfocard] = useState([]);
+
+  useEffect(() => {
+    if (!id) return;
+
+    const fetchData = async () => {
+      try {
+        setLoading(true);
+
+        const profileResponse = await axios.get(`http://localhost:3000/employee-master/${id}`);
+        const profileData = profileResponse.data;
+        setProfileData(profileData);
+
+        const emp_emailid = profileData.mail;
+        const personalResponse = await axios.get(`http://localhost:3000/Profile/${emp_emailid}`);
+        const personalData = personalResponse.data;
+        setPersonalDetails(personalData);
+
+        const updatedInfocard = [
+          {
+            title: "Personal Information",
+            text: personalData ? `${personalData.first_name} ${personalData.last_name}` : "Loading personal details...",
+          }
+        ];
+        setInfocard(updatedInfocard);
+        setLoading(false);
+      } catch (error) {
+        console.error("Error fetching profile data:", error);
+        setLoading(false);
+      }
+    };
+
+    fetchData();
+  }, [id]);
 
   const handlePopupClick = (card) => {
-    setOpenDialogs(prevState => ({
+    setOpenDialogs((prevState) => ({
       ...prevState,
-      [card.title.replace(/\s+/g, '')]: true
+      [card.title.replace(/\s+/g, "")]: true,
     }));
   };
 
   const closePopup = (card) => {
-    setOpenDialogs(prevState => ({
+    setOpenDialogs((prevState) => ({
       ...prevState,
-      [card.title.replace(/\s+/g, '')]: false
+      [card.title.replace(/\s+/g, "")]: false,
     }));
   };
 
-  const menuItems = ['Edit', 'Delete', 'View Details'];
+  if (loading) {
+    return <div>Loading...</div>;
+  }
+
+  if (!profileData) {
+    return <div>Error: Profile data not found</div>;
+  }
+
+  const {
+    emp_name,
+    mail,
+    emp_phone,
+    birth_date,
+    emp_address,
+    emp_gender,
+    emp_manager,
+    team_name,
+    job_title,
+    emp_id,
+    join_date,
+  } = profileData;
 
   return (
-    <>
     <Container>
       <ProfileSection>
-        <ProfilePicture src={Lama} alt="Profile Picture" />
+        <ProfilePicture alt="Profile Picture" />
         <ProfileDetails>
           <DetailsLeft>
-            <h2 style={{ fontWeight: 600, marginBottom: '10px' }}>Shawn Edmund Pinto</h2>
-            <p style={{ marginBottom: '10px' }}>Team Name: Development Team</p>
-            <p style={{ marginBottom: '10px' }}>Job Name: Software Engineer</p>
-            <p style={{ marginBottom: '10px' }}>Employee ID: 12345</p>
-            <p style={{ marginBottom: '10px' }}>Date of Join: January 1, 2024</p>
-            <Button >Click Me</Button>
+            <h2 style={{ fontWeight: 600, marginBottom: "10px" }}>{emp_name}</h2>
+            <p style={{ marginBottom: "10px" }}>Team Name: {team_name}</p>
+            <p style={{ marginBottom: "10px" }}>Job Name: {job_title}</p>
+            <p style={{ marginBottom: "10px" }}>Employee ID: {emp_id}</p>
+            <p style={{ marginBottom: "10px" }}>Date of Join: {join_date}</p>
+            <Button>Click Me</Button>
           </DetailsLeft>
           <Divider />
           <DetailsRight>
-            <p style={{ marginBottom: '10px' }}><strong>Phone:</strong> +973 12345678</p>
-            <p style={{ marginBottom: '10px' }}><strong>Email:</strong> shalav.d@example.com</p>
-            <p style={{ marginBottom: '10px' }}><strong>Birthday:</strong> May 15, 1990</p>
-            <p style={{ marginBottom: '10px' }}><strong>Address:</strong> 123 Pune, Maharashtra</p>
-            <p style={{ marginBottom: '10px' }}><strong>Gender:</strong> Male</p>
-            <p style={{ marginBottom: '10px' }}><strong>Reports to:</strong> Monica Dey</p>
+            <p style={{ marginBottom: "10px" }}><strong>Phone:</strong> {emp_phone}</p>
+            <p style={{ marginBottom: "10px" }}><strong>Email:</strong> {mail}</p>
+            <p style={{ marginBottom: "10px" }}><strong>Birthday:</strong> {birth_date}</p>
+            <p style={{ marginBottom: "10px" }}><strong>Address:</strong> {emp_address}</p>
+            <p style={{ marginBottom: "10px" }}><strong>Gender:</strong> {emp_gender}</p>
+            <p style={{ marginBottom: "10px" }}><strong>Reports to:</strong> {emp_manager}</p>
           </DetailsRight>
         </ProfileDetails>
       </ProfileSection>
@@ -261,21 +293,31 @@ const Profile = () => {
             <Card key={i}>
               <h3>{card.title}</h3>
               <p>{card.text}</p>
-              <PopupIcon
-                onClick={() => handlePopupClick(card)}
-              >
+              <PopupIcon onClick={() => handlePopupClick(card)}>
                 <EditNoteIcon></EditNoteIcon>
               </PopupIcon>
-              <Dialog open={openDialogs[card.title.replace(/\s+/g, '')]} onClose={() => closePopup(card)} fullWidth maxWidth="md">
+              <Dialog
+                open={openDialogs[card.title.replace(/\s+/g, "")]}
+                onClose={() => closePopup(card)}
+                fullWidth
+                maxWidth="md"
+              >
                 <DialogTitle>
                   {card.title}
-                  <IconButton onClick={() => closePopup(card)} style={{ float: 'right' }}>
-                    <CloseIcon color='error'></CloseIcon>
+                  <IconButton onClick={() => closePopup(card)} style={{ float: "right" }}>
+                    <CloseIcon color="error"></CloseIcon>
                   </IconButton>
                 </DialogTitle>
                 <DialogContent>
                   <Stack spacing={2} margin={2}>
                     {/* Add dialog content here */}
+                    {card.title === "Personal Information" && (
+                      <>
+                        <p>First Name: {personalDetails.first_name}</p>
+                        <p>Last Name: {personalDetails.last_name}</p>
+                        {/* Add more personal information fields */}
+                      </>
+                    )}
                   </Stack>
                 </DialogContent>
               </Dialog>
@@ -284,7 +326,6 @@ const Profile = () => {
         </InfoCard>
       </AdditionalContainer>
     </Container>
-    </>
   );
 };
 

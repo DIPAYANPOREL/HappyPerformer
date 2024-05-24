@@ -22,7 +22,7 @@ const Form = styled.div`
   width: 100%;
   flex-direction: column;
   justify-content: center;
-  align-item: center;
+  align-items: center;
 `;
 const SaveBtn = styled.button`
   background-color: #4caf50;

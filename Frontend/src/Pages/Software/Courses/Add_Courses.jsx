@@ -10,7 +10,6 @@ const MainWrapper = styled.div`
   flex-direction: column;
   min-height: 100vh;
   background-color: #f1f2f6;
-  /* padding: 10px; */
 `;
 
 const Content = styled.div`

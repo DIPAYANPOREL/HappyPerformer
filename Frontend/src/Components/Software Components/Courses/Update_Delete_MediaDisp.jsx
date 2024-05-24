@@ -1,19 +1,20 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import styled from 'styled-components';
+import axios from 'axios';
 
 const Main = styled.main`
   width: 100%;
   padding: 20px;
-  `;
+`;
 
 const ContainerFluid = styled.div`
   padding: 0;
-  `;
+`;
 
 const Row = styled.div`
-    display: flex;
-    justify-content: center;
-    `;
+  display: flex;
+  justify-content: center;
+`;
 
 const Col = styled.div`
   flex: 20%;
@@ -37,16 +38,16 @@ const Card = styled.div`
 const Table = styled.table`
   width: 100%;
   border-collapse: collapse;
-  `;
+`;
 
 const Th = styled.th`
   text-align: center;
   padding-bottom: 1rem;
-  `;
+`;
 
 const Tr = styled.tr`
   text-align: center;
-  `;
+`;
 
 const Td = styled.td`
   text-align: center;
@@ -63,64 +64,68 @@ const Td = styled.td`
 `;
 
 const Update_Delete_MediaDisp = () => {
+  const [data, setData] = useState([]);
 
-    const data = [
-        {
-            course_title: 'Course 1',
-            descr: 'Description 1',
-            video_id: 1,
-            location: 'Location 1',
-            course_id: 1
-        },
-        {
-            course_title: 'Course 2',
-            descr: 'Description 2',
-            video_id: 2,
-            location: 'Location 2',
-            course_id: 2
-        }
-    ];
-    return (
+  useEffect(() => {
+    const fetchData = async () => {
+      try {
+        const response = await axios.get('http://127.0.0.1:8000/UpdateDeleteMedia/');
+        setData(response.data);
+      } catch (error) {
+        console.error('Error fetching data:', error);
+      }
+    };
 
-        <Main >
-            <ContainerFluid >
-                <Row>
-                    <Col >
-                        <Card >
-                            <Table >
-                                <thead>
-                                    <Tr>
-                                        <Th style={{ width: '20%' }}>Course Title</Th>
-                                        <Th style={{ width: '20%' }}>Description</Th>
-                                        <Th style={{ width: '60%' }} colSpan="2">Operations</Th>
-                                    </Tr>
-                                    <tr>
-                                        <Th colSpan="4"> <hr /></Th>
-                                    </tr>
-                                </thead>
-                                <tbody>
-                                    {data.map((item, index) => (
-                                        <Tr key={index}>
-                                            <Td>{item.course_title}</Td>
-                                            <Td>{item.descr}</Td>
-                                            <Td>
-                                                {/* <a href={`media_update.php?id=${item.video_id}&loc=${item.location}&cd=${item.course_id}&desc=${item.descr}`}>UPDATE</a> */}
-                                                <a>UPDATE</a>
-                                            </Td>
-                                            <Td>
-                                                {/* <a href={``} onClick={() => checkDelete()}>Delete</a> */}
-                                                <a onClick={() => checkDelete()}>Delete</a>
-                                            </Td>
-                                        </Tr>
-                                    ))}
-                                </tbody>
-                            </Table>
-                        </Card>
-                    </Col>
-                </Row>
-            </ContainerFluid>
-        </Main>
-    );
+    fetchData();
+  }, []);
+
+  const handleDelete = async (course_id) => {
+    try {
+      await axios.delete(`http://127.0.0.1:8000/UpdateMedia/${course_id}`);
+      setData(data.filter((item) => item.course_id !== course_id));
+    } catch (error) {
+      console.error('Error deleting data:', error);
+    }
+  };
+
+  return (
+    <Main>
+      <ContainerFluid>
+        <Row>
+          <Col>
+            <Card>
+              <Table>
+                <thead>
+                  <Tr>
+                    <Th style={{ width: '20%' }}>Course Title</Th>
+                    <Th style={{ width: '20%' }}>Description</Th>
+                    <Th style={{ width: '60%' }} colSpan="2">Operations</Th>
+                  </Tr>
+                  <tr>
+                    <Th colSpan="4"> <hr /></Th>
+                  </tr>
+                </thead>
+                <tbody>
+                  {data.map((item, index) => (
+                    <Tr key={index}>
+                      <Td>{item.course_title}</Td>
+                      <Td>{item.description}</Td>
+                      <Td>
+                        <a href={`UpdateMedia/${item.course_id}`}>Update </a>
+                      </Td>
+                      <Td>
+                        <a onClick={() => handleDelete(item.course_id)}>Delete</a>
+                      </Td>
+                    </Tr>
+                  ))}
+                </tbody>
+              </Table>
+            </Card>
+          </Col>
+        </Row>
+      </ContainerFluid>
+    </Main>
+  );
 };
 
 export default Update_Delete_MediaDisp;

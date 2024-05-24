@@ -39,12 +39,6 @@ const Text1 = styled.div`
   margin-top: 20px;
 `;
 
-const Text2 = styled.div`
-  font-size: 16px;
-  color: #666;
-  margin-top: 10px;
-`;
-
 const TargetCard = (props) => {
   return (
     <Container>
@@ -52,17 +46,13 @@ const TargetCard = (props) => {
       <SectionPart>{props.type} Completed</SectionPart>
       <Text1>
         {props.percentage < 50 ? (
-          <>
-            You are not even half way completed, speed up!go to this page to
-            check your {props.type}.
-          </>
+          <>You are not even half way there, speed up!</>
         ) : props.percentage == 100 ? (
           <>Well done, no more {props.type} for now!</>
         ) : (
           <>Good Going, go to this page to check your {props.type}.</>
         )}
       </Text1>
-      <Text2>Also don't forget to rate yourself!</Text2>
     </Container>
   );
 };

@@ -1,6 +1,7 @@
 import React from 'react';
 import styled from 'styled-components';
-import Footer from "../../Components/Software Components/Footer";
+import Footer from '../../Components/Software Components/Footer';
+import Nav from '../../Components/Software Components/Dashboard/Nav';
 
 
 const Container = styled.div`
@@ -66,6 +67,7 @@ const LeaveHistory = () => {
 
   return (
     <>
+    <Nav/>
     <Container>
       <LeaveHistoryContainer>
         <h2>Leave History</h2>

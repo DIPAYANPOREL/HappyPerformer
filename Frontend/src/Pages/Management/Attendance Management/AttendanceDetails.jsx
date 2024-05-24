@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import styled from 'styled-components';
-
-
+import Footer from '../../../Components/Software Components/Footer';
+import Nav from '../../../Components/Software Components/Dashboard/Nav';
 
 const MainContainer = styled.div`
   max-width: 1000px;
@@ -11,28 +11,148 @@ const MainContainer = styled.div`
   box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
   border-radius: 5px;
   overflow: hidden;
-`; 
+`;
 const employees = [
-  { id: 1, email: '123@gmail.com', name: 'John', date: 'September 07, 2023', time: '11:46 pm' },
-  { id: 2, email: 'a123.salahkaar@gmail.com', name: 'Shawn', date: 'July 03, 2023', time: '12:46 pm' },
-  { id: 3, email: '3214@gmail.com', name: 'Clive', date: 'July 12, 2023', time: '12:46 pm' },
-  { id: 4, email: '4566@gmail.com', name: 'Derek', date: 'October 13 , 2023', time: '12:46 pm' },
-  { id: 5, email: '54344@gmail.com', name: 'Nathan', date: 'July 11, 2023', time: '12:46 pm' },
-  { id: 6, email: '432@gmail.com', name: 'Muhammad', date: 'August 11, 2023', time: '10:46 pm' },
-  { id: 7, email: '3456@gmail.com', name: 'Prashant', date: 'June 06, 2023', time: '11:46 pm' },
-  { id: 8, email: '98776@gmail.com', name: 'Dirk', date: 'January 04, 2023', time: '12:46 pm'},
-  { id: 9, email: '6544@gmail.com', name: 'Giannis', date: 'April 12, 2023', time: '11:46 pm' },
-  { id: 10, email: '34566@gmail.com', name: 'Wajid', date: 'June 16, 2023', time: '10:46 pm'},
-  { id: 11, email: '6776@gmail.com', name: 'Herbert', date: 'November 26, 2023', time: '08:46 pm' },
-  { id: 12, email: '65443@gmail.com', name: 'Jordan', date: 'August 23, 2023', time: '09:46 pm' },
-  { id: 13, email: '8565545@gmail.com', name: 'Paula', date: 'September 30, 2023', time: '11:46 pm' },
-  { id: 14, email: '0987@gmail.com', name: 'Peter', date: 'February 08  , 2023', time: '09:46 pm'},
-  { id: 15, email: '2468@gmail.com', name: 'David', date: 'June 09, 2023', time: '09:46 pm' },
-  { id: 16, email: '06345@gmail.com', name: 'Nancy', date: 'March 13, 2023', time: '10:46 pm' },
-  { id: 17, email: '30980@gmail.com', name: 'Helen', date: 'October 11, 2023', time: '08:46 pm'},
-  { id: 18, email: '095432@gmail.com', name: 'Noor', date: 'May 28, 2023', time: '11:46 pm'},
-  { id: 19, email: '23487@gmail.com', name: 'Abdullah', date: 'June 05, 2023', time: '10:46 pm' },
-  { id: 20, email: '09090@gmail.com', name: 'Anthony', date: 'July 17, 2023', time: '08:46 pm' },
+  {
+    id: 1,
+    email: "123@gmail.com",
+    name: "John",
+    date: "September 07, 2023",
+    time: "11:46 pm",
+  },
+  {
+    id: 2,
+    email: "a123.salahkaar@gmail.com",
+    name: "Shawn",
+    date: "July 03, 2023",
+    time: "12:46 pm",
+  },
+  {
+    id: 3,
+    email: "3214@gmail.com",
+    name: "Clive",
+    date: "July 12, 2023",
+    time: "12:46 pm",
+  },
+  {
+    id: 4,
+    email: "4566@gmail.com",
+    name: "Derek",
+    date: "October 13 , 2023",
+    time: "12:46 pm",
+  },
+  {
+    id: 5,
+    email: "54344@gmail.com",
+    name: "Nathan",
+    date: "July 11, 2023",
+    time: "12:46 pm",
+  },
+  {
+    id: 6,
+    email: "432@gmail.com",
+    name: "Muhammad",
+    date: "August 11, 2023",
+    time: "10:46 pm",
+  },
+  {
+    id: 7,
+    email: "3456@gmail.com",
+    name: "Prashant",
+    date: "June 06, 2023",
+    time: "11:46 pm",
+  },
+  {
+    id: 8,
+    email: "98776@gmail.com",
+    name: "Dirk",
+    date: "January 04, 2023",
+    time: "12:46 pm",
+  },
+  {
+    id: 9,
+    email: "6544@gmail.com",
+    name: "Giannis",
+    date: "April 12, 2023",
+    time: "11:46 pm",
+  },
+  {
+    id: 10,
+    email: "34566@gmail.com",
+    name: "Wajid",
+    date: "June 16, 2023",
+    time: "10:46 pm",
+  },
+  {
+    id: 11,
+    email: "6776@gmail.com",
+    name: "Herbert",
+    date: "November 26, 2023",
+    time: "08:46 pm",
+  },
+  {
+    id: 12,
+    email: "65443@gmail.com",
+    name: "Jordan",
+    date: "August 23, 2023",
+    time: "09:46 pm",
+  },
+  {
+    id: 13,
+    email: "8565545@gmail.com",
+    name: "Paula",
+    date: "September 30, 2023",
+    time: "11:46 pm",
+  },
+  {
+    id: 14,
+    email: "0987@gmail.com",
+    name: "Peter",
+    date: "February 08  , 2023",
+    time: "09:46 pm",
+  },
+  {
+    id: 15,
+    email: "2468@gmail.com",
+    name: "David",
+    date: "June 09, 2023",
+    time: "09:46 pm",
+  },
+  {
+    id: 16,
+    email: "06345@gmail.com",
+    name: "Nancy",
+    date: "March 13, 2023",
+    time: "10:46 pm",
+  },
+  {
+    id: 17,
+    email: "30980@gmail.com",
+    name: "Helen",
+    date: "October 11, 2023",
+    time: "08:46 pm",
+  },
+  {
+    id: 18,
+    email: "095432@gmail.com",
+    name: "Noor",
+    date: "May 28, 2023",
+    time: "11:46 pm",
+  },
+  {
+    id: 19,
+    email: "23487@gmail.com",
+    name: "Abdullah",
+    date: "June 05, 2023",
+    time: "10:46 pm",
+  },
+  {
+    id: 20,
+    email: "09090@gmail.com",
+    name: "Anthony",
+    date: "July 17, 2023",
+    time: "08:46 pm",
+  },
 ];
 const Table = styled.table`
   width: 100%;
@@ -105,13 +225,13 @@ const PaginationButton = styled.button`
   margin: 0 5px;
   border: 1px solid #ddd;
   border-radius: 3px;
-  background-color: ${(props) => (props.active ? '#4caf50' : '#fff')};
-  color: ${(props) => (props.active ? '#fff' : '#333')};
+  background-color: ${(props) => (props.active ? "#4caf50" : "#fff")};
+  color: ${(props) => (props.active ? "#fff" : "#333")};
   cursor: pointer;
   transition: background-color 0.3s ease;
 
   &:hover {
-    background-color: ${(props) => (props.active ? '#45a049' : '#f2f2f2')};
+    background-color: ${(props) => (props.active ? "#45a049" : "#f2f2f2")};
   }
 
   &:disabled {
@@ -122,10 +242,10 @@ const PaginationButton = styled.button`
 const EmployeeTable = () => {
   const [currentPage, setCurrentPage] = useState(1);
   const [entriesPerPage, setEntriesPerPage] = useState(10);
-  const [searchTerm, setSearchTerm] = useState('');
+  const [searchTerm, setSearchTerm] = useState("");
   const [sortOrder, setSortOrder] = useState({
     column: null,
-    direction: 'asc', 
+    direction: 'asc',
   });
   const totalPages = Math.ceil(employees.length / entriesPerPage);
 
@@ -135,10 +255,10 @@ const EmployeeTable = () => {
   const sortedEmployees = (column, direction) => {
     const sorted = [...employees].sort((a, b) => {
       if (a[column] < b[column]) {
-        return direction === 'asc' ? -1 : 1;
+        return direction === "asc" ? -1 : 1;
       }
       if (a[column] > b[column]) {
-        return direction === 'asc' ? 1 : -1;
+        return direction === "asc" ? 1 : -1;
       }
       return 0;
     });
@@ -157,19 +277,20 @@ const EmployeeTable = () => {
   };
   const handleEntriesChange = (e) => {
     setEntriesPerPage(parseInt(e.target.value));
-    setCurrentPage(1); 
+    setCurrentPage(1);
   };
   const handleSort = (column) => {
     setSortOrder({
       column,
-      direction: sortOrder.direction === 'asc' ? 'desc' : 'asc',
+      direction: sortOrder.direction === "asc" ? "desc" : "asc",
     });
   };
 
   return (
-    <div>
+      <>
+      <Nav />
       <MainContainer>
-      <h2>Attendance Details</h2>
+        <h2>Attendance Details</h2>
         <ControlsContainer>
           <SearchInput
             type="text"
@@ -193,10 +314,12 @@ const EmployeeTable = () => {
         <Table>
           <TableHead>
             <TableRow>
-              <TableHeader onClick={() => handleSort('email')}>Employee id</TableHeader>
-              <TableHeader onClick={() => handleSort('name')}>Name</TableHeader>
-              <TableHeader onClick={() => handleSort('date')}>Date</TableHeader>
-              <TableHeader onClick={() => handleSort('time')}>Time</TableHeader>
+              <TableHeader onClick={() => handleSort("email")}>
+                Employee id
+              </TableHeader>
+              <TableHeader onClick={() => handleSort("name")}>Name</TableHeader>
+              <TableHeader onClick={() => handleSort("date")}>Date</TableHeader>
+              <TableHeader onClick={() => handleSort("time")}>Time</TableHeader>
               <TableHeader>Action</TableHeader>
             </TableRow>
           </TableHead>
@@ -208,7 +331,7 @@ const EmployeeTable = () => {
                 <TableCell>{employee.date}</TableCell>
                 <TableCell>{employee.time}</TableCell>
                 <TableCell>
-                  <EditButton>Edit</EditButton>
+                  <EditButton>Delete</EditButton>
                 </TableCell>
               </TableRow>
             ))}
@@ -221,15 +344,17 @@ const EmployeeTable = () => {
           >
             Previous
           </PaginationButton>
-          {Array.from({ length: totalPages }, (_, i) => i + 1).map((pageNumber) => (
-            <PaginationButton
-              key={pageNumber}
-              active={pageNumber === currentPage}
-              onClick={() => changePage(pageNumber)}
-            >
-              {pageNumber}
-            </PaginationButton>
-          ))}
+          {Array.from({ length: totalPages }, (_, i) => i + 1).map(
+            (pageNumber) => (
+              <PaginationButton
+                key={pageNumber}
+                active={pageNumber === currentPage}
+                onClick={() => changePage(pageNumber)}
+              >
+                {pageNumber}
+              </PaginationButton>
+            )
+          )}
           <PaginationButton
             disabled={currentPage === totalPages}
             onClick={() => changePage(currentPage + 1)}
@@ -238,7 +363,8 @@ const EmployeeTable = () => {
           </PaginationButton>
         </PaginationContainer>
       </MainContainer>
-    </div>
+    <Footer/>
+    </>
   );
 };
 export default EmployeeTable;

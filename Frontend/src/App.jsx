@@ -1,19 +1,18 @@
 import { Route, Routes } from "react-router-dom";
-import Register from "../src/Pages/Software/Register";
-import EducationalInformation from "./Components/Software Components/Profile/EducationalInformation";
-import EmergencyContact from "./Components/Software Components/Profile/EmergencyContact";
-import Experience from "./Components/Software Components/Profile/Experience";
-import FamilyInformation from "./Components/Software Components/Profile/FamilyInformation";
-import PersonalInfo from "./Components/Software Components/Profile/PersonalInfo";
-import Table from "./Components/Software Components/Table";
+// Landing Pages
 import AboutUs from "./Pages/Landing Page/AboutUs";
 import ContactUs from "./Pages/Landing Page/ContactUs";
 import Home from "./Pages/Landing Page/Home";
 import MeetTheTeam from "./Pages/Landing Page/MeetTheTeam";
+import PrivacyPolicy from "./Pages/Landing Page/PrivacyPolicy";
 import TermsAndConditions from "./Pages/Landing Page/TermsAndConditions";
-import ApplyforLeave from "./Pages/Leave Management/ApplyforLeave";
-import LeaveHistory from "./Pages/Leave Management/LeaveHistory";
-import AttendanceDetails from "./Pages/Management/Attendance Management/AttendanceDetails";
+import Update_Delete_Media from "./Pages/Software/Courses/Update_Delete_Media";
+import Update_Media from "./Pages/Software/Courses/Update_Media";
+// Management
+// Cases
+import AllCases from "./Pages/Software/CaseManagement/AllCases";
+import CreateCase from "./Pages/Software/CaseManagement/CreateCase";
+// BankTransfer
 import EmployeeDetails from "./Pages/Management/Attendance Management/EmployeeDetails";
 import EnrollEmployee from "./Pages/Management/EnrollEmployee";
 import Profile from "./Pages/Software/AddDetails/Personaldetails";
@@ -52,6 +51,7 @@ function App() {
   return (
     <>
       <Routes>
+        {/* Landing Pages */}
         <Route path="/" element={<Home />} />
         <Route path="/terms" element={<TermsAndConditions />} />
         <Route path="/meet-the-team" element={<MeetTheTeam />} />

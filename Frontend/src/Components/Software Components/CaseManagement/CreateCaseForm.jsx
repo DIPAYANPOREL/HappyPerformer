@@ -1,4 +1,5 @@
-import React from "react";
+import axios from "axios";
+import React, { useState } from "react";
 import styled from "styled-components";
 
 const Container = styled.div`
@@ -73,23 +74,74 @@ const Button = styled.button`
 `;
 
 const CreateCaseForm = () => {
+  const [formData, setFormData] = useState({
+    createFor: "",
+    caseTitle: "",
+    caseType: "Benefits",
+    detailedDescription: "",
+  });
+
+  const handleChange = (e) => {
+    setFormData({ ...formData, [e.target.name]: e.target.value });
+  };
+
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+
+    try {
+      const response = await axios.post("localhost", formData);
+      console.log("Case created successfully:", response.data);
+
+      setFormData({
+        createFor: "",
+        caseTitle: "",
+        caseType: "Benefits",
+        detailedDescription: "",
+      });
+    } catch (error) {
+      console.error("Error creating case:", error);
+    }
+  };
+
   return (
     <Container>
       <Heading>Create Case</Heading>
-      <Form>
+      <Form onSubmit={handleSubmit}>
         <Label>Create For</Label>
-        <Input />
+        <Input
+          name="createFor"
+          value={formData.createFor}
+          onChange={handleChange}
+        />
+
         <Label>Case Title</Label>
-        <Input />
+        <Input
+          name="caseTitle"
+          value={formData.caseTitle}
+          onChange={handleChange}
+        />
+
         <Label>Case Type</Label>
-        <CaseSelect>
-          <Option>Benefits</Option>
-          <Option>Travel And Expense</Option>
-          <Option>Compensation and Payroll</Option>
+        <CaseSelect
+          name="caseType"
+          value={formData.caseType}
+          onChange={handleChange}
+        >
+          <Option value="Benefits">Benefits</Option>
+          <Option value="Travel And Expense">Travel And Expense</Option>
+          <Option value="Compensation and Payroll">
+            Compensation and Payroll
+          </Option>
         </CaseSelect>
+
         <Label>Detailed Description</Label>
-        <Input />
-        <Button>Create Case</Button>
+        <Input
+          name="detailedDescription"
+          value={formData.detailedDescription}
+          onChange={handleChange}
+        />
+
+        <Button type="submit">Create Case</Button>
       </Form>
     </Container>
   );

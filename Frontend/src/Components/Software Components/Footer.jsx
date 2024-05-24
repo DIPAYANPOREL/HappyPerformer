@@ -2,7 +2,8 @@ import React from "react";
 import styled from "styled-components";
 
 const Container = styled.div`
-  height: 4rem;
+  height: 50px;
+  padding: 40px;
   display: flex;
   justify-content: center;
   align-items: center;
