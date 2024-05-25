@@ -117,6 +117,7 @@ const ImageContainer = styled.img`
   max-width: 85%;
 `;
 const MainContainer = styled.div``;
+
 const Login = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
@@ -133,7 +134,7 @@ const Login = () => {
       .post("http://127.0.0.1:8000/login/", data)
       .then((res) => {
         console.log(res.data);
-        // navigate("/dashboard")
+        navigate("/dashboard");
       })
       .catch((err) => {
         console.log(err);

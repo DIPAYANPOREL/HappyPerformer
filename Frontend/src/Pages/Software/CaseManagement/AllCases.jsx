@@ -1,7 +1,8 @@
-import React, { useState } from 'react';
-import styled from 'styled-components';
-// import Footer from '../../../Dashboard/Components/Footer';
-// import Nav from '../Components/Software Components/Dashboard/Nav';
+import axios from "axios";
+import React, { useEffect, useState } from "react";
+import styled from "styled-components";
+import Nav from "../../../Components/Software Components/Dashboard/Nav";
+import Footer from "../../../Components/Software Components/Footer";
 
 const Container = styled.div`
   display: flex;
@@ -23,10 +24,9 @@ const SearchInput = styled.input`
   padding: 0.5rem;
   border-radius: 4px;
   border: 1px solid #ccc;
-  border-radius: 4px;
   font-size: 1rem;
-  flex: 1; 
-  margin-right: 1rem; 
+  flex: 1;
+  margin-right: 1rem;
 `;
 
 const TableContainer = styled.div`
@@ -38,14 +38,14 @@ const TableContainer = styled.div`
 `;
 
 const Table = styled.table`
-  width: 100%; 
+  width: 100%;
   border-collapse: collapse;
-  border: 2px solid #333; 
+  border: 2px solid #333;
 `;
 
 const TableHeader = styled.th`
   background-color: #666;
-  color: #fff; 
+  color: #fff;
   padding: 0.5rem;
   text-align: left;
 `;
@@ -61,110 +61,60 @@ const TableCell = styled.td`
 `;
 
 const StatusBadge = styled.span`
-  background-color: ${(props) => (props.status === 'New' ? 'red' : 'green')};
+  background-color: ${(props) =>
+    props.status === "New"
+      ? "red"
+      : props.status === "In Progress"
+      ? "orange"
+      : props.status === "Pending"
+      ? "blue"
+      : "green"};
   color: #fff;
   padding: 0.25rem 0.5rem;
   border-radius: 4px;
   font-size: 0.8rem;
 `;
 
-const App = () => {
-  const [searchTerm, setSearchTerm] = useState('');
+const AllCases = () => {
+  const [searchTerm, setSearchTerm] = useState("");
+  const [cases, setCases] = useState([]);
 
-  const [cases, setCases] = useState([
-    {
-      title: 'Travel Trip',
-      type: 'Travel and Expense',
-      created: 'About 1 month ago',
-      assignedTo: 'Elvis Presley',
-      status: 'New',
-    },
-    {
-      title: 'Project Proposal',
-      type: 'Project Management',
-      created: '2 weeks ago',
-      assignedTo: 'Lenny Kravitz',
-      status: 'In Progress',
-    },
-    {
-      title: 'Notification System',
-      type: 'Software Development',
-      created: '3 days ago',
-      assignedTo: 'Rick Sanchez',
-      status: 'Pending',
-    },
-    {
-      title: 'Not identified',
-      type: 'Software Development',
-      created: '3 days ago',
-      assignedTo: 'Rick Rubin',
-      status: 'Resolved',
-    },
-    {
-      title: 'Not identified',
-      type: 'Software Development',
-      created: '3 days ago',
-      assignedTo: 'Elvis Presley',
-      status: 'New',
-    },
-    {
-      title: 'Not identified',
-      type: 'Software Development',
-      created: '3 days ago',
-      assignedTo: 'Dirk Nowitzki',
-      status: 'In Progress',
-    },
-    {
-      title: 'Not identified',
-      type: 'Software Development',
-      created: '3 days ago',
-      assignedTo: 'Rick Rubin',
-      status: 'New',
-    },
-    {
-      title: 'Not identified',
-      type: 'Software Development',
-      created: '3 days ago',
-      assignedTo: 'Rick Rubin',
-      status: 'Pending',
-    },
-    {
-      title: 'Not identified',
-      type: 'Software Development',
-      created: '3 days ago',
-      assignedTo: 'Magic Johnson',
-      status: 'Resolved',
-    },
-    {
-      title: 'Not identified',
-      type: 'Software Development',
-      created: '3 days ago',
-      assignedTo: 'Derrick Rose',
-      status: 'Pending',
-    },
-    {
-      title: 'Not identified',
-      type: 'Software Development',
-      created: '3 days ago',
-      assignedTo: 'Dirk Nowitzki',
-      status: 'Resolved',
-    },
-  ]);
+  useEffect(() => {
+    const fetchCases = async () => {
+      try {
+        const response = await axios.get("http:");
+        console.log("Fetched data:", response.data);
+        if (Array.isArray(response.data.cases)) {
+          setCases(response.data.cases);
+        } else {
+          console.error("Expected an array of cases, but got:", response.data);
+        }
+      } catch (error) {
+        console.error("Error fetching cases:", error);
+      }
+    };
+
+    fetchCases();
+  }, []);
 
   const handleSearch = (term) => {
     setSearchTerm(term);
   };
 
-  const filteredCases = cases.filter(
-    (caseItem) =>
-      caseItem.title.toLowerCase().includes(searchTerm.toLowerCase()) ||
-      caseItem.type.toLowerCase().includes(searchTerm.toLowerCase()) ||
-      caseItem.status.toLowerCase().includes(searchTerm.toLowerCase())
-  );
+  const filteredCases = Array.isArray(cases)
+    ? cases.filter(
+        (caseItem) =>
+          caseItem.case_title
+            .toLowerCase()
+            .includes(searchTerm.toLowerCase()) ||
+          caseItem.case_type.toLowerCase().includes(searchTerm.toLowerCase()) ||
+          caseItem.case_status.toLowerCase().includes(searchTerm.toLowerCase())
+      )
+    : [];
 
   return (
     <>
-      {/* <Nav /> */}
+      <Nav />
       <Container>
         <h2>All Cases</h2>
         <SearchContainer>
@@ -189,12 +139,14 @@ const App = () => {
             <tbody>
               {filteredCases.map((caseItem, index) => (
                 <TableRow key={index}>
-                  <TableCell>{caseItem.title}</TableCell>
-                  <TableCell>{caseItem.type}</TableCell>
-                  <TableCell>{caseItem.created}</TableCell>
-                  <TableCell>{caseItem.assignedTo}</TableCell>
+                  <TableCell>{caseItem.case_title}</TableCell>
+                  <TableCell>{caseItem.case_type}</TableCell>
+                  <TableCell>{caseItem.case_date}</TableCell>
+                  <TableCell>{caseItem.assigned_to}</TableCell>
                   <TableCell>
-                    <StatusBadge status={caseItem.status}>{caseItem.status}</StatusBadge>
+                    <StatusBadge status={caseItem.case_status}>
+                      {caseItem.case_status}
+                    </StatusBadge>
                   </TableCell>
                 </TableRow>
               ))}
@@ -202,9 +154,9 @@ const App = () => {
           </Table>
         </TableContainer>
       </Container>
-      {/* <Footer /> */}
+      <Footer />
     </>
   );
 };
 
-export default App;
+export default AllCases;
