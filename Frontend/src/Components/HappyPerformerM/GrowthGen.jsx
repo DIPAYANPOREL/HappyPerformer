@@ -7,8 +7,11 @@ const Container = styled.div`
   padding: 60px 20px;
   border-radius: 15px;
   margin: auto;
-  min-width: 1000px;
   text-align: center;
+  width: 95%;
+  @media (max-width: 768px) {
+    padding: 40px 10px;
+  }
 `;
 
 const ContentSec = styled.div`
@@ -18,26 +21,41 @@ const ContentSec = styled.div`
   justify-content: center;
   align-items: center;
   flex-direction: column;
+  @media (max-width: 768px) {
+    height: auto;
+  }
 `;
 
 const Title = styled.h1`
   font-size: 36px;
   color: #333;
   margin-bottom: 25px;
-  max-width: 40%;
+  max-width: 60%;
+  @media (max-width: 768px) {
+    font-size: 28px;
+    max-width: 90%;
+  }
 `;
 
 const Mini = styled.p`
   font-size: 20px;
   color: #666;
-  margin-bottom: 30px;
-  max-width: 50%;
+  margin-bottom: 40px;
+  max-width: 60%;
+  @media (max-width: 768px) {
+    font-size: 18px;
+    max-width: 90%;
+  }
 `;
 
 const ButtonContainer = styled.div`
   display: flex;
   justify-content: center;
   gap: 20px;
+  @media (max-width: 768px) {
+    flex-direction: column;
+    gap: 10px;
+  }
 `;
 
 const Button = styled.a`
@@ -46,12 +64,12 @@ const Button = styled.a`
   font-size: 16px;
   text-align: center;
   text-decoration: none;
-  color: ${(props) => (props.primary ? "white" : "#0077B6")};
-  background-color: ${(props) => (props.primary ? "#0077B6" : "white")};
-  border: ${(props) => (props.primary ? "none" : "2px solid #0077B6")};
+  color: ${(props) => (props.primary ? "white" : "#1e4ae4")};
+  background-color: ${(props) => (props.primary ? "#1e4ae4" : "white")};
+  border: ${(props) => (props.primary ? "none" : "2px solid #1e4ae4")};
   cursor: pointer;
   &:hover {
-    background-color: ${(props) => (props.primary ? "#005f8a" : "#f0f4ff")};
+    background-color: ${(props) => (props.primary ? "#1540b4" : "#f0f4ff")};
   }
 `;
 
@@ -75,7 +93,7 @@ const GrowthGen = () => {
   return (
     <Container>
       <ContentSec>
-        <Title>The easiest way to automate HR tasks</Title>
+        <Title>Your growth genie has arrived!</Title>
         <Mini>
           Give your greatest asset the tools to connect, engage, and communicate
           with Happyperformer!
@@ -88,7 +106,7 @@ const GrowthGen = () => {
         </ButtonContainer>
       </ContentSec>
       <VideoSec>
-        <Video controls autoplay>
+        <Video controls autoPlay>
           <source src={video} type="video/mp4" />
           Your browser does not support the video tag.
         </Video>

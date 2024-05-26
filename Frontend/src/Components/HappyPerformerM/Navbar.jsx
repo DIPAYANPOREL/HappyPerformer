@@ -9,15 +9,27 @@ const Container = styled.div`
   align-items: center;
   background-color: white;
   padding: 20px 30px;
+  @media (max-width: 768px) {
+    flex-direction: column;
+    padding: 20px;
+  }
 `;
 
 const LogoCont = styled.img`
   height: 50px;
+  @media (max-width: 768px) {
+    margin-bottom: 20px;
+  }
 `;
 
 const MenuItems = styled.div`
   display: flex;
   gap: 20px;
+  @media (max-width: 768px) {
+    flex-direction: column;
+    align-items: center;
+    gap: 10px;
+  }
 `;
 
 const MenuItem = styled(Link)`
@@ -25,13 +37,17 @@ const MenuItem = styled(Link)`
   color: black;
   font-size: 16px;
   &:hover {
-    color: #0077b6;
+    color: #1e4ae4;
   }
 `;
 
 const Buttons = styled.div`
   display: flex;
   gap: 10px;
+  @media (max-width: 768px) {
+    flex-direction: column;
+    gap: 10px;
+  }
 `;
 
 const Button = styled(Link)`
@@ -40,11 +56,11 @@ const Button = styled(Link)`
   font-size: 16px;
   text-align: center;
   text-decoration: none;
-  background-color: ${(props) => (props.primary ? "#0077B6" : "#f4f6fd")};
-  color: ${(props) => (props.primary ? "white" : "#0077B6")};
+  background-color: ${(props) => (props.primary ? "#1e4ae4" : "#f4f6fd")};
+  color: ${(props) => (props.primary ? "white" : "#1e4ae4")};
   border: none;
   &:hover {
-    background-color: ${(props) => (props.primary ? "#005f8a" : "#e0e7ef")};
+    background-color: ${(props) => (props.primary ? "#1540b4" : "#e0e7ef")};
   }
 `;
 

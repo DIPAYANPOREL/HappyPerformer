@@ -1,5 +1,7 @@
 import React from "react";
 import styled from "styled-components";
+import Cakewalk from "../../Components/HappyPerformerM/Cakewalk";
+import GetInTouch from "../../Components/HappyPerformerM/GetInTouch";
 import GrowthGen from "../../Components/HappyPerformerM/GrowthGen";
 import Navbar from "../../Components/HappyPerformerM/Navbar";
 
@@ -12,7 +14,11 @@ const Home = () => {
     <Container>
       <Navbar />
       <GrowthGen />
-      Mai hoon gatotkatch
+      {/* Section 2 */}
+      {/* Section 3 */}
+      <Cakewalk />
+      <GetInTouch />
+      {/* Footer and info section */}
     </Container>
   );
 };
