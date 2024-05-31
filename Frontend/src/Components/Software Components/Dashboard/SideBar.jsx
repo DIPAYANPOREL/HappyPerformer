@@ -1,7 +1,14 @@
 import React, { useState } from "react";
-import styled from "styled-components";
+import styled, { createGlobalStyle } from "styled-components";
 import Coder from "../../../assets/coding.svg";
 import Item from "../Dashboard/Item";
+
+const GlobalStyle = createGlobalStyle`
+  body.blurred #content {
+    filter: blur(3px);
+    transition: filter 0.3s ease-in-out;
+  }
+`;
 
 const Container = styled.div`
   display: flex;
@@ -14,10 +21,7 @@ const Container = styled.div`
   color: white;
   width: ${({ isCollapsed }) => (isCollapsed ? "50px" : "250px")};
   transition: width 0.3s ease-in-out;
-  position: fixed;
-  top: 0;
-  left: 0;
-  z-index: 2;
+  overflow: hidden;
 `;
 
 const LogoContainer = styled.div`
@@ -26,9 +30,8 @@ const LogoContainer = styled.div`
   align-items: center;
   width: 80%;
   color: white;
-  // background-color: #758bfd;
-  background-color: #0077b6;
-  height: 7%;
+  background-color: #758bfd;
+  height: 5%;
   border-radius: 50px;
 `;
 
@@ -44,14 +47,14 @@ const MenuItems = styled.div`
     width: 5px;
   }
   ::-webkit-scrollbar-track {
-    background: #d9d9d9;
+    background: #0a1128;
   }
   ::-webkit-scrollbar-thumb {
-    background: #d9d9d9;
+    background: #0a1128;
   }
   -ms-overflow-style: none;
   scrollbar-width: thin;
-  scrollbar-color: #d9d9d9 #0a1128;
+  scrollbar-color: #0a1128 #0a1128;
 `;
 
 const MenuItem = styled.div`
@@ -92,22 +95,17 @@ const HamburgerIcon = styled.div`
   left: ${({ isCollapsed }) => (isCollapsed ? "10px" : "220px")};
   font-size: 24px;
   cursor: pointer;
-  z-index: 1;
+  z-index: 3;
   transition: left 0.3s ease-in-out;
 `;
 
-const SideBar = () => {
-  const [isCollapsed, setIsCollapsed] = useState(false);
+const SideBar = ({ isCollapsed, onToggle }) => {
   const [dropdowns, setDropdowns] = useState({
     leaves: false,
     expense: false,
     caseManagement: false,
     addDetails: false,
   });
-
-  const toggleCollapse = () => {
-    setIsCollapsed(!isCollapsed);
-  };
 
   const toggleDropdown = (dropdown) => {
     setDropdowns((prevDropdowns) => ({
@@ -117,66 +115,69 @@ const SideBar = () => {
   };
 
   return (
-    <Container isCollapsed={isCollapsed}>
-      <HamburgerIcon isCollapsed={isCollapsed} onClick={toggleCollapse}>
-        ≡
-      </HamburgerIcon>
-      <LogoContainer isCollapsed={isCollapsed}>HappyPerformer</LogoContainer>
-      <MenuItems isCollapsed={isCollapsed}>
-        <Item name="Dashboard" icon="💼" />
-        <Item name="Calendar" icon="🕵🏻‍♂" />
-        <Item name="Social" icon="📲" />
-        <Item name="Settings" icon="🕵🏻‍♂" />
-        <Item name="To-do-list" icon="📋" />
-        <Item name="KRA" icon="💼" />
-        <Item name="SOP" icon="📋" />
-        <Item name="JD" icon="💼" />
-        <Item name="Forms" icon="📋" />
-        <Item name="Letters" icon="📋" />
-        <Item name="FAQs" icon="🕵🏻‍♂" />
-        <Item name="Training" icon="📋" />
-        <Item name="Quiz" icon="📋" />
-        <Item name="PHP Tutorials" icon="📋" />
-        <Item name="My Performance" icon="📈" />
-        <Item name="Mark Attendance" icon="📈" />
-        <MenuItem onClick={() => toggleDropdown("leaves")}>
-          <span>Leaves</span>
-          <span>&#9660;</span>
-        </MenuItem>
-        <DropdownMenu isOpen={dropdowns.leaves}>
-          <DropdownItem>Apply for Leave</DropdownItem>
-          <DropdownItem>Leave History</DropdownItem>
-        </DropdownMenu>
-        <Item name="Add Loan" icon="🕵🏻‍♂" />
-        <Item name="IT Declaration" icon="📋" />
-        <MenuItem onClick={() => toggleDropdown("expense")}>
-          <span>Expense Management</span>
-          <span>&#9660;</span>
-        </MenuItem>
-        <DropdownMenu isOpen={dropdowns.expense}>
-          <DropdownItem>Submit Expense</DropdownItem>
-          <DropdownItem>Expense History</DropdownItem>
-        </DropdownMenu>
-        <Item name="Resign" icon="📋" />
-        <MenuItem onClick={() => toggleDropdown("caseManagement")}>
-          <span>Case Management</span>
-          <span>&#9660;</span>
-        </MenuItem>
-        <DropdownMenu isOpen={dropdowns.caseManagement}>
-          <DropdownItem>New Case</DropdownItem>
-          <DropdownItem>Case History</DropdownItem>
-        </DropdownMenu>
-        <MenuItem onClick={() => toggleDropdown("addDetails")}>
-          <span>Add Details</span>
-          <span>&#9660;</span>
-        </MenuItem>
-        <DropdownMenu isOpen={dropdowns.addDetails}>
-          <DropdownItem>Add Personal Details</DropdownItem>
-          <DropdownItem>Add Work Details</DropdownItem>
-        </DropdownMenu>
-      </MenuItems>
-      <SVGContainer src={Coder} isCollapsed={isCollapsed} />
-    </Container>
+    <>
+      <GlobalStyle />
+      <Container isCollapsed={isCollapsed}>
+        <HamburgerIcon isCollapsed={isCollapsed} onClick={onToggle}>
+          ≡
+        </HamburgerIcon>
+        <LogoContainer isCollapsed={isCollapsed}>HappyPerformer</LogoContainer>
+        <MenuItems isCollapsed={isCollapsed}>
+          <Item name="Dashboard" icon="💼" />
+          <Item name="Calendar" icon="🕵🏻‍♂️" />
+          <Item name="Social" icon="📲" />
+          <Item name="Settings" icon="🕵🏻‍♂️" />
+          <Item name="To-do-list" icon="📋" />
+          <Item name="KRA" icon="💼" />
+          <Item name="SOP" icon="📋" />
+          <Item name="JD" icon="💼" />
+          <Item name="Forms" icon="📋" />
+          <Item name="Letters" icon="📋" />
+          <Item name="FAQs" icon="🕵🏻‍♂️" />
+          <Item name="Training" icon="📋" />
+          <Item name="Quiz" icon="📋" />
+          <Item name="PHP Tutorials" icon="📋" />
+          <Item name="My Performance" icon="📈" />
+          <Item name="Mark Attendance" icon="📈" />
+          <MenuItem onClick={() => toggleDropdown("leaves")}>
+            <span>Leaves</span>
+            <span>&#9660;</span>
+          </MenuItem>
+          <DropdownMenu isOpen={dropdowns.leaves}>
+            <DropdownItem>Apply for Leave</DropdownItem>
+            <DropdownItem>Leave History</DropdownItem>
+          </DropdownMenu>
+          <Item name="Add Loan" icon="🕵🏻‍♂️" />
+          <Item name="IT Declaration" icon="📋" />
+          <MenuItem onClick={() => toggleDropdown("expense")}>
+            <span>Expense Management</span>
+            <span>&#9660;</span>
+          </MenuItem>
+          <DropdownMenu isOpen={dropdowns.expense}>
+            <DropdownItem>Submit Expense</DropdownItem>
+            <DropdownItem>Expense History</DropdownItem>
+          </DropdownMenu>
+          <Item name="Resign" icon="📋" />
+          <MenuItem onClick={() => toggleDropdown("caseManagement")}>
+            <span>Case Management</span>
+            <span>&#9660;</span>
+          </MenuItem>
+          <DropdownMenu isOpen={dropdowns.caseManagement}>
+            <DropdownItem>New Case</DropdownItem>
+            <DropdownItem>Case History</DropdownItem>
+          </DropdownMenu>
+          <MenuItem onClick={() => toggleDropdown("addDetails")}>
+            <span>Add Details</span>
+            <span>&#9660;</span>
+          </MenuItem>
+          <DropdownMenu isOpen={dropdowns.addDetails}>
+            <DropdownItem>Add Work Experience</DropdownItem>
+            <DropdownItem>Add Project</DropdownItem>
+          </DropdownMenu>
+        </MenuItems>
+        <SVGContainer src={Coder} alt="coding" isCollapsed={isCollapsed} />
+      </Container>
+    </>
   );
 };
 
