@@ -1,7 +1,6 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import styled from 'styled-components';
-// import Footer from '../../Components/Software Components/Footer';
-// import Nav from '../../Components/Software Components/Dashboard/Nav'
+import axios from 'axios';
 
 const Container = styled.div`
   display: flex;
@@ -69,113 +68,200 @@ const Button = styled.button`
 `;
 
 const Resignation = () => {
+  const [formData, setFormData] = useState({
+    joiningDate: '',
+    resignationSubmittedOn: '',
+    expectedLeavingDate: '',
+    noticePeriodRequiredDays: '',
+    primaryReasonForLeaving: '',
+    secondaryReasonForLeaving: '',
+    additionalReasonForLeaving: '',
+    leavingDate: '',
+    noticePeriodServedDays: '',
+    settlementFromDate: '',
+    noticePeriodShortfallDays: '',
+    exitInterviewDays: '',
+    lastWorkingDay: '',
+  });
+
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+    try {
+      const response = await axios.post('/api/resignation', formData);
+      console.log(response.data);
+    } catch (error) {
+      console.error(error);
+    }
+  };
+
+  const handleChange = (e) => {
+    setFormData({ ...formData, [e.target.name]: e.target.value });
+  };
+
+  const fetchData = async () => {
+    try {
+      const response = await axios.get('/api/data');
+      console.log(response.data);
+    } catch (error) {
+      console.error(error);
+    }
+  };
+
+  useEffect(() => {
+    fetchData();
+  }, []);
+
   return (
     <>
-    {/* <Nav /> */}
-    <Container>
-      <Header>Resignation</Header>
-      <FormContainer>
-        <FormGroup>
-          <Label>Joining Date</Label>
-          <Input type="date" defaultValue="0000-00-00" />
-        </FormGroup>
-        <FormGroup>
-          <Label>Year Of Service</Label>
-          <Input type="text" value="2024 years 5 months" readOnly />
-        </FormGroup>
-        <FormGroup>
-          <Label>Resignation Submitted on</Label>
-          <Input type="text" placeholder="mm/dd/yyyy" />
-        </FormGroup>
-        <FormGroup>
-          <Label>Expected Leaving Date</Label>
-          <Input type="date" defaultValue="2024-05-02" />
-        </FormGroup>
-        <FormGroup>
-          <Label>Notice Period Required Days</Label>
-          <Input type="number" />
-        </FormGroup>
-        <FormGroup>
-          <Label>Primary Reason For Leaving</Label>
-          <Select>
-            <option value="">Please Select</option>
-            <option value="">Better Compensation</option>
-            <option value="">Better Work Environment</option>
-            <option value="">Better Leadership</option>
-            <option value="">Career Advancement</option>
-            <option value="">Profile Switch</option>
-            <option value="">Company Reconstruction</option>
-            <option value="">Company Downturn</option>
-            <option value="">Relocation</option>
-            <option value="">Job Termination</option>
-            <option value="">Personal Reasons</option>
-            <option value="">Others</option>
-          </Select>
-        </FormGroup>
-        <FormGroup>
-          <Label>Secondary Reason For Leaving</Label>
-          <Select>
-            <option value="">Please Select</option>
-            <option value="">Better Compensation</option>
-            <option value="">Better Work Environment</option>
-            <option value="">Better Leadership</option>
-            <option value="">Career Advancement</option>
-            <option value="">Profile Switch</option>
-            <option value="">Company Reconstruction</option>
-            <option value="">Company Downturn</option>
-            <option value="">Relocation</option>
-            <option value="">Job Termination</option>
-            <option value="">Personal Reasons</option>
-            <option value="">Others</option>
-          </Select>
-        </FormGroup>
-        <FormGroup>
-          <Label>Any Additional Reason For Leaving</Label>
-          <Select>
-            <option value="">Please Select</option>
-            <option value="">Better Compensation</option>
-            <option value="">Better Work Environment</option>
-            <option value="">Better Leadership</option>
-            <option value="">Career Advancement</option>
-            <option value="">Profile Switch</option>
-            <option value="">Company Reconstruction</option>
-            <option value="">Company Downturn</option>
-            <option value="">Relocation</option>
-            <option value="">Job Termination</option>
-            <option value="">Personal Reasons</option>
-            <option value="">Others</option>
-          </Select>
-        </FormGroup>
-        <FormGroup>
-          <Label>Leaving Date</Label>
-          <Input type="date" placeholder="mm/dd/yyyy" />
-        </FormGroup>
-        <FormGroup>
-          <Label>Notice Period Served Days</Label>
-          <Input type="number" />
-        </FormGroup>
-        <FormGroup>
-          <Label>Settlement From Date</Label>
-          <Input type="date" placeholder="mm/dd/yyyy" />
-        </FormGroup>
-        <FormGroup>
-          <Label>Notice Period Shortfall Days</Label>
-          <Input type="number" />
-        </FormGroup>
-        <FormGroup>
-          <Label>Exit Interview Days</Label>
-          <Input type="date" placeholder="mm/dd/yyyy" />
-        </FormGroup>
-        <FormGroup>
-          <Label>Last Working Day</Label>
-          <Input type="date" placeholder="mm/dd/yyyy" />
-        </FormGroup>
-      </FormContainer>
-      <Button>SAVE DETAILS</Button>
-    </Container>
-    {/* <Footer /> */}
+      <Container>
+        <Header>Resignation</Header>
+        <FormContainer>
+          <FormGroup>
+            <Label>Joining Date</Label>
+            <Input
+              type="date"
+              name="joiningDate"
+              defaultValue="0000-00-00"
+              onChange={handleChange}
+            />
+          </FormGroup>
+          <FormGroup>
+            <Label>Year Of Service</Label>
+            <Input type="text" value="2024 years 5 months" readOnly />
+          </FormGroup>
+          <FormGroup>
+            <Label>Resignation Submitted on</Label>
+            <Input
+              type="text"
+              name="resignationSubmittedOn"
+              placeholder="mm/dd/yyyy"
+              onChange={handleChange}
+            />
+          </FormGroup>
+          <FormGroup>
+            <Label>Expected Leaving Date</Label>
+            <Input
+              type="date"
+              name="expectedLeavingDate"
+              defaultValue="2024-05-02"
+              onChange={handleChange}
+            />
+          </FormGroup>
+          <FormGroup>
+            <Label>Notice Period Required Days</Label>
+            <Input
+              type="number"
+              name="noticePeriodRequiredDays"
+              onChange={handleChange}
+            />
+          </FormGroup>
+          <FormGroup>
+            <Label>Primary Reason For Leaving</Label>
+            <Select name="primaryReasonForLeaving" onChange={handleChange}>
+              <option value="">Please Select</option>
+              <option value="">Better Compensation</option>
+              <option value="">Better Work Environment</option>
+              <option value="">Better Leadership</option>
+              <option value="">Career Advancement</option>
+              <option value="">Profile Switch</option>
+              <option value="">Company Reconstruction</option>
+              <option value="">Company Downturn</option>
+              <option value="">Relocation</option>
+              <option value="">Job Termination</option>
+              <option value="">Personal Reasons</option>
+              <option value="">Others</option>
+            </Select>
+          </FormGroup>
+          <FormGroup>
+            <Label>Secondary Reason For Leaving</Label>
+            <Select name="secondaryReasonForLeaving" onChange={handleChange}>
+              <option value="">Please Select</option>
+              <option value="">Better Compensation</option>
+              <option value="">Better Work Environment</option>
+              <option value="">Better Leadership</option>
+              <option value="">Career Advancement</option>
+              <option value="">Profile Switch</option>
+              <option value="">Company Reconstruction</option>
+              <option value="">Company Downturn</option>
+              <option value="">Relocation</option>
+              <option value="">Job Termination</option>
+              <option value="">Personal Reasons</option>
+              <option value="">Others</option>
+            </Select>
+          </FormGroup>
+          <FormGroup>
+            <Label>Any Additional Reason For Leaving</Label>
+            <Select name="additionalReasonForLeaving" onChange={handleChange}>
+              <option value="">Please Select</option>
+              <option value="">Better Compensation</option>
+              <option value="">Better Work Environment</option>
+              <option value="">Better Leadership</option>
+              <option value="">Career Advancement</option>
+              <option value="">Profile Switch</option>
+              <option value="">Company Reconstruction</option>
+              <option value="">Company Downturn</option>
+              <option value="">Relocation</option>
+              <option value="">Job Termination</option>
+              <option value="">Personal Reasons</option>
+              <option value="">Others</option>
+            </Select>
+          </FormGroup>
+          <FormGroup>
+            <Label>Leaving Date</Label>
+            <Input
+              type="date"
+              name="leavingDate"
+              placeholder="mm/dd/yyyy"
+              onChange={handleChange}
+            />
+          </FormGroup>
+          <FormGroup>
+            <Label>Notice Period Served Days</Label>
+            <Input
+              type="number"
+              name="noticePeriodServedDays"
+              onChange={handleChange}
+            />
+          </FormGroup>
+          <FormGroup>
+            <Label>Settlement From Date</Label>
+            <Input
+              type="date"
+              name="settlementFromDate"
+              placeholder="mm/dd/yyyy"
+              onChange={handleChange}
+            />
+          </FormGroup>
+          <FormGroup>
+            <Label>Notice Period Shortfall Days</Label>
+            <Input
+              type="number"
+              name="noticePeriodShortfallDays"
+              onChange={handleChange}
+            />
+          </FormGroup>
+          <FormGroup>
+            <Label>Exit Interview Days</Label>
+            <Input
+              type="date"
+              name="exitInterviewDays"
+              placeholder="mm/dd/yyyy"
+              onChange={handleChange}
+            />
+          </FormGroup>
+          <FormGroup>
+            <Label>Last Working Day</Label>
+            <Input
+              type="date"
+              name="lastWorkingDay"
+              placeholder="mm/dd/yyyy"
+              onChange={handleChange}
+            />
+          </FormGroup>
+        </FormContainer>
+        <Button onClick={handleSubmit}>SAVE DETAILS</Button>
+      </Container>
     </>
-
   );
 };
 

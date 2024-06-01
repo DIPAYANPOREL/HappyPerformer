@@ -1,5 +1,6 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import styled from 'styled-components';
+import axios from 'axios';
 import Nav from "../../../Components/Software Components/Dashboard/Nav";
 import Footer from "../../../Components/Software Components/Footer";
 
@@ -16,6 +17,7 @@ const Container = styled.div`
   width: 100%;
   height: 71vh;
 `;
+
 const Title = styled.h1`
   margin-bottom: 20px;
   font-size: 24px;
@@ -24,6 +26,7 @@ const Title = styled.h1`
   text-transform: uppercase;
   margin-top: 20px;
 `;
+
 const TableContainer = styled.div`
   border: 1px solid #ddd;
   border-radius: 5px;
@@ -39,6 +42,7 @@ const TableContainer = styled.div`
     -webkit-overflow-scrolling: touch;
   }
 `;
+
 const Table = styled.table`
   width: 100%;
   border-collapse: collapse;
@@ -46,6 +50,7 @@ const Table = styled.table`
   text-align: left;
   white-space: nowrap;
 `;
+
 const TableHead = styled.thead`
   background-color: #f5f5f5;
   color: #333;
@@ -54,26 +59,31 @@ const TableHead = styled.thead`
   font-size: 12px;
   font-weight: bold;
 `;
+
 const TableRow = styled.tr`
   &:nth-child(even) {
     background-color: #f9f9f9;
   }
 `;
+
 const TableHeader = styled.th`
   padding: 12px 10px;
   text-align: left;
   border-bottom: 1px solid #ddd;
   font-size: 12px;
 `;
+
 const TableBody = styled.tbody`
   color: #333;
   font-size: 12px;
 `;
+
 const TableData = styled.td`
   padding: 12px 10px;
   border-bottom: 1px solid #ddd;
   font-size: 12px;
 `;
+
 const NoDataMessage = styled.p`
   text-align: center;
   font-style: italic;
@@ -81,6 +91,7 @@ const NoDataMessage = styled.p`
   margin-top: 20px;
   margin-bottom: 20px;
 `;
+
 const ControlsContainer = styled.div`
   display: flex;
   justify-content: space-between;
@@ -88,6 +99,7 @@ const ControlsContainer = styled.div`
   margin-bottom: 20px;
   width: 80%;
 `;
+
 const SearchInput = styled.input`
   padding: 8px 12px;
   border: 1px solid #ddd;
@@ -95,6 +107,7 @@ const SearchInput = styled.input`
   font-size: 14px;
   width: 200px;
 `;
+
 const EntriesSelect = styled.select`
   padding: 8px 12px;
   border: 1px solid #ddd;
@@ -102,12 +115,14 @@ const EntriesSelect = styled.select`
   font-size: 14px;
   margin-left: 10px;
 `;
+
 const PaginationButtons = styled.div`
   display: flex;
   justify-content: center;
   margin-top: 20px;
   margin-bottom: 20px;
 `;
+
 const PaginationButton = styled.button`
   padding: 8px 12px;
   border: 1px solid #ddd;
@@ -124,51 +139,24 @@ const PaginationButton = styled.button`
 `;
 
 const SalaryDetails = () => {
-  const [data, setData] = useState([
-    {
-      id: 1,
-      email: '456.salahkaar@gmail.com',
-      payoutMonth: '2024-04',
-      monthlyCTC: 2.5,
-      eligibleDeductions: 0,
-      yearlyTaxableSalary: 70,
-      totalTaxLiability: 0,
-      monthlyTDS: 0,
-      monthlyEPF: 0.32,
-      monthlyProfessionalTax: 100,
-      netSalary: -197.62,
-    },
-    {
-        id: 2,
-        email: 'shawn.37002@.com',
-        payoutMonth: '2024-04',
-        monthlyCTC: 2.5,
-        eligibleDeductions: 0,
-        yearlyTaxableSalary: 30,
-        totalTaxLiability: 0,
-        monthlyTDS: 0,
-        monthlyEPF: 0.12,
-        monthlyProfessionalTax: 200,
-        netSalary: -197.62,
-      },
-      {
-        id: 3,
-        email: '123.salahkaar@gmail.com',
-        payoutMonth: '2024-04',
-        monthlyCTC: 3.5,
-        eligibleDeductions: 0,
-        yearlyTaxableSalary: 30,
-        totalTaxLiability: 0,
-        monthlyTDS: 2,
-        monthlyEPF: 0.12,
-        monthlyProfessionalTax: 300,
-        netSalary: -197.62,
-      },
-  ]);
-
+  const [data, setData] = useState([]);
   const [searchQuery, setSearchQuery] = useState('');
   const [entriesPerPage, setEntriesPerPage] = useState(10);
   const [currentPage, setCurrentPage] = useState(1);
+
+  useEffect(() => {
+    fetchData();
+  }, []);
+
+  const fetchData = () => {
+    axios.get('your_api_endpoint_here')
+      .then(response => {
+        setData(response.data);
+      })
+      .catch(error => {
+        console.error('Error fetching data:', error);
+      });
+  };
 
   const filteredData = data.filter(item =>
     Object.values(item).some(value =>
@@ -237,7 +225,7 @@ const SalaryDetails = () => {
                     <TableData>{item.monthlyEPF}</TableData>
                     <TableData>{item.monthlyProfessionalTax}</TableData>
                     <TableData>{item.netSalary}</TableData>
-                    </TableRow>
+                  </TableRow>
                 ))
               ) : (
                 <TableRow>

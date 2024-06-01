@@ -1,8 +1,8 @@
 import React, { useState } from 'react';
 import styled from 'styled-components';
+import axios from 'axios';
 import Nav from "../../../Components/Software Components/Dashboard/Nav";
 import Footer from "../../../Components/Software Components/Footer";
-
 
 const Header = styled.h2`
   font-size: 24px;
@@ -11,6 +11,7 @@ const Header = styled.h2`
   text-align: center;
   color: #333;
 `;
+
 const Container = styled.div`
   display: flex;
   flex-direction: column;
@@ -25,17 +26,20 @@ const Container = styled.div`
     max-width: 100%;
   }
 `;
+
 const InputGroup = styled.div`
   display: flex;
   align-items: center;
   margin-bottom: 20px;
   width: 100%;
 `;
+
 const Label = styled.label`
   font-weight: bold;
   margin-right: 10px;
   width: 150px;
 `;
+
 const Input = styled.input`
   padding: 10px;
   border: 1px solid #ccc;
@@ -45,6 +49,7 @@ const Input = styled.input`
     box-shadow: none;
   }
 `;
+
 const Textarea = styled.textarea`
   padding: 10px;
   border: 1px solid #ccc;
@@ -57,6 +62,7 @@ const Textarea = styled.textarea`
     box-shadow: none;
   }
 `;
+
 const Select = styled.select`
   padding: 10px;
   border: 1px solid #ccc;
@@ -65,6 +71,7 @@ const Select = styled.select`
   width: 150px;
   flex: 1;
 `;
+
 const Button = styled.button`
   padding: 10px 20px;
   background-color: #3f51b5;
@@ -76,6 +83,7 @@ const Button = styled.button`
     background-color: #283593;
   }
 `;
+
 const AddSalary = () => {
   const [payoutMonth, setPayoutMonth] = useState('');
   const [employeeRemarks, setEmployeeRemarks] = useState('');
@@ -86,89 +94,98 @@ const AddSalary = () => {
   const [effectiveFrom, setEffectiveFrom] = useState('');
 
   const handleAddSalary = () => {
-    console.log('Payout Month:', payoutMonth);
-    console.log('Employee Remarks:', employeeRemarks);
-    console.log('Notes:', notes);
-    console.log('Annual CTC:', annualCTC);
-    console.log('Payment Method:', paymentMethod);
-    console.log('Revision:', revision);
-    console.log('Effective From:', effectiveFrom);
+    const data = {
+      payoutMonth,
+      employeeRemarks,
+      notes,
+      annualCTC,
+      paymentMethod,
+      revision,
+      effectiveFrom
+    };
+
+    axios.post('your_api_endpoint_here', data)
+      .then(response => {
+        console.log(response);
+      })
+      .catch(error => {
+        console.error('There was an error!', error);
+      });
   };
 
   return (
     <>
-    <Nav/>
-    <Header>Add Salary</Header>
-    <Container>
-      <InputGroup>
-        <Label>Payout Month</Label>
-        <Input
-          type="date"
-          value={payoutMonth}
-          onChange={(e) => setPayoutMonth(e.target.value)}
-          required
-        />
-      </InputGroup>
-      <InputGroup>
-        <Label>Employee Remarks</Label>
-        <Textarea
-          value={employeeRemarks}
-          onChange={(e) => setEmployeeRemarks(e.target.value)}
-          required
-        >
-        </Textarea>
-      </InputGroup>
-      <InputGroup>
-        <Label>Notes</Label>
-        <Textarea
-          value={notes}
-          onChange={(e) => setNotes(e.target.value)}
-          required
-        >
-        </Textarea>
-      </InputGroup>
-      <InputGroup>
-        <Label>Annual CTC</Label>
-        <Input
-          type="number"
-          value={annualCTC}
-          onChange={(e) => setAnnualCTC(e.target.value)}
-          required
-        />
-      </InputGroup>
-      <InputGroup>
-        <Label>Payment Method</Label>
-        <Select
-          value={paymentMethod}
-          onChange={(e) => setPaymentMethod(e.target.value)}
-          required
-        >
-          <option value="Bank">Bank</option>
-          <option value="Cash">Cash</option>
-        </Select>
-      </InputGroup>
-      <InputGroup>
-        <Label>Revision %</Label>
-        <Input
-          type="number"
-          value={revision}
-          onChange={(e) => setRevision(e.target.value)}
-          required
-        />
-      </InputGroup>
-      <InputGroup>
-        <Label>Effective from</Label>
-        <Input
-          type="date"
-          value={effectiveFrom}
-          onChange={(e) => setEffectiveFrom(e.target.value)}
-          required
-        />
-      </InputGroup>
-      <Button onClick={handleAddSalary}>Add salary</Button>
-    </Container>
-    <Footer/>
+      <Nav />
+      <Header>Add Salary</Header>
+      <Container>
+        <InputGroup>
+          <Label>Payout Month</Label>
+          <Input
+            type="date"
+            value={payoutMonth}
+            onChange={(e) => setPayoutMonth(e.target.value)}
+            required
+          />
+        </InputGroup>
+        <InputGroup>
+          <Label>Employee Remarks</Label>
+          <Textarea
+            value={employeeRemarks}
+            onChange={(e) => setEmployeeRemarks(e.target.value)}
+            required
+          />
+        </InputGroup>
+        <InputGroup>
+          <Label>Notes</Label>
+          <Textarea
+            value={notes}
+            onChange={(e) => setNotes(e.target.value)}
+            required
+          />
+        </InputGroup>
+        <InputGroup>
+          <Label>Annual CTC</Label>
+          <Input
+            type="number"
+            value={annualCTC}
+            onChange={(e) => setAnnualCTC(e.target.value)}
+            required
+          />
+        </InputGroup>
+        <InputGroup>
+          <Label>Payment Method</Label>
+          <Select
+            value={paymentMethod}
+            onChange={(e) => setPaymentMethod(e.target.value)}
+            required
+          >
+            <option value="Bank">Bank</option>
+            <option value="Cash">Cash</option>
+          </Select>
+        </InputGroup>
+        <InputGroup>
+          <Label>Revision %</Label>
+          <Input
+            type="number"
+            value={revision}
+            onChange={(e) => setRevision(e.target.value)}
+            required
+          />
+        </InputGroup>
+        <InputGroup>
+          <Label>Effective from</Label>
+          <Input
+            type="date"
+            value={effectiveFrom}
+            onChange={(e) => setEffectiveFrom(e.target.value)}
+            required
+          />
+        </InputGroup>
+        <Button onClick={handleAddSalary}>Add salary</Button>
+      </Container>
+      <Footer />
     </>
   );
 };
+
 export default AddSalary;
