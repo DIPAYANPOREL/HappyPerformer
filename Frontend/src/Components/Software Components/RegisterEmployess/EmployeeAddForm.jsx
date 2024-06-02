@@ -1,9 +1,10 @@
+import axios from "axios";
 import React, { useState } from "react";
 import styled from "styled-components";
 
 const Container = styled.div`
   max-width: 600px;
-  width: 60%;
+  width: 80%;
   margin: 40px auto;
   padding: 20px;
   background-color: #f9f9f9;
@@ -13,6 +14,7 @@ const Container = styled.div`
   @media (max-width: 768px) {
     margin: 20px auto;
     padding: 10px;
+    width: 90%;
   }
 `;
 
@@ -40,11 +42,12 @@ const InputBar = styled.input`
   }
 `;
 
-const TextBar = styled.div`
+const TextBar = styled.label`
   margin-bottom: 10px;
   font-size: 16px;
   font-weight: bold;
   color: #333;
+  width: 100%;
   @media (max-width: 768px) {
     font-size: 14px;
   }
@@ -76,7 +79,7 @@ const SubmitBtn = styled.button`
   font-size: 16px;
   cursor: pointer;
   &:hover {
-    background-color: #0077b4;
+    background-color: #005f8a;
   }
   @media (max-width: 768px) {
     height: 30px;
@@ -110,7 +113,10 @@ const EmployeeAddForm = () => {
     e.preventDefault();
 
     try {
-      const response = await axios.post("localhostkaaddress", formData);
+      const response = await axios.post(
+        "http://127.0.0.1:8000/employees",
+        formData
+      );
       console.log("Employee registered successfully:", response.data);
     } catch (error) {
       console.error("Error registering employee:", error);
@@ -120,33 +126,46 @@ const EmployeeAddForm = () => {
   return (
     <Container>
       <FormCont onSubmit={handleSubmit}>
-        <TextBar>Full Name</TextBar>
+        <TextBar htmlFor="fullName">Full Name</TextBar>
         <InputBar
+          id="fullName"
           name="fullName"
           value={formData.fullName}
           onChange={handleChange}
         />
 
-        <TextBar>Email</TextBar>
-        <InputBar name="email" value={formData.email} onChange={handleChange} />
+        <TextBar htmlFor="email">Email</TextBar>
+        <InputBar
+          id="email"
+          name="email"
+          value={formData.email}
+          onChange={handleChange}
+        />
 
-        <TextBar>Phone</TextBar>
-        <InputBar name="phone" value={formData.phone} onChange={handleChange} />
+        <TextBar htmlFor="phone">Phone</TextBar>
+        <InputBar
+          id="phone"
+          name="phone"
+          value={formData.phone}
+          onChange={handleChange}
+        />
 
-        <TextBar>Department</TextBar>
+        <TextBar htmlFor="department">Department</TextBar>
         <DeptSelect
+          id="department"
           name="department"
           value={formData.department}
           onChange={handleChange}
         >
-          <option value="">SuperManager</option>
-          <option value="">HR</option>
-          <option value="">Manager</option>
-          <option value="">Employee</option>
+          <option value="SuperManager">SuperManager</option>
+          <option value="HR">HR</option>
+          <option value="Manager">Manager</option>
+          <option value="Employee">Employee</option>
         </DeptSelect>
 
-        <TextBar>Skills</TextBar>
+        <TextBar htmlFor="skills">Skills</TextBar>
         <InputBar
+          id="skills"
           name="skills"
           value={formData.skills}
           onChange={handleChange}
@@ -161,4 +180,5 @@ const EmployeeAddForm = () => {
     </Container>
   );
 };
+
 export default EmployeeAddForm;

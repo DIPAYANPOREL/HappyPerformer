@@ -1,14 +1,13 @@
-import React from 'react';
-import styled from 'styled-components';
-import Nav from '../../../Components/Software Components/Dashboard/Nav';
-import Footer from '../../../Components/Software Components/Footer';
-import Header from '../../../Components/Software Components/Dashboard/Header';
-import Add_CoursesDisp from '../../../Components/Software Components/Courses/Add_CoursesDisp';
+import React from "react";
+import styled from "styled-components";
+import AddCourseForm from "../../../Components/Software Components/Courses/Add_CoursesDisp";
+import Header from "../../../Components/Software Components/Dashboard/Header";
+import Layout from "../../../Components/Software Components/Dashboard/Layout";
 
 const MainWrapper = styled.div`
   display: flex;
   flex-direction: column;
-  min-height: 100vh;
+  min-height: 80vh;
   background-color: #f1f2f6;
 `;
 
@@ -17,19 +16,23 @@ const Content = styled.div`
   display: flex;
   flex-direction: column;
   align-items: center;
+  padding: 20px;
+  @media (max-width: 768px) {
+    padding: 10px;
+  }
 `;
 
-const Add_Courses = () => {
+const AddCourses = () => {
   return (
-    <MainWrapper>
-      <Nav />
-      <Content>
-        <Header title="Add Course"/>
-        <Add_CoursesDisp />
-      </Content>
-      <Footer />
-    </MainWrapper>
+    <Layout>
+      <Header title="Add Course" />
+      <MainWrapper>
+        <Content>
+          <AddCourseForm />
+        </Content>
+      </MainWrapper>
+    </Layout>
   );
 };
 
-export default Add_Courses;
+export default AddCourses;

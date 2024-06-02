@@ -16,7 +16,7 @@ const Card = styled.div`
 const Form = styled.form`
   display: flex;
   flex-direction: column;
-  gap:40px;
+  gap: 20px;
 `;
 
 const Label = styled.label`
@@ -33,7 +33,7 @@ const Input = styled.input`
 
 const Button = styled.button`
   padding: 12px;
-  background-color: #007bff;
+  background-color: #0077b6;
   color: #fff;
   border: none;
   border-radius: 4px;
@@ -44,7 +44,7 @@ const Button = styled.button`
   }
 `;
 
-const Update_MediaDisp = () => {
+const UpdateMediaDisp = () => {
   const [course, setCourse] = useState({
     course_id: "",
     course_title: "",
@@ -54,11 +54,13 @@ const Update_MediaDisp = () => {
 
   useEffect(() => {
     fetchCourseDetails();
-  }, []);
+  }, [course_id]);
 
   const fetchCourseDetails = async () => {
     try {
-      const response = await axios.get(`http://127.0.0.1:8000/UpdateMedia/${course_id}`);
+      const response = await axios.get(
+        `http://127.0.0.1:8000/UpdateMedia/${course_id}`
+      );
       setCourse(response.data);
     } catch (error) {
       console.error("Error fetching course details:", error);
@@ -87,7 +89,12 @@ const Update_MediaDisp = () => {
 
   return (
     <Card>
-      <Form onSubmit={(e) => { e.preventDefault(); updateCourse(); }}>
+      <Form
+        onSubmit={(e) => {
+          e.preventDefault();
+          updateCourse();
+        }}
+      >
         <div>
           <Label>Course ID:</Label>
           <Input
@@ -103,15 +110,15 @@ const Update_MediaDisp = () => {
             type="text"
             name="course_title"
             value={course.course_title}
-            onChange={(e) => setCourse({ ...course, course_title: e.target.value })}
+            onChange={(e) =>
+              setCourse({ ...course, course_title: e.target.value })
+            }
           />
         </div>
         {course.videos.map((video, index) => (
           <div key={index}>
             <div>
               <Label>Video Url:</Label>
-            </div>
-            <div>
               <Input
                 type="text"
                 name="location"
@@ -119,11 +126,8 @@ const Update_MediaDisp = () => {
                 onChange={(e) => handleChange(e, index)}
               />
             </div>
-            <br />
             <div>
               <Label>Video Description:</Label>
-            </div>
-            <div>
               <Input
                 type="text"
                 name="descr"
@@ -139,4 +143,4 @@ const Update_MediaDisp = () => {
   );
 };
 
-export default Update_MediaDisp;
+export default UpdateMediaDisp;

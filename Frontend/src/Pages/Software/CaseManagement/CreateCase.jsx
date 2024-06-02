@@ -1,8 +1,8 @@
 import React from "react";
 import styled from "styled-components";
 import CreateCaseForm from "../../../Components/Software Components/CaseManagement/CreateCaseForm";
-import Nav from "../../../Components/Software Components/Dashboard/Nav";
-import Footer from "../../../Components/Software Components/Footer";
+import Header from "../../../Components/Software Components/Dashboard/Header";
+import Layout from "../../../Components/Software Components/Dashboard/Layout";
 
 const Container = styled.div`
   padding: 20px;
@@ -21,16 +21,15 @@ const Title = styled.h1`
   text-align: center;
   padding: 20px;
 `;
+
 const CreateCase = () => {
   return (
-    <>
-      <Nav />
+    <Layout>
+      <Header title="Create Case" />
       <Container>
-        <Title>Case Management and stuf</Title>
         <CreateCaseForm />
       </Container>
-      <Footer />
-    </>
+    </Layout>
   );
 };
 

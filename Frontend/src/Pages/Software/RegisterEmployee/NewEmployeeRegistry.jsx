@@ -1,7 +1,7 @@
 import React from "react";
 import styled from "styled-components";
-import Nav from "../../../Components/Software Components/Dashboard/Nav";
-import Footer from "../../../Components/Software Components/Footer";
+import Header from "../../../Components/Software Components/Dashboard/Header";
+import Layout from "../../../Components/Software Components/Dashboard/Layout";
 import EmployeeAddForm from "../../../Components/Software Components/RegisterEmployess/EmployeeAddForm";
 
 const EmployeeContainer = styled.div`
@@ -11,19 +11,19 @@ const EmployeeContainer = styled.div`
   margin-top: 40px;
   padding: 20px;
   width: 100%;
+  @media (max-width: 768px) {
+    padding: 10px;
+  }
 `;
 
-const Container = styled.div``;
 const NewEmployeeRegistry = () => {
   return (
-    <Container>
-      <Nav />
+    <Layout>
+      <Header title="Add New Employee" />
       <EmployeeContainer>
-        <h1>New Employee Registry</h1>
         <EmployeeAddForm />
       </EmployeeContainer>
-      <Footer />
-    </Container>
+    </Layout>
   );
 };
 

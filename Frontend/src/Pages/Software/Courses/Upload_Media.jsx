@@ -1,16 +1,14 @@
-import React from 'react'
-import styled from 'styled-components';
-import Nav from '../../../Components/Software Components/Dashboard/Nav';
-import Header from '../../../Components/Software Components/Dashboard/Header';
-import Footer from '../../../Components/Software Components/Footer';
-import Upload_MediaDisp from '../../../Components/Software Components/Courses/Upload_MediaDisp';
+import React from "react";
+import styled from "styled-components";
+import Upload_MediaDisp from "../../../Components/Software Components/Courses/Upload_MediaDisp";
+import Header from "../../../Components/Software Components/Dashboard/Header";
+import Layout from "../../../Components/Software Components/Dashboard/Layout";
 
 const MainWrapper = styled.div`
   display: flex;
   flex-direction: column;
   min-height: 100vh;
   background-color: #f1f2f6;
-  /* padding: 10px; */
 `;
 
 const Content = styled.div`
@@ -22,15 +20,15 @@ const Content = styled.div`
 
 const Upload_Media = () => {
   return (
-    <MainWrapper>
-      <Nav />
-      <Content>
-        <Header title="Upload Media" />
-        <Upload_MediaDisp/>
-      </Content>
-      <Footer />
-    </MainWrapper>
-  )
-}
+    <Layout>
+      <MainWrapper>
+        <Content>
+          <Header title="Upload Media" />
+          <Upload_MediaDisp />
+        </Content>
+      </MainWrapper>
+    </Layout>
+  );
+};
 
-export default Upload_Media
+export default Upload_Media;

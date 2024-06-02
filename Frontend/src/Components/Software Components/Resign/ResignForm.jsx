@@ -62,7 +62,7 @@ const Input = styled.input`
 `;
 
 const SubmitButton = styled.button`
-  background-color: #4caf50;
+  background-color: #0077b6;
   border: none;
   color: white;
   padding: 15px 32px;
@@ -75,7 +75,12 @@ const SubmitButton = styled.button`
   border-radius: 5px;
 `;
 
-const ResignForm = () => {
+const ResignForm = ({
+  joiningDate,
+  onJoiningDateChange,
+  yearsOfService,
+  onYearsOfServiceChange,
+}) => {
   const [formData, setFormData] = useState({
     resignationSubmittedOn: "",
     expectedLeavingDate: "",

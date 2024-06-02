@@ -1,6 +1,6 @@
-import React, { useState, useEffect } from 'react';
-import styled from 'styled-components';
-import axios from 'axios';
+import axios from "axios";
+import React, { useEffect, useState } from "react";
+import styled from "styled-components";
 
 const Main = styled.main`
   width: 100%;
@@ -17,7 +17,7 @@ const Row = styled.div`
 `;
 
 const Col = styled.div`
-  flex: 20%;
+  flex: 1;
 
   @media (min-width: 1200px) {
     flex: 20%;
@@ -69,10 +69,12 @@ const Update_Delete_MediaDisp = () => {
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const response = await axios.get('http://127.0.0.1:8000/UpdateDeleteMedia/');
+        const response = await axios.get(
+          "http://127.0.0.1:8000/UpdateDeleteMedia/"
+        );
         setData(response.data);
       } catch (error) {
-        console.error('Error fetching data:', error);
+        console.error("Error fetching data:", error);
       }
     };
 
@@ -84,7 +86,7 @@ const Update_Delete_MediaDisp = () => {
       await axios.delete(`http://127.0.0.1:8000/UpdateMedia/${course_id}`);
       setData(data.filter((item) => item.course_id !== course_id));
     } catch (error) {
-      console.error('Error deleting data:', error);
+      console.error("Error deleting data:", error);
     }
   };
 
@@ -97,13 +99,17 @@ const Update_Delete_MediaDisp = () => {
               <Table>
                 <thead>
                   <Tr>
-                    <Th style={{ width: '20%' }}>Course Title</Th>
-                    <Th style={{ width: '20%' }}>Description</Th>
-                    <Th style={{ width: '60%' }} colSpan="2">Operations</Th>
+                    <Th style={{ width: "20%" }}>Course Title</Th>
+                    <Th style={{ width: "20%" }}>Description</Th>
+                    <Th style={{ width: "60%" }} colSpan="2">
+                      Operations
+                    </Th>
                   </Tr>
-                  <tr>
-                    <Th colSpan="4"> <hr /></Th>
-                  </tr>
+                  <Tr>
+                    <Th colSpan="4">
+                      <hr />
+                    </Th>
+                  </Tr>
                 </thead>
                 <tbody>
                   {data.map((item, index) => (
@@ -111,10 +117,12 @@ const Update_Delete_MediaDisp = () => {
                       <Td>{item.course_title}</Td>
                       <Td>{item.description}</Td>
                       <Td>
-                        <a href={`UpdateMedia/${item.course_id}`}>Update </a>
+                        <a href={`UpdateMedia/${item.course_id}`}>Update</a>
                       </Td>
                       <Td>
-                        <a onClick={() => handleDelete(item.course_id)}>Delete</a>
+                        <a onClick={() => handleDelete(item.course_id)}>
+                          Delete
+                        </a>
                       </Td>
                     </Tr>
                   ))}

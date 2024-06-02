@@ -1,14 +1,21 @@
-import styled from 'styled-components';
-import React, { useState, useEffect } from 'react';
+import React, { useEffect, useState } from "react";
+import styled from "styled-components";
 
 const Container = styled.div`
   width: 100%;
   padding: 20px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  @media (max-width: 768px) {
+    padding: 10px;
+  }
 `;
 
 const Row = styled.div`
   display: flex;
   justify-content: center;
+  width: 100%;
 `;
 
 const Column = styled.div`
@@ -16,17 +23,22 @@ const Column = styled.div`
   @media (min-width: 1200px) {
     flex-basis: 80%;
   }
+  @media (max-width: 768px) {
+    flex-basis: 100%;
+  }
 `;
 
 const Card = styled.div`
   border: 1px solid #ccc;
   border-radius: 10px;
   padding: 20px;
-  margin: 20px;
-  width: 96%;
-  font-size: 1.4rem;
+  margin: 20px 0;
+  width: 100%;
   background-color: white;
   box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  @media (max-width: 768px) {
+    padding: 10px;
+  }
 `;
 
 const Table = styled.table`
@@ -39,8 +51,8 @@ const Thead = styled.thead`
 `;
 
 const Th = styled.th`
-  width: 3em;
   padding: 8px;
+  text-align: center;
 `;
 
 const Tr = styled.tr`
@@ -48,8 +60,8 @@ const Tr = styled.tr`
 `;
 
 const Td = styled.td`
-  width: 3em;
   padding: 8px;
+  text-align: center;
 `;
 
 const Link = styled.a`
@@ -64,10 +76,10 @@ const CoursesDisp = () => {
   const [courses, setCourses] = useState([]);
 
   useEffect(() => {
-    fetch('http://127.0.0.1:8000/AddMediaContent/')
-      .then(response => response.json())
-      .then(data => setCourses(data))
-      .catch(error => console.error('Error fetching courses:', error));
+    fetch("http://127.0.0.1:8000/AddMediaContent/")
+      .then((response) => response.json())
+      .then((data) => setCourses(data))
+      .catch((error) => console.error("Error fetching courses:", error));
   }, []);
 
   return (

@@ -1,7 +1,7 @@
-import React from "react";
+import React, { useState } from "react";
 import styled from "styled-components";
-import Nav from "../../../Components/Software Components/Dashboard/Nav";
-import Footer from "../../../Components/Software Components/Footer";
+import Header from "../../../Components/Software Components/Dashboard/Header";
+import Layout from "../../../Components/Software Components/Dashboard/Layout";
 import ResignForm from "../../../Components/Software Components/Resign/ResignForm";
 
 const Container = styled.div`
@@ -9,6 +9,7 @@ const Container = styled.div`
   justify-content: center;
   align-items: center;
   flex-wrap: wrap;
+  padding: 20px;
 `;
 
 const InfoSection = styled.div`
@@ -17,11 +18,16 @@ const InfoSection = styled.div`
   align-items: center;
   width: 100%;
   padding: 30px;
+  flex-wrap: wrap;
 `;
 
-const JoinDate = styled.div``;
+const JoinDate = styled.div`
+  margin: 10px;
+`;
 
-const YearsOfService = styled.div``;
+const YearsOfService = styled.div`
+  margin: 10px;
+`;
 
 const Form = styled.div`
   display: flex;
@@ -32,8 +38,8 @@ const Form = styled.div`
 `;
 
 const Resign = () => {
-  const [joiningDate, setJoiningDate] = React.useState("");
-  const [yearsOfService, setYearsOfService] = React.useState(0);
+  const [joiningDate, setJoiningDate] = useState("");
+  const [yearsOfService, setYearsOfService] = useState(0);
 
   const handleJoiningDateChange = (event) => {
     setJoiningDate(event.target.value);
@@ -44,12 +50,12 @@ const Resign = () => {
   };
 
   return (
-    <>
-      <Nav />
+    <Layout>
+      <Header title="Resign" />
       <Container>
         <InfoSection>
           <JoinDate>Joining Date: {joiningDate}</JoinDate>
-          <YearsOfService>Years of services: {yearsOfService}</YearsOfService>
+          <YearsOfService>Years of Service: {yearsOfService}</YearsOfService>
         </InfoSection>
         <Form>
           <ResignForm
@@ -60,8 +66,7 @@ const Resign = () => {
           />
         </Form>
       </Container>
-      <Footer />
-    </>
+    </Layout>
   );
 };
 

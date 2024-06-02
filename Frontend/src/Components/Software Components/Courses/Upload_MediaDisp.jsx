@@ -1,7 +1,7 @@
-import React, { useState, useEffect } from 'react';
-import styled, { keyframes } from 'styled-components';
-import axios from 'axios';
-import { useParams } from 'react-router-dom';
+import axios from "axios";
+import React, { useEffect, useState } from "react";
+import { useParams } from "react-router-dom";
+import styled, { keyframes } from "styled-components";
 
 const fadeIn = keyframes`
   from {
@@ -23,7 +23,7 @@ const fadeOut = keyframes`
 
 const Message = styled.p`
   animation: ${({ visible }) => (visible ? fadeIn : fadeOut)} 0.5s ease forwards;
-  opacity: ${({ visible }) => (visible ? '1' : '0')};
+  opacity: ${({ visible }) => (visible ? "1" : "0")};
 `;
 
 const Card = styled.div`
@@ -44,14 +44,18 @@ const CardBody = styled.div`
 
 const FormContainer = styled.div`
   display: flex;
+  flex-direction: column;
   gap: 20px;
+  @media (min-width: 768px) {
+    flex-direction: row;
+  }
 `;
 
 const Form = styled.form`
   flex: 1;
   display: flex;
   flex-direction: column;
-  gap: 80px;
+  gap: 20px;
   padding: 20px;
 `;
 
@@ -62,7 +66,7 @@ const UploadSection = styled.div`
 `;
 
 const Description = styled.div`
-  padding: 20px;
+  padding: 20px 0;
 `;
 
 const Label = styled.label`
@@ -81,22 +85,27 @@ const Input = styled.input`
 const Button = styled.button`
   width: 100%;
   padding: 12px;
-  background-color: #007bff;
+  background-color: #0077b6;
   color: #fff;
   border: none;
   border-radius: 4px;
   cursor: pointer;
   font-size: 1rem;
+  transition: background-color 0.3s;
+
+  &:hover {
+    background-color: #0056b3;
+  }
 `;
 
 const Upload_MediaDisp = () => {
-  const [videoUrl, setVideoUrl] = useState('');
-  const [videoDescription, setVideoDescription] = useState('');
+  const [videoUrl, setVideoUrl] = useState("");
+  const [videoDescription, setVideoDescription] = useState("");
   const [pdfFile, setPdfFile] = useState(null);
-  const [pdfDescription, setPdfDescription] = useState('');
+  const [pdfDescription, setPdfDescription] = useState("");
   const [lastSubmittedVideo, setLastSubmittedVideo] = useState(null);
-  const [videoMessage, setVideoMessage] = useState('');
-  const [pdfMessage, setPdfMessage] = useState('');
+  const [videoMessage, setVideoMessage] = useState("");
+  const [pdfMessage, setPdfMessage] = useState("");
   const [showVideoMessage, setShowVideoMessage] = useState(false);
   const [showPdfMessage, setShowPdfMessage] = useState(false);
   const { course_id } = useParams();
@@ -106,7 +115,7 @@ const Upload_MediaDisp = () => {
       setShowVideoMessage(true);
       const timeout = setTimeout(() => {
         setShowVideoMessage(false);
-        setVideoMessage('');
+        setVideoMessage("");
       }, 5000);
       return () => clearTimeout(timeout);
     }
@@ -117,7 +126,7 @@ const Upload_MediaDisp = () => {
       setShowPdfMessage(true);
       const timeout = setTimeout(() => {
         setShowPdfMessage(false);
-        setPdfMessage('');
+        setPdfMessage("");
       }, 5000);
       return () => clearTimeout(timeout);
     }
@@ -143,48 +152,57 @@ const Upload_MediaDisp = () => {
     e.preventDefault();
 
     if (lastSubmittedVideo && lastSubmittedVideo.course_id === course_id) {
-      setVideoMessage('Details for this course and location have already been submitted.');
+      setVideoMessage(
+        "Details for this course and location have already been submitted."
+      );
       return;
     }
 
     if (videoUrl && videoDescription) {
       try {
-        const response = await axios.post('http://127.0.0.1:8000/UploadMedia/', {
-          location: videoUrl,
-          descr: videoDescription,
-          course_id: course_id,
-        });
+        const response = await axios.post(
+          "http://127.0.0.1:8000/UploadMedia/",
+          {
+            location: videoUrl,
+            descr: videoDescription,
+            course_id: course_id,
+          }
+        );
         console.log(response.data);
-        setLastSubmittedVideo({ course_id});
+        setLastSubmittedVideo({ course_id });
         setVideoMessage(response.data.message);
       } catch (error) {
-        setVideoMessage('Error uploading video. Please try again.');
-        console.error('Error uploading video:', error);
+        setVideoMessage("Error uploading video. Please try again.");
+        console.error("Error uploading video:", error);
       }
     }
   };
 
   const handlePdfSubmit = async (e) => {
     e.preventDefault();
-    console.log('PDF File:', pdfFile);
-    console.log('PDF Description:', pdfDescription);
+    console.log("PDF File:", pdfFile);
+    console.log("PDF Description:", pdfDescription);
 
     if (pdfFile && pdfDescription) {
       const formData = new FormData();
-      formData.append('pdf_file', pdfFile);
-      formData.append('pdf_description', pdfDescription);
-      formData.append('course_id', course_id);
+      formData.append("pdf_file", pdfFile);
+      formData.append("pdf_description", pdfDescription);
+      formData.append("course_id", course_id);
 
       try {
-        const response = await axios.post('http://127.0.0.1:8000/UploadPdf/', formData, {
-          headers: {
-            'Content-Type': 'multipart/form-data',
-          },
-        });
+        const response = await axios.post(
+          "http://127.0.0.1:8000/UploadPdf/",
+          formData,
+          {
+            headers: {
+              "Content-Type": "multipart/form-data",
+            },
+          }
+        );
         setPdfMessage(response.data.message);
       } catch (error) {
-        setPdfMessage('Error uploading PDF. Please try again.');
-        console.error('Error uploading PDF:', error);
+        setPdfMessage("Error uploading PDF. Please try again.");
+        console.error("Error uploading PDF:", error);
       }
     }
   };
