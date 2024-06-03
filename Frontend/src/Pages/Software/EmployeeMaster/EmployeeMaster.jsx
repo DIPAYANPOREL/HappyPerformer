@@ -113,9 +113,8 @@ const Employees = styled.div`
 
 const EmployeeMaster = () => {
   const [employees, setEmployees] = useState([]);
-  const [departments, setDepartments] = useState([]);
   const [loading, setLoading] = useState(true);
-  const url = "http://127.0.0.1:8000/";
+  const url = "http://127.0.0.1:8000";
   const navigate = useNavigate();
 
   useEffect(() => {
@@ -123,7 +122,6 @@ const EmployeeMaster = () => {
       .get(`${url}/employee-master`)
       .then((response) => {
         setEmployees(response.data.employees);
-        setDepartments(response.data.departments);
         setLoading(false);
       })
       .catch((err) => {
@@ -132,8 +130,8 @@ const EmployeeMaster = () => {
       });
   }, []);
 
-  const handleProfileClick = (empId) => {
-    navigate(`/Profile/${empId}`);
+  const handleProfileClick = (empEmailId) => {
+    navigate(`/Profile/${empEmailId}`);
   };
 
   if (loading) {
@@ -152,22 +150,17 @@ const EmployeeMaster = () => {
           <SearchBar placeholder="Search Employee..." />
         </SearchImport>
         <Employees>
-          {employees.map((employee, index) => {
-            const department = departments.find(
-              (dep) => dep.d_id === employee.d_id
-            );
-            return (
-              <EmployeeCard
-                key={index}
-                id={employee.emp_emailid}
-                name={employee.emp_name}
-                department={department.d_name}
-                phone={employee.emp_phone}
-                mail={employee.emp_emailid}
-                onClick={handleProfileClick}
-              />
-            );
-          })}
+          {employees.map((employee, index) => (
+            <EmployeeCard
+              key={index}
+              id={employee.emp_emailid}
+              name={employee.emp_name}
+              department={employee.d_id}
+              phone={employee.emp_phone}
+              mail={employee.emp_emailid}
+              onClick={() => handleProfileClick(employee.emp_emailid)}
+            />
+          ))}
         </Employees>
       </EmployeeSection>
     </Layout>
