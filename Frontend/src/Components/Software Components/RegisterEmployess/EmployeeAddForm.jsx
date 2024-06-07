@@ -102,10 +102,10 @@ const PlanDetails = styled.div`
 
 const EmployeeAddForm = () => {
   const [formData, setFormData] = useState({
-    fullName: "",
-    email: "",
-    phone: "",
-    department: "",
+    emp_name: "",
+    emp_emailid: "",
+    emp_phone: "",
+    d_id: "",
     skills: "",
   });
 
@@ -133,11 +133,11 @@ const EmployeeAddForm = () => {
   return (
     <Container>
       <FormCont onSubmit={handleSubmit}>
-        <TextBar htmlFor="fullName">Full Name</TextBar>
+        <TextBar htmlFor="emp_name">Full Name</TextBar>
         <InputBar
           id="fullName"
           name="fullName"
-          value={formData.fullName}
+          value={formData.emp_name}
           onChange={handleChange}
         />
 
@@ -145,7 +145,7 @@ const EmployeeAddForm = () => {
         <InputBar
           id="email"
           name="email"
-          value={formData.email}
+          value={formData.emp_emailid}
           onChange={handleChange}
         />
 
@@ -153,7 +153,7 @@ const EmployeeAddForm = () => {
         <InputBar
           id="phone"
           name="phone"
-          value={formData.phone}
+          value={formData.emp_phone}
           onChange={handleChange}
         />
 
@@ -161,7 +161,7 @@ const EmployeeAddForm = () => {
         <DeptSelect
           id="department"
           name="department"
-          value={formData.department}
+          value={formData.d_id}
           onChange={handleChange}
         >
           <option value="SuperManager">SuperManager</option>
