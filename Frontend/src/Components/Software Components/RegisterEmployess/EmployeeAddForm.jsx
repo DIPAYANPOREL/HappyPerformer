@@ -2,6 +2,10 @@ import axios from "axios";
 import React, { useState } from "react";
 import styled from "styled-components";
 
+axios.defaults.withCredentials = true;
+axios.defaults.xsrfCookieName = "csrftoken";
+axios.defaults.xsrfHeaderName = "X-CSRFToken";
+
 const Container = styled.div`
   max-width: 600px;
   width: 80%;
@@ -114,8 +118,11 @@ const EmployeeAddForm = () => {
 
     try {
       const response = await axios.post(
-        "http://127.0.0.1:8000/employees",
-        formData
+        "http://127.0.0.1:8000/AddNewEmployee",
+        formData,
+        {
+          withCredentials: true,
+        }
       );
       console.log("Employee registered successfully:", response.data);
     } catch (error) {
