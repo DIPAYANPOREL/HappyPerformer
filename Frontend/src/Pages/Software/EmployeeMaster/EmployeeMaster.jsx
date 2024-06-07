@@ -2,9 +2,13 @@ import axios from "axios";
 import React, { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import styled from "styled-components";
-import Header from "../../../Components/Software Components/Dashboard/Header";
-import Layout from "../../../Components/Software Components/Dashboard/Layout";
-import EmployeeCard from "../../../Components/Software Components/EmployeeMaster/EmployeeCard";
+import Header from "../../../Components/Segments/Header";
+import Layout from "../../../Components/Segments/Layout";
+import EmployeeCard from "../../../Components/Software/EmployeeMaster/EmployeeCard";
+
+axios.defaults.withCredentials = true;
+axios.defaults.xsrfCookieName = "csrftoken";
+axios.defaults.xsrfHeaderName = "X-CSRFToken";
 
 const EmployeeSection = styled.div`
   flex-grow: 1;
@@ -119,9 +123,12 @@ const EmployeeMaster = () => {
 
   useEffect(() => {
     axios
-      .get(`${url}/employee-master`)
+      .get(`${url}/employeemaster`, {
+        withCredentials: true,
+      })
       .then((response) => {
-        setEmployees(response.data.employees);
+        setEmployees(response.data);
+        console.log(response.data);
         setLoading(false);
       })
       .catch((err) => {
