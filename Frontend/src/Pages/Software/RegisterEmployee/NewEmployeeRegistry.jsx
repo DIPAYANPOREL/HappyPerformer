@@ -1,8 +1,8 @@
 import React from "react";
 import styled from "styled-components";
-import Header from "../../../Components/Software Components/Dashboard/Header";
-import Layout from "../../../Components/Software Components/Dashboard/Layout";
 import EmployeeAddForm from "../../../Components/Software Components/RegisterEmployess/EmployeeAddForm";
+import Layout from "../../../Components/Software Components/Dashboard/Layout";
+import Header from "../../../Components/Software Components/Dashboard/Header";
 
 const EmployeeContainer = styled.div`
   display: flex;

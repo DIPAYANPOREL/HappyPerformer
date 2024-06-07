@@ -112,11 +112,12 @@ const EmployeeAddForm = () => {
   const [departments, setDepartments] = useState([]);
   const [planDetails, setPlanDetails] = useState({});
   const [loading, setLoading] = useState(true);
+  const [error, setError] = useState("");
 
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const response = await axios.get("http://127.0.0.1:8000/departments");
+        const response = await axios.get("http://127.0.0.1:8000/AddNewEmployee");
         setDepartments(response.data.departments);
         setPlanDetails({
           emp_count: response.data.emp_count,
@@ -138,6 +139,12 @@ const EmployeeAddForm = () => {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
+    setError("");
+
+    if (!formData.d_id) {
+      setError("Please select a department.");
+      return;
+    }
 
     try {
       const response = await axios.post(
@@ -148,8 +155,11 @@ const EmployeeAddForm = () => {
         }
       );
       console.log("Employee registered successfully:", response.data);
+      alert("Employee registered successfully.");
     } catch (error) {
       console.error("Error registering employee:", error);
+      setError("Error registering employee. Please try again.");
+      alert("Error Adding New Employee")
     }
   };
 
@@ -191,6 +201,7 @@ const EmployeeAddForm = () => {
           value={formData.d_id}
           onChange={handleChange}
         >
+          <option value="">Select a department</option>
           {departments.map((dept) => (
             <option key={dept.d_id} value={dept.d_id}>
               {dept.d_name}
@@ -206,20 +217,16 @@ const EmployeeAddForm = () => {
           onChange={handleChange}
         />
 
+        {error && <div style={{ color: "red", marginBottom: "20px" }}>{error}</div>}
+
         <SubmitBtn type="submit">Register</SubmitBtn>
 
-        <PlanDetails>
-          Ongoing Plan: {planDetails.company.payment_type}
-        </PlanDetails>
-        <PlanDetails>
-          Total employees registered: {planDetails.emp_count}
-        </PlanDetails>
-        <PlanDetails>
-          Employee limit of your plan: {planDetails.company.emp_limit}
-        </PlanDetails>
+        <PlanDetails>Ongoing Plan: {planDetails.company.payment_type}</PlanDetails>
+        <PlanDetails>Total employees registered: {planDetails.emp_count}</PlanDetails>
+        <PlanDetails>Employee limit of your plan: {planDetails.company.emp_limit}</PlanDetails>
       </FormCont>
     </Container>
   );
 };
-// New Code
+
 export default EmployeeAddForm;
