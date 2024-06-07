@@ -1,5 +1,5 @@
 import axios from "axios";
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import styled from "styled-components";
 
 axios.defaults.withCredentials = true;
@@ -109,6 +109,29 @@ const EmployeeAddForm = () => {
     skills: "",
   });
 
+  const [departments, setDepartments] = useState([]);
+  const [planDetails, setPlanDetails] = useState({});
+  const [loading, setLoading] = useState(true);
+
+  useEffect(() => {
+    const fetchData = async () => {
+      try {
+        const response = await axios.get("http://127.0.0.1:8000/departments");
+        setDepartments(response.data.departments);
+        setPlanDetails({
+          emp_count: response.data.emp_count,
+          company: response.data.company,
+        });
+        setLoading(false);
+      } catch (error) {
+        console.error("Error fetching data:", error);
+        setLoading(false);
+      }
+    };
+
+    fetchData();
+  }, []);
+
   const handleChange = (e) => {
     setFormData({ ...formData, [e.target.name]: e.target.value });
   };
@@ -130,44 +153,49 @@ const EmployeeAddForm = () => {
     }
   };
 
+  if (loading) {
+    return <div>Loading...</div>;
+  }
+
   return (
     <Container>
       <FormCont onSubmit={handleSubmit}>
         <TextBar htmlFor="emp_name">Full Name</TextBar>
         <InputBar
-          id="fullName"
-          name="fullName"
+          id="emp_name"
+          name="emp_name"
           value={formData.emp_name}
           onChange={handleChange}
         />
 
-        <TextBar htmlFor="email">Email</TextBar>
+        <TextBar htmlFor="emp_emailid">Email</TextBar>
         <InputBar
-          id="email"
-          name="email"
+          id="emp_emailid"
+          name="emp_emailid"
           value={formData.emp_emailid}
           onChange={handleChange}
         />
 
-        <TextBar htmlFor="phone">Phone</TextBar>
+        <TextBar htmlFor="emp_phone">Phone</TextBar>
         <InputBar
-          id="phone"
-          name="phone"
+          id="emp_phone"
+          name="emp_phone"
           value={formData.emp_phone}
           onChange={handleChange}
         />
 
-        <TextBar htmlFor="department">Department</TextBar>
+        <TextBar htmlFor="d_id">Department</TextBar>
         <DeptSelect
-          id="department"
-          name="department"
+          id="d_id"
+          name="d_id"
           value={formData.d_id}
           onChange={handleChange}
         >
-          <option value="SuperManager">SuperManager</option>
-          <option value="HR">HR</option>
-          <option value="Manager">Manager</option>
-          <option value="Employee">Employee</option>
+          {departments.map((dept) => (
+            <option key={dept.d_id} value={dept.d_id}>
+              {dept.d_name}
+            </option>
+          ))}
         </DeptSelect>
 
         <TextBar htmlFor="skills">Skills</TextBar>
@@ -180,12 +208,18 @@ const EmployeeAddForm = () => {
 
         <SubmitBtn type="submit">Register</SubmitBtn>
 
-        <PlanDetails>Your ongoing plan: premium</PlanDetails>
-        <PlanDetails>Total employees registered in the portal: 29</PlanDetails>
-        <PlanDetails>Total employee limit of your plan: 50</PlanDetails>
+        <PlanDetails>
+          Ongoing Plan: {planDetails.company.payment_type}
+        </PlanDetails>
+        <PlanDetails>
+          Total employees registered: {planDetails.emp_count}
+        </PlanDetails>
+        <PlanDetails>
+          Employee limit of your plan: {planDetails.company.emp_limit}
+        </PlanDetails>
       </FormCont>
     </Container>
   );
 };
-
+// New Code
 export default EmployeeAddForm;
