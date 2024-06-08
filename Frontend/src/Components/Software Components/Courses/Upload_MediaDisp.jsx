@@ -1,4 +1,103 @@
-const Upload_MediaDisp = () => {
+import axios from "axios";
+import React, { useEffect, useState } from "react";
+import styled, { keyframes } from "styled-components";
+
+const fadeIn = keyframes`
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+`;
+
+const fadeOut = keyframes`
+  from {
+    opacity: 1;
+  }
+  to {
+    opacity: 0;
+  }
+`;
+
+const Message = styled.p`
+  animation: ${({ visible }) => (visible ? fadeIn : fadeOut)} 0.5s ease forwards;
+  opacity: ${({ visible }) => (visible ? "1" : "0")};
+`;
+
+const Card = styled.div`
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  padding: 20px;
+  margin: 20px;
+  width: 90%;
+  background-color: white;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+`;
+
+const CardBody = styled.div`
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+`;
+
+const FormContainer = styled.div`
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  @media (min-width: 768px) {
+    flex-direction: row;
+  }
+`;
+
+const Form = styled.form`
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  padding: 20px;
+`;
+
+const UploadSection = styled.div`
+  display: flex;
+  flex-direction: column;
+  font-size: 1.2rem;
+`;
+
+const Description = styled.div`
+  padding: 20px 0;
+`;
+
+const Label = styled.label`
+  font-weight: bold;
+`;
+
+const Input = styled.input`
+  width: 100%;
+  margin-top: 20px;
+  padding: 12px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  font-size: 1.2rem;
+`;
+
+const Button = styled.button`
+  width: 100%;
+  padding: 12px;
+  background-color: #0077b6;
+  color: #fff;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  font-size: 1rem;
+  transition: background-color 0.3s;
+
+  &:hover {
+    background-color: #0056b3;
+  }
+`;
+
+const Upload_MediaDisp = ({ course_id }) => {
   const [location, setLocation] = useState("");
   const [descr, setDescr] = useState("");
   const [pdfFile, setPdfFile] = useState(null);
@@ -8,7 +107,6 @@ const Upload_MediaDisp = () => {
   const [pdfMessage, setPdfMessage] = useState("");
   const [showVideoMessage, setShowVideoMessage] = useState(false);
   const [showPdfMessage, setShowPdfMessage] = useState(false);
-  const { course_id } = useParams();
 
   useEffect(() => {
     if (videoMessage) {
