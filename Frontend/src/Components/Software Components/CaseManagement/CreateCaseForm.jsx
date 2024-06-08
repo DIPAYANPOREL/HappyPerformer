@@ -2,6 +2,11 @@ import axios from "axios";
 import React, { useState } from "react";
 import styled from "styled-components";
 
+axios.defaults.withCredentials = true;
+axios.defaults.xsrfCookieName = "csrftoken";
+axios.defaults.xsrfHeaderName = "X-CSRFToken";
+
+
 const Container = styled.div`
   display: flex;
   flex-direction: column;
@@ -97,7 +102,7 @@ const CreateCaseForm = () => {
   const [formData, setFormData] = useState({
     createFor: "",
     caseTitle: "",
-    caseType: "Benefits",
+    caseType: "",
     detailedDescription: "",
   });
 
@@ -110,15 +115,17 @@ const CreateCaseForm = () => {
 
     try {
       const response = await axios.post(
-        "http://127.0.0.1:8000/cases",
-        formData
+        "http://127.0.0.1:8000/CreateCase",formData,
+        {
+          withCredentials: true,
+        }
       ); // Correct endpoint URL
       console.log("Case created successfully:", response.data);
 
       setFormData({
         createFor: "",
         caseTitle: "",
-        caseType: "Benefits",
+        caseType: "",
         detailedDescription: "",
       });
     } catch (error) {
