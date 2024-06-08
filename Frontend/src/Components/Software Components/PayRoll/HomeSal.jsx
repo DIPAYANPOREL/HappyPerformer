@@ -82,11 +82,7 @@ const HomeSal = () => {
     const fetchData = async () => {
       try {
         const response = await axios.get("http://127.0.0.1:8000/HomeSalary");
-<<<<<<< HEAD
-        setData(response.data.employees); 
-=======
         setData(response.data.employees);
->>>>>>> e6a3aa47d7b995a649e3db7edab8ff1cd7558874
       } catch (error) {
         console.error("Error fetching data:", error);
       }

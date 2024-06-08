@@ -109,7 +109,7 @@ const AddSalary = () => {
     };
 
     axios
-      .post("your_api_endpoint_here", data, {
+      .post("http://127.0.0.1:8000/AddSalary", data, {
         withCredentials: true,
       })
       .then((response) => {

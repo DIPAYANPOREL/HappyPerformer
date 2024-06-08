@@ -6,6 +6,7 @@ import BankTransferDetails from "./Pages/Management/BankTransfers/BankTransferDe
 import BankTransferPayout from "./Pages/Management/BankTransfers/BankTransferPayout";
 import CashChequeTransfer from "./Pages/Management/PayrollManagement/CashChequeTransfer";
 import HomeSalary from "./Pages/Management/PayrollManagement/HomeSalary";
+import AddSalary from "./Components/Software Components/PayRoll/AddSalary";
 import Attendance from "./Pages/Software/Attendance/Attendance";
 import CreateCase from "./Pages/Software/CaseManagement/CreateCase";
 import Add_Courses from "./Pages/Software/Courses/Add_Courses";
@@ -33,6 +34,7 @@ function App() {
       <Route path="/banktransfer1" element={<BankTransferDetails />} />
       <Route path="/banktransfer2" element={<BankTransferPayout />} />
       <Route path="/homesalary" element={<HomeSalary />} />
+      <Route path="/addsalary" element={<AddSalary />} />
       <Route path="/paysip" element={<CashChequeTransfer />} />
       <Route path="/resign" element={<Resign />} />
       <Route path="/login" element={<Login />} />
