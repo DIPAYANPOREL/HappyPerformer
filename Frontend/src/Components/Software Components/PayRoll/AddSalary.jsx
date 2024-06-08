@@ -1,8 +1,12 @@
-import React, { useState } from 'react';
-import styled from 'styled-components';
-import axios from 'axios';
+import axios from "axios";
+import React, { useState } from "react";
+import styled from "styled-components";
 import Nav from "../../../Components/Software Components/Dashboard/Nav";
 import Footer from "../../../Components/Software Components/Footer";
+
+axios.defaults.withCredentials = true;
+axios.defaults.xsrfCookieName = "csrftoken";
+axios.defaults.xsrfHeaderName = "X-CSRFToken";
 
 const Header = styled.h2`
   font-size: 24px;
@@ -85,13 +89,13 @@ const Button = styled.button`
 `;
 
 const AddSalary = () => {
-  const [payoutMonth, setPayoutMonth] = useState('');
-  const [employeeRemarks, setEmployeeRemarks] = useState('');
-  const [notes, setNotes] = useState('');
+  const [payoutMonth, setPayoutMonth] = useState("");
+  const [employeeRemarks, setEmployeeRemarks] = useState("");
+  const [notes, setNotes] = useState("");
   const [annualCTC, setAnnualCTC] = useState(0);
-  const [paymentMethod, setPaymentMethod] = useState('Bank');
+  const [paymentMethod, setPaymentMethod] = useState("Bank");
   const [revision, setRevision] = useState(0);
-  const [effectiveFrom, setEffectiveFrom] = useState('');
+  const [effectiveFrom, setEffectiveFrom] = useState("");
 
   const handleAddSalary = () => {
     const data = {
@@ -101,15 +105,18 @@ const AddSalary = () => {
       annualCTC,
       paymentMethod,
       revision,
-      effectiveFrom
+      effectiveFrom,
     };
 
-    axios.post('your_api_endpoint_here', data)
-      .then(response => {
+    axios
+      .post("your_api_endpoint_here", data, {
+        withCredentials: true,
+      })
+      .then((response) => {
         console.log(response);
       })
-      .catch(error => {
-        console.error('There was an error!', error);
+      .catch((error) => {
+        console.error("There was an error!", error);
       });
   };
 
