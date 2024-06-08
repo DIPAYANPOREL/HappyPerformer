@@ -117,9 +117,9 @@ const HomeSal = () => {
 
   const filteredData = data.filter(
     (row) =>
-      row.name.toLowerCase().includes(searchQuery.toLowerCase()) ||
-      row.email.toLowerCase().includes(searchQuery.toLowerCase()) ||
-      row.designation.toLowerCase().includes(searchQuery.toLowerCase())
+      row.emp_name.toLowerCase().includes(searchQuery.toLowerCase()) ||
+      row.emp_emailid.toLowerCase().includes(searchQuery.toLowerCase()) ||
+      row.emp_role.toLowerCase().includes(searchQuery.toLowerCase())
   );
 
   return (
@@ -155,9 +155,9 @@ const HomeSal = () => {
               {filteredData.slice(0, lines).map((row) => (
                 <TableRow key={row.id}>
                   <TableCell>{row.id}</TableCell>
-                  <TableCell>{row.name}</TableCell>
-                  <TableCell>{row.email}</TableCell>
-                  <TableCell>{row.designation}</TableCell>
+                  <TableCell>{row.emp_name}</TableCell>
+                  <TableCell>{row.emp_emailid}</TableCell>
+                  <TableCell>{row.emp_role}</TableCell>
                   <TableCell>
                     <ActionButton primary>Add Salary</ActionButton>
                     <ActionButton>Revision History</ActionButton>
