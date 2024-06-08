@@ -87,18 +87,16 @@ const HomeSal = () => {
     const fetchData = async () => {
       try {
         const response = await axios.get("http://127.0.0.1:8000/HomeSalary");
-        const dataWithIds = response.data.map(
-          (item) => (
-            {
-              ...item,
-              id: generateUniqueId(),
-            },
-            {
-              withCredentials: true,
-            }
-          )
-        );
-        setData(dataWithIds);
+        console.log("Response data:", response.data); // Log response data for debugging
+        if (Array.isArray(response.data.employees)) {
+          const dataWithIds = response.data.employees.map((item) => ({
+            ...item,
+            id: generateUniqueId(),
+          }));
+          setData(dataWithIds);
+        } else {
+          console.error("Unexpected data format:", response.data);
+        }
       } catch (error) {
         console.error("Error fetching data:", error);
       }
