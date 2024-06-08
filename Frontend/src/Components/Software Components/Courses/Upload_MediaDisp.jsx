@@ -1,106 +1,6 @@
-import axios from "axios";
-import React, { useEffect, useState } from "react";
-import { useParams } from "react-router-dom";
-import styled, { keyframes } from "styled-components";
-
-const fadeIn = keyframes`
-  from {
-    opacity: 0;
-  }
-  to {
-    opacity: 1;
-  }
-`;
-
-const fadeOut = keyframes`
-  from {
-    opacity: 1;
-  }
-  to {
-    opacity: 0;
-  }
-`;
-
-const Message = styled.p`
-  animation: ${({ visible }) => (visible ? fadeIn : fadeOut)} 0.5s ease forwards;
-  opacity: ${({ visible }) => (visible ? "1" : "0")};
-`;
-
-const Card = styled.div`
-  border: 1px solid #ccc;
-  border-radius: 4px;
-  padding: 20px;
-  margin: 20px;
-  width: 90%;
-  background-color: white;
-  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-`;
-
-const CardBody = styled.div`
-  display: flex;
-  flex-direction: column;
-  gap: 20px;
-`;
-
-const FormContainer = styled.div`
-  display: flex;
-  flex-direction: column;
-  gap: 20px;
-  @media (min-width: 768px) {
-    flex-direction: row;
-  }
-`;
-
-const Form = styled.form`
-  flex: 1;
-  display: flex;
-  flex-direction: column;
-  gap: 20px;
-  padding: 20px;
-`;
-
-const UploadSection = styled.div`
-  display: flex;
-  flex-direction: column;
-  font-size: 1.2rem;
-`;
-
-const Description = styled.div`
-  padding: 20px 0;
-`;
-
-const Label = styled.label`
-  font-weight: bold;
-`;
-
-const Input = styled.input`
-  width: 100%;
-  margin-top: 20px;
-  padding: 12px;
-  border: 1px solid #ccc;
-  border-radius: 4px;
-  font-size: 1.2rem;
-`;
-
-const Button = styled.button`
-  width: 100%;
-  padding: 12px;
-  background-color: #0077b6;
-  color: #fff;
-  border: none;
-  border-radius: 4px;
-  cursor: pointer;
-  font-size: 1rem;
-  transition: background-color 0.3s;
-
-  &:hover {
-    background-color: #0056b3;
-  }
-`;
-
 const Upload_MediaDisp = () => {
-  const [videoUrl, setVideoUrl] = useState("");
-  const [videoDescription, setVideoDescription] = useState("");
+  const [location, setLocation] = useState("");
+  const [descr, setDescr] = useState("");
   const [pdfFile, setPdfFile] = useState(null);
   const [pdfDescription, setPdfDescription] = useState("");
   const [lastSubmittedVideo, setLastSubmittedVideo] = useState(null);
@@ -132,12 +32,12 @@ const Upload_MediaDisp = () => {
     }
   }, [pdfMessage]);
 
-  const handleVideoUrlChange = (e) => {
-    setVideoUrl(e.target.value);
+  const handleLocationChange = (e) => {
+    setLocation(e.target.value);
   };
 
-  const handleVideoDescriptionChange = (e) => {
-    setVideoDescription(e.target.value);
+  const handleDescrChange = (e) => {
+    setDescr(e.target.value);
   };
 
   const handlePdfFileChange = (e) => {
@@ -158,13 +58,13 @@ const Upload_MediaDisp = () => {
       return;
     }
 
-    if (videoUrl && videoDescription) {
+    if (location && descr) {
       try {
         const response = await axios.post(
           "http://127.0.0.1:8000/UploadMedia/",
           {
-            location: videoUrl,
-            descr: videoDescription,
+            location: location,
+            descr: descr,
             course_id: course_id,
           }
         );
@@ -192,12 +92,7 @@ const Upload_MediaDisp = () => {
       try {
         const response = await axios.post(
           "http://127.0.0.1:8000/UploadPdf/",
-          formData,
-          {
-            headers: {
-              "Content-Type": "multipart/form-data",
-            },
-          }
+          formData
         );
         setPdfMessage(response.data.message);
       } catch (error) {
@@ -219,8 +114,8 @@ const Upload_MediaDisp = () => {
                 name="course_overview_url"
                 id="course_overview_url"
                 placeholder="E.g: https://youtu.be/bixR-KIJKYM"
-                value={videoUrl}
-                onChange={handleVideoUrlChange}
+                value={location}
+                onChange={handleLocationChange}
               />
             </UploadSection>
             <Description>
@@ -229,8 +124,8 @@ const Upload_MediaDisp = () => {
                 type="text"
                 id="descr"
                 placeholder="Enter a short description for video"
-                value={videoDescription}
-                onChange={handleVideoDescriptionChange}
+                value={descr}
+                onChange={handleDescrChange}
               />
             </Description>
             <Button type="submit" name="save_video">

@@ -2,6 +2,10 @@ import axios from "axios";
 import React, { useEffect, useState } from "react";
 import styled from "styled-components";
 
+axios.defaults.withCredentials = true;
+axios.defaults.xsrfCookieName = "csrftoken";
+axios.defaults.xsrfHeaderName = "X-CSRFToken";
+
 const Main = styled.main`
   width: 100%;
   padding: 20px;
@@ -63,8 +67,16 @@ const Td = styled.td`
   }
 `;
 
+const Message = styled.p`
+  color: red;
+  text-align: center;
+  margin-top: 20px;
+`;
+
 const Update_Delete_MediaDisp = () => {
   const [data, setData] = useState([]);
+  const [loading, setLoading] = useState(true);
+  const [errorMessage, setErrorMessage] = useState("");
 
   useEffect(() => {
     const fetchData = async () => {
@@ -75,6 +87,9 @@ const Update_Delete_MediaDisp = () => {
         setData(response.data);
       } catch (error) {
         console.error("Error fetching data:", error);
+        setErrorMessage("Error fetching data. Please try again later.");
+      } finally {
+        setLoading(false);
       }
     };
 
@@ -82,13 +97,22 @@ const Update_Delete_MediaDisp = () => {
   }, []);
 
   const handleDelete = async (course_id) => {
-    try {
-      await axios.delete(`http://127.0.0.1:8000/UpdateMedia/${course_id}`);
-      setData(data.filter((item) => item.course_id !== course_id));
-    } catch (error) {
-      console.error("Error deleting data:", error);
+    if (window.confirm("Are you sure you want to delete this course?")) {
+      try {
+        await axios.delete("http://127.0.0.1:8000/UpdateDeleteMedia/", {
+          data: { course_id },
+        });
+        setData(data.filter((item) => item.course_id !== course_id));
+      } catch (error) {
+        console.error("Error deleting data:", error);
+        setErrorMessage("Error deleting data. Please try again.");
+      }
     }
   };
+
+  if (loading) {
+    return <Main>Loading...</Main>;
+  }
 
   return (
     <Main>
@@ -128,6 +152,7 @@ const Update_Delete_MediaDisp = () => {
                   ))}
                 </tbody>
               </Table>
+              {errorMessage && <Message>{errorMessage}</Message>}
             </Card>
           </Col>
         </Row>
