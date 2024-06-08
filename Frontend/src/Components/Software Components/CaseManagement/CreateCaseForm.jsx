@@ -93,7 +93,7 @@ const Button = styled.button`
   font-size: 1rem;
   cursor: pointer;
   &:hover {
-    background-color: #005f8a;
+    background-color: #463aff;
   }
 `;
 
@@ -129,16 +129,13 @@ const CreateCaseForm = () => {
         detailedDescription: "",
       });
     } catch (error) {
-      if (error.response) {
-        console.error("Error data:", error.response.data);
-        console.error("Error status:", error.response.status);
-        console.error("Error headers:", error.response.headers);
-      } else if (error.request) {
-        console.error("Error request:", error.request);
+      if (error.response && error.response.status === 401) {
+        console.error("Unauthorized request. Please log in.");
+        alert("Unauthorized request. Please log in.");
       } else {
-        console.error("Error message:", error.message);
+        console.error("Error creating case:", error);
+        alert("Error creating case. Please try again.");
       }
-      console.error("Error config:", error.config);
     }
   };
 
