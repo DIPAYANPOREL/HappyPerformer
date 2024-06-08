@@ -2,6 +2,10 @@ import axios from "axios";
 import React, { useState } from "react";
 import styled from "styled-components";
 
+axios.defaults.withCredentials = true;
+axios.defaults.xsrfCookieName = "csrftoken";
+axios.defaults.xsrfHeaderName = "X-CSRFToken";
+
 const Container = styled.div`
   display: flex;
   flex-direction: column;
@@ -104,8 +108,15 @@ const ResignForm = ({
     e.preventDefault();
 
     try {
-      const response = await axios.post("/api/resign", formData);
+      const response = await axios.post(
+        "http://127.0.0.1:8000/resign",
+        formData,
+        {
+          withCredentials: true,
+        }
+      );
       console.log(response.data);
+      alert("Boom! Sucessfull");
       // Handle success response
     } catch (error) {
       console.error(error);
