@@ -6,7 +6,6 @@ axios.defaults.withCredentials = true;
 axios.defaults.xsrfCookieName = "csrftoken";
 axios.defaults.xsrfHeaderName = "X-CSRFToken";
 
-
 const Container = styled.div`
   display: flex;
   flex-direction: column;
@@ -94,7 +93,7 @@ const Button = styled.button`
   font-size: 1rem;
   cursor: pointer;
   &:hover {
-    background-color: #463aff;
+    background-color: #005f8a;
   }
 `;
 
@@ -115,11 +114,12 @@ const CreateCaseForm = () => {
 
     try {
       const response = await axios.post(
-        "http://127.0.0.1:8000/CreateCase",formData,
+        "http://127.0.0.1:8000/CreateCase",
+        formData,
         {
           withCredentials: true,
         }
-      ); // Correct endpoint URL
+      );
       console.log("Case created successfully:", response.data);
 
       setFormData({
@@ -129,7 +129,16 @@ const CreateCaseForm = () => {
         detailedDescription: "",
       });
     } catch (error) {
-      console.error("Error creating case:", error);
+      if (error.response) {
+        console.error("Error data:", error.response.data);
+        console.error("Error status:", error.response.status);
+        console.error("Error headers:", error.response.headers);
+      } else if (error.request) {
+        console.error("Error request:", error.request);
+      } else {
+        console.error("Error message:", error.message);
+      }
+      console.error("Error config:", error.config);
     }
   };
 
