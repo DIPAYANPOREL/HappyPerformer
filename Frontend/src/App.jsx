@@ -43,10 +43,10 @@ function App() {
       <Route path="/newemp" element={<NewEmployeeRegistry />} />
       {/* Courses */}
       <Route path="/addcourse" element={<Add_Courses />} />
+      <Route path="/uploadmedia/:course_id" element={<Upload_Media />} />
       <Route path="/addmedia" element={<Add_Media_Content />} />
       <Route path="/updatemedia" element={<Update_Media />} />
       <Route path="/delete-updatemedia" element={<Update_Delete_Media />} />
-      <Route path="/uploadmedia" element={<Upload_Media />} />
       <Route path="/newemp" element={<NewEmployeeRegistry />} />
       {/* Resign */}
       <Route path="/resign" element={<Resign />} />

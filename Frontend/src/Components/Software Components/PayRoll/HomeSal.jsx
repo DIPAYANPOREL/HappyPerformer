@@ -78,27 +78,11 @@ const HomeSal = () => {
   const [lines, setLines] = useState(10);
   const [searchQuery, setSearchQuery] = useState("");
 
-  // Utility function to generate unique IDs
-  const generateUniqueId = () => {
-    return Math.floor(Math.random() * Date.now());
-  };
-
   useEffect(() => {
     const fetchData = async () => {
       try {
         const response = await axios.get("http://127.0.0.1:8000/HomeSalary");
-        const dataWithIds = response.data.map(
-          (item) => (
-            {
-              ...item,
-              id: generateUniqueId(),
-            },
-            {
-              withCredentials: true,
-            }
-          )
-        );
-        setData(dataWithIds);
+        setData(response.data.employees); 
       } catch (error) {
         console.error("Error fetching data:", error);
       }
@@ -152,9 +136,9 @@ const HomeSal = () => {
               </TableRow>
             </TableHeader>
             <tbody>
-              {filteredData.slice(0, lines).map((row) => (
-                <TableRow key={row.id}>
-                  <TableCell>{row.id}</TableCell>
+              {filteredData.slice(0, lines).map((row, index) => (
+                <TableRow key={index}>
+                  <TableCell>{index + 1}</TableCell>
                   <TableCell>{row.emp_name}</TableCell>
                   <TableCell>{row.emp_emailid}</TableCell>
                   <TableCell>{row.emp_role}</TableCell>
