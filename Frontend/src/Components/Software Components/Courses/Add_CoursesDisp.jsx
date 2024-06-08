@@ -3,6 +3,10 @@ import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import styled from "styled-components";
 
+axios.defaults.withCredentials = true;
+axios.defaults.xsrfCookieName = "csrftoken";
+axios.defaults.xsrfHeaderName = "X-CSRFToken";
+
 const Card = styled.div`
   border: 1px solid #ccc;
   border-radius: 10px;
@@ -70,7 +74,7 @@ const RemoveButton = styled.button`
 `;
 
 const AddCourseForm = () => {
-  const [courseTitle, setCourseTitle] = useState("");
+  const [course_title, setCourseTitle] = useState("");
   const [description, setDescription] = useState("");
   const [thumbnail, setThumbnail] = useState(null);
   const navigate = useNavigate();
@@ -87,7 +91,7 @@ const AddCourseForm = () => {
   const handleSubmit = async (event) => {
     event.preventDefault();
     const formData = new FormData();
-    formData.append("course_title", courseTitle);
+    formData.append("course_title", course_title);
     formData.append("description", description);
     if (thumbnail) {
       formData.append("thumbnail", thumbnail);
@@ -98,9 +102,7 @@ const AddCourseForm = () => {
         "http://127.0.0.1:8000/AddCourses/",
         formData,
         {
-          headers: {
-            "Content-Type": "multipart/form-data",
-          },
+          withCredentials: true,
         }
       );
       const { course_id } = response.data;
@@ -117,7 +119,7 @@ const AddCourseForm = () => {
           <Label>COURSE TITLE</Label>
           <Input
             type="text"
-            value={courseTitle}
+            value={course_title}
             onChange={(e) => setCourseTitle(e.target.value)}
             required
           />
