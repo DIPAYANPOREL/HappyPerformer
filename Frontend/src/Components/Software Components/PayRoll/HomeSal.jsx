@@ -2,6 +2,10 @@ import axios from "axios";
 import React, { useEffect, useState } from "react";
 import styled from "styled-components";
 
+axios.defaults.withCredentials = true;
+axios.defaults.xsrfCookieName = "csrftoken";
+axios.defaults.xsrfHeaderName = "X-CSRFToken";
+
 const Wrapper = styled.div`
   font-family: Arial, sans-serif;
 `;
@@ -74,11 +78,27 @@ const HomeSal = () => {
   const [lines, setLines] = useState(10);
   const [searchQuery, setSearchQuery] = useState("");
 
+  // Utility function to generate unique IDs
+  const generateUniqueId = () => {
+    return Math.floor(Math.random() * Date.now());
+  };
+
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const response = await axios.get("your_backend_api_url");
-        setData(response.data);
+        const response = await axios.get("http://127.0.0.1:8000/HomeSalary");
+        const dataWithIds = response.data.map(
+          (item) => (
+            {
+              ...item,
+              id: generateUniqueId(),
+            },
+            {
+              withCredentials: true,
+            }
+          )
+        );
+        setData(dataWithIds);
       } catch (error) {
         console.error("Error fetching data:", error);
       }
@@ -101,6 +121,7 @@ const HomeSal = () => {
       row.email.toLowerCase().includes(searchQuery.toLowerCase()) ||
       row.designation.toLowerCase().includes(searchQuery.toLowerCase())
   );
+
   return (
     <Wrapper>
       <Container>
