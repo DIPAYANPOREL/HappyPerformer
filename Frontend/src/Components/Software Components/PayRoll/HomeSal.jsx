@@ -1,5 +1,6 @@
 import axios from "axios";
 import React, { useEffect, useState } from "react";
+import { useNavigate } from "react-router-dom";
 import styled from "styled-components";
 
 axios.defaults.withCredentials = true;
@@ -77,6 +78,7 @@ const HomeSal = () => {
   const [data, setData] = useState([]);
   const [lines, setLines] = useState(10);
   const [searchQuery, setSearchQuery] = useState("");
+  const navigate = useNavigate();
 
   useEffect(() => {
     const fetchData = async () => {
@@ -143,9 +145,27 @@ const HomeSal = () => {
                   <TableCell>{row.emp_emailid}</TableCell>
                   <TableCell>{row.emp_role}</TableCell>
                   <TableCell>
-                    <ActionButton primary>Add Salary</ActionButton>
-                    <ActionButton>Revision History</ActionButton>
-                    <ActionButton primary>Display Details</ActionButton>
+                    <ActionButton
+                      primary
+                      onClick={() => navigate(`/AddSalary/${row.emp_emailid}`)}
+                    >
+                      Add Salary
+                    </ActionButton>
+                    <ActionButton
+                      onClick={() =>
+                        navigate(`/RevisionHistory/${row.emp_emailid}`)
+                      }
+                    >
+                      Revision History
+                    </ActionButton>
+                    <ActionButton
+                      primary
+                      onClick={() =>
+                        navigate(`/DisplayDetails/${row.emp_emailid}`)
+                      }
+                    >
+                      Display Details
+                    </ActionButton>
                   </TableCell>
                 </TableRow>
               ))}
