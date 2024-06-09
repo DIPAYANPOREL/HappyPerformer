@@ -5,6 +5,10 @@ import "react-datepicker/dist/react-datepicker.css";
 import { useParams } from "react-router-dom";
 import styled from "styled-components";
 
+axios.defaults.withCredentials = true;
+axios.defaults.xsrfCookieName = "csrftoken";
+axios.defaults.xsrfHeaderName = "X-CSRFToken";
+
 const Container = styled.div`
   display: flex;
   justify-content: center;
@@ -95,16 +99,15 @@ const BTDetails = () => {
   const handleSubmit = (e) => {
     e.preventDefault();
 
-    const payload = {
-      month,
-      valueDate,
-      narration,
-      debitAccountNumber,
-      fileNameStart,
-    };
+    const formData = new FormData();
+    formData.append("month", month);
+    formData.append("valuedate", valueDate.toISOString().split("T")[0]);
+    formData.append("narration", narration);
+    formData.append("debitac", debitAccountNumber);
+    formData.append("filename", fileNameStart);
 
     axios
-      .post("/api/bank-transfer-details", payload)
+      .post(`http://127.0.0.1:8000/BankTransferUpdate/?month=${month}`, formData)
       .then((response) => {
         console.log("Data submitted successfully:", response.data);
       })
@@ -121,7 +124,7 @@ const BTDetails = () => {
           <DatePicker
             selected={valueDate}
             onChange={setValueDate}
-            dateFormat="dd/MM/yyyy"
+            dateFormat="yyyy-MM-dd"
             customInput={<Input />}
           />
         </FormGroup>

@@ -99,9 +99,7 @@ const Update_Delete_MediaDisp = () => {
   const handleDelete = async (course_id) => {
     if (window.confirm("Are you sure you want to delete this course?")) {
       try {
-        await axios.delete("http://127.0.0.1:8000/UpdateDeleteMedia/", {
-          data: { course_id },
-        });
+        await axios.delete(`http://127.0.0.1:8000/UpdateMedia/${course_id}`);
         setData(data.filter((item) => item.course_id !== course_id));
       } catch (error) {
         console.error("Error deleting data:", error);
@@ -141,7 +139,7 @@ const Update_Delete_MediaDisp = () => {
                       <Td>{item.course_title}</Td>
                       <Td>{item.description}</Td>
                       <Td>
-                        <a href={`UpdateMedia/${item.course_id}`}>Update</a>
+                        <a href={`updatemedia/${item.course_id}`}>Update</a>
                       </Td>
                       <Td>
                         <a onClick={() => handleDelete(item.course_id)}>

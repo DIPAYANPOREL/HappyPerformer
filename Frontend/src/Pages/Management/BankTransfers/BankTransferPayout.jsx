@@ -5,6 +5,11 @@ import styled from "styled-components";
 import Header from "../../../Components/Software Components/Dashboard/Header";
 import Layout from "../../../Components/Software Components/Dashboard/Layout";
 
+axios.defaults.withCredentials = true;
+axios.defaults.xsrfCookieName = "csrftoken";
+axios.defaults.xsrfHeaderName = "X-CSRFToken";
+
+
 const Container = styled.div`
   flex: 1;
   display: flex;
@@ -112,16 +117,14 @@ const BankTransferPayout = () => {
 
   useEffect(() => {
     axios
-      .get(`/api/bank-transfers/${month}`)
+      .get(`http://127.0.0.1:8000/BankTransfer/?month=${month}`)
       .then((response) => {
-        setData(response.data.transfers || []);
-        setSummary(
-          response.data.summary || {
-            totalEmployees: 0,
-            totalAmount: 0,
-            totalErrors: 0,
-          }
-        );
+        setData(response.data.salary_details || []);
+        setSummary({
+          totalEmployees: response.data.total_employees,
+          totalAmount: response.data.total_amount,
+          totalErrors: response.data.total_employees_with_errors,
+        });
       })
       .catch((error) => {
         console.error("There was an error fetching the data!", error);
@@ -129,7 +132,7 @@ const BankTransferPayout = () => {
   }, [month]);
 
   const handleProceedClick = () => {
-    navigate(`/bank-transfer-details/${month}`);
+    navigate(`/banktransfer1/?month=${month}`);
   };
 
   return (
@@ -172,17 +175,17 @@ const BankTransferPayout = () => {
           <tbody>
             {Array.isArray(data) && data.length > 0 ? (
               data.map((row) => (
-                <TableRow key={row.id}>
-                  <TableCell>{row.id}</TableCell>
-                  <TableCell>{row.name}</TableCell>
-                  <TableCell>{row.bank}</TableCell>
-                  <TableCell>{row.branch}</TableCell>
-                  <TableCell>{row.ifscCode}</TableCell>
-                  <TableCell>{row.accountNumber}</TableCell>
-                  <TableCell>{row.accountType}</TableCell>
-                  <TableCell>{row.amount}</TableCell>
-                  <TableCell>{row.holdSalary ? "Yes" : "No"}</TableCell>
-                  <TableCell>{row.status}</TableCell>
+                <TableRow key={row.sal_id}>
+                  <TableCell>{row.sal_id}</TableCell>
+                  <TableCell>{row.emp_emailid__holder_name}</TableCell>
+                  <TableCell>{row.emp_emailid__bank_name}</TableCell>
+                  <TableCell>{row.emp_emailid__branch}</TableCell>
+                  <TableCell>{row.emp_emailid__ifsc}</TableCell>
+                  <TableCell>{row.emp_emailid__acc_no}</TableCell>
+                  <TableCell>{row.emp_emailid__acc_type}</TableCell>
+                  <TableCell>{row.Net_Salary}</TableCell>
+                  <TableCell>{row.holdsalary ? "Yes" : "No"}</TableCell>
+                  <TableCell>{row.paid ? "Paid" : "Unpaid"}</TableCell>
                 </TableRow>
               ))
             ) : (

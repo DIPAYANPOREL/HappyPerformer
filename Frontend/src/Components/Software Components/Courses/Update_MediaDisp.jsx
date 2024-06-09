@@ -3,6 +3,10 @@ import React, { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 import styled from "styled-components";
 
+axios.defaults.withCredentials = true;
+axios.defaults.xsrfCookieName = "csrftoken";
+axios.defaults.xsrfHeaderName = "X-CSRFToken";
+
 const Card = styled.div`
   border: 1px solid #ccc;
   border-radius: 10px;
@@ -69,22 +73,12 @@ const UpdateMediaDisp = () => {
 
   const updateCourse = async () => {
     try {
-      await axios.put(`http://127.0.0.1:8000/UpdateMedia/${course_id}`, course);
+      await axios.put(`http://127.0.0.1:8000/UpdateMedia/${course.course_id}`, course);
       console.log("Course updated successfully:", course);
       window.location.reload();
     } catch (error) {
       console.error("Error updating course:", error);
     }
-  };
-
-  const handleChange = (e, index) => {
-    const { name, value } = e.target;
-    const updatedVideos = [...course.videos];
-    updatedVideos[index] = { ...updatedVideos[index], [name]: value };
-    setCourse((prevCourse) => ({
-      ...prevCourse,
-      videos: updatedVideos,
-    }));
   };
 
   return (
@@ -99,7 +93,6 @@ const UpdateMediaDisp = () => {
           <Label>Course ID:</Label>
           <Input
             type="text"
-            name="course_id"
             value={course.course_id}
             readOnly
           />
@@ -108,11 +101,8 @@ const UpdateMediaDisp = () => {
           <Label>Course Title:</Label>
           <Input
             type="text"
-            name="course_title"
             value={course.course_title}
-            onChange={(e) =>
-              setCourse({ ...course, course_title: e.target.value })
-            }
+            onChange={(e) => setCourse(prevState => ({ ...prevState, course_title: e.target.value }))}
           />
         </div>
         {course.videos.map((video, index) => (
@@ -121,18 +111,24 @@ const UpdateMediaDisp = () => {
               <Label>Video Url:</Label>
               <Input
                 type="text"
-                name="location"
                 value={video.location}
-                onChange={(e) => handleChange(e, index)}
+                onChange={(e) => {
+                  const updatedVideos = [...course.videos];
+                  updatedVideos[index].location = e.target.value;
+                  setCourse(prevState => ({ ...prevState, videos: updatedVideos }));
+                }}
               />
             </div>
             <div>
               <Label>Video Description:</Label>
               <Input
                 type="text"
-                name="descr"
                 value={video.descr}
-                onChange={(e) => handleChange(e, index)}
+                onChange={(e) => {
+                  const updatedVideos = [...course.videos];
+                  updatedVideos[index].descr = e.target.value;
+                  setCourse(prevState => ({ ...prevState, videos: updatedVideos }));
+                }}
               />
             </div>
           </div>

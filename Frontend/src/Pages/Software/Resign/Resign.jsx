@@ -1,5 +1,5 @@
 import axios from "axios";
-import React, { useEffect, useState } from "react";
+import React, { useState, useEffect } from "react";
 import styled from "styled-components";
 import Header from "../../../Components/Software Components/Dashboard/Header";
 import Layout from "../../../Components/Software Components/Dashboard/Layout";
@@ -43,23 +43,28 @@ const Form = styled.div`
 `;
 
 const Resign = () => {
+  const [resignationData, setResignationData] = useState({});
   const [joiningDate, setJoiningDate] = useState("");
   const [yearsOfService, setYearsOfService] = useState(0);
 
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const response = await axios.get("http://127.0.0.1:8000/resign", {
+        const response = await axios.get("http://127.0.0.1:8000/Resign", {
           withCredentials: true,
         });
         const data = response.data;
 
-        // Assuming the backend sends joiningDate in the format 'YYYY-MM-DD'
-        setJoiningDate(data.joiningDate);
+        // Set resignation data received from the server
+        setResignationData(data);
+
+        // Extract joining date from resignation data
+        const joiningDate = data[0]?.submit_date || "";
+        setJoiningDate(joiningDate);
 
         // Calculating years of service from the joining date
         const currentYear = new Date().getFullYear();
-        const joiningYear = new Date(data.joiningDate).getFullYear();
+        const joiningYear = new Date(joiningDate).getFullYear();
         const years = currentYear - joiningYear;
         setYearsOfService(years);
       } catch (error) {
@@ -69,14 +74,6 @@ const Resign = () => {
 
     fetchData();
   }, []);
-
-  const handleJoiningDateChange = (event) => {
-    setJoiningDate(event.target.value);
-  };
-
-  const handleYearsOfServiceChange = (event) => {
-    setYearsOfService(event.target.value);
-  };
 
   return (
     <Layout>
@@ -88,10 +85,9 @@ const Resign = () => {
         </InfoSection>
         <Form>
           <ResignForm
+            resignationData={resignationData}
             joiningDate={joiningDate}
-            onJoiningDateChange={handleJoiningDateChange}
             yearsOfService={yearsOfService}
-            onYearsOfServiceChange={handleYearsOfServiceChange}
           />
         </Form>
       </Container>

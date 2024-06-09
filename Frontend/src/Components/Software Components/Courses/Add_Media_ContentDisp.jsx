@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from "react";
+import axios from "axios"; // Import Axios
 import styled from "styled-components";
 
 const Container = styled.div`
@@ -76,11 +77,18 @@ const CoursesDisp = () => {
   const [courses, setCourses] = useState([]);
 
   useEffect(() => {
-    fetch("http://127.0.0.1:8000/AddMediaContent/")
-      .then((response) => response.json())
-      .then((data) => setCourses(data))
-      .catch((error) => console.error("Error fetching courses:", error));
+    const fetchCourses = async () => {
+      try {
+        const response = await axios.get("http://127.0.0.1:8000/AddMediaContent");
+        setCourses(response.data);
+      } catch (error) {
+        console.error("Error fetching courses:", error);
+      }
+    };
+
+    fetchCourses();
   }, []);
+
 
   return (
     <Container>

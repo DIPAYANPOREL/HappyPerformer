@@ -21,7 +21,7 @@ const Container = styled.div`
 const Table = styled.table`
   border-collapse: collapse;
   width: 80%;
-  max-width: 1000px; /* Ensure table doesn't get too wide */
+  max-width: 1000px;
   margin: 0 auto;
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
 
@@ -82,17 +82,17 @@ const BTransfer = () => {
 
   useEffect(() => {
     axios
-      .get("")
+      .get("http://127.0.0.1:8000/BankTransferPayout")
       .then((response) => {
-        setData(response.data);
+        setData(response.data.payouts);
       })
       .catch((error) => {
         console.error("There was an error fetching the data!", error);
       });
   }, []);
 
-  const handleViewClick = (month) => {
-    navigate(`/bank-transfer-payout/${month}`);
+  const handleViewClick = (payout_month) => {
+    navigate(`/banktransfer2/${payout_month}`);
   };
 
   return (
@@ -108,9 +108,9 @@ const BTransfer = () => {
           {Array.isArray(data) && data.length > 0 ? (
             data.map((item, index) => (
               <tr key={index}>
-                <Td>{item.month}</Td>
+                <Td>{item.payout_month}</Td>
                 <Td>
-                  <ViewBtn onClick={() => handleViewClick(item.month)}>
+                  <ViewBtn onClick={() => handleViewClick(item.payout_month)}>
                     View
                   </ViewBtn>
                 </Td>

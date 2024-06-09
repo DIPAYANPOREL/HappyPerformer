@@ -1,8 +1,12 @@
-import axios from "axios"; // Ensure axios is imported
+import axios from "axios";
 import React, { useEffect, useState } from "react";
 import styled from "styled-components";
 import Header from "../../../Components/Software Components/Dashboard/Header";
 import Layout from "../../../Components/Software Components/Dashboard/Layout";
+
+axios.defaults.withCredentials = true;
+axios.defaults.xsrfCookieName = "csrftoken";
+axios.defaults.xsrfHeaderName = "X-CSRFToken";
 
 const Container = styled.div`
   display: flex;
@@ -69,17 +73,19 @@ const NoDataMessage = styled.div`
 
 const CashChequeTransfer = () => {
   const [payrollData, setPayrollData] = useState([]);
-  const [loading, setLoading] = useState(true); // State for loading
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState(null);
 
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const response = await axios.get("your_backend_api_url");
-        setPayrollData(response.data);
+        const response = await axios.get("http://127.0.0.1:8000/PayslipPayout");
+        setPayrollData(response.data.payouts);
       } catch (error) {
+        setError("Error fetching payroll data");
         console.error("Error fetching payroll data:", error);
       } finally {
-        setLoading(false); // Set loading to false after data is fetched
+        setLoading(false);
       }
     };
 
@@ -93,6 +99,8 @@ const CashChequeTransfer = () => {
         <Title>Select Payroll Month:</Title>
         {loading ? (
           <LoadingMessage>Loading...</LoadingMessage>
+        ) : error ? (
+          <NoDataMessage>{error}</NoDataMessage>
         ) : payrollData.length === 0 ? (
           <NoDataMessage>No data available</NoDataMessage>
         ) : (
@@ -104,8 +112,8 @@ const CashChequeTransfer = () => {
             <TableBody>
               {payrollData.map((data, index) => (
                 <TableRow key={index}>
-                  <span>{data.month}</span>
-                  <span>{data.action}</span>
+                  <span>{new Date(data.payout_month).toLocaleDateString()}</span>
+                  <span>View Details</span>
                 </TableRow>
               ))}
             </TableBody>

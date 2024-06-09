@@ -31,10 +31,10 @@ function App() {
       <Route path="/" element={<Home />} />
       <Route path="/markattendance" element={<Attendance />} />
       <Route path="/banktransfer" element={<BankTransfer />} />
+      <Route path="/banktransfer2/:month" element={<BankTransferPayout />} />
       <Route path="/banktransfer1" element={<BankTransferDetails />} />
-      <Route path="/banktransfer2" element={<BankTransferPayout />} />
       <Route path="/homesalary" element={<HomeSalary />} />
-      <Route path="/addsalary" element={<AddSalary />} />
+      <Route path="/addsalary/:emp_emailid" element={<AddSalary />} />
       <Route path="/paysip" element={<CashChequeTransfer />} />
       <Route path="/resign" element={<Resign />} />
       <Route path="/login" element={<Login />} />
@@ -47,8 +47,8 @@ function App() {
       <Route path="/addcourse" element={<Add_Courses />} />
       <Route path="/uploadmedia/:course_id" element={<Upload_Media />} />
       <Route path="/addmedia" element={<Add_Media_Content />} />
-      <Route path="/updatemedia" element={<Update_Media />} />
-      <Route path="/delete-updatemedia" element={<Update_Delete_Media />} />
+      <Route path="/updatedeletemedia" element={<Update_Delete_Media />} />
+      <Route path="/updatemedia/:course_id" element={<Update_Media />} />
       <Route path="/newemp" element={<NewEmployeeRegistry />} />
       {/* Resign */}
       <Route path="/resign" element={<Resign />} />
