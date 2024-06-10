@@ -1,12 +1,13 @@
-import React, { useState, useEffect } from 'react';
-import styled from 'styled-components';
-import axios from 'axios';
-import Footer from '../../../Components/Software Components/Footer';
-import Nav from '../../../Components/Software Components/Dashboard/Nav';
+import React, { useState, useEffect } from "react";
+import styled from "styled-components";
+import axios from "axios";
+import Footer from "../Components/Software Components/Footer.jsx";
+import Nav from "../Components/Software Components/Dashboard/Nav";
 
 const Container = styled.div`
   width: 50%;
   margin: 0 auto;
+  height: 100vh;
 `;
 
 const CardContainer = styled.div``;
@@ -71,8 +72,17 @@ const Training = () => {
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const response = await axios.get('/api/videos');
-        setVideos(response.data);
+        const response = await axios.get("/api/videos");
+        if (
+          response.data &&
+          Array.isArray(response.data) &&
+          response.data.length > 0
+        ) {
+          setVideos(response.data);
+        } else {
+          setVideos([]);
+          console.log("No videos found");
+        }
       } catch (error) {
         console.error(error);
       }
@@ -89,19 +99,23 @@ const Training = () => {
           <Title>Training Page</Title>
           <hr />
           <Row>
-            {videos.map((video) => (
-              <Col key={video.id}>
-                <YouTubeVideoCard
-                  title={video.title}
-                  channel={video.channel}
-                  views={video.views}
-                  image={video.image}
-                  link={video.link}
-                />
-                <PdfCard title={video.title} pdf={video.pdf} />
-                <hr />
-              </Col>
-            ))}
+            {videos.length > 0 ? (
+              videos.map((video) => (
+                <Col key={video.id}>
+                  <YouTubeVideoCard
+                    title={video.title}
+                    channel={video.channel}
+                    views={video.views}
+                    image={video.image}
+                    link={video.link}
+                  />
+                  <PdfCard title={video.title} pdf={video.pdf} />
+                  <hr />
+                </Col>
+              ))
+            ) : (
+              <p>No videos found</p>
+            )}
           </Row>
         </CardContainer>
       </Container>

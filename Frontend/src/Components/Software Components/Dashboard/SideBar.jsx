@@ -1,6 +1,5 @@
 import React, { useState } from "react";
 import styled, { createGlobalStyle } from "styled-components";
-import styled, { createGlobalStyle } from "styled-components";
 import Coder from "../../../assets/coding.svg";
 import Item from "../Dashboard/Item";
 

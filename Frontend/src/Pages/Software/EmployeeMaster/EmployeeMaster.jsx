@@ -2,9 +2,9 @@ import axios from "axios";
 import React, { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import styled from "styled-components";
-import Header from "../../../Components/Segments/Header";
-import Layout from "../../../Components/Segments/Layout";
-import EmployeeCard from "../../../Components/Software/EmployeeMaster/EmployeeCard";
+import Header from "Frontend/src/Components/Software Components/Dashboard/Header.jsx";
+import Layout from "Frontend/src/Components/Software Components/Dashboard/Layout.jsx";
+import EmployeeCard from "Frontend/src/Components/Software Components/EmployeeMaster/EmployeeCard.jsx";
 
 axios.defaults.withCredentials = true;
 axios.defaults.xsrfCookieName = "csrftoken";
