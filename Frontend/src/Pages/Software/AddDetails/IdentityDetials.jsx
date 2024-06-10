@@ -2,89 +2,259 @@ import React, { useState, useEffect } from 'react';
 import Footer from '../../../Components/Software Components/Footer';
 import Nav from '../../../Components/Software Components/Dashboard/Nav';
 import axios from 'axios';
+import styled from 'styled-components';
+import Modal from './Modal';
+
+axios.defaults.withCredentials = true;
+axios.defaults.xsrfCookieName = "csrftoken";
+axios.defaults.xsrfHeaderName = "X-CSRFToken";
+
+const IdentityDetailsContainer = styled.div`
+  overflow-y: auto;
+  height: calc(100vh - 100px);
+  display: flex;
+  flex-direction: column;
+  width: 80%;
+  margin: 0 auto;
+  padding-bottom: 100px;
+`;
+
+const IdentityDetailsTable = styled.table`
+  margin-top: 50px;
+  width: 100%;
+  align-items: center;
+  border-collapse: collapse;
+  text-align: center;
+`;
+
+const IdentityDetailsHeader = styled.th`
+  background-color: #2C599D;
+  color: white;
+  padding: 15px;
+`;
+
+const IdentityDetailsRow = styled.tr`
+  border-bottom: 1px solid #ddd;
+
+  &:nth-of-type(even) {
+    background-color: #f2f2f2;
+  }
+`;
+
+const IdentityDetailsCell = styled.td`
+  padding: 15px;
+  border: 1px solid #ddd;
+`;
+
+const IdentityDetailsButton = styled.button`
+  background-color: #2C599D;
+  color: white;
+  border-radius: 5px;
+  border: none;
+  padding: 5px 10px;
+  width: 70px;
+  margin-bottom: 10px;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 17px;
+  cursor: pointer;
+  margin-right: 10px;
+
+  &:hover {
+    background-color: #FB9B50;
+  }
+
+  &:active {
+    position: relative;
+    top: 1px;
+  }
+`;
+
+const AddCaseForm = styled.form`
+  margin-top: 15px;
+  padding: 20px;
+  border: 1px solid lightgrey;
+  border-radius: 5px;
+  background-color: white;
+`;
+
+const IdentityField = styled.div`
+  display: flex;
+  flex-direction: column;
+  margin-bottom: 20px;
+`;
+
+const Mandatory = styled.span`
+  color: red;
+`;
+
+const Error = styled.span`
+  color: red;
+  font-size: 12px;
+`;
+
+const CaseButton = styled.button`
+  padding: 10px 20px;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  margin-right: 10px;
+  color: white;
+  background-color: #2C599D;
+
+  &:hover {
+    background-color: #FB9B50;
+    color: white;
+  }
+
+  &:active {
+    position: relative;
+    top: 1px;
+  }
+`;
+
+const EmptyListMessage = styled.div`
+  text-align: center;
+  margin-top: 50px;
+  font-size: 20px;
+  color: gray;
+`;
 
 const IdentityDetails = () => {
-  const [identityDetails, setIdentityDetails] = useState([]);
-  const [addCase, setAddCase] = useState(false);
+  const [identityDetails, setIdentityDetails] = useState([
+    { id: 1, identityType: 'ADHAAR', identityNumber: '', details: null },
+    { id: 2, identityType: 'DRIVING LICENSE', identityNumber: '', details: null },
+    { id: 3, identityType: 'PASSPORT', identityNumber: '', details: null },
+    { id: 4, identityType: 'PAN CARD', identityNumber: '', details: null },
+  ]);
+  const [showModal, setShowModal] = useState(false);
   const [selectedIdentity, setSelectedIdentity] = useState(null);
 
   const handleDelete = async (id) => {
     try {
-      await axios.delete(`/api/identity-details/${id}`);
-      const newList = identityDetails.filter((item) => item.id !== id);
-      setIdentityDetails(newList);
+      const identityType = identityDetails.find(item => item.id === id).identityType;
+      await axios.delete(`http://127.0.0.1:8000/Update${identityType}`); // Adjusted endpoint
+      setIdentityDetails(identityDetails.map(item =>
+        item.id === id ? { ...item, details: null } : item
+      ));
     } catch (error) {
       console.error('Error deleting identity detail:', error);
     }
   };
 
-  const handleAdd = (id) => {
-    const selectedIdentity = identityDetails.find((item) => item.id === id);
-    setAddCase(true);
-    setSelectedIdentity(selectedIdentity);
+  const handleEdit = (id) => {
+    const selected = identityDetails.find(item => item.id === id);
+    setSelectedIdentity(selected);
+    setShowModal(true);
+  };
+
+  const handleView = (id) => {
+    const selected = identityDetails.find(item => item.id === id);
+    if (selected.details) {
+      alert(`Details: ${JSON.stringify(selected.details)}`);
+    } else {
+      alert('No details available');
+    }
   };
 
   const handleAddCase = async (e) => {
     e.preventDefault();
     const formData = new FormData(e.target);
 
-    const newDetails = {
-      identityType: selectedIdentity.identityType,
-      identityNumber: formData.get('identityNumber'),
-      ...(selectedIdentity.identityType === 'ADHAAR' && {
-        aadharCardNumber: formData.get('aadharCardNumber'),
-        aadharCardName: formData.get('aadharCardName'),
-        aadharCardEnrollNumber: formData.get('aadharCardEnrollNumber'),
-        aadharCardScan: formData.get('aadharCardScan'),
-      }),
-      ...(selectedIdentity.identityType === 'DRIVING LICENSE' && {
-        drivingLicenseNumber: formData.get('drivingLicenseNumber'),
-        drivinglicenseName: formData.get('drivinglicenseName'),
-        validdate: formData.get('validdate'),
-        drivinglicenseScan: formData.get('drivinglicenseScan'),
-      }),
-      ...(selectedIdentity.identityType === 'PAN CARD' && {
-        panCardNumber: formData.get('panCardNumber'),
-        panCardName: formData.get('panCardName'),
-        panCardScan: formData.get('panCardScan'),
-      }),
-      ...(selectedIdentity.identityType === 'PASSPORT' && {
-        passportNumber: formData.get('passportNumber'),
-        passportName: formData.get('passportName'),
-        validPassportdate: formData.get('validPassportdate'),
-        passportScan: formData.get('passportScan'),
-      }),
-    };
+    let newDetails = {};
+
+    switch (selectedIdentity.identityType) {
+      case 'ADHAAR':
+        newDetails = {
+          adhaar_no: formData.get('aadharCardNumber'),
+          adhaar_name: formData.get('aadharCardName'),
+          enroll_no: formData.get('aadharCardEnrollNumber'),
+          adhaar_pic: formData.get('aadharCardScan')
+        };
+        break;
+      case 'DRIVING LICENSE':
+        newDetails = {
+          licence_no: formData.get('drivingLicenseNumber'),
+          licence_name: formData.get('drivinglicenseName'),
+          expiry_date: formData.get('validdate'),
+          licence_pic: formData.get('drivinglicenseScan')
+        };
+        break;
+      case 'PAN CARD':
+        newDetails = {
+          pan_no: formData.get('panCardNumber'),
+          pan_name: formData.get('panCardName'),
+          pan_pic: formData.get('panCardScan')
+        };
+        break;
+      case 'PASSPORT':
+        newDetails = {
+          passport_no: formData.get('passportNumber'),
+          passport_name: formData.get('passportName'),
+          passport_validity: formData.get('validPassportdate'),
+          passport_pic: formData.get('passportScan')
+        };
+        break;
+      default:
+        console.error('Invalid identity type');
+        return;
+    }
 
     try {
       let response;
-      if (selectedIdentity.id) {
-        response = await axios.put(`/api/identity-details/${selectedIdentity.id}`, newDetails);
-        const updatedDetails = identityDetails.map((item) =>
-          item.id === selectedIdentity.id ? response.data : item
-        );
-        setIdentityDetails(updatedDetails);
+      if (selectedIdentity.details) {
+        response = await axios.put(`http://127.0.0.1:8000/Update${selectedIdentity.identityType}`, newDetails);
+        setIdentityDetails(identityDetails.map(item =>
+          item.id === selectedIdentity.id ? { ...item, details: response.data } : item
+        ));
       } else {
-        response = await axios.post('/api/identity-details', newDetails);
-        setIdentityDetails((prevState) => [...prevState, response.data]);
+        response = await axios.post(`http://127.0.0.1:8000/Update${selectedIdentity.identityType}`, newDetails);
+        setIdentityDetails(identityDetails.map(item =>
+          item.id === selectedIdentity.id ? { ...item, details: response.data } : item
+        ));
       }
-      setAddCase(false);
-      setSelectedIdentity(null);
+      setShowModal(false);
     } catch (error) {
-      console.error('Error saving identity details:', error);
+      console.error('Error saving identity detail:', error);
     }
   };
 
   const handleCloseForm = () => {
-    setAddCase(false);
-    setSelectedIdentity(null);
+    setShowModal(false);
   };
 
   useEffect(() => {
     const fetchIdentityDetails = async () => {
       try {
-        const response = await axios.get('/api/identity-details');
-        setIdentityDetails(response.data);
+        const adhaarResponse = await axios.get('http://127.0.0.1:8000/UpdateAdhaar');
+        const licenceResponse = await axios.get('http://127.0.0.1:8000/UpdateLicence');
+        const passportResponse = await axios.get('http://127.0.0.1:8000/UpdatePassport');
+        const panResponse = await axios.get('http://127.0.0.1:8000/UpdatePan');
+
+        const updatedDetails = identityDetails.map(item => {
+          let details;
+          switch (item.identityType) {
+            case 'ADHAAR':
+              details = adhaarResponse.data;
+              break;
+            case 'DRIVING LICENSE':
+              details = licenceResponse.data;
+              break;
+            case 'PASSPORT':
+              details = passportResponse.data;
+              break;
+            case 'PAN CARD':
+              details = panResponse.data;
+              break;
+            default:
+              details = null;
+          }
+          return {
+            ...item,
+            details: details || null
+          };
+        });
+        setIdentityDetails(updatedDetails);
       } catch (error) {
         console.error('Error fetching identity details:', error);
       }
@@ -96,225 +266,92 @@ const IdentityDetails = () => {
   return (
     <>
       <Nav />
-      <div className='identity-details-container' style={{ overflowY: 'auto', height: 'calc(100vh - 100px)' }}>
-        <style>
-          {`
-          .identity-details-container {
-            display: flex;
-            flex-direction: column;
-            width: 80%;
-            margin: 0 auto;
-            padding-bottom: 100px;
-          }
-
-          .identity-details-table {
-            margin-top: 50px;
-            width: 100%;
-            align-items: center;
-            border-collapse: collapse;
-          }
-
-          .identity-details-header {
-            background-color: #2C599D;
-            color: white;
-            padding: 15px;
-          }
-
-          .identity-details-row {
-            border-bottom: 1px solid #ddd;
-          }
-
-          .identity-details-row:nth-of-type(even) {
-            background-color: #f2f2f2;
-          }
-
-          .identity-details-cell {
-            padding: 5px;
-            width: 30%;
-          }
-
-          .identity-details-button {
-            background-color: #2C599D;
-            color: white;
-            border-radius: 5px;
-            border: none;
-            padding: 5px 10px;
-            width: 70px;
-            margin-bottom: 10px;
-            text-decoration: none;
-            display: inline-block;
-            font-size: 17px;
-            cursor: pointer;
-            margin-right: 10px;
-            justify-self: center;
-          }
-
-          .identity-details-action {
-            display: flex;
-            justify-content: center;
-            align-items: center;
-          }
-
-          .identity-details-button:hover {
-            background-color: #FB9B50;
-          }
-
-          .identity-details-button:active {
-            position: relative;
-            top: 1px;
-          }
-
-          .add-case-form {
-            display: ${addCase ? 'block' : 'none'};
-            margin-top: 15px;
-            padding: 20px;
-            border: 1px solid lightgrey;
-            border-radius: 5px;
-            background-color: white;
-          }
-
-          .identityfield {
-            display: flex;
-            flex-direction: column;
-            margin-bottom: 20px;
-          }
-
-          .identityfield label {
-            margin-bottom: 5px;
-          }
-
-          .identityfield input {
-            padding: 10px;
-            border: 1px solid lightgrey;
-            border-radius: 5px;
-          }
-
-          .Mandatory {
-            color: red;
-          }
-
-          .Error {
-            color: red;
-            font-size: 12px;
-          }
-
-          .casebtn {
-            padding: 10px 20px;
-            border: none;
-            border-radius: 5px;
-            cursor: pointer;
-            margin-right: 10px;
-            color: white;
-            background-color: #2C599D;
-          }
-
-          .casebtn:hover {
-            background-color: #FB9B50;
-            color: white;
-          }
-
-          .casebtn:active {
-            position: relative;
-            top: 1px;
-          }
-
-          .empty-list-message {
-            text-align: center;
-            margin-top: 50px;
-            font-size: 20px;
-            color: gray;
-          }
-          `}
-        </style>
-        {identityDetails.length > 0 ? (
-          <table className='identity-details-table'>
+      <IdentityDetailsContainer>
+        <h1 style={{ marginTop: '30px' }}>Identity Details</h1>
+        {identityDetails.length === 0 ? (
+          <EmptyListMessage>No identity details available.</EmptyListMessage>
+        ) : (
+          <IdentityDetailsTable>
             <thead>
               <tr>
-                <th className='identity-details-header'>IDENTITY TYPE</th>
-                <th className='identity-details-header'>IDENTITY NUMBER</th>
-                <th className='identity-details-header'>ACTION</th>
+                <IdentityDetailsHeader>Identity Type</IdentityDetailsHeader>
+                <IdentityDetailsHeader>Identity Number</IdentityDetailsHeader>
+                <IdentityDetailsHeader>Actions</IdentityDetailsHeader>
               </tr>
             </thead>
             <tbody>
               {identityDetails.map((item) => (
-                <tr key={item.id} className='identity-details-row'>
-                  <td className='identity-details-cell'>{item.identityType}</td>
-                  <td className='identity-details-cell'>{item.identityNumber}</td>
-                  <td className='identity-details-cell'>
-                    <button className='identity-details-button' onClick={() => handleAdd(item.id)}>Add</button>
-                    <button className='identity-details-button' onClick={() => handleDelete(item.id)}>Delete</button>
-                  </td>
-                </tr>
+                <IdentityDetailsRow key={item.id}>
+                  <IdentityDetailsCell>{item.identityType}</IdentityDetailsCell>
+                  <IdentityDetailsCell>{item.details ? item.details.identityNumber : 'N/A'}</IdentityDetailsCell>
+                  <IdentityDetailsCell>
+                    <IdentityDetailsButton onClick={() => handleView(item.id)}>View</IdentityDetailsButton>
+                    <IdentityDetailsButton onClick={() => handleEdit(item.id)}>Edit</IdentityDetailsButton>
+                    <IdentityDetailsButton onClick={() => handleDelete(item.id)}>Delete</IdentityDetailsButton>
+                  </IdentityDetailsCell>
+                </IdentityDetailsRow>
               ))}
             </tbody>
-          </table>
-        ) : (
-          <div className='empty-list-message'>The list is empty.</div>
+          </IdentityDetailsTable>
         )}
-        {addCase && selectedIdentity && (
-          <form onSubmit={handleAddCase} className='add-case-form'>
-            <div className='ui-divider'></div>
-            <div style={{ textAlign: 'center', marginBottom: '30px' }}>
-              <h3>Employee Identity - {selectedIdentity.identityType}</h3>
-            </div>
-            {selectedIdentity.identityType === 'ADHAAR' && (
-              <div className='identityfield'>
-                <label>ADHAAR CARD NUMBER <span className='Mandatory'>*</span></label>
-                <input type='number' name='aadharCardNumber' required />
-                <span className='Error'>This field is mandatory</span>
-                <label style={{marginTop:'14px'}}>NAME ON ADHAAR CARD</label>
-                <input type='text' name='aadharCardName'/>
-                <label style={{marginTop:'14px'}}>ADHAAR CARD ENROLLMENT NUMBER </label>
-                <input type='number' name='aadharCardEnrollNumber'/>
-                <label style={{marginTop:'14px'}}>UPLOAD ADHAAR CARD SCAN</label>
-                <input type='file' name='aadharCardScan'/>
-              </div>
-            )}
-            {selectedIdentity.identityType === 'DRIVING LICENSE' && (
-              <div className='identityfield'>
-                <label>Driving License Number <span className='Mandatory'>*</span></label>
-                <input type='number' name='drivingLicenseNumber' required />
-                <span className='Error'>This field is mandatory</span>
-                <label style={{marginTop:'14px'}}>Name On License</label>
-                <input type='text' name='drivinglicenseName'/>
-                <label style={{marginTop:'14px'}}>Valid Till</label>
-                <input type='date' name='validdate'/>
-                <label style={{marginTop:'20px'}}>Upload Driving License </label>
-                <input type='file' name='drivinglicenseScan'/>
-              </div>
-            )}
-            {selectedIdentity.identityType === 'PAN CARD' && (
-              <div className='identityfield'>
-                <label>PAN Card Number <span className='Mandatory'>*</span></label>
-                <input type='number' name='panCardNumber' required />
-                <span className='Error'>This field is mandatory</span>
-                <label style={{marginTop:'14px'}}>Name on PAN CARD</label>
-                <input type='text' name='panCardName'/>
-                <label style={{marginTop:'20px'}}>Upload PAN CARD Scan </label>
-                <input type='file' name='panCardScan'/>
-              </div>
-            )}
-            {selectedIdentity.identityType === 'PASSPORT' && (
-              <div className='identityfield'>
-                <label>Passport Number <span className='Mandatory'>*</span></label>
-                <input type='number' name='passportNumber' required />
-                <span className='Error'>This field is mandatory</span>
-                <label style={{marginTop:'14px'}}>Name on Passport</label>
-                <input type='text' name='passportName'/>
-                <label style={{marginTop:'14px'}}>Valid Till</label>
-                <input type='date' name='validPassportdate'/>
-                <label style={{marginTop:'20px'}}>Upload Passport Scan </label>
-                <input type='file' name='passportScan'/>
-              </div>
-            )}
-            <button type="submit" className='casebtn'>Save Details</button>
-            <button type="button" className='casebtn' onClick={handleCloseForm}>Close</button>
-          </form>
-        )}
-      </div>
-      <div style={{ position: 'fixed', left: 0, bottom: 0, width: '100%' }}>
-        <Footer />
-      </div>
+      </IdentityDetailsContainer>
+      <Footer />
+
+      <Modal show={showModal} onClose={handleCloseForm}>
+        <AddCaseForm onSubmit={handleAddCase}>
+          {selectedIdentity && selectedIdentity.identityType === 'ADHAAR' && (
+            <IdentityField>
+              <label>ADHAAR CARD NUMBER <Mandatory>*</Mandatory></label>
+              <input type='number' name='aadharCardNumber' defaultValue={selectedIdentity.details ? selectedIdentity.details.adhaar_no : ''} required />
+              <Error>This field is mandatory</Error>
+              <label style={{ marginTop: '14px' }}>NAME ON ADHAAR</label>
+              <input type='text' name='aadharCardName' defaultValue={selectedIdentity.details ? selectedIdentity.details.adhaar_name : ''} />
+              <label style={{ marginTop: '14px' }}>ENROLLMENT NUMBER</label>
+              <input type='number' name='aadharCardEnrollNumber' defaultValue={selectedIdentity.details ? selectedIdentity.details.enroll_no : ''} />
+              <label style={{ marginTop: '14px' }}>ADHAAR CARD SCAN</label>
+              <input type='file' name='aadharCardScan' accept='image/*' />
+            </IdentityField>
+          )}
+          {selectedIdentity && selectedIdentity.identityType === 'DRIVING LICENSE' && (
+            <IdentityField>
+              <label>DRIVING LICENSE NUMBER <Mandatory>*</Mandatory></label>
+              <input type='number' name='drivingLicenseNumber' defaultValue={selectedIdentity.details ? selectedIdentity.details.licence_no : ''} required />
+              <Error>This field is mandatory</Error>
+              <label style={{ marginTop: '14px' }}>NAME ON DRIVING LICENSE</label>
+              <input type='text' name='drivinglicenseName' defaultValue={selectedIdentity.details ? selectedIdentity.details.licence_name : ''} />
+              <label style={{ marginTop: '14px' }}>VALID UPTO</label>
+              <input type='date' name='validdate' defaultValue={selectedIdentity.details ? selectedIdentity.details.expiry_date : ''} />
+              <label style={{ marginTop: '14px' }}>DRIVING LICENSE SCAN</label>
+              <input type='file' name='drivinglicenseScan' accept='image/*' />
+            </IdentityField>
+          )}
+          {selectedIdentity && selectedIdentity.identityType === 'PAN CARD' && (
+            <IdentityField>
+              <label>PAN CARD NUMBER <Mandatory>*</Mandatory></label>
+              <input type='number' name='panCardNumber' defaultValue={selectedIdentity.details ? selectedIdentity.details.pan_no : ''} required />
+              <Error>This field is mandatory</Error>
+              <label style={{ marginTop: '14px' }}>NAME ON PAN CARD</label>
+              <input type='text' name='panCardName' defaultValue={selectedIdentity.details ? selectedIdentity.details.pan_name : ''} />
+              <label style={{ marginTop: '14px' }}>PAN CARD SCAN</label>
+              <input type='file' name='panCardScan' accept='image/*' />
+            </IdentityField>
+          )}
+          {selectedIdentity && selectedIdentity.identityType === 'PASSPORT' && (
+            <IdentityField>
+              <label>PASSPORT NUMBER <Mandatory>*</Mandatory></label>
+              <input type='number' name='passportNumber' defaultValue={selectedIdentity.details ? selectedIdentity.details.passport_no : ''} required />
+              <Error>This field is mandatory</Error>
+              <label style={{ marginTop: '14px' }}>NAME ON PASSPORT</label>
+              <input type='text' name='passportName' defaultValue={selectedIdentity.details ? selectedIdentity.details.passport_name : ''} />
+              <label style={{ marginTop: '14px' }}>VALID UPTO</label>
+              <input type='date' name='validPassportdate' defaultValue={selectedIdentity.details ? selectedIdentity.details.passport_validity : ''} />
+              <label style={{ marginTop: '14px' }}>PASSPORT SCAN</label>
+              <input type='file' name='passportScan' accept='image/*' />
+            </IdentityField>
+          )}
+          <CaseButton type='submit'>Save</CaseButton>
+        </AddCaseForm>
+      </Modal>
     </>
   );
 };
