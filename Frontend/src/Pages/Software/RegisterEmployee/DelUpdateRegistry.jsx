@@ -1,8 +1,13 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import styled from 'styled-components';
 import Footer from '../../../Components/Software Components/Footer';
 import Nav from '../../../Components/Software Components/Dashboard/Nav';
 import axios from 'axios';
+
+
+axios.defaults.withCredentials = true;
+axios.defaults.xsrfCookieName = "csrftoken";
+axios.defaults.xsrfHeaderName = "X-CSRFToken";
 
 const CustomContainer = styled.div`
   background-color: #fff;
@@ -27,7 +32,7 @@ const Card = styled.div`
   width: 70%;
   max-width: 1250px;
   flex-direction: column;
-  overflow: hidden; 
+  overflow: hidden;
 `;
 
 const Form = styled.form`
@@ -56,7 +61,14 @@ const Input = styled.input`
   border-radius: 4px;
   font-size: 14px;
   margin-top: 8px;
+`;
 
+const Select = styled.select`
+  padding: 8px 12px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  font-size: 14px;
+  margin-top: 8px;
 `;
 
 const Button = styled.button`
@@ -101,27 +113,46 @@ const DelUpdateRegistry = () => {
   const [role, setRole] = useState('');
   const [department, setDepartment] = useState('');
   const [skills, setSkills] = useState('');
+  const [departments, setDepartments] = useState([]);
+  const [emails, setEmails] = useState([]);
   const [showUpdateForm, setShowUpdateForm] = useState(false);
   const [loading, setLoading] = useState(false);
   const [message, setMessage] = useState('');
   const [error, setError] = useState(false);
 
+  useEffect(() => {
+    // Fetch departments and emails when the component mounts
+    const fetchInitialData = async () => {
+      try {
+        const departmentResponse = await axios.get('http://127.0.0.1:8000/UpdateEmployeeDetails/');
+        setDepartments(departmentResponse.data.departments);
+
+        const emailResponse = await axios.get('http://127.0.0.1:8000/UpdateDeleteEmployee/');
+        setEmails(emailResponse.data.email_ids);
+      } catch (error) {
+        console.error('Error fetching initial data:', error);
+      }
+    };
+
+    fetchInitialData();
+  }, []);
+
   const handleUpdate = async () => {
     if (!emailId) {
-      setMessage('Please enter a valid email.');
+      setMessage('Please select a valid email.');
       setError(true);
       return;
     }
 
     setLoading(true);
     try {
-      const response = await axios.get(`/api/employees/${emailId}`);
-      const data = response.data;
-      setName(data.name);
-      setPhoneNumber(data.phoneNumber);
+      const response = await axios.get(`http://127.0.0.1:8000/UpdateEmployeeDetails/?emp_emailid=${emailId}`);
+      const data = response.data.employee_data;
+      setName(data.emp_name);
+      setPhoneNumber(data.emp_phone);
       setRole(data.role);
-      setDepartment(data.department);
-      setSkills(data.skills);
+      setDepartment(data.d_id);
+      setSkills(data.emp_skills);
       setShowUpdateForm(true);
       setMessage('');
     } catch (error) {
@@ -135,16 +166,17 @@ const DelUpdateRegistry = () => {
 
   const handleDelete = async () => {
     if (!emailId) {
-      setMessage('Please enter a valid email.');
+      setMessage('Please select a valid email.');
       setError(true);
       return;
     }
 
     setLoading(true);
     try {
-      await axios.delete(`/api/employees/${emailId}`);
+      await axios.delete(`http://127.0.0.1:8000/UpdateDeleteEmployee/?emailId=${emailId}`);
       setMessage('Employee record deleted successfully!');
       setError(false);
+      window.location.reload();
     } catch (error) {
       console.error('Error deleting employee record:', error);
       setMessage('Error deleting employee record.');
@@ -158,14 +190,14 @@ const DelUpdateRegistry = () => {
     e.preventDefault();
     setLoading(true);
     const updatedDetails = {
-      name,
-      phoneNumber,
-      role,
-      department,
-      skills,
+      emp_name: name,
+      emp_emailid: emailId,
+      emp_phone: phoneNumber,
+      d_id: department,
+      emp_skills: skills,
     };
     try {
-      await axios.put(`/api/employees/${emailId}`, updatedDetails);
+      await axios.post('http://127.0.0.1:8000/UpdateEmployeeDetails/', updatedDetails);
       setMessage('Details have been updated successfully!');
       setError(false);
       setShowUpdateForm(false);
@@ -185,17 +217,21 @@ const DelUpdateRegistry = () => {
         <Card>
           {!showUpdateForm ? (
             <Form>
-              <h3 style={{marginBottom: '30px', marginLeft:'auto', marginRight:'auto'}}>Delete/Update Employee Registry</h3>
+              <h3 style={{ marginBottom: '30px', marginLeft: 'auto', marginRight: 'auto' }}>Delete/Update Employee Registry</h3>
               {message && <Message error={error}>{message}</Message>}
               <FormGroup>
-                <Label htmlFor="emailId" style={{fontSize:'1.1rem'}}>Email:</Label>
-                <Input
-                  type="email"
+                <Label htmlFor="emailId" style={{ fontSize: '1.1rem' }}>Email:</Label>
+                <Select
                   id="emailId"
                   value={emailId}
                   onChange={(e) => setEmailId(e.target.value)}
                   required
-                />
+                >
+                  <option value="">Select Email</option>
+                  {emails.map(email => (
+                    <option key={email} value={email}>{email}</option>
+                  ))}
+                </Select>
               </FormGroup>
               <FormGroup>
                 <Button type="button" onClick={handleUpdate} disabled={loading}>
@@ -210,7 +246,7 @@ const DelUpdateRegistry = () => {
             </Form>
           ) : (
             <Form onSubmit={handleSubmit}>
-              <h3 style={{marginBottom:'20px', marginLeft:'auto', marginRight:'auto'}}>UPDATE FORM</h3>
+              <h3 style={{ marginBottom: '20px', marginLeft: 'auto', marginRight: 'auto' }}>UPDATE FORM</h3>
               {message && <Message error={error}>{message}</Message>}
               <FormGroup>
                 <Label htmlFor="name">Name:</Label>
@@ -244,13 +280,17 @@ const DelUpdateRegistry = () => {
               </FormGroup>
               <FormGroup>
                 <Label htmlFor="department">Department:</Label>
-                <Input
-                  type="text"
+                <Select
                   id="department"
                   value={department}
                   onChange={(e) => setDepartment(e.target.value)}
                   required
-                />
+                >
+                  <option value="">Select Department</option>
+                  {departments.map(dept => (
+                    <option key={dept.d_id} value={dept.d_id}>{dept.d_name}</option>
+                  ))}
+                </Select>
               </FormGroup>
               <FormGroup>
                 <Label htmlFor="skills">Skills:</Label>

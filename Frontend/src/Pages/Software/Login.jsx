@@ -134,7 +134,7 @@ const Login = () => {
       .post("http://127.0.0.1:8000/login/", data)
       .then((res) => {
         console.log(res.data);
-        navigate("/addmedia");
+        navigate("/delupdateregistry");
       })
       .catch((err) => {
         console.log(err);
