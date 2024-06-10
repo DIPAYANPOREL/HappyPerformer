@@ -1,14 +1,15 @@
 import React from 'react';
 import styled from 'styled-components';
-import Footer from '../../../Components/Software Components/Footer'
-import Nav from '../../../Components/Software Components/Dashboard/Nav'
+import Footer from '../../../Components/Software Components/Footer';
+import Nav from '../../../Components/Software Components/Dashboard/Nav';
 
 const CaseContainer = styled.div`
   display: flex;
   justify-content: center;
   align-items: center;
   height: 100vh;
-  background-color: #f5f5f5;
+  background-color: #fff;
+  overflow: hidden;
 `;
 
 const Form = styled.form`
@@ -78,7 +79,6 @@ const SubmitButton = styled.button`
   border-radius: 4px;
   padding: 0.75rem 1.5rem; /* Adjusted padding */
   font-size: 1rem;
-
   cursor: pointer;
 
   &:hover {
@@ -89,66 +89,77 @@ const SubmitButton = styled.button`
 const JobDetails = () => {
   return (
     <>
-    <Nav/>
-    <CaseContainer>
-      <Form>
-        <UIDivider />
-        <UIForm>
-          <Title style={{ textAlign: 'center'}}>Job Details</Title>
-          <CaseField>
-            <Label>
-              Title 
-            </Label>
-            <Input
-              type="text"
-              name="title"
-              placeholder="Title"
-            />
-          </CaseField>
-          <CaseField style={{ width: '35rem', borderRadius: '4px' }}>
-            <Label>Department</Label>
-            <Select name="casetype">
-              <option value="case-dropdown" selected disabled>
-                Select
-              </option>
-              <option value="HR">HR</option>
-              <option value="Manager">Manager</option>
-              <option value="Employee">Employee</option>
-            </Select>
-          </CaseField>
-          <CaseField style={{ width: '35rem', borderRadius: '4px' }}>
-            <Label>Working Type</Label>
-            <Select name="casetype">
-              <option value="case-dropdown" selected disabled>
-                Select
-              </option>
-              <option value="">Full Time</option>
-              <option value="">Part Time</option>
-              <option value="">Remote</option>
-            </Select>
-          </CaseField>
-          <CaseField>
-            <Label>Start Date</Label>
-            <Input type="date" name="startdate" placeholder="dd-mm-yyyy" />
-          </CaseField>
-          <SubmitButton onClick={() => validateForm()}>Submit</SubmitButton>
-        </UIForm>
-      </Form>
-    </CaseContainer>
-    <div style={{position: 'fixed', left: 0, bottom: 0, width: '100%'}}>
-      <Footer/>
-    </div>
+      <Nav />
+      <CaseContainer>
+        <Form name="myForm">
+          <UIDivider />
+          <UIForm>
+            <Title style={{ textAlign: 'center'}}>Job Details</Title>
+            <CaseField>
+              <Label>
+                Title 
+              </Label>
+              <Input
+                type="text"
+                name="title"
+                placeholder="Title"
+              />
+            </CaseField>
+            <CaseField style={{ width: '100%', borderRadius: '4px' }}>
+              <Label>Department</Label>
+              <Select name="casetype">
+                <option value="case-dropdown" selected disabled>
+                  Select
+                </option>
+                <option value="HR">HR</option>
+                <option value="Manager">Manager</option>
+                <option value="Employee">Employee</option>
+              </Select>
+            </CaseField>
+            <CaseField style={{ width: '100%', borderRadius: '4px' }}>
+              <Label>Working Type</Label>
+              <Select name="casetype">
+                <option value="case-dropdown" selected disabled>
+                  Select
+                </option>
+                <option value="full-time">Full Time</option>
+                <option value="part-time">Part Time</option>
+                <option value="remote">Remote</option>
+              </Select>
+            </CaseField>
+            <CaseField>
+              <Label>Start Date</Label>
+              <Input type="date" name="startdate" placeholder="dd-mm-yyyy" />
+            </CaseField>
+            <SubmitButton onClick={() => validateForm()}>Submit</SubmitButton>
+          </UIForm>
+        </Form>
+      </CaseContainer>
+      <FooterContainer>
+        <Footer />
+      </FooterContainer>
     </>
   );
 };
 
+const FooterContainer = styled.div`
+  position: fixed;
+  left: 0;
+  bottom: 0;
+  width: 100%;
+`;
+
 function validateForm() {
-  const x = document.forms['myForm']['createcase'].value;
-  if (x === '') {
-    document.getElementsByClassName('Error')[0].style.display = 'block';
+  const form = document.forms['myForm'];
+  const title = form['title'].value;
+  const department = form['casetype'].value;
+  const startDate = form['startdate'].value;
+
+  if (!title || !department || !startDate) {
+    alert('Please fill in all fields');
   } else {
     alert('Form is Valid');
   }
 }
 
-export default JobDetails
+export default JobDetails;

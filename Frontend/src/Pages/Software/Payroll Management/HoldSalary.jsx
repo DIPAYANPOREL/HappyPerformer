@@ -1,4 +1,5 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
+import axios from "axios";
 import styled from "styled-components";
 import Footer from '../../../Components/Software Components/Footer'
 import Nav from '../../../Components/Software Components/Dashboard/Nav'
@@ -24,19 +25,31 @@ const Select = styled.select`
   border-radius: 5px;
   border: 1px solid #ddd;
   margin-bottom: 20px;
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+  max-width: 300px;
 `;
 
 const Table = styled.table`
-  width: 100%;
+  width: 70%;
+  margin-left: auto;
+  margin-right: auto;
   border-collapse: collapse;
   margin-bottom: 20px;
+  margin-top: 50px;
+  border-radius: 10px;
+  border-top-left-radius: 10px;
+  border-top-right-radius: 10px;
 `;
-
 const TableHeader = styled.thead`
   background-color: #0077b6;
   color: white;
+  height: 30px;
+  border-radius: 10px;
+  border-top-left-radius: 10px;
+  border-top-right-radius: 10px;
 `;
-
 const TableRow = styled.tr`
   &:nth-child(even) {
     background-color: #f2f2f2;
@@ -84,139 +97,147 @@ const Input = styled.input`
 `;
 
 const HoldSalary = () => {
-  const employees = [
-    {
-      id: 1,
-      name: "John Doe",
-      bank: "Bank A",
-      branch: "Branch A",
-      IFSC: "IFSC001",
-      account: "1234567890",
-      isOnHold: false,
-    },
-    {
-      id: 2,
-      name: "Jane Doe",
-      bank: "Bank B",
-      branch: "Branch B",
-      IFSC: "IFSC002",
-      account: "0987654321",
-      isOnHold: false,
-    },
-  ];
-
+  const [employees, setEmployees] = useState([]);
   const [selectedEmployee, setSelectedEmployee] = useState(null);
   const [showModal, setShowModal] = useState(false);
   const [holdReason, setHoldReason] = useState("");
   const [remarks, setRemarks] = useState("");
 
-  const handleHoldUnhold = (employee) => {
-    const updatedEmployee = { ...employee, isOnHold: !employee.isOnHold };
-    setSelectedEmployee(updatedEmployee);
-    if (updatedEmployee.isOnHold) {
-      setShowModal(true);
-    } else {
-      alert(`Account ${updatedEmployee.account} is unheld`);
+  useEffect(() => {
+    fetchEmployees();
+  }, []);
+
+  const fetchEmployees = async () => {
+    try {
+      const response = await axios.get('/api/employees'); // Adjust the endpoint as necessary
+      setEmployees(response.data);
+    } catch (error) {
+      console.error('Error fetching employees:', error);
     }
   };
 
-  const holdSalary = () => {
-    setShowModal(false);
-    setHoldReason("");
-    setRemarks("");
+  const handleHoldUnhold = async (employee) => {
+    const updatedEmployee = { ...employee, isOnHold: !employee.isOnHold };
+
+    if (updatedEmployee.isOnHold) {
+      setSelectedEmployee(updatedEmployee);
+      setShowModal(true);
+    } else {
+      try {
+        await axios.post(`/api/employees/${employee.id}/unhold`);
+        alert(`Account ${updatedEmployee.account} is unheld`);
+        setSelectedEmployee(updatedEmployee);
+      } catch (error) {
+        console.error('Error unholding salary:', error);
+      }
+    }
+  };
+
+  const holdSalary = async () => {
+    try {
+      await axios.post(`/api/employees/${selectedEmployee.id}/hold`, {
+        holdReason,
+        remarks
+      });
+      setShowModal(false);
+      setHoldReason("");
+      setRemarks("");
+      setSelectedEmployee({ ...selectedEmployee, isOnHold: true });
+    } catch (error) {
+      console.error('Error holding salary:', error);
+    }
   };
 
   return (
     <>
-    <Nav/>
-    <Wrapper>
-      <Header>Hold Salary</Header>
-      <SelectLabel htmlFor="employeeSelect">Select Employee:</SelectLabel>
-      <Select
-        id="employeeSelect"
-        onChange={(e) =>
-          setSelectedEmployee(
-            employees.find((emp) => emp.name === e.target.value)
-          )
-        }
-      >
-        <option value="">Select Employee</option>
-        {employees.map((employee) => (
-          <option key={employee.id} value={employee.name}>
-            {employee.name}
-          </option>
-        ))}
-      </Select>
-      <Table>
-        <TableHeader>
-          <TableRow>
-            <th>ID</th>
-            <th>Name</th>
-            <th>Bank</th>
-            <th>Branch</th>
-            <th>IFSC Code</th>
-            <th>Account Number</th>
-            <th>Action</th>
-          </TableRow>
-        </TableHeader>
-        <tbody>
-          {selectedEmployee && (
+      <Nav />
+      <Wrapper>
+        <SelectLabel htmlFor="employeeSelect" style={{marginLeft:'46%', marginTop:'40px'}}>Select Employee:</SelectLabel>
+        <Select
+          id="employeeSelect"
+          onChange={(e) =>
+            setSelectedEmployee(
+              employees.find((emp) => emp.name === e.target.value)
+            )
+          }
+        >
+          <option value="">Select Employee</option>
+          {employees.map((employee) => (
+            <option key={employee.id} value={employee.name}>
+              {employee.name}
+            </option>
+          ))}
+        </Select>
+        <Table>
+          <TableHeader>
             <TableRow>
-              <TableCell>{selectedEmployee.id}</TableCell>
-              <TableCell>{selectedEmployee.name}</TableCell>
-              <TableCell>{selectedEmployee.bank}</TableCell>
-              <TableCell>{selectedEmployee.branch}</TableCell>
-              <TableCell>{selectedEmployee.IFSC}</TableCell>
-              <TableCell>{selectedEmployee.account}</TableCell>
-              <TableCell>
-                <ActionButton
-                  onClick={() => handleHoldUnhold(selectedEmployee)}
-                >
-                  {selectedEmployee.isOnHold ? "Unhold" : "Hold"}
-                </ActionButton>
-              </TableCell>
+              <th>ID</th>
+              <th>Name</th>
+              <th>Bank</th>
+              <th>Branch</th>
+              <th>IFSC Code</th>
+              <th>Account Number</th>
+              <th>Action</th>
             </TableRow>
-          )}
-        </tbody>
-      </Table>
+          </TableHeader>
+          <tbody>
+            {selectedEmployee && (
+              <TableRow>
+                <TableCell>{selectedEmployee.id}</TableCell>
+                <TableCell>{selectedEmployee.name}</TableCell>
+                <TableCell>{selectedEmployee.bank}</TableCell>
+                <TableCell>{selectedEmployee.branch}</TableCell>
+                <TableCell>{selectedEmployee.IFSC}</TableCell>
+                <TableCell>{selectedEmployee.account}</TableCell>
+                <TableCell>
+                  <ActionButton
+                    onClick={() => handleHoldUnhold(selectedEmployee)}
+                  >
+                    {selectedEmployee.isOnHold ? "Unhold" : "Hold"}
+                  </ActionButton>
+                </TableCell>
+              </TableRow>
+            )}
+          </tbody>
+        </Table>
 
-      {showModal && selectedEmployee && (
-        <Modal>
-          <form>
-            <InputLabel>Employee Name: {selectedEmployee.name}</InputLabel>
-            <InputLabel>
-              Hold Reason:
-              <select
-                value={holdReason}
-                onChange={(e) => setHoldReason(e.target.value)}
-              >
-                <option value="">Select Hold Reason</option>
-                <option value="Verification not done">
-                  Verification not done
-                </option>
-                <option value="Document Not Submitted">
-                  Document Not Submitted
-                </option>
-                <option value="Bank Issues">Bank Issues</option>
-                <option value="Other">Other</option>
-              </select>
-            </InputLabel>
-            <InputLabel>
-              Remarks:
-              <Input
-                type="text"
-                value={remarks}
-                onChange={(e) => setRemarks(e.target.value)}
-              />
-            </InputLabel>
-            <ActionButton onClick={holdSalary}>Hold Salary</ActionButton>
-          </form>
-        </Modal>
-      )}
-    </Wrapper>
-    <div style={{position: 'fixed', left: 0, bottom: 0, width: '100%'}}>
-      <Footer/>
-    </div>
+        {showModal && selectedEmployee && (
+          <Modal>
+            <form onSubmit={(e) => { e.preventDefault(); holdSalary(); }}>
+              <InputLabel>Employee Name: {selectedEmployee.name}</InputLabel>
+              <InputLabel>
+                Hold Reason:
+                <select
+                  value={holdReason}
+                  onChange={(e) => setHoldReason(e.target.value)}
+                >
+                  <option value="">Select Hold Reason</option>
+                  <option value="Verification not done">
+                    Verification not done
+                  </option>
+                  <option value="Document Not Submitted">
+                    Document Not Submitted
+                  </option>
+                  <option value="Bank Issues">Bank Issues</option>
+                  <option value="Other">Other</option>
+                </select>
+              </InputLabel>
+              <InputLabel>
+                Remarks:
+                <Input
+                  type="text"
+                  value={remarks}
+                  onChange={(e) => setRemarks(e.target.value)}
+                />
+              </InputLabel>
+              <ActionButton type="submit">Hold Salary</ActionButton>
+            </form>
+          </Modal>
+        )}
+      </Wrapper>
+      <div style={{position: 'fixed', left: 0, bottom: 0, width: '100%'}}>
+        <Footer/>
+      </div>
     </>
   );
 };

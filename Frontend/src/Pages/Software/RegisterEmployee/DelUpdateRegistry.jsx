@@ -1,15 +1,18 @@
 import React, { useState } from 'react';
 import styled from 'styled-components';
-import Footer from '../../../Components/Software Components/Footer'
-import Nav from '../../../Components/Software Components/Dashboard/Nav'
+import Footer from '../../../Components/Software Components/Footer';
+import Nav from '../../../Components/Software Components/Dashboard/Nav';
+import axios from 'axios';
 
 const CustomContainer = styled.div`
-  background-color: #f5f5f5;
+  background-color: #fff;
   display: flex;
   justify-content: center;
   align-items: center;
   min-height: 100vh;
-  width: 100%;
+  width: 60%;
+  margin-left: auto;
+  margin-right: auto;
 `;
 
 const Card = styled.div`
@@ -21,21 +24,24 @@ const Card = styled.div`
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
   padding: 24px;
   margin-bottom: 24px;
-  width: 1250px;
-`;
-
-const FormCard = styled(Card)`
-  margin-top: 20px;
+  width: 70%;
+  max-width: 1250px;
+  flex-direction: column;
+  overflow: hidden; 
 `;
 
 const Form = styled.form`
   display: flex;
   flex-direction: column;
   margin-bottom: 16px;
+  width: 100%;
 `;
 
 const FormGroup = styled.div`
   margin-bottom: 16px;
+  display: flex;
+  flex-direction: column;
+  width: 100%;
 `;
 
 const Label = styled.label`
@@ -45,20 +51,16 @@ const Label = styled.label`
 `;
 
 const Input = styled.input`
-  width: 300px;
   padding: 8px 12px;
   border: 1px solid #ccc;
   border-radius: 4px;
   font-size: 14px;
-  margin-left: 20px;
+  margin-top: 8px;
+
 `;
 
 const Button = styled.button`
-  display: flex;
-  justify-content: center;
-  align-items: center;
   background-color: #007bff;
-  width: 1100px;
   color: #fff;
   border: none;
   border-radius: 4px;
@@ -66,30 +68,30 @@ const Button = styled.button`
   font-size: 14px;
   cursor: pointer;
   margin-top: 10px;
-  margin-left: 30px;
+  margin-left: auto;
+  margin-right: auto;
+  width: 100%;
+  display: inline-block;
 
   &:hover {
     background-color: #0056b3;
   }
 `;
-  const CloseButton = styled.button`
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  background-color: #007bff;
-  width: 100%;
-  color: #fff;
-  border: none;
-  border-radius: 4px;
-  padding: 8px 16px;
-  font-size: 14px;
-  cursor: pointer;
-  margin-top: 10px;
-  margin-left: 3px;
-  
+
+const CloseButton = styled(Button)`
+  background-color: #6c757d;
+
   &:hover {
-    background-color: #0056b3;
+    background-color: #5a6268;
   }
+`;
+
+const Message = styled.div`
+  margin: 16px 0;
+  padding: 12px;
+  border-radius: 4px;
+  color: ${props => (props.error ? 'red' : 'green')};
+  background-color: ${props => (props.error ? '#f8d7da' : '#d4edda')};
 `;
 
 const DelUpdateRegistry = () => {
@@ -100,127 +102,183 @@ const DelUpdateRegistry = () => {
   const [department, setDepartment] = useState('');
   const [skills, setSkills] = useState('');
   const [showUpdateForm, setShowUpdateForm] = useState(false);
+  const [loading, setLoading] = useState(false);
+  const [message, setMessage] = useState('');
+  const [error, setError] = useState(false);
 
-  const handleUpdate = () => {
-    setShowUpdateForm(true);
+  const handleUpdate = async () => {
+    if (!emailId) {
+      setMessage('Please enter a valid email.');
+      setError(true);
+      return;
+    }
+
+    setLoading(true);
+    try {
+      const response = await axios.get(`/api/employees/${emailId}`);
+      const data = response.data;
+      setName(data.name);
+      setPhoneNumber(data.phoneNumber);
+      setRole(data.role);
+      setDepartment(data.department);
+      setSkills(data.skills);
+      setShowUpdateForm(true);
+      setMessage('');
+    } catch (error) {
+      console.error('Error fetching employee data:', error);
+      setMessage('Error fetching employee data.');
+      setError(true);
+    } finally {
+      setLoading(false);
+    }
   };
 
   const handleDelete = async () => {
-    
+    if (!emailId) {
+      setMessage('Please enter a valid email.');
+      setError(true);
+      return;
+    }
+
+    setLoading(true);
+    try {
+      await axios.delete(`/api/employees/${emailId}`);
+      setMessage('Employee record deleted successfully!');
+      setError(false);
+    } catch (error) {
+      console.error('Error deleting employee record:', error);
+      setMessage('Error deleting employee record.');
+      setError(true);
+    } finally {
+      setLoading(false);
+    }
   };
 
-  const handleSubmit = async () => {
-    alert('Details have been updated successfully!');
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+    setLoading(true);
+    const updatedDetails = {
+      name,
+      phoneNumber,
+      role,
+      department,
+      skills,
+    };
+    try {
+      await axios.put(`/api/employees/${emailId}`, updatedDetails);
+      setMessage('Details have been updated successfully!');
+      setError(false);
+      setShowUpdateForm(false);
+    } catch (error) {
+      console.error('Error updating employee details:', error);
+      setMessage('Error updating employee details.');
+      setError(true);
+    } finally {
+      setLoading(false);
+    }
   };
- 
+
   return (
     <>
-    <Nav/>
-    <CustomContainer>
-      {!showUpdateForm ? (
+      <Nav />
+      <CustomContainer>
         <Card>
-          <Form>
-            <FormGroup>
-              <h2 style={{ marginBottom: '40px', marginLeft:'420px' }}>Delete/Update Employee Registry</h2>
-              <Label htmlFor="name" style={{ fontSize: '20px', marginBottom: '8px', marginLeft: '30px'}}>Email:</Label>
-              <br></br>
-              <Input
-                type="email"
-                id="emailId"
-                value={emailId}
-                onChange={(e) => setEmailId(e.target.value)}
-                style={{marginLeft:'30px',marginTop:'10px',width:'1098px'}}
-              />
-            </FormGroup>
-            <FormGroup>
-              <Button type="button" onClick={handleUpdate} style={{marginBottom:'25px'}}>
-                Update
-              </Button>
-              <Button type="button" onClick={handleDelete}>
-                Delete
-              </Button>
-            </FormGroup>
-          </Form>
-        </Card>
-      ) : (
-        <FormCard>
-          <Form>
-          <h2 style={{marginLeft:'500px'}}>Update Form</h2>
-            <FormGroup>
-            <Label htmlFor="name" style={{ fontSize: '15px', marginBottom: '8px' }}>Name:</Label>
-            <br></br>
-              <Input
-                type="text"
-                id="name"
-                value={name}
-                onChange={(e) => setName(e.target.value)}
-                style={{marginLeft:'1px', width:'1160px'}}
-              />
-            </FormGroup>
-            <FormGroup>
-            <Label htmlFor="name" style={{ fontSize: '15px', marginBottom: '8px' }}>Phone Number:</Label>
-            <br></br>
-              <Input
-                type="number"
-                id="phoneNumber"
-                value={phoneNumber}
-                onChange={(e) => setPhoneNumber(e.target.value)}
-                style={{marginLeft:'1px', width:'1160px'}}
-              />
-            </FormGroup>
-            <FormGroup>
-            <Label htmlFor="name" style={{ fontSize: '15px', marginBottom: '8px' }}>Role:</Label>
-            <br></br>
-              <Input
-                type="text"
-                id="role"
-                value={role}
-                onChange={(e) => setRole(e.target.value)}
-                style={{marginLeft:'1px', width:'1160px'}}
-              />
-            </FormGroup>
-            <FormGroup>
-            <Label htmlFor="name" style={{ fontSize: '15px', marginBottom: '8px' }}>Department:</Label>
-            <br></br>
-              <Input
-                type="text"
-                id="department"
-                value={department}
-                onChange={(e) => setDepartment(e.target.value)}
-                style={{marginLeft:'1px', width:'1160px'}}
-              />
-            </FormGroup>
-            <FormGroup>
-            <Label htmlFor="name" style={{ fontSize: '15px', marginBottom: '8px' }}>Skills:</Label>
-            <br></br>
-              <Input
-                type="text"
-                id="skills"
-                value={skills}
-                onChange={(e) => setSkills(e.target.value)}
-                style={{marginLeft:'1px', width:'1160px'}}
-              />
-            </FormGroup>
-            <FormGroup>
-              <Button type="button" onClick={handleSubmit} style={{marginLeft:'2px', width:'100%',marginTop:'20px'}}>
-                Insert
-              </Button>
+          {!showUpdateForm ? (
+            <Form>
+              <h3 style={{marginBottom: '30px', marginLeft:'auto', marginRight:'auto'}}>Delete/Update Employee Registry</h3>
+              {message && <Message error={error}>{message}</Message>}
               <FormGroup>
-      <CloseButton type="button" onClick={() => setShowUpdateForm(false)} style={{marginTop:'25px'}}>
-        Close
-      </CloseButton>
-    </FormGroup>
-            </FormGroup>
-          </Form>
-        </FormCard>
-      )}
-    </CustomContainer>
-    <div style={{position: 'fixed', left: 0, bottom: 0, width: '100%'}}>
-      <Footer/>
-    </div>
+                <Label htmlFor="emailId" style={{fontSize:'1.1rem'}}>Email:</Label>
+                <Input
+                  type="email"
+                  id="emailId"
+                  value={emailId}
+                  onChange={(e) => setEmailId(e.target.value)}
+                  required
+                />
+              </FormGroup>
+              <FormGroup>
+                <Button type="button" onClick={handleUpdate} disabled={loading}>
+                  {loading ? 'Loading...' : 'Update'}
+                </Button>
+              </FormGroup>
+              <FormGroup>
+                <Button type="button" onClick={handleDelete} disabled={loading}>
+                  {loading ? 'Loading...' : 'Delete'}
+                </Button>
+              </FormGroup>
+            </Form>
+          ) : (
+            <Form onSubmit={handleSubmit}>
+              <h3 style={{marginBottom:'20px', marginLeft:'auto', marginRight:'auto'}}>UPDATE FORM</h3>
+              {message && <Message error={error}>{message}</Message>}
+              <FormGroup>
+                <Label htmlFor="name">Name:</Label>
+                <Input
+                  type="text"
+                  id="name"
+                  value={name}
+                  onChange={(e) => setName(e.target.value)}
+                  required
+                />
+              </FormGroup>
+              <FormGroup>
+                <Label htmlFor="phoneNumber">Phone Number:</Label>
+                <Input
+                  type="number"
+                  id="phoneNumber"
+                  value={phoneNumber}
+                  onChange={(e) => setPhoneNumber(e.target.value)}
+                  required
+                />
+              </FormGroup>
+              <FormGroup>
+                <Label htmlFor="role">Role:</Label>
+                <Input
+                  type="text"
+                  id="role"
+                  value={role}
+                  onChange={(e) => setRole(e.target.value)}
+                  required
+                />
+              </FormGroup>
+              <FormGroup>
+                <Label htmlFor="department">Department:</Label>
+                <Input
+                  type="text"
+                  id="department"
+                  value={department}
+                  onChange={(e) => setDepartment(e.target.value)}
+                  required
+                />
+              </FormGroup>
+              <FormGroup>
+                <Label htmlFor="skills">Skills:</Label>
+                <Input
+                  type="text"
+                  id="skills"
+                  value={skills}
+                  onChange={(e) => setSkills(e.target.value)}
+                  required
+                />
+              </FormGroup>
+              <FormGroup>
+                <Button type="submit" disabled={loading}>
+                  {loading ? 'Updating...' : 'Update'}
+                </Button>
+              </FormGroup>
+              <FormGroup>
+                <CloseButton type="button" onClick={() => setShowUpdateForm(false)}>
+                  Close
+                </CloseButton>
+              </FormGroup>
+            </Form>
+          )}
+        </Card>
+      </CustomContainer>
+      <Footer style={{ position: 'fixed', left: 0, bottom: 0, width: '100%' }} />
     </>
   );
 };
 
 export default DelUpdateRegistry;
-

@@ -1,18 +1,16 @@
 import React from 'react';
 import styled from 'styled-components';
 
-
 const CardContainer = styled.div`
-  margin-top: 150px;
+  margin-top: 100px;
   width: 80%;
   margin-left: 10%;
   border: 1px solid #ccc;
-  border-radius: 8px;
+  border-radius: 10px;
   padding: 15px;
-  margin-bottom: -55px;
-  box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2), 0 6px 20px 0 rgba(0,0,0,0.19);
+  margin-bottom: 55px;
+  box-shadow: 0 2px 6px 0 rgba(0,0,0,0.1), 0 6px 20px 0 rgba(0,0,0,0.15);
 `;
-
 
 const Form = styled.form`
   margin-top: 20px;
@@ -45,19 +43,18 @@ const Card = ({title, children}) => {
     </CardContainer>
   );
 };
-
 const ITdeclaration = () => {
   return (
     <div>
       <Card title={
-        <div style={{ color: '#00b8d4', backgroundColor: 'rgba(0, 0, 0, 0.05)', padding:'5px', marginBottom:'25px' }}>
+        <div style={{ color: '#00b8d2', backgroundColor: 'rgba(0, 0, 0, 0.05)', padding:'5px', marginBottom:'25px' }}>
           80C Investments
         </div>
       }>
         <p style={{marginBottom: '15px'}}><strong>Note:</strong> This section contains the list of investments including LIC Schemes, Mutual Funds, and Unit-Linked Insurance Plan. The maximum limit for this section is Rs. 1,50,000.00.</p>
         <Form style={{display: 'flex', flexDirection: 'column'}}>
-        <p style={{marginBottom: '20px', width:'45%', alignItems:'center'}}><strong>Select An Investment</strong></p>
-          <Select style={{marginBottom: '20px', width:'45%', alignItems:'center'}}>
+        <p style={{marginBottom: '20px', width:'28%', alignItems:'center'}}><strong>Select An Investment</strong></p>
+          <Select style={{marginBottom: '20px', width:'28%', alignItems:'center'}}>
             <option value="LIC">Life Insurance Premium</option>
             <option value="PPF">Public Provident Fund</option>
             <option value="Unit-Linked Insurance Plan">Unit-Linked Insurance Plan</option>
@@ -65,20 +62,20 @@ const ITdeclaration = () => {
             <option value="MutualFunds">Mutual Funds</option>
             <option value="TutionFees">Tution Fees</option>
           </Select>
-          <Input style={{marginBottom: '20px', width:'45%', alignItems:'center'}} type="number" placeholder="Enter your amount" />
-          <Button style={{marginBottom: '20px', width:'20%'}} type="submit">Save</Button>
+          <Input style={{marginBottom: '20px', width:'28%', alignItems:'center'}} type="number" placeholder="Enter your amount" />
+          <Button style={{marginBottom: '20px', width:'28%'}} type="submit">Save</Button>
         </Form>
       </Card>
       <Card title={
-        <div style={{color: '#ffb22b', backgroundColor: 'rgba(0, 0, 0, 0.05)',borderRadius: '4px', padding: '5px', marginBottom: '25px'}}>
+        <div style={{color: '#ffb22b', backgroundColor: 'rgba(0, 0, 0, 0.05)',borderRadius: '2px', padding: '5px', marginBottom: '25px'}}>
           80D Investments
         </div>
       }>
         <p style={{ marginTop: '20px', marginBottom: '20px' }}>Investment Declaration</p>
         <p><strong>Note :</strong> Declare investment such as LIC Premiums, Mutual Funds and Unit-Linked Insurance Plan under this section. The maximum tax saving investment you can make under 80C is Rs.1,50,000</p>
         <Form style={{display: 'flex', flexDirection: 'column'}}>
-        <p style={{marginBottom: '20px', width:'45%', alignItems:'center'}}><strong>Select An Investment</strong></p>
-          <Select style={{marginBottom: '20px', width:'45%', alignItems:'center'}}>
+        <p style={{marginBottom: '20px', width:'28%', alignItems:'center'}}><strong>Select An Investment</strong></p>
+          <Select style={{marginBottom: '20px', width:'28%', alignItems:'center'}}>
             <option value="">Medi Claim Policy for self/spouse/children-80D</option>
             <option value="">Medi Claim Policy for self/spouse/children/Senior Citizen -80D</option>
             <option value="">Medi Claim Policy for Parents-80D</option>
@@ -86,37 +83,37 @@ const ITdeclaration = () => {
             <option value="">Prevention Health Check Up-80D</option>
             <option value="">Prevention Health Check Up for Parents -80D</option>
           </Select>
-          <Input style={{marginBottom: '20px', width:'45%', alignItems:'center'}} type="number" placeholder="Enter your amount" />
-          <Button style={{marginBottom: '20px', width:'20%'}} type="submit">Save</Button>
+          <Input style={{marginBottom: '20px', width:'28%', alignItems:'center'}} type="number" placeholder="Enter your amount" />
+          <Button style={{marginBottom: '20px', width:'28%'}} type="submit">Save</Button>
         </Form>
       </Card>
       <Card title={
-        <div style={{color: '#28a745', backgroundColor: 'rgba(0, 0, 0, 0.05)', borderRadius: '4px', padding: '5px', marginBottom: '25px'}}>
+        <div style={{color: '#28a725', backgroundColor: 'rgba(0, 0, 0, 0.05)', borderRadius: '2px', padding: '5px', marginBottom: '25px'}}>
           Other Investments and Exemptions 
         </div>
       }>
         <p style={{ marginTop: '20px', marginBottom: '20px' }}>Investment Declaration</p>
         <p><strong>Note :</strong> Declare investments such as voluntary NPS, Interest paid on education loan and medical expenditures under this section</p>
         <Form style={{display: 'flex', flexDirection: 'column'}}>
-        <p style={{marginTop:'10px',marginBottom: '20px', width:'45%', alignItems:'center'}}><strong>Select An Investment</strong></p>
-          <Select style={{marginBottom: '20px', width:'45%', alignItems:'center'}}>
+        <p style={{marginTop:'10px',marginBottom: '20px', width:'28%', alignItems:'center'}}><strong>Select An Investment</strong></p>
+          <Select style={{marginBottom: '20px', width:'28%', alignItems:'center'}}>
             <option value="">Additional Exemptions on Vountary NPS</option>
             <option value="">Rajiv Gandhi Equity Savings Scheme</option>
             <option value="">Treatment of Dependent with Disability</option>
             <option value="">Treatment of Dependent with Severe Disability</option>
           </Select>
-          <Input style={{marginBottom: '20px', width:'45%', alignItems:'center'}} type="number" placeholder="Enter your amount" />
-          <Button style={{marginBottom: '20px', width:'20%'}} type="submit">Save</Button>
+          <Input style={{marginBottom: '20px', width:'28%', alignItems:'center'}} type="number" placeholder="Enter your amount" />
+          <Button style={{marginBottom: '20px', width:'28%'}} type="submit">Save</Button>
         </Form>
       </Card>
       <Card title={
-        <div style={{background: 'rgba(0,0,0,0.05)', borderRadius: '4px', padding: '5px', marginBottom: '25px'}}>
+        <div style={{background: 'rgba(0,0,0,0.05)', borderRadius: '2px', padding: '5px', marginBottom: '25px'}}>
           Other Sources Of Income 
         </div>
       }>
         <p style={{marginBottom: '10px', padding: '10px'}}><strong>Special title treatment</strong></p>
-        <div style={{backgroundColor: '#f8d7da', borderColor: '#f5c2c7', color: '#842029', padding: '15px', borderRadius: '4px'}}>
-          <p style={{marginBottom: '5px', padding: '10px'}}><strong>⚠️ Remember empty fields will be considered as 0 if not filled</strong></p>
+        <div style={{backgroundColor: '#f8d7da', borderColor: '#f5c2c7', color: '#822029', padding: '15px', borderRadius: '2px'}}>
+          <p style={{marginBottom: '5px', padding: '10px', height:'10px', marginLeft:'-15px'}}><strong>⚠️ Remember empty fields will be considered as 0 if not filled</strong></p>
         </div>
         <p style={{marginTop:'35px'}}>Income from other sources</p>
         <Form>
@@ -130,22 +127,14 @@ const ITdeclaration = () => {
         <Form>
           <Input type="number" placeholder="Enter your amount" style={{marginTop:'-5px',marginBottom: '20px', width:'27%'}}/>
         </Form>
-        <p>Interest Earned from National Savings certificates</p>
+        <p>Interest Earned from National Savings Certificates</p>
         <Form style={{display: 'flex', flexDirection: 'column'}}>
           <Input type="number" placeholder="Enter your amount" style={{marginTop:'-5px',marginBottom: '20px', width:'27%'}} />
-          <Button style={{width:'20%'}} type="submit">Save</Button>
+          <Button style={{width:'27%', marginBottom:'20px'}} type="submit">Save</Button>
         </Form>
       </Card>
     </div>
   );
 };
-
-const App = () => {
-  return (
-    <div>
-      <ITdeclaration />
-    </div>
-  );
-};
-
-export default App;
+  
+export default ITdeclaration;

@@ -1,13 +1,13 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import styled from 'styled-components';
-import Footer from '../../../Components/Software Components/Footer'
-import Nav from '../../../Components/Software Components/Dashboard/Nav'
+import axios from 'axios';
+import Footer from '../../../Components/Software Components/Footer';
+import Nav from '../../../Components/Software Components/Dashboard/Nav';
 
 const SelectEmployee = styled.select`
   padding: 0.5rem;
   margin-top: 10rem;
   margin-bottom: 1rem;
-
 `;
 
 const TableContainer = styled.div`
@@ -19,7 +19,7 @@ const TableContainer = styled.div`
   display: flex;
   justify-content: center;
   align-items: center;
-  margin-left:10%;
+  margin-left: 10%;
 `;
 
 const Table = styled.table`
@@ -33,32 +33,53 @@ const Table = styled.table`
   }
 
   th {
-    background-color: rgba(52, 152, 219, 0.6);
+    background-color: #0b2447;
+    color: #f1f1f1;
     font-weight: bold;
   }
 `;
 
 const ViewEncashment = () => {
-  const employees = [
-    { id: 1, name: 'John Doe' },
-    { id: 2, name: 'Jane Doe' },
-    { id: 3, name: 'Bob Smith' },
-  ];
-
+  const [employees, setEmployees] = useState([]);
   const [selectedEmployee, setSelectedEmployee] = useState(null);
+  const [selectedEmployeeData, setSelectedEmployeeData] = useState(null);
 
-  const handleEmployeeSelect = (event) => {
-    setSelectedEmployee(event.target.value);
+  // Fetch employees from the backend
+  useEffect(() => {
+    const fetchEmployees = async () => {
+      try {
+        const response = await axios.get('/api/employees'); // Adjust the URL to  API endpoint
+        setEmployees(response.data);
+      } catch (error) {
+        console.error('Error fetching employees:', error);
+      }
+    };
+
+    fetchEmployees();
+  }, []);
+
+  const handleEmployeeSelect = async (event) => {
+    const employeeId = event.target.value;
+    setSelectedEmployee(employeeId);
+
+    if (employeeId) {
+      try {
+        const response = await axios.get(`/api/employees/${employeeId}/encashment`); // Adjust the URL to  API endpoint
+        setSelectedEmployeeData(response.data);
+      } catch (error) {
+        console.error('Error fetching employee data:', error);
+      }
+    } else {
+      setSelectedEmployeeData(null);
+    }
   };
-
-  const selectedEmployeeData = selectedEmployee
-    ? employees.find((employee) => employee.id === parseInt(selectedEmployee))
-    : null;
 
   return (
     <>
-    <Nav/>
-      <label htmlFor="employeeSelect" style={{marginLeft:'40%'}}>Select Employee: </label>
+      <Nav />
+      <label htmlFor="employeeSelect" style={{ marginLeft: '40%' }}>
+        Select Employee:
+      </label>
       <SelectEmployee id="employeeSelect" value={selectedEmployee || ''} onChange={handleEmployeeSelect}>
         <option value="">Select an employee</option>
         {employees.map((employee) => (
@@ -81,9 +102,9 @@ const ViewEncashment = () => {
             {selectedEmployeeData ? (
               <tr>
                 <td>{selectedEmployeeData.name}</td>
-                <td>10</td>
-                <td>2</td>
-                <td>$200</td>
+                <td>{selectedEmployeeData.totalLeaves}</td>
+                <td>{selectedEmployeeData.leavesTaken}</td>
+                <td>{selectedEmployeeData.encashment}</td>
               </tr>
             ) : (
               <tr>
@@ -93,9 +114,9 @@ const ViewEncashment = () => {
           </tbody>
         </Table>
       </TableContainer>
-    <div style={{position: 'fixed', left: 0, bottom: 0, width: '100%'}}>
-      <Footer/>
-    </div>
+      <div style={{ position: 'fixed', left: 0, bottom: 0, width: '100%' }}>
+        <Footer />
+      </div>
     </>
   );
 };
