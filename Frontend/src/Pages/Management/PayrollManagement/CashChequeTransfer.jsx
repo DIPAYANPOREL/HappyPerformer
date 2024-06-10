@@ -1,14 +1,19 @@
-import React from 'react';
-import styled from 'styled-components';
-import Nav from "../../../Components/Software Components/Dashboard/Nav";
-import Footer from "../../../Components/Software Components/Footer";
+import axios from "axios";
+import React, { useEffect, useState } from "react";
+import styled from "styled-components";
+import Header from "../../../Components/Software Components/Dashboard/Header";
+import Layout from "../../../Components/Software Components/Dashboard/Layout";
+
+axios.defaults.withCredentials = true;
+axios.defaults.xsrfCookieName = "csrftoken";
+axios.defaults.xsrfHeaderName = "X-CSRFToken";
 
 const Container = styled.div`
   display: flex;
   flex-direction: column;
   align-items: center;
   margin-top: 40px;
-  font-family: 'Roboto', sans-serif;
+  font-family: "Roboto", sans-serif;
 `;
 
 const Title = styled.h2`
@@ -54,37 +59,68 @@ const TableRow = styled.div`
   }
 `;
 
+const LoadingMessage = styled.div`
+  margin-top: 20px;
+  font-size: 1.2rem;
+  color: #0077b6;
+`;
+
+const NoDataMessage = styled.div`
+  margin-top: 20px;
+  font-size: 1.2rem;
+  color: #ff0000;
+`;
+
 const CashChequeTransfer = () => {
-  const dummyData = [
-    { month: 'January', action: 'View' },
-    { month: 'February', action: 'View' },
-    { month: 'March', action: 'View' },
-    { month: 'April', action: 'View' },
-    { month: 'May', action: 'View' },
-  ];
+  const [payrollData, setPayrollData] = useState([]);
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState(null);
+
+  useEffect(() => {
+    const fetchData = async () => {
+      try {
+        const response = await axios.get("http://127.0.0.1:8000/PayslipPayout");
+        setPayrollData(response.data.payouts);
+      } catch (error) {
+        setError("Error fetching payroll data");
+        console.error("Error fetching payroll data:", error);
+      } finally {
+        setLoading(false);
+      }
+    };
+
+    fetchData();
+  }, []);
 
   return (
-    <>
-    <Nav/>
-    <Container>
-      <Title>Select Payroll Month:</Title>
-      <Table>
-        <TableHeader>
-          <span>Payroll Month</span>
-          <span>Action</span>
-        </TableHeader>
-        <TableBody>
-          {dummyData.map((data, index) => (
-            <TableRow key={index}>
-              <span>{data.month}</span>
-              <span>{data.action}</span>
-            </TableRow>
-          ))}
-        </TableBody>
-      </Table>
-    </Container>
-    <Footer/>
-    </>
+    <Layout>
+      <Header title="Cash Cheque Transfer" />
+      <Container>
+        <Title>Select Payroll Month:</Title>
+        {loading ? (
+          <LoadingMessage>Loading...</LoadingMessage>
+        ) : error ? (
+          <NoDataMessage>{error}</NoDataMessage>
+        ) : payrollData.length === 0 ? (
+          <NoDataMessage>No data available</NoDataMessage>
+        ) : (
+          <Table>
+            <TableHeader>
+              <span>Payroll Month</span>
+              <span>Action</span>
+            </TableHeader>
+            <TableBody>
+              {payrollData.map((data, index) => (
+                <TableRow key={index}>
+                  <span>{new Date(data.payout_month).toLocaleDateString()}</span>
+                  <span>View Details</span>
+                </TableRow>
+              ))}
+            </TableBody>
+          </Table>
+        )}
+      </Container>
+    </Layout>
   );
 };
 

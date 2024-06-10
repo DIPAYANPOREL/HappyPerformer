@@ -3,6 +3,10 @@ import React, { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 import styled from "styled-components";
 
+axios.defaults.withCredentials = true;
+axios.defaults.xsrfCookieName = "csrftoken";
+axios.defaults.xsrfHeaderName = "X-CSRFToken";
+
 const Card = styled.div`
   border: 1px solid #ccc;
   border-radius: 10px;
@@ -16,7 +20,7 @@ const Card = styled.div`
 const Form = styled.form`
   display: flex;
   flex-direction: column;
-  gap:40px;
+  gap: 20px;
 `;
 
 const Label = styled.label`
@@ -33,7 +37,7 @@ const Input = styled.input`
 
 const Button = styled.button`
   padding: 12px;
-  background-color: #007bff;
+  background-color: #0077b6;
   color: #fff;
   border: none;
   border-radius: 4px;
@@ -44,7 +48,7 @@ const Button = styled.button`
   }
 `;
 
-const Update_MediaDisp = () => {
+const UpdateMediaDisp = () => {
   const [course, setCourse] = useState({
     course_id: "",
     course_title: "",
@@ -54,11 +58,13 @@ const Update_MediaDisp = () => {
 
   useEffect(() => {
     fetchCourseDetails();
-  }, []);
+  }, [course_id]);
 
   const fetchCourseDetails = async () => {
     try {
-      const response = await axios.get(`http://127.0.0.1:8000/UpdateMedia/${course_id}`);
+      const response = await axios.get(
+        `http://127.0.0.1:8000/UpdateMedia/${course_id}`
+      );
       setCourse(response.data);
     } catch (error) {
       console.error("Error fetching course details:", error);
@@ -67,7 +73,7 @@ const Update_MediaDisp = () => {
 
   const updateCourse = async () => {
     try {
-      await axios.put(`http://127.0.0.1:8000/UpdateMedia/${course_id}`, course);
+      await axios.put(`http://127.0.0.1:8000/UpdateMedia/${course.course_id}`, course);
       console.log("Course updated successfully:", course);
       window.location.reload();
     } catch (error) {
@@ -75,24 +81,18 @@ const Update_MediaDisp = () => {
     }
   };
 
-  const handleChange = (e, index) => {
-    const { name, value } = e.target;
-    const updatedVideos = [...course.videos];
-    updatedVideos[index] = { ...updatedVideos[index], [name]: value };
-    setCourse((prevCourse) => ({
-      ...prevCourse,
-      videos: updatedVideos,
-    }));
-  };
-
   return (
     <Card>
-      <Form onSubmit={(e) => { e.preventDefault(); updateCourse(); }}>
+      <Form
+        onSubmit={(e) => {
+          e.preventDefault();
+          updateCourse();
+        }}
+      >
         <div>
           <Label>Course ID:</Label>
           <Input
             type="text"
-            name="course_id"
             value={course.course_id}
             readOnly
           />
@@ -101,34 +101,34 @@ const Update_MediaDisp = () => {
           <Label>Course Title:</Label>
           <Input
             type="text"
-            name="course_title"
             value={course.course_title}
-            onChange={(e) => setCourse({ ...course, course_title: e.target.value })}
+            onChange={(e) => setCourse(prevState => ({ ...prevState, course_title: e.target.value }))}
           />
         </div>
         {course.videos.map((video, index) => (
           <div key={index}>
             <div>
               <Label>Video Url:</Label>
-            </div>
-            <div>
               <Input
                 type="text"
-                name="location"
                 value={video.location}
-                onChange={(e) => handleChange(e, index)}
+                onChange={(e) => {
+                  const updatedVideos = [...course.videos];
+                  updatedVideos[index].location = e.target.value;
+                  setCourse(prevState => ({ ...prevState, videos: updatedVideos }));
+                }}
               />
             </div>
-            <br />
             <div>
               <Label>Video Description:</Label>
-            </div>
-            <div>
               <Input
                 type="text"
-                name="descr"
                 value={video.descr}
-                onChange={(e) => handleChange(e, index)}
+                onChange={(e) => {
+                  const updatedVideos = [...course.videos];
+                  updatedVideos[index].descr = e.target.value;
+                  setCourse(prevState => ({ ...prevState, videos: updatedVideos }));
+                }}
               />
             </div>
           </div>
@@ -139,4 +139,4 @@ const Update_MediaDisp = () => {
   );
 };
 
-export default Update_MediaDisp;
+export default UpdateMediaDisp;

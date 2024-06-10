@@ -2,15 +2,26 @@ import axios from "axios";
 import React, { useState } from "react";
 import styled from "styled-components";
 
+axios.defaults.withCredentials = true;
+axios.defaults.xsrfCookieName = "csrftoken";
+axios.defaults.xsrfHeaderName = "X-CSRFToken";
+
 const Container = styled.div`
   display: flex;
   flex-direction: column;
   align-items: center;
   padding: 2rem;
-  width: 40%;
+  width: 100%;
+  max-width: 600px;
   background-color: #f5f5f5;
   border-radius: 4px;
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  margin: 1rem;
+
+  @media (max-width: 768px) {
+    padding: 1rem;
+    width: 90%;
+  }
 `;
 
 const Heading = styled.h1`
@@ -18,13 +29,13 @@ const Heading = styled.h1`
   font-weight: bold;
   margin-bottom: 1rem;
   color: #333;
+  text-align: center;
 `;
 
 const Form = styled.form`
   display: flex;
   flex-direction: column;
   width: 100%;
-  max-width: 400px;
 `;
 
 const Label = styled.label`
@@ -40,6 +51,19 @@ const Input = styled.input`
   border-radius: 4px;
   font-size: 1rem;
   margin-bottom: 1rem;
+  &:focus {
+    border-color: #6c63ff;
+    outline: none;
+  }
+`;
+
+const TextArea = styled.textarea`
+  padding: 0.5rem;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  font-size: 1rem;
+  margin-bottom: 1rem;
+  resize: vertical;
   &:focus {
     border-color: #6c63ff;
     outline: none;
@@ -62,7 +86,7 @@ const Option = styled.option``;
 
 const Button = styled.button`
   padding: 0.5rem 2rem;
-  background-color: #6c63ff;
+  background-color: #0077b6;
   color: #fff;
   border: none;
   border-radius: 4px;
@@ -77,7 +101,7 @@ const CreateCaseForm = () => {
   const [formData, setFormData] = useState({
     createFor: "",
     caseTitle: "",
-    caseType: "Benefits",
+    caseType: "",
     detailedDescription: "",
   });
 
@@ -89,17 +113,29 @@ const CreateCaseForm = () => {
     e.preventDefault();
 
     try {
-      const response = await axios.post("localhost", formData);
+      const response = await axios.post(
+        "http://127.0.0.1:8000/CreateCase",
+        formData,
+        {
+          withCredentials: true,
+        }
+      );
       console.log("Case created successfully:", response.data);
 
       setFormData({
         createFor: "",
         caseTitle: "",
-        caseType: "Benefits",
+        caseType: "",
         detailedDescription: "",
       });
     } catch (error) {
-      console.error("Error creating case:", error);
+      if (error.response && error.response.status === 401) {
+        console.error("Unauthorized request. Please log in.");
+        alert("Unauthorized request. Please log in.");
+      } else {
+        console.error("Error creating case:", error);
+        alert("Error creating case. Please try again.");
+      }
     }
   };
 
@@ -135,8 +171,9 @@ const CreateCaseForm = () => {
         </CaseSelect>
 
         <Label>Detailed Description</Label>
-        <Input
+        <TextArea
           name="detailedDescription"
+          rows="4"
           value={formData.detailedDescription}
           onChange={handleChange}
         />

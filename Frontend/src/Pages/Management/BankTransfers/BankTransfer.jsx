@@ -1,52 +1,51 @@
 import React from "react";
 import styled from "styled-components";
 import BTransfer from "../../../Components/Software Components/BankTrans/BTransfer";
-import Header from "../../../Components/Software Components/Dashboard/Header";
-import Nav from "../../../Components/Software Components/Dashboard/Nav";
-import Footer from "../../../Components/Software Components/Footer";
+import Layout from "../../../Components/Software Components/Dashboard/Layout";
 
-const Wrapper = styled.div`
-  height: 100%;
-  background-color: #f8f9fa;
-`;
-
+// Container for the main content area
 const Container = styled.div`
   height: calc(100% - 50px);
   display: flex;
   flex-direction: column;
 `;
 
+// Top section styling
 const Top = styled.div`
   padding: 40px;
   display: flex;
   align-items: center;
   justify-content: center;
-  //   background-color: #007bff;
+
+  @media (max-width: 768px) {
+    padding: 20px;
+  }
 `;
 
+// Bottom section styling
 const Bottom = styled.div`
   flex: 1;
   overflow: auto;
   padding: 20px;
+
+  @media (max-width: 768px) {
+    padding: 10px;
+  }
 `;
 
+// BankTransfer component
 const BankTransfer = () => {
   return (
-    <>
-      <Wrapper>
-        <Nav />
-        <Header title="Bank Transfer Payout" />
-        <Container>
-          <Top>
-            <h1>Bank Transfer</h1>
-          </Top>
-          <Bottom>
-            <BTransfer />
-          </Bottom>
-        </Container>
-        <Footer />
-      </Wrapper>
-    </>
+    <Layout>
+      <Container>
+        <Top>
+          <h1>Bank Transfer</h1>
+        </Top>
+        <Bottom>
+          <BTransfer />
+        </Bottom>
+      </Container>
+    </Layout>
   );
 };
 

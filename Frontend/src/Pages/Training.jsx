@@ -1,72 +1,124 @@
-import React from 'react'
+import React, { useState, useEffect } from 'react';
+import styled from 'styled-components';
+import axios from 'axios';
+import Footer from '../../../Components/Software Components/Footer';
+import Nav from '../../../Components/Software Components/Dashboard/Nav';
+
+const Container = styled.div`
+  width: 50%;
+  margin: 0 auto;
+`;
+
+const CardContainer = styled.div``;
+
+const Title = styled.h2`
+  text-align: center;
+  padding-top: 20px;
+`;
+
+const Row = styled.div`
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+`;
+
+const Col = styled.div`
+  width: 30%;
+  margin-bottom: 20px;
+`;
+
+const Card = styled.div`
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+`;
+
+const CardBody = styled.div`
+  padding: 10px;
+`;
+
+const CardTitle = styled.h5`
+  margin: 0;
+`;
+
+const CardText = styled.p`
+  margin: 5px 0;
+`;
+
+const VideoPlayer = styled.iframe`
+  width: 100%;
+  height: 145px;
+  border: none;
+`;
+
+const Button = styled.a`
+  display: inline-block;
+  padding: 6px 12px;
+  background-color: #007bff;
+  color: #fff;
+  text-decoration: none;
+  border-radius: 4px;
+  transition: background-color 0.3s;
+
+  &:hover {
+    background-color: #0056b3;
+  }
+`;
 
 const Training = () => {
-  const videos = [
-    {
-      id: 1,
-      title: 'JavaScript Tutorial For Beginners',
-      image: 'https://i.ytimg.com/vi/PbpYtmTe5o4/hqdefault.jpg',
-      link: 'https://www.youtube.com/embed/uC9VtVnuPD0',
-      pdf: 'https://drive.google.com/uc?export=download&id=1Yf3NQvJX4703Q9uQbFUv5ZWoD6SqwM7U',
+  const [videos, setVideos] = useState([]);
 
-    },
-    {
-      id: 2,
-      title: 'React JS Tutorial For Beginners',
-      image: 'https://i.ytimg.com/vi/Ke90Tje7VS0/hqdefault.jpg',
-      link: 'https://www.youtube.com/embed/Ke90Tje7VS0',
-      pdf: 'https://drive.google.com/uc?export=download&id=1cZiKJi7q_xb0B8K5K8kJr7KLkMmW39Kk',
+  useEffect(() => {
+    const fetchData = async () => {
+      try {
+        const response = await axios.get('/api/videos');
+        setVideos(response.data);
+      } catch (error) {
+        console.error(error);
+      }
+    };
 
-    },
-    {
-      id: 3,
-      title: 'CSS Tutorial For Beginners',
-      image: 'https://i.ytimg.com/vi/kUMe1FH4CHE/hqdefault.jpg',
-      link: 'https://www.youtube.com/embed/kUMe1FH4CHE?si=vTLbH2ADCckqUkcZ',
-      pdf: 'https://drive.google.com/uc?export=download&id=1QjhI6J0RRnQhzcS5fz-G6g_OqF7p3hXS',
-
-    },
-  ]
+    fetchData();
+  }, []);
 
   return (
-    <div className="container" style={{ width: '50%', margin: '0 auto' }}>
-      <div className="card-container">
-
-        <h2 className="text-center pt-4">Training Page</h2>
-        <hr />
-
-        <div className="row">
-          {videos.map(video => (
-            <div key={video.id} className="col-md-4">
-              <YouTubeVideoCard
-                title={video.title}
-                channel={video.channel}
-                views={video.views}
-                image={video.image}
-                link={video.link}
-              />
-              <PdfCard
-                title={video.title}
-                pdf={video.pdf}
-              />
-              <hr />
-            </div>
-          ))}
-        </div>
-      </div>
-    </div>
-  )
-}
+    <>
+      <Nav />
+      <Container>
+        <CardContainer>
+          <Title>Training Page</Title>
+          <hr />
+          <Row>
+            {videos.map((video) => (
+              <Col key={video.id}>
+                <YouTubeVideoCard
+                  title={video.title}
+                  channel={video.channel}
+                  views={video.views}
+                  image={video.image}
+                  link={video.link}
+                />
+                <PdfCard title={video.title} pdf={video.pdf} />
+                <hr />
+              </Col>
+            ))}
+          </Row>
+        </CardContainer>
+      </Container>
+      <Footer />
+    </>
+  );
+};
 
 const YouTubeVideoCard = ({ title, channel, views, image, link }) => {
   return (
-    <div className="card">
-      <div className="card-body">
-        <h5 className="card-title">{title}</h5>
-        <p className="card-text">{channel}</p>
-        <p className="card-text">{views}</p>
-      </div>
-      <iframe
+    <Card>
+      <CardBody>
+        <CardTitle>{title}</CardTitle>
+        <CardText>{channel}</CardText>
+        <CardText>{views}</CardText>
+      </CardBody>
+      <VideoPlayer
         width="100%"
         height="145"
         src={link}
@@ -74,18 +126,21 @@ const YouTubeVideoCard = ({ title, channel, views, image, link }) => {
         allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
         allowFullScreen
       />
+    </Card>
+  );
+};
 
-    </div>
-  )
-}
-const PdfCard = ({ title }) => {
+const PdfCard = ({ title, pdf }) => {
   return (
-    <div className="card">
-      <div className="card-body">
-        <h5 className="card-title">{title}</h5>
-          <a href="https://happyperformer.com/pdf/JS%20pdf%20description.pdf" target="_blank" rel="noopener noreferrer" className="btn btn-primary">Study Material</a>
-      </div>
-    </div>
-  )
-}
-export default Training
+    <Card>
+      <CardBody>
+        <CardTitle>{title}</CardTitle>
+        <Button href={pdf} target="_blank" rel="noopener noreferrer">
+          Study Material
+        </Button>
+      </CardBody>
+    </Card>
+  );
+};
+
+export default Training;

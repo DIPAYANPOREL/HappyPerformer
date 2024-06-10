@@ -1,14 +1,18 @@
-import React, { useState } from 'react';
-import styled from 'styled-components';
-import axios from 'axios';
-import { useNavigate } from 'react-router-dom';
+import axios from "axios";
+import React, { useState } from "react";
+import { useNavigate } from "react-router-dom";
+import styled from "styled-components";
+
+axios.defaults.withCredentials = true;
+axios.defaults.xsrfCookieName = "csrftoken";
+axios.defaults.xsrfHeaderName = "X-CSRFToken";
 
 const Card = styled.div`
   border: 1px solid #ccc;
   border-radius: 10px;
   padding: 20px;
   margin: 20px;
-  width:96%;
+  width: 96%;
   background-color: white;
   box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
 `;
@@ -16,7 +20,7 @@ const Card = styled.div`
 const Form = styled.form`
   display: flex;
   flex-direction: column;
-  gap: 50px;
+  gap: 20px;
 `;
 
 const Label = styled.label`
@@ -41,7 +45,7 @@ const TextArea = styled.textarea`
 const Button = styled.button`
   width: 100%;
   padding: 12px;
-  background-color: #007bff;
+  background-color: #0077b6;
   color: #fff;
   border: none;
   border-radius: 4px;
@@ -69,9 +73,9 @@ const RemoveButton = styled.button`
   cursor: pointer;
 `;
 
-const CoursesDisp = () => {
-  const [courseTitle, setCourseTitle] = useState('');
-  const [description, setDescription] = useState('');
+const AddCourseForm = () => {
+  const [course_title, setCourseTitle] = useState("");
+  const [description, setDescription] = useState("");
   const [thumbnail, setThumbnail] = useState(null);
   const navigate = useNavigate();
 
@@ -81,29 +85,30 @@ const CoursesDisp = () => {
 
   const handleRemoveFile = () => {
     setThumbnail(null);
-    document.getElementById('file').value = '';
+    document.getElementById("file").value = "";
   };
 
   const handleSubmit = async (event) => {
     event.preventDefault();
     const formData = new FormData();
-    formData.append('course_title', courseTitle);
-    formData.append('description', description);
-    // if (thumbnail) {
-    //   formData.append('thumbnail', thumbnail);
-    // }
+    formData.append("course_title", course_title);
+    formData.append("description", description);
+    if (thumbnail) {
+      formData.append("thumbnail", thumbnail);
+    }
 
     try {
-      const response = await axios.post('http://127.0.0.1:8000/AddCourses/', formData, {
-        headers: {
-          'Content-Type': 'multipart/form-data',
-        },
-      });
+      const response = await axios.post(
+        "http://127.0.0.1:8000/AddCourses/",
+        formData,
+        {
+          withCredentials: true,
+        }
+      );
       const { course_id } = response.data;
-
       navigate(`/UploadMedia/${course_id}`);
     } catch (error) {
-      console.error('Error:', error);
+      console.error("Error:", error);
     }
   };
 
@@ -114,7 +119,7 @@ const CoursesDisp = () => {
           <Label>COURSE TITLE</Label>
           <Input
             type="text"
-            value={courseTitle}
+            value={course_title}
             onChange={(e) => setCourseTitle(e.target.value)}
             required
           />
@@ -123,8 +128,6 @@ const CoursesDisp = () => {
           <Label>SHORT DESCRIPTION</Label>
           <TextArea
             rows="5"
-            cols="20"
-            id="short_description"
             placeholder="Enter description"
             value={description}
             onChange={(e) => setDescription(e.target.value)}
@@ -135,7 +138,11 @@ const CoursesDisp = () => {
           <Label>Thumbnail</Label>
           <FileInputWrapper>
             <Input type="file" id="file" onChange={handleFileChange} />
-            {thumbnail && <RemoveButton type="button" onClick={handleRemoveFile}>&times;</RemoveButton>}
+            {thumbnail && (
+              <RemoveButton type="button" onClick={handleRemoveFile}>
+                &times;
+              </RemoveButton>
+            )}
           </FileInputWrapper>
         </div>
         <Button type="submit">Add Media</Button>
@@ -144,4 +151,4 @@ const CoursesDisp = () => {
   );
 };
 
-export default CoursesDisp;
+export default AddCourseForm;

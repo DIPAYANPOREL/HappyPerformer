@@ -1,10 +1,8 @@
 import React from "react";
 import styled from "styled-components";
 import Update_MediaDisp from "../../../Components/Software Components/Courses/Update_MediaDisp";
-import Nav from '../../../Components/Software Components/Dashboard/Nav';
-import Header from '../../../Components/Software Components/Dashboard/Header';
-import Footer from '../../../Components/Software Components/Footer';
-
+import Header from "../../../Components/Software Components/Dashboard/Header";
+import Layout from "../../../Components/Software Components/Dashboard/Layout";
 
 const MainWrapper = styled.div`
   display: flex;
@@ -20,17 +18,17 @@ const Content = styled.div`
   align-items: center;
 `;
 
-const Update_Media = () => {
-    return (
-        <MainWrapper>
-            <Nav />
-            <Content>
-                <Header title="Update Content" />
-                <Update_MediaDisp />
-            </Content>
-            <Footer />
-        </MainWrapper>
-    );
+const UpdateMedia = () => {
+  return (
+    <Layout>
+      <Header title="Update Content" />
+      <MainWrapper>
+        <Content>
+          <Update_MediaDisp />
+        </Content>
+      </MainWrapper>
+    </Layout>
+  );
 };
 
-export default Update_Media;
+export default UpdateMedia;

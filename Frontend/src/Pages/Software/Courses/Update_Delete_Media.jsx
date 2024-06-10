@@ -1,10 +1,8 @@
-import React from 'react'
-import styled from 'styled-components'
-import Nav from '../../../Components/Software Components/Dashboard/Nav';
-import Footer from '../../../Components/Software Components/Footer';
-import Header from '../../../Components/Software Components/Dashboard/Header';
-import Update_Delete_MediaDisp from '../../../Components/Software Components/Courses/Update_Delete_MediaDisp';
-
+import React from "react";
+import styled from "styled-components";
+import Update_Delete_MediaDisp from "../../../Components/Software Components/Courses/Update_Delete_MediaDisp";
+import Header from "../../../Components/Software Components/Dashboard/Header";
+import Layout from "../../../Components/Software Components/Dashboard/Layout";
 
 const MainWrapper = styled.div`
   display: flex;
@@ -20,18 +18,17 @@ const Content = styled.div`
   align-items: center;
 `;
 
-
 const Update_Delete_Media = () => {
   return (
-    <MainWrapper>
-      <Nav />
-      <Content>
-        <Header title="Update Training"/>
-        <Update_Delete_MediaDisp/>
-      </Content>
-      <Footer />
-    </MainWrapper>
-  )
-}
+    <Layout>
+      <MainWrapper>
+        <Content>
+          <Header title="Update Training" />
+          <Update_Delete_MediaDisp />
+        </Content>
+      </MainWrapper>
+    </Layout>
+  );
+};
 
-export default Update_Delete_Media
+export default Update_Delete_Media;

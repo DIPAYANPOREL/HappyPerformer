@@ -1,22 +1,39 @@
-import React from "react";
+import axios from "axios";
+import React, { useState, useEffect } from "react";
 import styled from "styled-components";
+import Header from "../../../Components/Software Components/Dashboard/Header";
+import Layout from "../../../Components/Software Components/Dashboard/Layout";
 import ResignForm from "../../../Components/Software Components/Resign/ResignForm";
+
+axios.defaults.withCredentials = true;
+axios.defaults.xsrfCookieName = "csrftoken";
+axios.defaults.xsrfHeaderName = "X-CSRFToken";
 
 const Container = styled.div`
   display: flex;
   justify-content: center;
   align-items: center;
   flex-wrap: wrap;
+  padding: 20px;
 `;
+
 const InfoSection = styled.div`
   display: flex;
   justify-content: space-evenly;
   align-items: center;
   width: 100%;
   padding: 30px;
+  flex-wrap: wrap;
 `;
-const JoinDate = styled.div``;
-const YearsOfService = styled.div``;
+
+const JoinDate = styled.div`
+  margin: 10px;
+`;
+
+const YearsOfService = styled.div`
+  margin: 10px;
+`;
+
 const Form = styled.div`
   display: flex;
   width: 100%;
@@ -24,50 +41,57 @@ const Form = styled.div`
   justify-content: center;
   align-items: center;
 `;
-const SaveBtn = styled.button`
-  background-color: #4caf50;
-  border: none;
-  color: white;
-  padding: 15px 32px;
-  text-align: center;
-  text-decoration: none;
-  display: inline-block;
-  font-size: 16px;
-  margin: 20px 0px;
-  cursor: pointer;
-`;
 
 const Resign = () => {
-  const [joiningDate, setJoiningDate] = React.useState("");
-  const [yearsOfService, setYearsOfService] = React.useState(0);
+  const [resignationData, setResignationData] = useState({});
+  const [joiningDate, setJoiningDate] = useState("");
+  const [yearsOfService, setYearsOfService] = useState(0);
 
-  const handleJoiningDateChange = (event) => {
-    setJoiningDate(event.target.value);
-  };
+  useEffect(() => {
+    const fetchData = async () => {
+      try {
+        const response = await axios.get("http://127.0.0.1:8000/Resign", {
+          withCredentials: true,
+        });
+        const data = response.data;
 
-  const handleYearsOfServiceChange = (event) => {
-    setYearsOfService(event.target.value);
-  };
+        // Set resignation data received from the server
+        setResignationData(data);
 
-  const handleSave = () => {};
+        // Extract joining date from resignation data
+        const joiningDate = data[0]?.submit_date || "";
+        setJoiningDate(joiningDate);
+
+        // Calculating years of service from the joining date
+        const currentYear = new Date().getFullYear();
+        const joiningYear = new Date(joiningDate).getFullYear();
+        const years = currentYear - joiningYear;
+        setYearsOfService(years);
+      } catch (error) {
+        console.error("Error fetching data:", error);
+      }
+    };
+
+    fetchData();
+  }, []);
 
   return (
-    <Container>
-      {/* That upper section */}
-      <InfoSection>
-        <JoinDate>Joining Date: {joiningDate}</JoinDate>
-        <YearsOfService>Years of services: {yearsOfService}</YearsOfService>
-      </InfoSection>
-      <Form>
-        <ResignForm
-          joiningDate={joiningDate}
-          onJoiningDateChange={handleJoiningDateChange}
-          yearsOfService={yearsOfService}
-          onYearsOfServiceChange={handleYearsOfServiceChange}
-        />
-      </Form>
-      <SaveBtn onClick={handleSave}>Save</SaveBtn>
-    </Container>
+    <Layout>
+      <Header title="Resign" />
+      <Container>
+        <InfoSection>
+          <JoinDate>Joining Date: {joiningDate}</JoinDate>
+          <YearsOfService>Years of Service: {yearsOfService}</YearsOfService>
+        </InfoSection>
+        <Form>
+          <ResignForm
+            resignationData={resignationData}
+            joiningDate={joiningDate}
+            yearsOfService={yearsOfService}
+          />
+        </Form>
+      </Container>
+    </Layout>
   );
 };
 

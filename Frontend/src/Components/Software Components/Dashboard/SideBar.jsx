@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import styled, { createGlobalStyle } from "styled-components";
+import styled, { createGlobalStyle } from "styled-components";
 import Coder from "../../../assets/coding.svg";
 import Item from "../Dashboard/Item";
 
@@ -21,10 +22,7 @@ const Container = styled.div`
   color: white;
   width: ${({ isCollapsed }) => (isCollapsed ? "50px" : "250px")};
   transition: width 0.3s ease-in-out;
-  position: fixed;
-  top: 0;
-  left: 0;
-  z-index: 2;
+  overflow: hidden;
 `;
 
 const LogoContainer = styled.div`
@@ -51,12 +49,15 @@ const MenuItems = styled.div`
   }
   ::-webkit-scrollbar-track {
     background: #0a1128;
+    background: #0a1128;
   }
   ::-webkit-scrollbar-thumb {
+    background: #0a1128;
     background: #0a1128;
   }
   -ms-overflow-style: none;
   scrollbar-width: thin;
+  scrollbar-color: #0a1128 #0a1128;
   scrollbar-color: #0a1128 #0a1128;
 `;
 
@@ -99,7 +100,11 @@ const HamburgerIcon = styled.div`
   font-size: 24px;
   cursor: pointer;
   z-index: 3;
+  z-index: 3;
   transition: left 0.3s ease-in-out;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 `;
 
 const SideBar = () => {

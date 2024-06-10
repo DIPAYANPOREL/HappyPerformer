@@ -1,9 +1,14 @@
-import React, { useState } from "react";
+import axios from "axios";
+import React, { useEffect, useState } from "react";
 import styled from "styled-components";
+
+axios.defaults.withCredentials = true;
+axios.defaults.xsrfCookieName = "csrftoken";
+axios.defaults.xsrfHeaderName = "X-CSRFToken";
 
 const Container = styled.div`
   max-width: 600px;
-  width: 60%;
+  width: 80%;
   margin: 40px auto;
   padding: 20px;
   background-color: #f9f9f9;
@@ -13,6 +18,7 @@ const Container = styled.div`
   @media (max-width: 768px) {
     margin: 20px auto;
     padding: 10px;
+    width: 90%;
   }
 `;
 
@@ -40,11 +46,12 @@ const InputBar = styled.input`
   }
 `;
 
-const TextBar = styled.div`
+const TextBar = styled.label`
   margin-bottom: 10px;
   font-size: 16px;
   font-weight: bold;
   color: #333;
+  width: 100%;
   @media (max-width: 768px) {
     font-size: 14px;
   }
@@ -76,7 +83,7 @@ const SubmitBtn = styled.button`
   font-size: 16px;
   cursor: pointer;
   &:hover {
-    background-color: #0077b4;
+    background-color: #005f8a;
   }
   @media (max-width: 768px) {
     height: 30px;
@@ -95,12 +102,36 @@ const PlanDetails = styled.div`
 
 const EmployeeAddForm = () => {
   const [formData, setFormData] = useState({
-    fullName: "",
-    email: "",
-    phone: "",
-    department: "",
+    emp_name: "",
+    emp_emailid: "",
+    emp_phone: "",
+    d_id: "",
     skills: "",
   });
+
+  const [departments, setDepartments] = useState([]);
+  const [planDetails, setPlanDetails] = useState({});
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState("");
+
+  useEffect(() => {
+    const fetchData = async () => {
+      try {
+        const response = await axios.get("http://127.0.0.1:8000/AddNewEmployee");
+        setDepartments(response.data.departments);
+        setPlanDetails({
+          emp_count: response.data.emp_count,
+          company: response.data.company,
+        });
+        setLoading(false);
+      } catch (error) {
+        console.error("Error fetching data:", error);
+        setLoading(false);
+      }
+    };
+
+    fetchData();
+  }, []);
 
   const handleChange = (e) => {
     setFormData({ ...formData, [e.target.name]: e.target.value });
@@ -108,57 +139,94 @@ const EmployeeAddForm = () => {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
+    setError("");
+
+    if (!formData.d_id) {
+      setError("Please select a department.");
+      return;
+    }
 
     try {
-      const response = await axios.post("localhostkaaddress", formData);
+      const response = await axios.post(
+        "http://127.0.0.1:8000/AddNewEmployee",
+        formData,
+        {
+          withCredentials: true,
+        }
+      );
       console.log("Employee registered successfully:", response.data);
+      alert("Employee registered successfully.");
     } catch (error) {
       console.error("Error registering employee:", error);
+      setError("Error registering employee. Please try again.");
+      alert("Error Adding New Employee")
     }
   };
+
+  if (loading) {
+    return <div>Loading...</div>;
+  }
 
   return (
     <Container>
       <FormCont onSubmit={handleSubmit}>
-        <TextBar>Full Name</TextBar>
+        <TextBar htmlFor="emp_name">Full Name</TextBar>
         <InputBar
-          name="fullName"
-          value={formData.fullName}
+          id="emp_name"
+          name="emp_name"
+          value={formData.emp_name}
           onChange={handleChange}
         />
 
-        <TextBar>Email</TextBar>
-        <InputBar name="email" value={formData.email} onChange={handleChange} />
+        <TextBar htmlFor="emp_emailid">Email</TextBar>
+        <InputBar
+          id="emp_emailid"
+          name="emp_emailid"
+          value={formData.emp_emailid}
+          onChange={handleChange}
+        />
 
-        <TextBar>Phone</TextBar>
-        <InputBar name="phone" value={formData.phone} onChange={handleChange} />
+        <TextBar htmlFor="emp_phone">Phone</TextBar>
+        <InputBar
+          id="emp_phone"
+          name="emp_phone"
+          value={formData.emp_phone}
+          onChange={handleChange}
+        />
 
-        <TextBar>Department</TextBar>
+        <TextBar htmlFor="d_id">Department</TextBar>
         <DeptSelect
-          name="department"
-          value={formData.department}
+          id="d_id"
+          name="d_id"
+          value={formData.d_id}
           onChange={handleChange}
         >
-          <option value="">SuperManager</option>
-          <option value="">HR</option>
-          <option value="">Manager</option>
-          <option value="">Employee</option>
+          <option value="">Select a department</option>
+          {departments.map((dept) => (
+            <option key={dept.d_id} value={dept.d_id}>
+              {dept.d_name}
+            </option>
+          ))}
         </DeptSelect>
 
-        <TextBar>Skills</TextBar>
+        <TextBar htmlFor="skills">Skills</TextBar>
         <InputBar
+          id="skills"
           name="skills"
           value={formData.skills}
           onChange={handleChange}
         />
 
+        {error && <div style={{ color: "red", marginBottom: "20px" }}>{error}</div>}
+
         <SubmitBtn type="submit">Register</SubmitBtn>
 
-        <PlanDetails>Your ongoing plan: premium</PlanDetails>
-        <PlanDetails>Total employees registered in the portal: 29</PlanDetails>
-        <PlanDetails>Total employee limit of your plan: 50</PlanDetails>
+        <PlanDetails>Ongoing Plan: {planDetails.company.payment_type}</PlanDetails>
+        <PlanDetails>Total employees registered: {planDetails.emp_count}</PlanDetails>
+        <PlanDetails>Employee limit of your plan: {planDetails.company.emp_limit}</PlanDetails>
       </FormCont>
     </Container>
   );
 };
+// latest comment
 export default EmployeeAddForm;
