@@ -85,7 +85,7 @@ const ManageExpenses = () => {
 
   const fetchExpenses = () => {
     axios
-      .get("http://127.0.0.1:8000/manage-expenses")
+      .get("http://127.0.0.1:8000/ManageExpenses/")
       .then((response) => {
         setExpenses(response.data.expenses);
       })
@@ -106,7 +106,7 @@ const ManageExpenses = () => {
 
   const handleDeleteExpense = (expenseId) => {
     axios
-      .delete(`http://127.0.0.1:8000/manage-expenses?expense_id=${expenseId}`)
+      .delete(`http://127.0.0.1:8000/ManageExpenses/?expense_id=${expenseId}`)
       .then((response) => {
         console.log("Expense deleted successfully:", response.data);
         fetchExpenses();
@@ -119,7 +119,7 @@ const ManageExpenses = () => {
   const handleSaveEdit = () => {
     axios
       .post(
-        `http://127.0.0.1:8000/manage-expenses?expense_id=${editExpenseId}`,
+        `http://127.0.0.1:8000/ManageExpenses/?expense_id=${editExpenseId}`,
         editExpenseData
       )
       .then((response) => {
