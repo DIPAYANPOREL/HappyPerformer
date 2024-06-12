@@ -1,3 +1,4 @@
+import axios from "axios";
 import {
   BarElement,
   CategoryScale,
@@ -10,7 +11,6 @@ import { Bar } from "react-chartjs-2";
 import styled from "styled-components";
 import Header from "../../../Components/Software Components/Dashboard/Header";
 import Layout from "../../../Components/Software Components/Dashboard/Layout";
-import axios from "axios";
 ChartJS.register(BarElement, CategoryScale, LinearScale, Tooltip);
 
 axios.defaults.withCredentials = true;
