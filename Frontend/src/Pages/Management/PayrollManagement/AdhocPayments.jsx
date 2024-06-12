@@ -213,6 +213,16 @@ const AdhocPayments = () => {
       .then((response) => {
         setData([...data, response.data]);
         closePopup();
+        alert("Data submitted successfully");
+        setFormData({
+          name: "",
+          department: "",
+          type: "",
+          amount: "",
+          month: "",
+          year: "",
+        });
+        setLoading(false);
       })
       .catch((error) => {
         console.error("There was an error submitting the data!", error);

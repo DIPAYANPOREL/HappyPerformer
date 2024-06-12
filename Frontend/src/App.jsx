@@ -18,6 +18,7 @@ import Upload_Media from "./Pages/Software/Courses/Upload_Media";
 import FAQView from "./Pages/Management/FAQView";
 import AdhocPayments from "./Pages/Management/PayrollManagement/AdhocPayments";
 import ReportingForm from "./Pages/Management/ReportingForm";
+import Resignation from "./Pages/Management/Resignations/Resignations";
 import Faq from "./Pages/Software/DashBoard/FAQ";
 import LoanPayments from "./Pages/Software/DashBoard/LoanPayments";
 import AddExpense from "./Pages/Software/ExpenseManagements/Addexpense";
@@ -59,6 +60,7 @@ function App() {
       <Route path="/newemp" element={<NewEmployeeRegistry />} />
       {/* Resign */}
       <Route path="/resign" element={<Resign />} />
+      <Route path="/resignations" element={<Resignation />} />
       {/* SOP */}
       <Route path="/sop" element={<SopPolicies />} />
       {/* PHP Tuts */}
