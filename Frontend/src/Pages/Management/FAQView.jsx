@@ -55,7 +55,7 @@ const FAQView = () => {
 
   useEffect(() => {
     axios
-      .get("/api/faqs")
+      .get("http://127.0.0.1:8000/FAQsView")
       .then((response) => {
         setFaqs(response.data.faqs || []);
         setLoading(false);
@@ -70,7 +70,7 @@ const FAQView = () => {
   const handleSubmitAnswer = (id, answer) => {
     axios
       .post(
-        `/api/faqs?faq_id=${id}`,
+        `http://127.0.0.1:8000/FAQsView/?faq_id=${id}`,
         { answer },
         {
           credentials: true,
@@ -78,7 +78,9 @@ const FAQView = () => {
       )
       .then((response) => {
         console.log("Answer submitted successfully:", response.data);
+        alert("Answer submitted successfully")
       })
+
       .catch((error) => {
         console.error("There was an error submitting the answer:", error);
       });
