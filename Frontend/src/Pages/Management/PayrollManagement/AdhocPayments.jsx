@@ -1,6 +1,6 @@
-import React, { useState } from "react";
-import styled from "styled-components";
 import axios from "axios";
+import React, { useEffect, useState } from "react";
+import styled from "styled-components";
 import Layout from "../../../Components/Software Components/Dashboard/Layout";
 
 const WhiteContainer = styled.div`
@@ -140,33 +140,22 @@ const AdhocPayments = () => {
     year: "",
   });
   const [errors, setErrors] = useState({});
-  const [data, setData] = useState([
-    {
-      Name: "Daniel",
-      Department: "IT",
-      Type: "Allowance",
-      Amount: 1000,
-      Month: "May",
-      Year: 2022,
-    },
-    {
-      Name: "Harshal",
-      Department: "IT",
-      Type: "Allowance",
-      Amount: 1000,
-      Month: "March",
-      Year: 2022,
-    },
-    {
-      Name: "Manav",
-      Department: "IT",
-      Type: "Allowance",
-      Amount: 42,
-      Month: "June",
-      Year: 2022,
-    },
-    // ... (rest of the initial data)
-  ]);
+  const [data, setData] = useState([]);
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState("");
+
+  useEffect(() => {
+    axios
+      .get("/api/adhoc-payments")
+      .then((response) => {
+        setData(response.data);
+        setLoading(false);
+      })
+      .catch((error) => {
+        setError("Error fetching data from server");
+        setLoading(false);
+      });
+  }, []);
 
   const openPopup = () => {
     setIsPopupOpen(true);
@@ -205,12 +194,12 @@ const AdhocPayments = () => {
     if (!validateForm()) return;
 
     const newData = {
-      Name: formData.name,
-      Department: formData.department,
-      Type: formData.type,
-      Amount: parseFloat(formData.amount),
-      Month: formData.month,
-      Year: parseInt(formData.year),
+      name: formData.name,
+      dept: formData.department,
+      type: formData.type,
+      amt: parseFloat(formData.amount),
+      mon: formData.month,
+      year: parseInt(formData.year),
     };
 
     axios
@@ -233,51 +222,107 @@ const AdhocPayments = () => {
               <Title>Adhoc Payments</Title>
               <AddButton onClick={openPopup}>Add</AddButton>
             </Header>
-            <TableContainer>
-              <Table>
-                <thead>
-                  <TableRow>
-                    <TableCellHeader>Name</TableCellHeader>
-                    <TableCellHeader>Department</TableCellHeader>
-                    <TableCellHeader>Type</TableCellHeader>
-                    <TableCellHeader>Amount</TableCellHeader>
-                    <TableCellHeader>Month</TableCellHeader>
-                    <TableCellHeader>Year</TableCellHeader>
-                  </TableRow>
-                </thead>
-                <tbody>
-                  {data.map((item, index) => (
-                    <TableRow key={index}>
-                      <TableCell>{item.Name}</TableCell>
-                      <TableCell>{item.Department}</TableCell>
-                      <TableCell>{item.Type}</TableCell>
-                      <TableCell>{item.Amount}</TableCell>
-                      <TableCell>{item.Month}</TableCell>
-                      <TableCell>{item.Year}</TableCell>
+            {loading ? (
+              <p>Loading...</p>
+            ) : error ? (
+              <p>{error}</p>
+            ) : data.length === 0 ? (
+              <p>No data available</p>
+            ) : (
+              <TableContainer>
+                <Table>
+                  <thead>
+                    <TableRow>
+                      <TableCellHeader>Name</TableCellHeader>
+                      <TableCellHeader>Department</TableCellHeader>
+                      <TableCellHeader>Type</TableCellHeader>
+                      <TableCellHeader>Amount</TableCellHeader>
+                      <TableCellHeader>Month</TableCellHeader>
+                      <TableCellHeader>Year</TableCellHeader>
                     </TableRow>
-                  ))}
-                </tbody>
-              </Table>
-            </TableContainer>
+                  </thead>
+                  <tbody>
+                    {data.map((item, index) => (
+                      <TableRow key={index}>
+                        <TableCell>{item.name}</TableCell>
+                        <TableCell>{item.dept}</TableCell>
+                        <TableCell>{item.type}</TableCell>
+                        <TableCell>{item.amt}</TableCell>
+                        <TableCell>{item.mon}</TableCell>
+                        <TableCell>{item.year}</TableCell>
+                      </TableRow>
+                    ))}
+                  </tbody>
+                </Table>
+              </TableContainer>
+            )}
             {isPopupOpen && (
               <>
                 <Overlay onClick={closePopup} />
                 <PopupContainer>
                   <h2>Add Allowance or Deduction</h2>
-                  {Object.keys(formData).map((key) => (
-                    <FormField key={key}>
-                      <Label htmlFor={key}>
-                        Enter {key.charAt(0).toUpperCase() + key.slice(1)}:
-                      </Label>
-                      <Input
-                        type="text"
-                        id={key}
-                        value={formData[key]}
-                        onChange={handleChange}
-                      />
-                      {errors[key] && <ErrorText>{errors[key]}</ErrorText>}
-                    </FormField>
-                  ))}
+                  <FormField>
+                    <Label htmlFor="name">Enter Name:</Label>
+                    <Input
+                      type="text"
+                      id="name"
+                      value={formData.name}
+                      onChange={handleChange}
+                    />
+                    {errors.name && <ErrorText>{errors.name}</ErrorText>}
+                  </FormField>
+                  <FormField>
+                    <Label htmlFor="department">Enter Department:</Label>
+                    <Input
+                      type="text"
+                      id="department"
+                      value={formData.department}
+                      onChange={handleChange}
+                    />
+                    {errors.department && (
+                      <ErrorText>{errors.department}</ErrorText>
+                    )}
+                  </FormField>
+                  <FormField>
+                    <Label htmlFor="type">Enter Type:</Label>
+                    <Input
+                      type="text"
+                      id="type"
+                      value={formData.type}
+                      onChange={handleChange}
+                    />
+                    {errors.type && <ErrorText>{errors.type}</ErrorText>}
+                  </FormField>
+                  <FormField>
+                    <Label htmlFor="amount">Enter Amount:</Label>
+                    <Input
+                      type="text"
+                      id="amount"
+                      value={formData.amount}
+                      onChange={handleChange}
+                    />
+                    {errors.amount && <ErrorText>{errors.amount}</ErrorText>}
+                  </FormField>
+                  <FormField>
+                    <Label htmlFor="month">Enter Month:</Label>
+                    <Input
+                      type="text"
+                      id="month"
+                      value={formData.month}
+                      onChange={handleChange}
+                    />
+                    {errors.month && <ErrorText>{errors.month}</ErrorText>}
+                  </FormField>
+                  <FormField>
+                    <Label htmlFor="year">Enter Year:</Label>
+                    <Input
+                      type="text"
+                      id="year"
+                      value={formData.year}
+                      onChange={handleChange}
+                    />
+                    {errors.year && <ErrorText>{errors.year}</ErrorText>}
+                  </FormField>
                   <Button onClick={insertData}>Insert</Button>
                   <Button onClick={closePopup}>Close</Button>
                 </PopupContainer>

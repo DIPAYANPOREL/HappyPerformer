@@ -16,6 +16,7 @@ import Update_Media from "./Pages/Software/Courses/Update_Media";
 import Upload_Media from "./Pages/Software/Courses/Upload_Media";
 // import EmployeeMaster from "./Pages/Software/EmployeeMaster/EmployeeMaster";
 import FAQView from "./Pages/Management/FAQView";
+import AdhocPayments from "./Pages/Management/PayrollManagement/AdhocPayments";
 import ReportingForm from "./Pages/Management/ReportingForm";
 import Faq from "./Pages/Software/DashBoard/FAQ";
 import LoanPayments from "./Pages/Software/DashBoard/LoanPayments";
@@ -74,6 +75,8 @@ function App() {
 
       {/* Reports */}
       <Route path="/reporting-form" element={<ReportingForm />} />
+
+      <Route path="/adhoc" element={<AdhocPayments />} />
     </Routes>
   );
 }
