@@ -3,14 +3,19 @@ import {
   CategoryScale,
   Chart as ChartJS,
   LinearScale,
+  Tooltip,
 } from "chart.js";
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { Bar } from "react-chartjs-2";
 import styled from "styled-components";
 import Header from "../../../Components/Software Components/Dashboard/Header";
 import Layout from "../../../Components/Software Components/Dashboard/Layout";
+import axios from "axios";
+ChartJS.register(BarElement, CategoryScale, LinearScale, Tooltip);
 
-ChartJS.register(BarElement, CategoryScale, LinearScale);
+axios.defaults.withCredentials = true;
+axios.defaults.xsrfCookieName = "csrftoken";
+axios.defaults.xsrfHeaderName = "X-CSRFToken";
 
 const Container = styled.div`
   display: flex;
@@ -38,29 +43,81 @@ const ExpenseChartContainer = styled.div`
   width: 100%;
 `;
 
-const data = {
-  labels: ["2024-06-10"],
-  datasets: [
-    {
-      label: "Expense by Month (Whole Year)",
-      data: [6.0],
-      backgroundColor: "blue",
-    },
-  ],
-};
-
-const options = {
-  scales: {
-    y: {
-      beginAtZero: true,
-      max: 7,
-      min: 5,
-      stepSize: 0.2,
-    },
-  },
-};
-
 const ExpenseReports = () => {
+  const [chartData, setChartData] = useState({
+    labels: [],
+    datasets: [
+      {
+        label: "Expense by Month (Whole Year)",
+        data: [],
+        backgroundColor: "blue",
+        expenseItems: [],
+        expenseIds: [],
+      },
+    ],
+  });
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState("");
+
+  useEffect(() => {
+    fetchExpenseData();
+  }, []);
+
+  const fetchExpenseData = async () => {
+    try {
+      const response = await axios.get("http://127.0.0.1:8000/ExpenseReport");
+      const expenses = response.data.expenses;
+
+      const labels = expenses.map((expense) => expense.date);
+      const data = expenses.map((expense) => expense.amount);
+      const expenseItems = expenses.map((expense) => expense.expense_item);
+      const expenseIds = expenses.map((expense) => expense.expense_id);
+
+      setChartData({
+        labels,
+        datasets: [
+          {
+            label: "Expense by Month (Whole Year)",
+            data,
+            backgroundColor: "blue",
+            expenseItems,
+            expenseIds,
+          },
+        ],
+      });
+
+      setLoading(false);
+    } catch (error) {
+      console.error("There was an error fetching the expense data:", error);
+      setError("There was an error fetching the expense data.");
+      setLoading(false);
+    }
+  };
+
+  if (loading) {
+    return (
+      <Layout>
+        <Container>
+          <WhiteContainer>
+            <Heading>Loading...</Heading>
+          </WhiteContainer>
+        </Container>
+      </Layout>
+    );
+  }
+
+  if (error) {
+    return (
+      <Layout>
+        <Container>
+          <WhiteContainer>
+            <Heading>{error}</Heading>
+          </WhiteContainer>
+        </Container>
+      </Layout>
+    );
+  }
+
   return (
     <Layout>
       <Header title="Expense Report" />
@@ -68,7 +125,31 @@ const ExpenseReports = () => {
         <WhiteContainer>
           <Heading>Full Expense Reports</Heading>
           <ExpenseChartContainer>
-            <Bar data={data} options={options} />
+            <Bar
+              data={chartData}
+              options={{
+                scales: {
+                  y: {
+                    beginAtZero: true,
+                    max: Math.max(...chartData.datasets[0].data) + 10, // Dynamic max value
+                    stepSize: 10,
+                  },
+                },
+                plugins: {
+                  tooltip: {
+                    callbacks: {
+                      label: function (context) {
+                        const index = context.dataIndex;
+                        const amount = context.dataset.data[index];
+                        const item = context.dataset.expenseItems[index];
+                        const id = context.dataset.expenseIds[index];
+                        return `Amount: ${amount}, Item: ${item}, ID: ${id}`;
+                      },
+                    },
+                  },
+                },
+              }}
+            />
           </ExpenseChartContainer>
         </WhiteContainer>
       </Container>

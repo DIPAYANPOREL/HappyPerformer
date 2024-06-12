@@ -21,7 +21,7 @@ const InnerContainer = styled.div`
   padding: 40px;
   border-radius: 10px;
   box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-  width: 600px; /* Increased width */
+  width: 600px;
 `;
 
 const Form = styled.form`
@@ -31,20 +31,20 @@ const Form = styled.form`
 
 const Input = styled.input`
   margin-bottom: 20px;
-  padding: 15px; /* Increased padding */
+  padding: 15px;
   border: 1px solid #ced4da;
   border-radius: 10px;
   font-size: 16px;
 `;
 
 const Label = styled.label`
-  margin-bottom: 10px; /* Increased margin */
+  margin-bottom: 10px;
   font-weight: bold;
   font-size: 16px;
 `;
 
 const Button = styled.button`
-  padding: 15px; /* Increased padding */
+  padding: 15px;
   background-color: #007bff;
   color: white;
   border: none;
@@ -58,7 +58,7 @@ const Button = styled.button`
 `;
 
 const Heading = styled.h2`
-  margin-bottom: 30px; /* Increased margin */
+  margin-bottom: 30px; 
   text-align: center;
 `;
 
@@ -75,7 +75,7 @@ const AddExpense = () => {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    setError(""); // Clear any previous errors
+    setError("");
     const payload = {
       expense: amount,
       expensedate: date,
@@ -83,7 +83,7 @@ const AddExpense = () => {
     };
 
     axios
-      .post("http://127.0.0.1:8000/add-expense", payload)
+      .post("http://127.0.0.1:8000/AddExpenses", payload)
       .then((response) => {
         console.log("Expense added successfully:", response.data);
         setAmount("");
