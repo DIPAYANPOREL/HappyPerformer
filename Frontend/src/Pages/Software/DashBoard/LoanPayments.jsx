@@ -175,8 +175,13 @@ const LoanPayments = () => {
   const [error, setError] = useState("");
 
   useEffect(() => {
+    fetchLoans();
+  }, []);
+
+  const fetchLoans = () => {
+    setLoading(true);
     axios
-      .get("http://127.0.0.1:8000/FAQsView")
+      .get("http://127.0.0.1:8000/AddLoan")
       .then((response) => {
         setLoans(response.data.loans || []);
         setLoading(false);
@@ -186,7 +191,7 @@ const LoanPayments = () => {
         setError("No data available, please try again");
         setLoading(false);
       });
-  }, []);
+  };
 
   const toggleApplyLoanPopup = () => {
     setApplyLoanOpen(!isApplyLoanOpen);
@@ -205,8 +210,8 @@ const LoanPayments = () => {
 
     if (!formData.name.trim()) {
       formErrors.name = "Name is required";
-    } else if (!/^[A-Za-z]+$/.test(formData.name)) {
-      formErrors.name = "Name should only contain letters";
+    } else if (!/^[A-Za-z\s-]+$/.test(formData.name)) {
+      formErrors.name = "Name should only contain letters, spaces, and hyphens";
     }
 
     if (!formData.department.trim()) {
@@ -246,7 +251,7 @@ const LoanPayments = () => {
         mamt: formData.monthlyAmount,
         startdate: formData.startDate,
         reason: formData.reason,
-        status: 0, // Assuming status 0 is for pending
+        status: 0,
       };
 
       axios
@@ -266,7 +271,7 @@ const LoanPayments = () => {
             reason: "",
           });
           setErrors({});
-          // Optionally, you can refetch the loans data here
+          fetchLoans(); // Refresh the loan data
         })
         .catch((error) => {
           console.error("There was an error applying for the loan!", error);
