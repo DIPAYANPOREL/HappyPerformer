@@ -2,7 +2,11 @@ import axios from "axios";
 import React, { useEffect, useState } from "react";
 import styled from "styled-components";
 import Header from "../../../Components/Software Components/Dashboard/Header";
-import Layout from "../../../Components/Software Components/Dashboard/Layout"; // Verify this path is correct
+import Layout from "../../../Components/Software Components/Dashboard/Layout";
+
+axios.defaults.withCredentials = true;
+axios.defaults.xsrfCookieName = "csrftoken";
+axios.defaults.xsrfHeaderName = "X-CSRFToken";
 
 const Container = styled.div`
   flex: 1;
@@ -225,12 +229,12 @@ const Faq = () => {
   const [activeIndex, setActiveIndex] = useState(null);
   const [faqs, setFaqs] = useState([]);
   const [showPopup, setShowPopup] = useState(false);
-  const [formData, setFormData] = useState({ email: "", message: "" });
-  const [errors, setErrors] = useState({ email: "", message: "" });
+  const [formData, setFormData] = useState({ message: "" });
+  const [errors, setErrors] = useState({ message: "" });
 
   useEffect(() => {
     axios
-      .get("/api/faq")
+      .get("http://127.0.0.1:8000/FAQsView")
       .then((response) => {
         setFaqs(response.data.faqs);
       })
@@ -250,12 +254,7 @@ const Faq = () => {
 
   const validateForm = () => {
     let valid = true;
-    const errors = { email: "", message: "" };
-
-    if (!formData.email) {
-      errors.email = "Email is required";
-      valid = false;
-    }
+    const errors = { message: "" };
 
     if (!formData.message) {
       errors.message = "Message is required";
@@ -269,18 +268,18 @@ const Faq = () => {
   const handleSubmit = (e) => {
     e.preventDefault();
     if (validateForm()) {
-      console.log("Submitting form with data:", formData); // Debugging log
+      console.log("Submitting form with data:", formData);
       axios
-        .post("/api/faq", formData) // Adjust the API endpoint as per your backend setup
+        .post("http://127.0.0.1:8000/FAQsView/", formData)
         .then((response) => {
-          console.log("Form submitted successfully:", response); // Log response for debugging
+          console.log("Form submitted successfully:", response);
           setShowPopup(true);
         })
         .catch((error) => {
           console.error("Error submitting form:", error);
         });
     } else {
-      console.log("Form validation failed with errors:", errors); // Debugging log
+      console.log("Form validation failed with errors:", errors);
     }
   };
 
@@ -304,17 +303,6 @@ const Faq = () => {
         ))}
         <FormTitle>More Questions? Let us help you!</FormTitle>
         <Form onSubmit={handleSubmit}>
-          <Label htmlFor="email">Email Address</Label>
-          <Input
-            type="email"
-            id="email"
-            name="email"
-            placeholder="Your email address"
-            value={formData.email}
-            onChange={handleChange}
-            required
-          />
-          {errors.email && <p style={{ color: "red" }}>{errors.email}</p>}
           <Label htmlFor="message">Message</Label>
           <TextArea
             id="message"
@@ -344,3 +332,4 @@ const Faq = () => {
 };
 
 export default Faq;
+
