@@ -1,7 +1,12 @@
-import React, { useState } from "react";
-import styled from "styled-components";
-import Layout from "../../Components/Software Components/Dashboard/Layout";
 import axios from "axios";
+import React, { useEffect, useState } from "react";
+import styled from "styled-components";
+import Header from "../../Components/Software Components/Dashboard/Header";
+import Layout from "../../Components/Software Components/Dashboard/Layout";
+
+axios.defaults.withCredentials = true;
+axios.defaults.xsrfCookieName = "csrftoken";
+axios.defaults.xsrfHeaderName = "X-CSRFToken";
 
 const MainContainer = styled.div`
   flex: 1;
@@ -43,11 +48,34 @@ const Input = styled.input`
 `;
 
 const FAQView = () => {
-  const [answers, setAnswers] = useState({}); // State to hold answers
+  const [faqs, setFaqs] = useState([]);
+  const [answers, setAnswers] = useState({});
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState("");
+
+  useEffect(() => {
+    axios
+      .get("/api/faqs")
+      .then((response) => {
+        setFaqs(response.data.faqs || []);
+        setLoading(false);
+      })
+      .catch((error) => {
+        console.error("There was an error fetching the FAQs:", error);
+        setError("No data available, please try again");
+        setLoading(false);
+      });
+  }, []);
 
   const handleSubmitAnswer = (id, answer) => {
     axios
-      .post("/api/submit-answer", { id, answer }) // Adjust URL and payload as needed
+      .post(
+        `/api/faqs?faq_id=${id}`,
+        { answer },
+        {
+          credentials: true,
+        }
+      )
       .then((response) => {
         console.log("Answer submitted successfully:", response.data);
       })
@@ -63,8 +91,33 @@ const FAQView = () => {
     }));
   };
 
+  if (loading) {
+    return (
+      <Layout>
+        <MainContainer>
+          <Container>
+            <Title>Loading...</Title>
+          </Container>
+        </MainContainer>
+      </Layout>
+    );
+  }
+
+  if (error) {
+    return (
+      <Layout>
+        <MainContainer>
+          <Container>
+            <Title>{error}</Title>
+          </Container>
+        </MainContainer>
+      </Layout>
+    );
+  }
+
   return (
     <Layout>
+      <Header title="FAQ's" />
       <MainContainer>
         <Container>
           <Title>Frequently Asked Questions</Title>
@@ -79,17 +132,17 @@ const FAQView = () => {
               </tr>
             </thead>
             <tbody>
-              {data.map((item) => (
-                <tr key={item.id}>
-                  <Td>{item.id}</Td>
-                  <Td>{item.employee}</Td>
+              {faqs.map((item) => (
+                <tr key={item.faq_id}>
+                  <Td>{item.faq_id}</Td>
+                  <Td>{item.emp_emailid}</Td>
                   <Td>{item.question}</Td>
                   <Td>
                     <Input
                       type="text"
-                      value={answers[item.id] || ""}
+                      value={answers[item.faq_id] || ""}
                       onChange={(e) =>
-                        handleInputChange(item.id, e.target.value)
+                        handleInputChange(item.faq_id, e.target.value)
                       }
                       placeholder="Answer..."
                     />
@@ -97,7 +150,7 @@ const FAQView = () => {
                   <Td>
                     <button
                       onClick={() =>
-                        handleSubmitAnswer(item.id, answers[item.id])
+                        handleSubmitAnswer(item.faq_id, answers[item.faq_id])
                       }
                     >
                       Submit Answer

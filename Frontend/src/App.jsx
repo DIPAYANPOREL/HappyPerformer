@@ -15,6 +15,7 @@ import Update_Delete_Media from "./Pages/Software/Courses/Update_Delete_Media";
 import Update_Media from "./Pages/Software/Courses/Update_Media";
 import Upload_Media from "./Pages/Software/Courses/Upload_Media";
 // import EmployeeMaster from "./Pages/Software/EmployeeMaster/EmployeeMaster";
+import FAQView from "./Pages/Management/FAQView";
 import Login from "./Pages/Software/Login";
 import PHPTutorials from "./Pages/Software/PHPTutorials/PHPTutorials";
 import Pricing from "./Pages/Software/Pricing";
@@ -55,6 +56,8 @@ function App() {
       <Route path="/sop" element={<SopPolicies />} />
       {/* PHP Tuts */}
       <Route path="/phptuts" element={<PHPTutorials />} />
+      {/* FAQ Views */}
+      <Route path="/FAQs" element={<FAQView />} />
     </Routes>
   );
 }
