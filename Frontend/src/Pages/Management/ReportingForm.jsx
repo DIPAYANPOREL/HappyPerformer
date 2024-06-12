@@ -1,7 +1,12 @@
-import React, { useState } from "react";
 import axios from "axios";
+import React, { useEffect, useState } from "react";
 import styled, { createGlobalStyle } from "styled-components";
+import Header from "../../Components/Software Components/Dashboard/Header";
 import Layout from "../../Components/Software Components/Dashboard/Layout";
+
+axios.defaults.withCredentials = true;
+axios.defaults.xsrfCookieName = "csrftoken";
+axios.defaults.xsrfHeaderName = "X-CSRFToken";
 
 // Global styles for CSS reset and base styles
 const GlobalStyle = createGlobalStyle`
@@ -67,8 +72,10 @@ const Title = styled.h1`
   }
 `;
 
-const SectionTitle = styled.h2`
-  margin-top: 0;
+const Label = styled.label`
+  display: block;
+  margin-bottom: 10px;
+  font-size: 16px;
   font-weight: bold;
   color: #333;
 `;
@@ -87,12 +94,11 @@ const Option = styled.option`
   font-size: 16px;
 `;
 
-const Label = styled.label`
+const InfoLabel = styled.label`
   display: block;
   margin-bottom: 10px;
-  font-size: 16px;
-  font-weight: bold;
-  color: #333;
+  font-size: 14px;
+  color: #666;
 `;
 
 const Input = styled.input`
@@ -103,13 +109,6 @@ const Input = styled.input`
   border: 1px solid #ccc;
   border-radius: 10px;
   margin-bottom: 20px;
-`;
-
-const InfoLabel = styled.label`
-  display: block;
-  margin-bottom: 10px;
-  font-size: 14px;
-  color: #666;
 `;
 
 const Button = styled.button`
@@ -175,7 +174,20 @@ const PopupButton = styled(Button)`
 
 const ReportingForm = () => {
   const [companyId, setCompanyId] = useState("");
+  const [employees, setEmployees] = useState([]);
   const [isPopupVisible, setPopupVisible] = useState(false);
+
+  useEffect(() => {
+    axios
+      .get("/api/reporting-details")
+      .then((response) => {
+        setEmployees(response.data);
+      })
+      .catch((error) => {
+        console.error("There was an error fetching the data!", error);
+        setEmployees([]);
+      });
+  }, []);
 
   const handleSubmit = () => {
     setPopupVisible(true);
@@ -192,13 +204,14 @@ const ReportingForm = () => {
     const reportingTo = document.querySelector("select:not([multiple])").value;
 
     const payload = {
-      companyId,
-      selectedEmployees,
-      reportingTo,
+      eemail: selectedEmployees,
+      remail: reportingTo,
     };
 
     axios
-      .post("/api/reporting-details", payload) //gotta add the respective API link
+      .post("/api/reporting-details", payload, {
+        withCredentials: true,
+      })
       .then((response) => {
         console.log("Data submitted successfully:", response.data);
         setPopupVisible(false);
@@ -212,6 +225,7 @@ const ReportingForm = () => {
     <>
       <GlobalStyle />
       <Layout>
+        <Header title="Reporting Form" />
         <Container>
           <Title>Reporting Form</Title>
           <Label htmlFor="companyId">Company ID</Label>
@@ -223,21 +237,15 @@ const ReportingForm = () => {
           />
           <Label>Select Employees whose reporting you want to create</Label>
           <EmployeeSelect multiple>
-            <Option value="Derek D'souza">
-              Derek D'souza-&gt; derekdesouza.salahkaar@gmail.com
-            </Option>
-            <Option value="Priyank">
-              Priyank -&gt; priyank.salahkaar@gmail.com
-            </Option>
-            <Option value="Anuja Sakulkar">
-              Anuja Sakulkar -&gt; anujasakulkar.salahkaar@gmail.com
-            </Option>
-            <Option value="Vijay varia">
-              Vijay varia -&gt; Vijay.salahkar@gmail.com
-            </Option>
-            <Option value="Chirag Panchal">
-              Chirag Panchal -&gt; chirag.salahkaar@gmail.com
-            </Option>
+            {employees.length > 0 ? (
+              employees.map((employee) => (
+                <Option key={employee.emp_emailid} value={employee.emp_emailid}>
+                  {employee.emp_emailid}
+                </Option>
+              ))
+            ) : (
+              <Option disabled>No data available</Option>
+            )}
           </EmployeeSelect>
           <InfoLabel>
             Hold down the Ctrl (windows)/Command (Mac) button to select multiple
@@ -247,21 +255,15 @@ const ReportingForm = () => {
             Select Employee whom the above selected Employees would Report To
           </Label>
           <EmployeeSelect>
-            <Option value="Priyank">
-              Priyank -&gt; priyank.salahkaar@gmail.com
-            </Option>
-            <Option value="Derek D'souza">
-              Derek D'souza-&gt; derekdesouza.salahkaar@gmail.com
-            </Option>
-            <Option value="Anuja Sakulkar">
-              Anuja Sakulkar -&gt; anujasakulkar.salahkaar@gmail.com
-            </Option>
-            <Option value="Vijay varia">
-              Vijay varia -&gt; Vijay.salahkar@gmail.com
-            </Option>
-            <Option value="Chirag Panchal">
-              Chirag Panchal -&gt; chirag.salahkaar@gmail.com
-            </Option>
+            {employees.length > 0 ? (
+              employees.map((employee) => (
+                <Option key={employee.emp_emailid} value={employee.emp_emailid}>
+                  {employee.emp_emailid}
+                </Option>
+              ))
+            ) : (
+              <Option disabled>No data available</Option>
+            )}
           </EmployeeSelect>
           <Button onClick={handleSubmit}>Submit</Button>
         </Container>
