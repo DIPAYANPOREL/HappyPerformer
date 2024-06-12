@@ -3,6 +3,10 @@ import React, { useEffect, useState } from "react";
 import styled from "styled-components";
 import Layout from "../../../Components/Software Components/Dashboard/Layout";
 
+axios.defaults.withCredentials = true;
+axios.defaults.xsrfCookieName = "csrftoken";
+axios.defaults.xsrfHeaderName = "X-CSRFToken";
+
 const WhiteContainer = styled.div`
   background-color: white;
   padding: 20px;
@@ -203,7 +207,9 @@ const AdhocPayments = () => {
     };
 
     axios
-      .post("/api/adhoc-payments", newData)
+      .post("/api/adhoc-payments", newData, {
+        withCredentials: true,
+      })
       .then((response) => {
         setData([...data, response.data]);
         closePopup();
