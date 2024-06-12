@@ -57,7 +57,10 @@ const FAQView = () => {
     axios
       .get("http://127.0.0.1:8000/FAQsView")
       .then((response) => {
-        setFaqs(response.data.faqs || []);
+        const fetchedFaqs = response.data.faqs || [];
+        // Sort the fetched FAQs by faq_id in ascending order
+        fetchedFaqs.sort((a, b) => a.faq_id - b.faq_id);
+        setFaqs(fetchedFaqs);
         setLoading(false);
       })
       .catch((error) => {
@@ -69,8 +72,7 @@ const FAQView = () => {
 
   const handleSubmitAnswer = (id, answer) => {
     axios
-      .post(
-        `http://127.0.0.1:8000/FAQsView/?faq_id=${id}`,
+      .post("http://127.0.0.1:8000/FAQsView/?faq_id=${id}",
         { answer },
         {
           credentials: true,
@@ -78,9 +80,8 @@ const FAQView = () => {
       )
       .then((response) => {
         console.log("Answer submitted successfully:", response.data);
-        alert("Answer submitted successfully")
+        alert("Answer submitted successfully");
       })
-
       .catch((error) => {
         console.error("There was an error submitting the answer:", error);
       });
