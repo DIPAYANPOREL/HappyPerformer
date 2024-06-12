@@ -1,7 +1,8 @@
-import React, { useState } from "react";
-import styled from "styled-components";
-import Layout from "../../../Components/Software Components/Dashboard/Layout"; // Verify this path is correct
 import axios from "axios";
+import React, { useEffect, useState } from "react";
+import styled from "styled-components";
+import Header from "../../../Components/Software Components/Dashboard/Header";
+import Layout from "../../../Components/Software Components/Dashboard/Layout"; // Verify this path is correct
 
 const Container = styled.div`
   flex: 1;
@@ -222,48 +223,21 @@ const Overlay = styled.div`
 
 const Faq = () => {
   const [activeIndex, setActiveIndex] = useState(null);
+  const [faqs, setFaqs] = useState([]);
   const [showPopup, setShowPopup] = useState(false);
   const [formData, setFormData] = useState({ email: "", message: "" });
   const [errors, setErrors] = useState({ email: "", message: "" });
 
-  const faqs = [
-    {
-      question: "What is a JD?",
-      answer:
-        "A job description (JD) is a document that describes the general tasks, or other related duties, and responsibilities of a position.",
-    },
-    {
-      question: "What is a SOP?",
-      answer:
-        "A standard operating procedure (SOP) is a set of step-by-step instructions compiled by an organization to help workers carry out routine operations.",
-    },
-    {
-      question: "What are KRA/KPI?",
-      answer:
-        "Key Result Areas (KRA) and Key Performance Indicators (KPI) are metrics that help an organization define and measure progress toward organizational goals.",
-    },
-    {
-      question: "How to work on the TO-DO list page?",
-      answer:
-        "You can manage your tasks efficiently by adding, updating, and tracking them on the TO-DO list page.",
-    },
-    {
-      question: "What are 'Goals' in the Calendar?",
-      answer:
-        "Goals in the Calendar help you set and track personal or professional objectives over a period of time.",
-    },
-    {
-      question:
-        "How will a Manager rate my work? Is there a Hierarchy to the system?",
-      answer:
-        "Managers rate work based on predefined criteria and there is often a hierarchy in organizations to manage and review performance.",
-    },
-    {
-      question: "Can we have more details on the working of the Website?",
-      answer:
-        "The website functions through a combination of user interactions, backend processing, and database management to deliver services.",
-    },
-  ];
+  useEffect(() => {
+    axios
+      .get("/api/faq")
+      .then((response) => {
+        setFaqs(response.data.faqs);
+      })
+      .catch((error) => {
+        console.error("Error fetching FAQs:", error);
+      });
+  }, []);
 
   const handleToggle = (index) => {
     setActiveIndex(activeIndex === index ? null : index);
@@ -316,10 +290,11 @@ const Faq = () => {
 
   return (
     <Layout>
+      <Header title="FAQ's" />
       <Container>
         <Title>Frequently Asked Questions</Title>
         {faqs.map((faq, index) => (
-          <div key={index}>
+          <div key={faq.faq_id}>
             <QuestionContainer onClick={() => handleToggle(index)}>
               {faq.question}
               <span>{activeIndex === index ? "-" : "+"}</span>

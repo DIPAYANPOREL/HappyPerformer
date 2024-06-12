@@ -17,6 +17,7 @@ import Upload_Media from "./Pages/Software/Courses/Upload_Media";
 // import EmployeeMaster from "./Pages/Software/EmployeeMaster/EmployeeMaster";
 import FAQView from "./Pages/Management/FAQView";
 import ReportingForm from "./Pages/Management/ReportingForm";
+import Faq from "./Pages/Software/DashBoard/FAQ";
 import LoanPayments from "./Pages/Software/DashBoard/LoanPayments";
 import AddExpense from "./Pages/Software/ExpenseManagements/Addexpense";
 import ExpenseReports from "./Pages/Software/ExpenseManagements/Expensereports";
@@ -63,6 +64,7 @@ function App() {
       <Route path="/phptuts" element={<PHPTutorials />} />
       {/* FAQ Views */}
       <Route path="/FAQs" element={<FAQView />} />
+      <Route path="/allfaq" element={<Faq />} />
       {/* Loans */}
       <Route path="/addloan" element={<LoanPayments />} />
       {/* Expense Management */}
