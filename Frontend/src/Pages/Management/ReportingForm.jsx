@@ -8,7 +8,6 @@ axios.defaults.withCredentials = true;
 axios.defaults.xsrfCookieName = "csrftoken";
 axios.defaults.xsrfHeaderName = "X-CSRFToken";
 
-// Global styles for CSS reset and base styles
 const GlobalStyle = createGlobalStyle`
   * {
     margin: 0;
@@ -179,7 +178,7 @@ const ReportingForm = () => {
 
   useEffect(() => {
     axios
-      .get("/api/reporting-details")
+      .get("http://127.0.0.1:8000/ReportingStructureForm/")
       .then((response) => {
         setEmployees(response.data);
       })
@@ -209,7 +208,7 @@ const ReportingForm = () => {
     };
 
     axios
-      .post("/api/reporting-details", payload, {
+      .post("http://127.0.0.1:8000/ReportingStructureForm/", payload, {
         withCredentials: true,
       })
       .then((response) => {
