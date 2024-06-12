@@ -100,13 +100,13 @@ const InfoLabel = styled.label`
   color: #666;
 `;
 
-const Input = styled.input`
+const StaticText = styled.p`
   width: 100%;
-  height: 40px;
   padding: 10px;
   font-size: 16px;
   border: 1px solid #ccc;
   border-radius: 10px;
+  background-color: #f1f1f1;
   margin-bottom: 20px;
 `;
 
@@ -180,7 +180,8 @@ const ReportingForm = () => {
     axios
       .get("http://127.0.0.1:8000/ReportingStructureForm/")
       .then((response) => {
-        setEmployees(response.data);
+        setEmployees(response.data.employees || []);
+        setCompanyId(response.data.companyId || "");
       })
       .catch((error) => {
         console.error("There was an error fetching the data!", error);
@@ -213,6 +214,7 @@ const ReportingForm = () => {
       })
       .then((response) => {
         console.log("Data submitted successfully:", response.data);
+        alert("Data submitted successfully");
         setPopupVisible(false);
       })
       .catch((error) => {
@@ -227,13 +229,8 @@ const ReportingForm = () => {
         <Header title="Reporting Form" />
         <Container>
           <Title>Reporting Form</Title>
-          <Label htmlFor="companyId">Company ID</Label>
-          <Input
-            id="companyId"
-            type="text"
-            value={companyId}
-            onChange={(e) => setCompanyId(e.target.value)}
-          />
+          <Label>Company ID</Label>
+          <StaticText>{companyId}</StaticText>
           <Label>Select Employees whose reporting you want to create</Label>
           <EmployeeSelect multiple>
             {employees.length > 0 ? (
