@@ -72,7 +72,8 @@ const FAQView = () => {
 
   const handleSubmitAnswer = (id, answer) => {
     axios
-      .post("http://127.0.0.1:8000/FAQsView/?faq_id=${id}",
+      .post(
+        "http://127.0.0.1:8000/FAQsView/?faq_id=${id}",
         { answer },
         {
           credentials: true,

@@ -1,7 +1,12 @@
 import axios from "axios";
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import styled from "styled-components";
+import Header from "../../../Components/Software Components/Dashboard/Header";
 import Layout from "../../../Components/Software Components/Dashboard/Layout";
+
+axios.defaults.withCredentials = true;
+axios.defaults.xsrfCookieName = "csrftoken";
+axios.defaults.xsrfHeaderName = "X-CSRFToken";
 
 const OuterContainer = styled.div`
   display: flex;
@@ -165,6 +170,23 @@ const LoanPayments = () => {
     reason: "",
   });
   const [errors, setErrors] = useState({});
+  const [loans, setLoans] = useState([]);
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState("");
+
+  useEffect(() => {
+    axios
+      .get("http://127.0.0.1:8000/FAQsView")
+      .then((response) => {
+        setLoans(response.data.loans || []);
+        setLoading(false);
+      })
+      .catch((error) => {
+        console.error("There was an error fetching the loans:", error);
+        setError("No data available, please try again");
+        setLoading(false);
+      });
+  }, []);
 
   const toggleApplyLoanPopup = () => {
     setApplyLoanOpen(!isApplyLoanOpen);
@@ -217,13 +239,20 @@ const LoanPayments = () => {
   const handleApplyLoan = () => {
     const formErrors = validateForm();
     if (Object.keys(formErrors).length === 0) {
-      // Handle apply loan logic here
       const payload = {
-        ...formData,
+        name: formData.name,
+        department: formData.department,
+        lamt: formData.loanAmount,
+        mamt: formData.monthlyAmount,
+        startdate: formData.startDate,
+        reason: formData.reason,
+        status: 0, // Assuming status 0 is for pending
       };
 
       axios
-        .post("/api/apply-loan", payload)
+        .post("http://127.0.0.1:8000/AddLoan", payload, {
+          credentials: true,
+        })
         .then((response) => {
           console.log("Loan applied successfully:", response.data);
           alert("Loan Applied!");
@@ -237,6 +266,7 @@ const LoanPayments = () => {
             reason: "",
           });
           setErrors({});
+          // Optionally, you can refetch the loans data here
         })
         .catch((error) => {
           console.error("There was an error applying for the loan!", error);
@@ -254,8 +284,33 @@ const LoanPayments = () => {
     });
   };
 
+  if (loading) {
+    return (
+      <Layout>
+        <OuterContainer>
+          <WhiteContainer>
+            <Heading>Loading...</Heading>
+          </WhiteContainer>
+        </OuterContainer>
+      </Layout>
+    );
+  }
+
+  if (error) {
+    return (
+      <Layout>
+        <OuterContainer>
+          <WhiteContainer>
+            <Heading>{error}</Heading>
+          </WhiteContainer>
+        </OuterContainer>
+      </Layout>
+    );
+  }
+
   return (
     <Layout>
+      <Header title="Loans" />
       <OuterContainer>
         <WhiteContainer>
           <Heading>Add Loan</Heading>
@@ -278,16 +333,18 @@ const LoanPayments = () => {
               </TableRow>
             </thead>
             <tbody>
-              <TableRow>
-                <TableCell>1</TableCell>
-                <TableCell>Priyank Jain</TableCell>
-                <TableCell>Super Manager</TableCell>
-                <TableCell>200000</TableCell>
-                <TableCell>20000</TableCell>
-                <TableCell>2024-05-27</TableCell>
-                <TableCell>Personal</TableCell>
-                <TableCell>Approved</TableCell>
-              </TableRow>
+              {loans.map((loan, index) => (
+                <TableRow key={index}>
+                  <TableCell>{index + 1}</TableCell>
+                  <TableCell>{loan.name}</TableCell>
+                  <TableCell>{loan.department}</TableCell>
+                  <TableCell>{loan.loan_amount}</TableCell>
+                  <TableCell>{loan.monthly_amount}</TableCell>
+                  <TableCell>{loan.start_date}</TableCell>
+                  <TableCell>{loan.reason}</TableCell>
+                  <TableCell>{loan.status}</TableCell>
+                </TableRow>
+              ))}
             </tbody>
           </Table>
           <PopupContainer isOpen={isApplyLoanOpen}>
@@ -371,6 +428,22 @@ const LoanPayments = () => {
                     <TableHeader>Status</TableHeader>
                   </TableRow>
                 </thead>
+                <tbody>
+                  {loans
+                    .filter((loan) => loan.status === "Pending")
+                    .map((loan, index) => (
+                      <TableRow key={index}>
+                        <TableCell>{index + 1}</TableCell>
+                        <TableCell>{loan.name}</TableCell>
+                        <TableCell>{loan.department}</TableCell>
+                        <TableCell>{loan.loan_amount}</TableCell>
+                        <TableCell>{loan.monthly_amount}</TableCell>
+                        <TableCell>{loan.start_date}</TableCell>
+                        <TableCell>{loan.reason}</TableCell>
+                        <TableCell>{loan.status}</TableCell>
+                      </TableRow>
+                    ))}
+                </tbody>
               </Table>
               <CloseButton onClick={togglePendingLoanPopup}>Close</CloseButton>
             </PopupLoan>
@@ -391,6 +464,22 @@ const LoanPayments = () => {
                     <TableHeader>Status</TableHeader>
                   </TableRow>
                 </thead>
+                <tbody>
+                  {loans
+                    .filter((loan) => loan.status === "Approved")
+                    .map((loan, index) => (
+                      <TableRow key={index}>
+                        <TableCell>{index + 1}</TableCell>
+                        <TableCell>{loan.name}</TableCell>
+                        <TableCell>{loan.department}</TableCell>
+                        <TableCell>{loan.loan_amount}</TableCell>
+                        <TableCell>{loan.monthly_amount}</TableCell>
+                        <TableCell>{loan.start_date}</TableCell>
+                        <TableCell>{loan.reason}</TableCell>
+                        <TableCell>{loan.status}</TableCell>
+                      </TableRow>
+                    ))}
+                </tbody>
               </Table>
               <CloseButton onClick={toggleApprovedLoanPopup}>Close</CloseButton>
             </PopupLoan>
