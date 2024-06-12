@@ -150,7 +150,7 @@ const AdhocPayments = () => {
 
   useEffect(() => {
     axios
-      .get("/api/adhoc-payments")
+      .get("http://127.0.0.1:8000/AdhocPayments")
       .then((response) => {
         setData(response.data);
         setLoading(false);
@@ -207,7 +207,7 @@ const AdhocPayments = () => {
     };
 
     axios
-      .post("/api/adhoc-payments", newData, {
+      .post("http://127.0.0.1:8000/AdhocPayments/", newData, {
         withCredentials: true,
       })
       .then((response) => {
