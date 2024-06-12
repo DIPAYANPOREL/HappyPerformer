@@ -1,12 +1,14 @@
-import React from "react";
-import styled from "styled-components";
-import { Bar } from "react-chartjs-2";
 import {
-  Chart as ChartJS,
   BarElement,
   CategoryScale,
+  Chart as ChartJS,
   LinearScale,
 } from "chart.js";
+import React from "react";
+import { Bar } from "react-chartjs-2";
+import styled from "styled-components";
+import Header from "../../../Components/Software Components/Dashboard/Header";
+import Layout from "../../../Components/Software Components/Dashboard/Layout";
 
 ChartJS.register(BarElement, CategoryScale, LinearScale);
 
@@ -60,14 +62,17 @@ const options = {
 
 const ExpenseReports = () => {
   return (
-    <Container>
-      <WhiteContainer>
-        <Heading>Full Expense Reports</Heading>
-        <ExpenseChartContainer>
-          <Bar data={data} options={options} />
-        </ExpenseChartContainer>
-      </WhiteContainer>
-    </Container>
+    <Layout>
+      <Header title="Expense Report" />
+      <Container>
+        <WhiteContainer>
+          <Heading>Full Expense Reports</Heading>
+          <ExpenseChartContainer>
+            <Bar data={data} options={options} />
+          </ExpenseChartContainer>
+        </WhiteContainer>
+      </Container>
+    </Layout>
   );
 };
 

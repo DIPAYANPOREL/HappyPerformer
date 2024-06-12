@@ -18,6 +18,7 @@ import Upload_Media from "./Pages/Software/Courses/Upload_Media";
 import FAQView from "./Pages/Management/FAQView";
 import LoanPayments from "./Pages/Software/DashBoard/LoanPayments";
 import AddExpense from "./Pages/Software/ExpenseManagements/Addexpense";
+import ExpenseReports from "./Pages/Software/ExpenseManagements/Expensereports";
 import Login from "./Pages/Software/Login";
 import PHPTutorials from "./Pages/Software/PHPTutorials/PHPTutorials";
 import Pricing from "./Pages/Software/Pricing";
@@ -64,6 +65,7 @@ function App() {
       <Route path="/addloan" element={<LoanPayments />} />
       {/* Expense Management */}
       <Route path="/addexpense" element={<AddExpense />} />
+      <Route path="/expense-report" element={<ExpenseReports />} />
     </Routes>
   );
 }
