@@ -5,7 +5,7 @@ import Item from "../Dashboard/Item";
 
 const GlobalStyle = createGlobalStyle`
   body.blurred #content {
-    filter: blur(5px);
+    filter: blur(3px);
     transition: filter 0.3s ease-in-out;
   }
 `;
@@ -31,7 +31,7 @@ const LogoContainer = styled.div`
   width: 80%;
   color: white;
   background-color: #758bfd;
-  height: 7%;
+  height: 5%;
   border-radius: 50px;
 `;
 
@@ -48,15 +48,12 @@ const MenuItems = styled.div`
   }
   ::-webkit-scrollbar-track {
     background: #0a1128;
-    background: #0a1128;
   }
   ::-webkit-scrollbar-thumb {
-    background: #0a1128;
     background: #0a1128;
   }
   -ms-overflow-style: none;
   scrollbar-width: thin;
-  scrollbar-color: #0a1128 #0a1128;
   scrollbar-color: #0a1128 #0a1128;
 `;
 
@@ -99,31 +96,19 @@ const HamburgerIcon = styled.div`
   font-size: 24px;
   cursor: pointer;
   z-index: 3;
-  z-index: 3;
   transition: left 0.3s ease-in-out;
   display: flex;
   justify-content: center;
   align-items: center;
 `;
 
-const SideBar = () => {
-  const [isCollapsed, setIsCollapsed] = useState(true);
+const SideBar = ({ isCollapsed, onToggle }) => {
   const [dropdowns, setDropdowns] = useState({
     leaves: false,
     expense: false,
     caseManagement: false,
     addDetails: false,
   });
-
-  const toggleCollapse = () => {
-    const newState = !isCollapsed;
-    setIsCollapsed(newState);
-    if (!newState) {
-      document.body.classList.add("blurred");
-    } else {
-      document.body.classList.remove("blurred");
-    }
-  };
 
   const toggleDropdown = (dropdown) => {
     setDropdowns((prevDropdowns) => ({
@@ -136,22 +121,22 @@ const SideBar = () => {
     <>
       <GlobalStyle />
       <Container isCollapsed={isCollapsed}>
-        <HamburgerIcon isCollapsed={isCollapsed} onClick={toggleCollapse}>
+        <HamburgerIcon isCollapsed={isCollapsed} onClick={onToggle}>
           ≡
         </HamburgerIcon>
         <LogoContainer isCollapsed={isCollapsed}>HappyPerformer</LogoContainer>
         <MenuItems isCollapsed={isCollapsed}>
           <Item name="Dashboard" icon="💼" />
-          <Item name="Calendar" icon="🕵🏻‍♂" />
+          <Item name="Calendar" icon="🕵🏻‍♂️" />
           <Item name="Social" icon="📲" />
-          <Item name="Settings" icon="🕵🏻‍♂" />
+          <Item name="Settings" icon="🕵🏻‍♂️" />
           <Item name="To-do-list" icon="📋" />
           <Item name="KRA" icon="💼" />
           <Item name="SOP" icon="📋" />
           <Item name="JD" icon="💼" />
           <Item name="Forms" icon="📋" />
           <Item name="Letters" icon="📋" />
-          <Item name="FAQs" icon="🕵🏻‍♂" />
+          <Item name="FAQs" icon="🕵🏻‍♂️" />
           <Item name="Training" icon="📋" />
           <Item name="Quiz" icon="📋" />
           <Item name="PHP Tutorials" icon="📋" />
@@ -165,7 +150,7 @@ const SideBar = () => {
             <DropdownItem>Apply for Leave</DropdownItem>
             <DropdownItem>Leave History</DropdownItem>
           </DropdownMenu>
-          <Item name="Add Loan" icon="🕵🏻‍♂" />
+          <Item name="Add Loan" icon="🕵🏻‍♂️" />
           <Item name="IT Declaration" icon="📋" />
           <MenuItem onClick={() => toggleDropdown("expense")}>
             <span>Expense Management</span>
@@ -189,11 +174,11 @@ const SideBar = () => {
             <span>&#9660;</span>
           </MenuItem>
           <DropdownMenu isOpen={dropdowns.addDetails}>
-            <DropdownItem>Add Personal Details</DropdownItem>
-            <DropdownItem>Add Work Details</DropdownItem>
+            <DropdownItem>Add Work Experience</DropdownItem>
+            <DropdownItem>Add Project</DropdownItem>
           </DropdownMenu>
         </MenuItems>
-        <SVGContainer src={Coder} isCollapsed={isCollapsed} />
+        <SVGContainer src={Coder} alt="coding" isCollapsed={isCollapsed} />
       </Container>
     </>
   );

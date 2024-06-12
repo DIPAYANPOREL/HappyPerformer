@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React from "react";
 import styled from "styled-components";
 import Layout from "../../../Components/Software Components/Dashboard/Layout";
 
@@ -34,18 +34,6 @@ const ResponsiveIframe = styled.iframe`
 `;
 
 const PHPTutorials = ({ videoId }) => {
-  const [videos, setVideos] = useState([]);
-
-  useEffect(() => {
-    axios
-      .get("/api/video-tutorials")
-      .then((response) => {
-        setVideos(response.data);
-      })
-      .catch((error) => {
-        console.error("There was an error fetching the videos!", error);
-      });
-  }, []);
   return (
     <>
       <Layout>
