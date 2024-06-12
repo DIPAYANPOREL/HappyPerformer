@@ -55,10 +55,9 @@ const FAQView = () => {
 
   useEffect(() => {
     axios
-      .get("http://127.0.0.1:8000/FAQsView")
+      .get("http://127.0.0.1:8000/FAQManagement")
       .then((response) => {
         const fetchedFaqs = response.data.faqs || [];
-        // Sort the fetched FAQs by faq_id in ascending order
         fetchedFaqs.sort((a, b) => a.faq_id - b.faq_id);
         setFaqs(fetchedFaqs);
         setLoading(false);
@@ -73,7 +72,7 @@ const FAQView = () => {
   const handleSubmitAnswer = (id, answer) => {
     axios
       .post(
-        "http://127.0.0.1:8000/FAQsView/?faq_id=${id}",
+        "http://127.0.0.1:8000/FAQManagement/?faq_id=${id}",
         { answer },
         {
           credentials: true,

@@ -180,8 +180,10 @@ const ReportingForm = () => {
     axios
       .get("http://127.0.0.1:8000/ReportingStructureForm/")
       .then((response) => {
-        setEmployees(response.data.employees || []);
-        setCompanyId(response.data.companyId || "");
+        if (response.data.length > 0) {
+          setEmployees(response.data);
+          setCompanyId(response.data[0].d_id__c_id); // Extracting companyId from the first employee object
+        }
       })
       .catch((error) => {
         console.error("There was an error fetching the data!", error);
