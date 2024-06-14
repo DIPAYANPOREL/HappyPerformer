@@ -47,6 +47,20 @@ const Input = styled.input`
   box-sizing: border-box;
 `;
 
+const SubmitButton = styled.button`
+  background-color: green;
+  color: white;
+  border: none;
+  padding: 10px 20px;
+  border-radius: 5px;
+  cursor: pointer;
+  margin-top: 10px;
+
+  &:hover {
+    background-color: darkgreen;
+  }
+`;
+
 const FAQView = () => {
   const [faqs, setFaqs] = useState([]);
   const [answers, setAnswers] = useState({});
@@ -72,7 +86,7 @@ const FAQView = () => {
   const handleSubmitAnswer = (id, answer) => {
     axios
       .post(
-        "http://127.0.0.1:8000/FAQManagement/?faq_id=${id}",
+        `http://127.0.0.1:8000/FAQManagement/?faq_id=${id}`,
         { answer },
         {
           credentials: true,
@@ -151,13 +165,13 @@ const FAQView = () => {
                     />
                   </Td>
                   <Td>
-                    <button
+                    <SubmitButton
                       onClick={() =>
                         handleSubmitAnswer(item.faq_id, answers[item.faq_id])
                       }
                     >
                       Submit Answer
-                    </button>
+                    </SubmitButton>
                   </Td>
                 </tr>
               ))}
