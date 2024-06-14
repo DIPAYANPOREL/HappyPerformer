@@ -13,10 +13,10 @@ const Container = styled.div`
   padding: 2rem;
   width: 100%;
   max-width: 600px;
-  background-color: #f5f5f5;
-  border-radius: 4px;
-  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-  margin: 1rem;
+  background-color: #ffffff;
+  border-radius: 10px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  margin: 1rem auto;
 
   @media (max-width: 768px) {
     padding: 1rem;
@@ -25,10 +25,10 @@ const Container = styled.div`
 `;
 
 const Heading = styled.h1`
-  font-size: 2rem;
+  font-size: 2.5rem;
   font-weight: bold;
-  margin-bottom: 1rem;
-  color: #333;
+  margin-bottom: 1.5rem;
+  color: #0077b6;
   text-align: center;
 `;
 
@@ -39,45 +39,45 @@ const Form = styled.form`
 `;
 
 const Label = styled.label`
-  font-size: 1rem;
+  font-size: 1.1rem;
   font-weight: bold;
   margin-bottom: 0.5rem;
   color: #333;
 `;
 
 const Input = styled.input`
-  padding: 0.5rem;
+  padding: 0.75rem;
   border: 1px solid #ccc;
-  border-radius: 4px;
+  border-radius: 5px;
   font-size: 1rem;
-  margin-bottom: 1rem;
+  margin-bottom: 1.5rem;
   &:focus {
-    border-color: #6c63ff;
+    border-color: #0077b6;
     outline: none;
   }
 `;
 
 const TextArea = styled.textarea`
-  padding: 0.5rem;
+  padding: 0.75rem;
   border: 1px solid #ccc;
-  border-radius: 4px;
+  border-radius: 5px;
   font-size: 1rem;
-  margin-bottom: 1rem;
+  margin-bottom: 1.5rem;
   resize: vertical;
   &:focus {
-    border-color: #6c63ff;
+    border-color: #0077b6;
     outline: none;
   }
 `;
 
 const CaseSelect = styled.select`
-  padding: 0.5rem;
+  padding: 0.75rem;
   border: 1px solid #ccc;
-  border-radius: 4px;
+  border-radius: 5px;
   font-size: 1rem;
-  margin-bottom: 1rem;
+  margin-bottom: 1.5rem;
   &:focus {
-    border-color: #6c63ff;
+    border-color: #0077b6;
     outline: none;
   }
 `;
@@ -85,15 +85,17 @@ const CaseSelect = styled.select`
 const Option = styled.option``;
 
 const Button = styled.button`
-  padding: 0.5rem 2rem;
+  padding: 0.75rem 2.5rem;
   background-color: #0077b6;
   color: #fff;
   border: none;
-  border-radius: 4px;
-  font-size: 1rem;
+  border-radius: 5px;
+  font-size: 1.1rem;
   cursor: pointer;
+  align-self: center;
+  transition: background-color 0.3s;
   &:hover {
-    background-color: #463aff;
+    background-color: #005f8d;
   }
 `;
 
@@ -163,6 +165,7 @@ const CreateCaseForm = () => {
           value={formData.caseType}
           onChange={handleChange}
         >
+          <Option value="">Select a case type</Option>
           <Option value="Benefits">Benefits</Option>
           <Option value="Travel And Expense">Travel And Expense</Option>
           <Option value="Compensation and Payroll">

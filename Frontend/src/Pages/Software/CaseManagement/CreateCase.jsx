@@ -11,15 +11,16 @@ const Container = styled.div`
   display: flex;
   flex-direction: column;
   align-items: center;
+  background-color: #f9f9f9;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
 `;
 
 const Title = styled.h1`
-  font-size: 34px;
+  font-size: 2.5rem;
   font-weight: bold;
   margin-bottom: 20px;
-  color: #333;
+  color: #0077b6;
   text-align: center;
-  padding: 20px;
 `;
 
 const CreateCase = () => {
@@ -27,6 +28,7 @@ const CreateCase = () => {
     <Layout>
       <Header title="Create Case" />
       <Container>
+        <Title>Create Case</Title>
         <CreateCaseForm />
       </Container>
     </Layout>
