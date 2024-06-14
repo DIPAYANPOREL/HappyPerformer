@@ -262,6 +262,7 @@ const FAQ = () => {
         })
         .then((response) => {
           console.log("Form submitted successfully:", response);
+          setFormData({ question: "" });
           setShowPopup(true);
         })
         .catch((error) => {
