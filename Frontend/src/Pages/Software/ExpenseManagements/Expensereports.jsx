@@ -21,8 +21,10 @@ const Container = styled.div`
   display: flex;
   justify-content: center;
   align-items: center;
-  height: 100vh;
+  padding: 20px;
   background-color: #f5f5f5;
+  min-height: 100vh;
+  box-sizing: border-box;
 `;
 
 const WhiteContainer = styled.div`
@@ -30,17 +32,21 @@ const WhiteContainer = styled.div`
   padding: 20px;
   border-radius: 10px;
   box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-  width: 80%;
+  width: 100%;
   max-width: 1200px;
+  box-sizing: border-box;
 `;
 
 const Heading = styled.h1`
   text-align: center;
   margin-bottom: 20px;
+  font-size: 2rem;
+  color: #333;
 `;
 
 const ExpenseChartContainer = styled.div`
   width: 100%;
+  overflow-x: auto;
 `;
 
 const ExpenseReports = () => {
@@ -50,7 +56,7 @@ const ExpenseReports = () => {
       {
         label: "Expense by Month (Whole Year)",
         data: [],
-        backgroundColor: "blue",
+        backgroundColor: "rgba(0, 123, 255, 0.7)",
         expenseItems: [],
         expenseIds: [],
       },
@@ -79,7 +85,7 @@ const ExpenseReports = () => {
           {
             label: "Expense by Month (Whole Year)",
             data,
-            backgroundColor: "blue",
+            backgroundColor: "rgba(0, 123, 255, 0.7)",
             expenseItems,
             expenseIds,
           },
@@ -128,6 +134,8 @@ const ExpenseReports = () => {
             <Bar
               data={chartData}
               options={{
+                responsive: true,
+                maintainAspectRatio: false,
                 scales: {
                   y: {
                     beginAtZero: true,
@@ -149,6 +157,7 @@ const ExpenseReports = () => {
                   },
                 },
               }}
+              height={400}
             />
           </ExpenseChartContainer>
         </WhiteContainer>
