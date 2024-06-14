@@ -31,23 +31,26 @@ const Header = styled.div`
   justify-content: space-between;
   align-items: center;
   width: 100%;
-  position: relative;
+  margin-bottom: 20px;
 `;
 
 const Title = styled.h1`
   text-align: center;
   flex-grow: 1;
   margin: 0;
+  font-size: 1.5rem;
 `;
 
 const AddButton = styled.button`
-  position: absolute;
-  right: 0;
   padding: 10px 20px;
-  background-color: #007bff;
+  background-color: #28a745;
   color: white;
   border: none;
+  border-radius: 5px;
   cursor: pointer;
+  &:hover {
+    background-color: #218838;
+  }
 `;
 
 const TableContainer = styled.div`
@@ -68,6 +71,9 @@ const TableCell = styled.td`
   padding: 10px;
   text-align: left;
   border-right: 1px solid #ddd;
+  &:last-child {
+    border-right: none;
+  }
 `;
 
 const TableCellHeader = styled.th`
@@ -99,21 +105,25 @@ const PopupContainer = styled.div`
   z-index: 999;
   width: 300px;
   max-width: 80%;
+  border-radius: 8px;
 `;
 
 const FormField = styled.div`
-  margin-bottom: 10px;
+  margin-bottom: 15px;
 `;
 
 const Label = styled.label`
   display: block;
   margin-bottom: 5px;
+  font-weight: bold;
 `;
 
 const Input = styled.input`
   width: 100%;
   padding: 8px;
   box-sizing: border-box;
+  border: 1px solid #ddd;
+  border-radius: 5px;
 `;
 
 const Button = styled.button`
@@ -122,9 +132,13 @@ const Button = styled.button`
   background-color: #007bff;
   color: white;
   border: none;
+  border-radius: 5px;
   cursor: pointer;
   &:last-child {
     margin-right: 0;
+  }
+  &:hover {
+    background-color: #0056b3;
   }
 `;
 
@@ -148,7 +162,8 @@ const AdhocPayments = () => {
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState("");
 
-  useEffect(() => {
+  const fetchData = () => {
+    setLoading(true);
     axios
       .get("http://127.0.0.1:8000/AdhocPayments")
       .then((response) => {
@@ -159,6 +174,10 @@ const AdhocPayments = () => {
         setError("Error fetching data from server");
         setLoading(false);
       });
+  };
+
+  useEffect(() => {
+    fetchData();
   }, []);
 
   const openPopup = () => {
@@ -222,7 +241,7 @@ const AdhocPayments = () => {
           month: "",
           year: "",
         });
-        setLoading(false);
+        fetchData();
       })
       .catch((error) => {
         console.error("There was an error submitting the data!", error);
@@ -339,8 +358,10 @@ const AdhocPayments = () => {
                     />
                     {errors.year && <ErrorText>{errors.year}</ErrorText>}
                   </FormField>
-                  <Button onClick={insertData}>Insert</Button>
-                  <Button onClick={closePopup}>Close</Button>
+                  <div>
+                    <Button onClick={insertData}>Submit</Button>
+                    <Button onClick={closePopup}>Cancel</Button>
+                  </div>
                 </PopupContainer>
               </>
             )}
