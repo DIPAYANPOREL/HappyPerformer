@@ -70,10 +70,18 @@ const ActionButton = styled(Button)`
 `;
 
 const EditButton = styled(ActionButton)`
-  background-color: #ffc107;
+  background-color: #17a2b8;
 
   &:hover {
-    background-color: #e0a800;
+    background-color: #138496;
+  }
+`;
+
+const SaveButton = styled(ActionButton)`
+  background-color: #28a745;
+
+  &:hover {
+    background-color: #218838;
   }
 `;
 
@@ -246,7 +254,7 @@ const ManageExpenses = () => {
                   </Td>
                   <Td>
                     {isEditing && editExpenseId === expense.expense_id ? (
-                      <EditButton onClick={handleSaveEdit}>Save</EditButton>
+                      <SaveButton onClick={handleSaveEdit}>Save</SaveButton>
                     ) : (
                       <EditButton onClick={() => handleEditExpense(expense)}>
                         Edit
