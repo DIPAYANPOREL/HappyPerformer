@@ -41,9 +41,6 @@ const BankTransfer = () => {
     <Layout>
       <Header title="Bank Transfers" />
       <Container>
-        <Top>
-          <h1>Bank Transfer</h1>
-        </Top>
         <Bottom>
           <BTransfer />
         </Bottom>

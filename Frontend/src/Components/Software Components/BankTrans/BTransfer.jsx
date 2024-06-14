@@ -32,7 +32,7 @@ const Table = styled.table`
 `;
 
 const Th = styled.th`
-  background-color: #1e4ae4;
+  background-color: #0077b6;
   color: white;
   padding: 15px;
   text-align: center;
@@ -58,7 +58,7 @@ const Td = styled.td`
 `;
 
 const ViewBtn = styled.button`
-  background-color: #1e4ae4;
+  background-color: #0077b6;
   border: none;
   color: white;
   padding: 10px 20px;
