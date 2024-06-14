@@ -30,15 +30,13 @@ const GlobalStyle = createGlobalStyle`
 `;
 
 const CustomContainer = styled.div`
-  background-color: #fff;
   display: flex;
   justify-content: center;
   align-items: center;
   min-height: 100vh;
-  width: 60%;
-  margin-left: auto;
-  margin-right: auto;
-  padding: 50px;
+  width: 80%;
+  margin: 40px auto;
+  padding: 20px;
 `;
 
 const Card = styled.div`
@@ -50,7 +48,7 @@ const Card = styled.div`
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
   padding: 32px;
   margin-bottom: 32px;
-  width: 80%;
+  width: 100%;
   max-width: 900px;
   flex-direction: column;
 `;
