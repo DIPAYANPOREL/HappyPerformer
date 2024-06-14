@@ -38,6 +38,7 @@ const CustomContainer = styled.div`
   width: 60%;
   margin-left: auto;
   margin-right: auto;
+  padding: 50px;
 `;
 
 const Card = styled.div`
@@ -254,136 +255,126 @@ const DelUpdateRegistry = () => {
   };
 
   return (
-    <>
+    <Layout>
       <GlobalStyle />
-      <Layout>
-        <Header title="Delete - Update Employee" />
-        <CustomContainer>
-          <Card>
-            {!showUpdateForm ? (
-              <Form>
-                <h3 style={{ marginBottom: "30px", textAlign: "center" }}>
-                  Delete/Update Employee Registry
-                </h3>
-                {message && <Message error={error}>{message}</Message>}
-                <FormGroup>
-                  <Label htmlFor="emailId" style={{ fontSize: "1.1rem" }}>
-                    Email:
-                  </Label>
-                  <Select
-                    id="emailId"
-                    value={emailId}
-                    onChange={(e) => setEmailId(e.target.value)}
-                    required
-                  >
-                    <option value="">Select Email</option>
-                    {emails.map((email) => (
-                      <option key={email} value={email}>
-                        {email}
-                      </option>
-                    ))}
-                  </Select>
-                </FormGroup>
-                <FormGroup>
-                  <Button
-                    type="button"
-                    onClick={handleUpdate}
-                    disabled={loading}
-                  >
-                    {loading ? "Loading..." : "Update"}
-                  </Button>
-                </FormGroup>
-                <FormGroup>
-                  <Button
-                    type="button"
-                    onClick={handleDelete}
-                    disabled={loading}
-                  >
-                    {loading ? "Loading..." : "Delete"}
-                  </Button>
-                </FormGroup>
-              </Form>
-            ) : (
-              <Form onSubmit={handleSubmit}>
-                <h3 style={{ marginBottom: "20px", textAlign: "center" }}>
-                  UPDATE FORM
-                </h3>
-                {message && <Message error={error}>{message}</Message>}
-                <FormGroup>
-                  <Label htmlFor="name">Name:</Label>
-                  <Input
-                    type="text"
-                    id="name"
-                    value={name}
-                    onChange={(e) => setName(e.target.value)}
-                    required
-                  />
-                </FormGroup>
-                <FormGroup>
-                  <Label htmlFor="phoneNumber">Phone Number:</Label>
-                  <Input
-                    type="number"
-                    id="phoneNumber"
-                    value={phoneNumber}
-                    onChange={(e) => setPhoneNumber(e.target.value)}
-                    required
-                  />
-                </FormGroup>
-                <FormGroup>
-                  <Label htmlFor="role">Role:</Label>
-                  <Input
-                    type="text"
-                    id="role"
-                    value={role}
-                    onChange={(e) => setRole(e.target.value)}
-                    required
-                  />
-                </FormGroup>
-                <FormGroup>
-                  <Label htmlFor="department">Department:</Label>
-                  <Select
-                    id="department"
-                    value={department}
-                    onChange={(e) => setDepartment(e.target.value)}
-                    required
-                  >
-                    <option value="">Select Department</option>
-                    {departments.map((dept) => (
-                      <option key={dept.d_id} value={dept.d_id}>
-                        {dept.d_name}
-                      </option>
-                    ))}
-                  </Select>
-                </FormGroup>
-                <FormGroup>
-                  <Label htmlFor="skills">Skills:</Label>
-                  <Input
-                    type="text"
-                    id="skills"
-                    value={skills}
-                    onChange={(e) => setSkills(e.target.value)}
-                    required
-                  />
-                </FormGroup>
-                <FormGroup>
-                  <Button type="submit" disabled={loading}>
-                    {loading ? "Updating..." : "Update"}
-                  </Button>
-                </FormGroup>
-                <FormGroup>
-                  <CloseButton
-                    type="button"
-                    onClick={() => setShowUpdateForm(false)}
-                  >
-                    Close
-                  </CloseButton>
-                </FormGroup>
-              </Form>
-            )}
-          </Card>
-        </CustomContainer>
-      </Layout>
-    </>
+      <Header title="Delete - Update Employee" />
+      <CustomContainer>
+        <Card>
+          {!showUpdateForm ? (
+            <Form>
+              <h3 style={{ marginBottom: "30px", textAlign: "center" }}>
+                Delete/Update Employee Registry
+              </h3>
+              {message && <Message error={error}>{message}</Message>}
+              <FormGroup>
+                <Label htmlFor="emailId" style={{ fontSize: "1.1rem" }}>
+                  Email:
+                </Label>
+                <Select
+                  id="emailId"
+                  value={emailId}
+                  onChange={(e) => setEmailId(e.target.value)}
+                  required
+                >
+                  <option value="">Select Email</option>
+                  {emails.map((email) => (
+                    <option key={email} value={email}>
+                      {email}
+                    </option>
+                  ))}
+                </Select>
+              </FormGroup>
+              <FormGroup>
+                <Button type="button" onClick={handleUpdate} disabled={loading}>
+                  {loading ? "Loading..." : "Update"}
+                </Button>
+              </FormGroup>
+              <FormGroup>
+                <Button type="button" onClick={handleDelete} disabled={loading}>
+                  {loading ? "Loading..." : "Delete"}
+                </Button>
+              </FormGroup>
+            </Form>
+          ) : (
+            <Form onSubmit={handleSubmit}>
+              <h3 style={{ marginBottom: "20px", textAlign: "center" }}>
+                UPDATE FORM
+              </h3>
+              {message && <Message error={error}>{message}</Message>}
+              <FormGroup>
+                <Label htmlFor="name">Name:</Label>
+                <Input
+                  type="text"
+                  id="name"
+                  value={name}
+                  onChange={(e) => setName(e.target.value)}
+                  required
+                />
+              </FormGroup>
+              <FormGroup>
+                <Label htmlFor="phoneNumber">Phone Number:</Label>
+                <Input
+                  type="number"
+                  id="phoneNumber"
+                  value={phoneNumber}
+                  onChange={(e) => setPhoneNumber(e.target.value)}
+                  required
+                />
+              </FormGroup>
+              <FormGroup>
+                <Label htmlFor="role">Role:</Label>
+                <Input
+                  type="text"
+                  id="role"
+                  value={role}
+                  onChange={(e) => setRole(e.target.value)}
+                  required
+                />
+              </FormGroup>
+              <FormGroup>
+                <Label htmlFor="department">Department:</Label>
+                <Select
+                  id="department"
+                  value={department}
+                  onChange={(e) => setDepartment(e.target.value)}
+                  required
+                >
+                  <option value="">Select Department</option>
+                  {departments.map((dept) => (
+                    <option key={dept.d_id} value={dept.d_id}>
+                      {dept.d_name}
+                    </option>
+                  ))}
+                </Select>
+              </FormGroup>
+              <FormGroup>
+                <Label htmlFor="skills">Skills:</Label>
+                <Input
+                  type="text"
+                  id="skills"
+                  value={skills}
+                  onChange={(e) => setSkills(e.target.value)}
+                  required
+                />
+              </FormGroup>
+              <FormGroup>
+                <Button type="submit" disabled={loading}>
+                  {loading ? "Updating..." : "Update"}
+                </Button>
+              </FormGroup>
+              <FormGroup>
+                <CloseButton
+                  type="button"
+                  onClick={() => setShowUpdateForm(false)}
+                >
+                  Close
+                </CloseButton>
+              </FormGroup>
+            </Form>
+          )}
+        </Card>
+      </CustomContainer>
+    </Layout>
   );
 };
 
