@@ -89,7 +89,6 @@ const CoursesDisp = () => {
     fetchCourses();
   }, []);
 
-
   return (
     <Container>
       <Row>
@@ -112,7 +111,7 @@ const CoursesDisp = () => {
                   <Tr key={course.course_id}>
                     <Td>{course.course_title}</Td>
                     <Td>
-                      <Link href={`UploadMedia/${course.course_id}`}>ADD</Link>
+                      <Link href={`/UploadMedia/${course.course_id}`}>ADD</Link>
                     </Td>
                   </Tr>
                 ))}
