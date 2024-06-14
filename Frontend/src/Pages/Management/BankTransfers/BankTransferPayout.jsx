@@ -137,7 +137,7 @@ const BankTransferPayout = () => {
 
   return (
     <Layout>
-      <Header title="Bank Transfer" />
+      <Header title="Bank Transfer Payout" />
       <Container>
         <Top>
           <TopColumn>

@@ -21,7 +21,7 @@ const Container = styled.div`
 const BankTransferDetails = () => {
   return (
     <Layout>
-      <Header title="Bank Transfer" />
+      <Header title="Bank Transfer Details" />
       <Container>
         <BTDetails />
       </Container>
