@@ -31,6 +31,7 @@ import Register from "./Pages/Software/Register";
 import NewEmployeeRegistry from "./Pages/Software/RegisterEmployee/NewEmployeeRegistry";
 import Resign from "./Pages/Software/Resign/Resign";
 import SopPolicies from "./Pages/Software/Sop&Policies/SopPolicies";
+import DelUpdateRegistry from "./Pages/Software/RegisterEmployee/DelUpdateRegistry";
 
 function App() {
   return (
@@ -51,13 +52,13 @@ function App() {
       {/* <Route path="/employeemaster" element={<EmployeeMaster />} /> */}
       <Route path="/createcase" element={<CreateCase />} />
       <Route path="/newemp" element={<NewEmployeeRegistry />} />
+      <Route path="/delemp" element={<DelUpdateRegistry />} />
       {/* Courses */}
       <Route path="/addcourse" element={<Add_Courses />} />
       <Route path="/uploadmedia/:course_id" element={<Upload_Media />} />
       <Route path="/addmedia" element={<Add_Media_Content />} />
       <Route path="/updatedeletemedia" element={<Update_Delete_Media />} />
       <Route path="/updatemedia/:course_id" element={<Update_Media />} />
-      <Route path="/newemp" element={<NewEmployeeRegistry />} />
       {/* Resign */}
       <Route path="/resign" element={<Resign />} />
       <Route path="/resignations" element={<Resignation />} />
