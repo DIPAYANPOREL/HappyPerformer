@@ -15,20 +15,11 @@ const Container = styled.div`
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
 `;
 
-const Title = styled.h1`
-  font-size: 2.5rem;
-  font-weight: bold;
-  margin-bottom: 20px;
-  color: #0077b6;
-  text-align: center;
-`;
-
 const CreateCase = () => {
   return (
     <Layout>
       <Header title="Create Case" />
       <Container>
-        <Title>Create Case</Title>
         <CreateCaseForm />
       </Container>
     </Layout>

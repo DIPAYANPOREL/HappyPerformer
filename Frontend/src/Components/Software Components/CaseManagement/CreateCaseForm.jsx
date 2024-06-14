@@ -143,7 +143,6 @@ const CreateCaseForm = () => {
 
   return (
     <Container>
-      <Heading>Create Case</Heading>
       <Form onSubmit={handleSubmit}>
         <Label>Create For</Label>
         <Input
