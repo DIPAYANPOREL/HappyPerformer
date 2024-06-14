@@ -1,6 +1,7 @@
 import axios from "axios";
 import React, { useEffect, useState } from "react";
 import styled from "styled-components";
+import Header from "../../../Components/Software Components/Dashboard/Header";
 import Layout from "../../../Components/Software Components/Dashboard/Layout";
 
 axios.defaults.withCredentials = true;
@@ -26,7 +27,7 @@ const Container = styled.div`
   background-color: #f0f0f0;
 `;
 
-const Header = styled.div`
+const Headers = styled.div`
   display: flex;
   justify-content: space-between;
   align-items: center;
@@ -251,12 +252,13 @@ const AdhocPayments = () => {
   return (
     <>
       <Layout>
+        <Header title="Adhoc Payments" />
         <Container>
           <WhiteContainer>
-            <Header>
+            <Headers>
               <Title>Adhoc Payments</Title>
               <AddButton onClick={openPopup}>Add</AddButton>
-            </Header>
+            </Headers>
             {loading ? (
               <p>Loading...</p>
             ) : error ? (
