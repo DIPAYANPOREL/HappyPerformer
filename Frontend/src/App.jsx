@@ -32,6 +32,7 @@ import NewEmployeeRegistry from "./Pages/Software/RegisterEmployee/NewEmployeeRe
 import Resign from "./Pages/Software/Resign/Resign";
 import SopPolicies from "./Pages/Software/Sop&Policies/SopPolicies";
 import DelUpdateRegistry from "./Pages/Software/RegisterEmployee/DelUpdateRegistry";
+import HomeSal from "./Components/Software Components/PayRoll/HomeSal";
 
 function App() {
   return (
@@ -44,6 +45,7 @@ function App() {
       <Route path="/banktransfer1" element={<BankTransferDetails />} />
       <Route path="/homesalary" element={<HomeSalary />} />
       <Route path="/addsalary/:emp_emailid" element={<AddSalary />} />
+      <Route path="/homesal" element={<HomeSal />} />
       <Route path="/paysip" element={<CashChequeTransfer />} />
       <Route path="/resign" element={<Resign />} />
       <Route path="/login" element={<Login />} />
