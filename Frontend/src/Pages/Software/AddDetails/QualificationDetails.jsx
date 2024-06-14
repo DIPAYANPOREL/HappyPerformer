@@ -2,7 +2,11 @@ import React, { useState, useEffect } from 'react';
 import styled from 'styled-components';
 import Footer from '../../../Components/Software Components/Footer';
 import Nav from '../../../Components/Software Components/Dashboard/Nav';
-// import axios from 'axios';
+import axios from 'axios';
+
+axios.defaults.withCredentials = true;
+axios.defaults.xsrfCookieName = "csrftoken";
+axios.defaults.xsrfHeaderName = "X-CSRFToken";
 
 const QualificationDetailsStyled = styled.div`
   background-color: #fff;
@@ -99,17 +103,21 @@ const FormInput = styled.input`
   border-radius: 5px;
   margin-top: 10px;
 `;
+
 const QualificationDetails = () => {
   const [showForm, setShowForm] = useState(false);
   const [qualificationDetails, setQualificationDetails] = useState([]);
+  const [editDetail, setEditDetail] = useState(null);
+  const [error, setError] = useState(null);
 
   useEffect(() => {
     const fetchQualificationDetails = async () => {
       try {
-        const response = await axios.get('/api/qualification-details');
+        const response = await axios.get('http://127.0.0.1:8000/UpdateQualification');
         setQualificationDetails(response.data);
       } catch (error) {
         console.error('Error fetching qualification details:', error);
+        setError('Error fetching qualification details');
       }
     };
 
@@ -125,34 +133,33 @@ const QualificationDetails = () => {
     const formData = new FormData(event.target);
 
     const newDetails = {
-      type: formData.get('qualificationtype'),
-      degree: formData.get('degree'),
-      college: formData.get('college'),
-      university: formData.get('university'),
-      duration: formData.get('duration'),
-      yearOfPassing: formData.get('passoutyear'),
-      comments: formData.get('comments'),
+      q_type: formData.get('qualificationtype'),
+      q_degree: formData.get('degree'),
+      q_clg: formData.get('college'),
+      q_uni: formData.get('university'),
+      q_duration: formData.get('duration'),
+      q_yop: formData.get('passoutyear'),
+      q_comment: formData.get('comments'),
     };
 
     try {
-      const response = await axios.post('/api/qualification-details', newDetails);
+      const response = await axios.post('http://127.0.0.1:8000/UpdateQualification', newDetails);
       setQualificationDetails((prevState) => [...prevState, response.data]);
       alert('Details Updated Successfully');
     } catch (error) {
       console.error('Error saving qualification details:', error);
-      alert('Error saving details');
+      setError('Error saving details');
     }
 
     event.target.reset();
   };
 
-  const deleteItem = async (index) => {
-    const item = qualificationDetails[index];
+  const deleteItem = async (Q_Id) => {
     try {
-      await axios.delete(`/api/qualification-details/${item.id}`);
-      const newList = [...qualificationDetails];
-      newList.splice(index, 1);
+      await axios.delete(`http://127.0.0.1:8000/UpdateQualification/?Q_Id=${Q_Id}`);
+      const newList = qualificationDetails.filter((item) => item.Q_Id !== Q_Id);
       setQualificationDetails(newList);
+      alert('Details Deleted Successfully');
     } catch (error) {
       console.error('Error deleting qualification detail:', error);
     }
@@ -162,8 +169,8 @@ const QualificationDetails = () => {
     <>
       <Nav />
       {!showForm && (
-      <QualificationDetailsStyled>
-        <div className="workcontainer">
+        <QualificationDetailsStyled>
+          <div className="workcontainer">
             <Table>
               <thead>
                 <tr>
@@ -179,15 +186,15 @@ const QualificationDetails = () => {
                 </tr>
               </thead>
               <tbody>
-                {qualificationDetails.map((detail, index) => (
-                  <tr key={index}>
-                    <td>{detail.type}</td>
-                    <td>{detail.degree}</td>
-                    <td>{detail.college}</td>
-                    <td>{detail.university}</td>
-                    <td>{detail.duration}</td>
-                    <td>{detail.yearOfPassing}</td>
-                    <td>{detail.comments}</td>
+                {qualificationDetails.map((detail) => (
+                  <tr key={detail.Q_Id}>
+                    <td>{detail.q_type}</td>
+                    <td>{detail.q_degree}</td>
+                    <td>{detail.q_clg}</td>
+                    <td>{detail.q_uni}</td>
+                    <td>{detail.q_duration}</td>
+                    <td>{detail.q_yop}</td>
+                    <td>{detail.q_comment}</td>
                     <td>
                       <Button
                         onClick={() => {
@@ -199,98 +206,96 @@ const QualificationDetails = () => {
                       </Button>
                     </td>
                     <td>
-                      <Button onClick={() => deleteItem(index)}>Delete</Button>
+                      <Button onClick={() => deleteItem(detail.Q_Id)}>Delete</Button>
                     </td>
                   </tr>
                 ))}
               </tbody>
             </Table>
-          <Button onClick={toggleForm}>
-             Add Details
-          </Button>
+            <Button onClick={toggleForm}>Add Details</Button>
           </div>
-          </QualificationDetailsStyled>
-        )}
-          {showForm && (
-            <Form onSubmit={saveDetails}>
-              <div style={{ display: 'flex', justifyContent: 'center' }}>
-                <h1 style={{ marginBottom: '20px' }}>Qualification Details</h1>
-              </div>
-              <FormSection>
-                <FormLabel>Type</FormLabel>
-                <select
-                  style={{
-                    width: '100%',
-                    height: '2.5rem',
-                    borderRadius: '4px',
-                    border: '1px solid #ccc',
-                  }}
-                  name="qualificationtype"
-                  required
-                  defaultValue=""
-                >
-                  <option value="" disabled>
-                    Please Select
-                  </option>
-                  <option value="Grad Engineer">Grad Engineer</option>
-                  <option value="Post Graduate">Post Graduate</option>
-                  <option value="Diploma">Diploma</option>
-                  <option value="Other">Other</option>
-                </select>
-              </FormSection>
-              <FormSection>
-                <FormLabel>Degree</FormLabel>
-                <select
-                  style={{
-                    width: '100%',
-                    height: '2.5rem',
-                    borderRadius: '4px',
-                    border: '1px solid #ccc',
-                  }}
-                  name="degree"
-                  required
-                  defaultValue=""
-                >
-                  <option value="" disabled>
-                    Please Select
-                  </option>
-                  <option value="B.Tech">B.Tech</option>
-                  <option value="M.Tech">M.Tech</option>
-                  <option value="MBA">MBA</option>
-                  <option value="Other">Other</option>
-                </select>
-              </FormSection>
-              <FormSection>
-                <FormLabel>College</FormLabel>
-                <FormInput type="text" name="college" placeholder="College" required />
-              </FormSection>
-              <FormSection>
-                <FormLabel>University</FormLabel>
-                <FormInput type="text" name="university" placeholder="University" required />
-              </FormSection>
-              <FormSection>
-                <FormLabel>Duration</FormLabel>
-                <FormInput type="number" name="duration" placeholder="Duration" required />
-              </FormSection>
-              <FormSection>
-                <FormLabel>Year Of Passing</FormLabel>
-                <FormInput type="number" name="passoutyear" placeholder="Year Of Passing" required />
-              </FormSection>
-              <FormSection>
-                <FormLabel>Comments</FormLabel>
-                <FormInput type="text" name="comments" placeholder="Comments (If Any)" />
-              </FormSection>
-              <div style={{ display: 'flex', justifyContent: 'flex-end' }}>
-            <Button style={{ marginLeft: '1px', }} type="submit">
+        </QualificationDetailsStyled>
+      )}
+      {showForm && (
+        <Form onSubmit={saveDetails}>
+          <div style={{ display: 'flex', justifyContent: 'center' }}>
+            <h1 style={{ marginBottom: '20px' }}>Qualification Details</h1>
+          </div>
+          <FormSection>
+            <FormLabel>Type</FormLabel>
+            <select
+              style={{
+                width: '100%',
+                height: '2.5rem',
+                borderRadius: '4px',
+                border: '1px solid #ccc',
+              }}
+              name="qualificationtype"
+              required
+              defaultValue=""
+            >
+              <option value="" disabled>
+                Please Select
+              </option>
+              <option value="Grad Engineer">Grad Engineer</option>
+              <option value="Post Graduate">Post Graduate</option>
+              <option value="Diploma">Diploma</option>
+              <option value="Other">Other</option>
+            </select>
+          </FormSection>
+          <FormSection>
+            <FormLabel>Degree</FormLabel>
+            <select
+              style={{
+                width: '100%',
+                height: '2.5rem',
+                borderRadius: '4px',
+                border: '1px solid #ccc',
+              }}
+              name="degree"
+              required
+              defaultValue=""
+            >
+              <option value="" disabled>
+                Please Select
+              </option>
+              <option value="B.Tech">B.Tech</option>
+              <option value="M.Tech">M.Tech</option>
+              <option value="MBA">MBA</option>
+              <option value="Other">Other</option>
+            </select>
+          </FormSection>
+          <FormSection>
+            <FormLabel>College</FormLabel>
+            <FormInput type="text" name="college" placeholder="College" required />
+          </FormSection>
+          <FormSection>
+            <FormLabel>University</FormLabel>
+            <FormInput type="text" name="university" placeholder="University" required />
+          </FormSection>
+          <FormSection>
+            <FormLabel>Duration</FormLabel>
+            <FormInput type="number" name="duration" placeholder="Duration" required />
+          </FormSection>
+          <FormSection>
+            <FormLabel>Year Of Passing</FormLabel>
+            <FormInput type="number" name="passoutyear" placeholder="Year Of Passing" required />
+          </FormSection>
+          <FormSection>
+            <FormLabel>Comments</FormLabel>
+            <FormInput type="text" name="comments" placeholder="Comments (If Any)" />
+          </FormSection>
+          <div style={{ display: 'flex', justifyContent: 'flex-end' }}>
+            <Button style={{ marginLeft: '1px' }} type="submit">
               Save Details
             </Button>
             <Button onClick={toggleForm} style={{ marginLeft: '10px' }}>
               Close
             </Button>
           </div>
-            </Form>
-          )}
-      <div style={{ position: 'fixed', left: 0, bottom: 0, width: '100%', height:'9%' }}>
+        </Form>
+      )}
+      <div style={{ position: 'fixed', left: 0, bottom: 0, width: '100%', height: '9%' }}>
         <Footer />
       </div>
     </>
@@ -298,4 +303,5 @@ const QualificationDetails = () => {
 };
 
 export default QualificationDetails;
+
 
