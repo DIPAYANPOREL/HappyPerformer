@@ -10,7 +10,7 @@ axios.defaults.xsrfHeaderName = "X-CSRFToken";
 
 const Container = styled.div`
   flex: 1;
-  padding: 0px;
+  padding: 20px;
   background-color: #fff;
   border-radius: 10px;
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
@@ -122,19 +122,6 @@ const Label = styled.label`
   }
 `;
 
-const Input = styled.input`
-  padding: 10px;
-  width: 100%;
-  border: 1px solid #ccc;
-  border-radius: 4px;
-  margin-bottom: 20px;
-
-  @media (max-width: 768px) {
-    padding: 8px;
-    margin-bottom: 15px;
-  }
-`;
-
 const TextArea = styled.textarea`
   padding: 10px;
   width: 100%;
@@ -171,7 +158,7 @@ const Button = styled.button`
 
 const PopupContainer = styled.div`
   position: fixed;
-  top: 20%;
+  top: 50%;
   left: 50%;
   transform: translate(-50%, -50%);
   background-color: #fff;
@@ -225,12 +212,12 @@ const Overlay = styled.div`
   z-index: 999;
 `;
 
-const Faq = () => {
+const FAQ = () => {
   const [activeIndex, setActiveIndex] = useState(null);
   const [faqs, setFaqs] = useState([]);
   const [showPopup, setShowPopup] = useState(false);
-  const [formData, setFormData] = useState({ message: "" });
-  const [errors, setErrors] = useState({ message: "" });
+  const [formData, setFormData] = useState({ question: "" });
+  const [errors, setErrors] = useState({ question: "" });
 
   useEffect(() => {
     axios
@@ -254,10 +241,10 @@ const Faq = () => {
 
   const validateForm = () => {
     let valid = true;
-    const errors = { message: "" };
+    const errors = { question: "" };
 
-    if (!formData.message) {
-      errors.message = "Message is required";
+    if (!formData.question) {
+      errors.question = "Question is required";
       valid = false;
     }
 
@@ -270,7 +257,9 @@ const Faq = () => {
     if (validateForm()) {
       console.log("Submitting form with data:", formData);
       axios
-        .post("http://127.0.0.1:8000/FAQsView/", formData)
+        .post("http://127.0.0.1:8000/FAQsView/", formData, {
+          withCredentials: true,
+        })
         .then((response) => {
           console.log("Form submitted successfully:", response);
           setShowPopup(true);
@@ -303,16 +292,16 @@ const Faq = () => {
         ))}
         <FormTitle>More Questions? Let us help you!</FormTitle>
         <Form onSubmit={handleSubmit}>
-          <Label htmlFor="message">Message</Label>
+          <Label htmlFor="question">Question</Label>
           <TextArea
-            id="message"
-            name="message"
-            placeholder="Your message"
-            value={formData.message}
+            id="question"
+            name="question"
+            placeholder="Your question"
+            value={formData.question}
             onChange={handleChange}
             required
           />
-          {errors.message && <p style={{ color: "red" }}>{errors.message}</p>}
+          {errors.question && <p style={{ color: "red" }}>{errors.question}</p>}
           <Button type="submit">SUBMIT</Button>
         </Form>
       </Container>
@@ -331,5 +320,4 @@ const Faq = () => {
   );
 };
 
-export default Faq;
-
+export default FAQ;
