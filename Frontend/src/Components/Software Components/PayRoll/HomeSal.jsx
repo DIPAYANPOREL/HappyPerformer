@@ -2,6 +2,8 @@ import axios from "axios";
 import React, { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import styled from "styled-components";
+import Header from "../../../Components/Software Components/Dashboard/Header";
+import Layout from "../../../Components/Software Components/Dashboard/Layout";
 
 axios.defaults.withCredentials = true;
 axios.defaults.xsrfCookieName = "csrftoken";
@@ -9,6 +11,7 @@ axios.defaults.xsrfHeaderName = "X-CSRFToken";
 
 const Wrapper = styled.div`
   font-family: Arial, sans-serif;
+  padding: 20px;
 `;
 
 const Container = styled.div`
@@ -16,7 +19,7 @@ const Container = styled.div`
   justify-content: space-between;
   align-items: center;
   margin-bottom: 20px;
-  padding: 40px;
+  flex-wrap: wrap;
 `;
 
 const SearchInput = styled.input`
@@ -24,21 +27,28 @@ const SearchInput = styled.input`
   border-radius: 5px;
   border: 1px solid #ddd;
   margin-right: 10px;
+  flex: 1;
+  min-width: 200px;
+  margin-bottom: 10px;
 `;
 
 const Select = styled.select`
   padding: 10px;
   border-radius: 5px;
   border: 1px solid #ddd;
+  min-width: 150px;
+  margin-bottom: 10px;
 `;
 
 const TableWrapper = styled.div`
   margin-top: 20px;
+  overflow-x: auto;
 `;
 
 const Table = styled.table`
   width: 100%;
   border-collapse: collapse;
+  margin-bottom: 20px;
 `;
 
 const TableHeader = styled.thead`
@@ -56,6 +66,7 @@ const TableCell = styled.td`
   padding: 10px;
   border: 1px solid #dddddd;
   text-align: left;
+  vertical-align: middle;
 `;
 
 const TableHeadCell = styled.th`
@@ -72,6 +83,15 @@ const ActionButton = styled.button`
   border: none;
   border-radius: 5px;
   cursor: pointer;
+  transition: transform 0.2s;
+
+  &:hover {
+    transform: scale(1.05);
+  }
+
+  &:last-child {
+    margin-right: 0;
+  }
 `;
 
 const HomeSal = () => {
@@ -109,71 +129,76 @@ const HomeSal = () => {
   );
 
   return (
-    <Wrapper>
-      <Container>
-        <SearchInput
-          type="text"
-          placeholder="Search..."
-          value={searchQuery}
-          onChange={handleSearchChange}
-        />
-        <Select value={lines} onChange={handleSelectChange}>
-          <option value="10">10 lines</option>
-          <option value="20">20 lines</option>
-          <option value="30">30 lines</option>
-        </Select>
-      </Container>
-      <TableWrapper>
-        {filteredData.length === 0 ? (
-          <p>No data available</p>
-        ) : (
-          <Table>
-            <TableHeader>
-              <TableRow>
-                <TableHeadCell>ID</TableHeadCell>
-                <TableHeadCell>Name</TableHeadCell>
-                <TableHeadCell>Email</TableHeadCell>
-                <TableHeadCell>Designation</TableHeadCell>
-                <TableHeadCell>Actions</TableHeadCell>
-              </TableRow>
-            </TableHeader>
-            <tbody>
-              {filteredData.slice(0, lines).map((row, index) => (
-                <TableRow key={index}>
-                  <TableCell>{index + 1}</TableCell>
-                  <TableCell>{row.emp_name}</TableCell>
-                  <TableCell>{row.emp_emailid}</TableCell>
-                  <TableCell>{row.emp_role}</TableCell>
-                  <TableCell>
-                    <ActionButton
-                      primary
-                      onClick={() => navigate(`/AddSalary/${row.emp_emailid}`)}
-                    >
-                      Add Salary
-                    </ActionButton>
-                    <ActionButton
-                      onClick={() =>
-                        navigate(`/RevisionHistory/${row.emp_emailid}`)
-                      }
-                    >
-                      Revision History
-                    </ActionButton>
-                    <ActionButton
-                      primary
-                      onClick={() =>
-                        navigate(`/DisplayDetails/${row.emp_emailid}`)
-                      }
-                    >
-                      Display Details
-                    </ActionButton>
-                  </TableCell>
+    <Layout>
+      <Header title="Home Salary" />
+      <Wrapper>
+        <Container>
+          <SearchInput
+            type="text"
+            placeholder="Search..."
+            value={searchQuery}
+            onChange={handleSearchChange}
+          />
+          <Select value={lines} onChange={handleSelectChange}>
+            <option value="10">10 lines</option>
+            <option value="20">20 lines</option>
+            <option value="30">30 lines</option>
+          </Select>
+        </Container>
+        <TableWrapper>
+          {filteredData.length === 0 ? (
+            <p>No data available</p>
+          ) : (
+            <Table>
+              <TableHeader>
+                <TableRow>
+                  <TableHeadCell>ID</TableHeadCell>
+                  <TableHeadCell>Name</TableHeadCell>
+                  <TableHeadCell>Email</TableHeadCell>
+                  <TableHeadCell>Designation</TableHeadCell>
+                  <TableHeadCell>Actions</TableHeadCell>
                 </TableRow>
-              ))}
-            </tbody>
-          </Table>
-        )}
-      </TableWrapper>
-    </Wrapper>
+              </TableHeader>
+              <tbody>
+                {filteredData.slice(0, lines).map((row, index) => (
+                  <TableRow key={index}>
+                    <TableCell>{index + 1}</TableCell>
+                    <TableCell>{row.emp_name}</TableCell>
+                    <TableCell>{row.emp_emailid}</TableCell>
+                    <TableCell>{row.emp_role}</TableCell>
+                    <TableCell>
+                      <ActionButton
+                        primary
+                        onClick={() =>
+                          navigate(`/AddSalary/${row.emp_emailid}`)
+                        }
+                      >
+                        Add Salary
+                      </ActionButton>
+                      <ActionButton
+                        onClick={() =>
+                          navigate(`/RevisionHistory/${row.emp_emailid}`)
+                        }
+                      >
+                        Revision History
+                      </ActionButton>
+                      <ActionButton
+                        primary
+                        onClick={() =>
+                          navigate(`/DisplayDetails/${row.emp_emailid}`)
+                        }
+                      >
+                        Display Details
+                      </ActionButton>
+                    </TableCell>
+                  </TableRow>
+                ))}
+              </tbody>
+            </Table>
+          )}
+        </TableWrapper>
+      </Wrapper>
+    </Layout>
   );
 };
 
