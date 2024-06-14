@@ -11,62 +11,89 @@ axios.defaults.xsrfCookieName = "csrftoken";
 axios.defaults.xsrfHeaderName = "X-CSRFToken";
 
 const OuterContainer = styled.div`
-  background-color: white;
+  background-color: #ffffff;
   border: 1px solid #ddd;
-  border-radius: 4px;
+  border-radius: 10px;
   margin: 20px;
   width: 100%;
   max-width: 1200px;
   margin: 20px auto;
   overflow: hidden;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
 `;
 
 const InnerContainer = styled.div`
   flex: 1;
-  padding: 20px;
+  padding: 30px;
 `;
 
 const Heading = styled.h1`
   text-align: center;
-  margin-bottom: 20px;
+  margin-bottom: 30px;
+  font-size: 2rem;
+  color: #333;
 `;
 
 const Table = styled.table`
   width: 100%;
   border-collapse: collapse;
-  margin-bottom: 20px;
+  margin-bottom: 30px;
+  font-size: 1rem;
 `;
 
 const Th = styled.th`
   border: 1px solid #ddd;
-  padding: 8px;
+  padding: 12px;
   text-align: left;
+  background-color: #f2f2f2;
+  font-weight: bold;
 `;
 
 const Td = styled.td`
   border: 1px solid #ddd;
-  padding: 8px;
+  padding: 12px;
+  text-align: left;
 `;
 
 const Button = styled.button`
-  background-color: #007bff;
   color: white;
   border: none;
   padding: 10px 20px;
   cursor: pointer;
   border-radius: 4px;
-  &:hover {
-    background-color: #0056b3;
-  }
+  font-size: 0.9rem;
+  transition: background-color 0.3s;
 `;
 
 const ActionButton = styled(Button)`
   margin-right: 5px;
 `;
 
+const EditButton = styled(ActionButton)`
+  background-color: #ffc107;
+
+  &:hover {
+    background-color: #e0a800;
+  }
+`;
+
+const DeleteButton = styled(ActionButton)`
+  background-color: #dc3545;
+
+  &:hover {
+    background-color: #c82333;
+  }
+`;
+
 const PrintButton = styled(Button)`
   display: block;
+  background-color: #007bff;
   margin: 20px auto;
+  font-size: 1rem;
+
+  &:hover {
+    background-color: #0056b3;
+  }
 `;
 
 const ManageExpenses = () => {
@@ -219,17 +246,17 @@ const ManageExpenses = () => {
                   </Td>
                   <Td>
                     {isEditing && editExpenseId === expense.expense_id ? (
-                      <ActionButton onClick={handleSaveEdit}>Save</ActionButton>
+                      <EditButton onClick={handleSaveEdit}>Save</EditButton>
                     ) : (
-                      <ActionButton onClick={() => handleEditExpense(expense)}>
+                      <EditButton onClick={() => handleEditExpense(expense)}>
                         Edit
-                      </ActionButton>
+                      </EditButton>
                     )}
-                    <ActionButton
+                    <DeleteButton
                       onClick={() => handleDeleteExpense(expense.expense_id)}
                     >
                       Delete
-                    </ActionButton>
+                    </DeleteButton>
                   </Td>
                 </tr>
               ))}
