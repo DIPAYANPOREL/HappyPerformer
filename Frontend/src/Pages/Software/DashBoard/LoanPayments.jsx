@@ -69,6 +69,15 @@ const TableCell = styled.td`
   text-align: center;
 `;
 
+const StatusTableCell = styled(TableCell)`
+  color: ${({ status }) =>
+    status === "Pending"
+      ? "yellow"
+      : status === "Approved"
+      ? "green"
+      : "black"};
+`;
+
 const TableRow = styled.tr`
   &:nth-child(even) {
     background-color: #f9f9f9;
@@ -347,7 +356,9 @@ const LoanPayments = () => {
                   <TableCell>{loan.monthly_amount}</TableCell>
                   <TableCell>{loan.start_date}</TableCell>
                   <TableCell>{loan.reason}</TableCell>
-                  <TableCell>{loan.status}</TableCell>
+                  <StatusTableCell status={loan.status}>
+                    {loan.status}
+                  </StatusTableCell>
                 </TableRow>
               ))}
             </tbody>
@@ -445,7 +456,9 @@ const LoanPayments = () => {
                         <TableCell>{loan.monthly_amount}</TableCell>
                         <TableCell>{loan.start_date}</TableCell>
                         <TableCell>{loan.reason}</TableCell>
-                        <TableCell>{loan.status}</TableCell>
+                        <StatusTableCell status={loan.status}>
+                          {loan.status}
+                        </StatusTableCell>
                       </TableRow>
                     ))}
                 </tbody>
@@ -481,7 +494,9 @@ const LoanPayments = () => {
                         <TableCell>{loan.monthly_amount}</TableCell>
                         <TableCell>{loan.start_date}</TableCell>
                         <TableCell>{loan.reason}</TableCell>
-                        <TableCell>{loan.status}</TableCell>
+                        <StatusTableCell status={loan.status}>
+                          {loan.status}
+                        </StatusTableCell>
                       </TableRow>
                     ))}
                 </tbody>
