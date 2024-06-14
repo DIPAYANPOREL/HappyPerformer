@@ -18,7 +18,8 @@ const GlobalStyle = createGlobalStyle`
   body, html {
     width: 100%;
     height: 100%;
-    font-family: Arial, sans-serif;
+    font-family: 'Roboto', sans-serif;
+    background-color: #f4f7f6;
   }
 
   #root {
@@ -33,14 +34,13 @@ const Container = styled.div`
   display: flex;
   flex-direction: column;
   align-items: center;
-  padding: 20px;
-  background-color: #f9f9f9;
-  border: 1px solid #ddd;
-  border-radius: 10px;
-  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+  padding: 40px;
+  background-color: #fff;
+  border-radius: 15px;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
   width: 90%;
   max-width: 800px;
-  margin: 20px auto;
+  margin: 40px auto;
 
   @media (max-width: 1200px) {
     max-width: 90%;
@@ -52,77 +52,84 @@ const Container = styled.div`
 
   @media (max-width: 768px) {
     max-width: 100%;
-    padding: 15px;
+    padding: 30px;
   }
 
   @media (max-width: 576px) {
-    padding: 10px;
+    padding: 20px;
   }
 `;
 
 const Title = styled.h1`
   font-weight: bold;
-  color: #333;
-  margin-bottom: 20px;
+  color: #0077b6;
+  margin-bottom: 30px;
 
   @media (max-width: 576px) {
-    font-size: 1.5em;
-    margin-bottom: 15px;
+    font-size: 1.8em;
+    margin-bottom: 20px;
   }
 `;
 
 const Label = styled.label`
   display: block;
   margin-bottom: 10px;
-  font-size: 16px;
+  font-size: 1.1rem;
   font-weight: bold;
   color: #333;
 `;
 
 const EmployeeSelect = styled.select`
   width: 100%;
-  height: 100px;
-  padding: 10px;
-  font-size: 16px;
+  height: 150px;
+  padding: 15px;
+  font-size: 1rem;
   border: 1px solid #ccc;
   border-radius: 10px;
   margin-bottom: 20px;
+  background-color: #f9f9f9;
+
+  &:focus {
+    border-color: #0077b6;
+    outline: none;
+  }
 `;
 
 const Option = styled.option`
-  font-size: 16px;
+  font-size: 1rem;
 `;
 
 const InfoLabel = styled.label`
   display: block;
   margin-bottom: 10px;
-  font-size: 14px;
+  font-size: 0.9rem;
   color: #666;
 `;
 
 const StaticText = styled.p`
   width: 100%;
-  padding: 10px;
-  font-size: 16px;
+  padding: 15px;
+  font-size: 1rem;
   border: 1px solid #ccc;
   border-radius: 10px;
-  background-color: #f1f1f1;
+  background-color: #e9e9e9;
   margin-bottom: 20px;
 `;
 
 const Button = styled.button`
   width: 50%;
-  height: 40px;
+  height: 45px;
   padding: 10px;
-  font-size: 16px;
+  font-size: 1.1rem;
   border: none;
   border-radius: 10px;
-  background-color: #007bff;
+  background-color: #0077b6;
   color: #fff;
   cursor: pointer;
+  transition: background-color 0.3s;
 
   :hover {
-    background-color: #45a049;
+    background-color: #005f8d;
   }
 
   @media (max-width: 576px) {
@@ -144,10 +151,10 @@ const PopupOverlay = styled.div`
 
 const PopupContainer = styled.div`
   background-color: #fff;
-  padding: 20px;
+  padding: 30px;
   border-radius: 10px;
   text-align: center;
-  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
   width: 90%;
   max-width: 400px;
 
@@ -159,7 +166,7 @@ const PopupContainer = styled.div`
 const PopupTitle = styled.h3`
   margin-top: 0;
   font-weight: bold;
-  color: #333;
+  color: #0077b6;
 `;
 
 const PopupButton = styled(Button)`
