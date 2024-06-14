@@ -219,7 +219,7 @@ const FAQ = () => {
   const [formData, setFormData] = useState({ question: "" });
   const [errors, setErrors] = useState({ question: "" });
 
-  useEffect(() => {
+  const fetchFAQs = () => {
     axios
       .get("http://127.0.0.1:8000/FAQsView")
       .then((response) => {
@@ -228,6 +228,10 @@ const FAQ = () => {
       .catch((error) => {
         console.error("Error fetching FAQs:", error);
       });
+  };
+
+  useEffect(() => {
+    fetchFAQs();
   }, []);
 
   const handleToggle = (index) => {
@@ -255,21 +259,18 @@ const FAQ = () => {
   const handleSubmit = (e) => {
     e.preventDefault();
     if (validateForm()) {
-      console.log("Submitting form with data:", formData);
       axios
         .post("http://127.0.0.1:8000/FAQsView/", formData, {
           withCredentials: true,
         })
         .then((response) => {
-          console.log("Form submitted successfully:", response);
           setFormData({ question: "" });
           setShowPopup(true);
+          fetchFAQs(); // Refresh the FAQ list
         })
         .catch((error) => {
           console.error("Error submitting form:", error);
         });
-    } else {
-      console.log("Form validation failed with errors:", errors);
     }
   };
 
