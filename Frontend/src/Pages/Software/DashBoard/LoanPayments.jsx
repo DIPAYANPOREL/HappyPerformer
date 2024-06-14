@@ -72,7 +72,7 @@ const TableCell = styled.td`
 const StatusTableCell = styled(TableCell)`
   color: ${({ status }) =>
     status === "Pending"
-      ? "yellow"
+      ? "orange"
       : status === "Approved"
       ? "green"
       : "black"};
