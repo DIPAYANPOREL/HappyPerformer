@@ -268,7 +268,7 @@ const ApprovedLeaves = () => {
 
   const fetchData = async () => {
     try {
-      const response = await axios.get("YOUR_API_ENDPOINT/leaves");
+      const response = await axios.get("http://127.0.0.1:8000/ApprovedLeaves");
       if (Array.isArray(response.data)) {
         setLeaveApplications(response.data);
       } else {
