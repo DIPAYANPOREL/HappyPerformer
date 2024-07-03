@@ -2,8 +2,6 @@ import axios from "axios";
 import React, { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import styled from "styled-components";
-import Header from "../../../Components/Software Components/Dashboard/Header";
-import Layout from "../../../Components/Software Components/Dashboard/Layout";
 
 axios.defaults.withCredentials = true;
 axios.defaults.xsrfCookieName = "csrftoken";
@@ -129,8 +127,7 @@ const HomeSal = () => {
   );
 
   return (
-    <Layout>
-      <Header title="Home Salary" />
+
       <Wrapper>
         <Container>
           <SearchInput
@@ -198,7 +195,7 @@ const HomeSal = () => {
           )}
         </TableWrapper>
       </Wrapper>
-    </Layout>
+
   );
 };
 
