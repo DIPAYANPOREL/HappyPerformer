@@ -1,68 +1,88 @@
-import React from "react";
 import { Route, Routes } from "react-router-dom";
-import Register from "../src/Pages/Software/Register";
-import EducationalInformation from "./Components/Software Components/Profile/EducationalInformation";
-import EmergencyContact from "./Components/Software Components/Profile/EmergencyContact";
-import Experience from "./Components/Software Components/Profile/Experience";
-import FamilyInformation from "./Components/Software Components/Profile/FamilyInformation";
-import PersonalInfo from "./Components/Software Components/Profile/PersonalInfo";
-import Table from "./Components/Software Components/Table";
-import Home from "./Pages/Landing Page/Home";
-import MeetTheTeam from "./Pages/Landing Page/MeetTheTeam";
-import ApplyforLeave from "./Pages/Leave Management/ApplyforLeave";
-import LeaveHistory from "./Pages/Leave Management/LeaveHistory";
-import AttendanceDetails from "./Pages/Management/Attendance Management/AttendanceDetails";
-import EmployeeDetails from "./Pages/Management/Attendance Management/EmployeeDetails";
-import EnrollEmployee from "./Pages/Management/EnrollEmployee";
+// Landing Pages
+import AddSalary from "./Components/Software Components/PayRoll/AddSalary";
+import Home from "./Pages/HappyPerformerMain/Home";
+import BankTransfer from "./Pages/Management/BankTransfers/BankTransfer";
+import BankTransferDetails from "./Pages/Management/BankTransfers/BankTransferDetails";
+import BankTransferPayout from "./Pages/Management/BankTransfers/BankTransferPayout";
+import CashChequeTransfer from "./Pages/Management/PayrollManagement/CashChequeTransfer";
+import HomeSalary from "./Pages/Management/PayrollManagement/HomeSalary";
 import Attendance from "./Pages/Software/Attendance/Attendance";
-import Dashboard from "./Pages/Software/DashBoard/Dashboard";
-import FAQ from "./Pages/Software/DashBoard/FAQ";
+import CreateCase from "./Pages/Software/CaseManagement/CreateCase";
+import Add_Courses from "./Pages/Software/Courses/Add_Courses";
+import Add_Media_Content from "./Pages/Software/Courses/Add_Media_Content";
+import Update_Delete_Media from "./Pages/Software/Courses/Update_Delete_Media";
+import Update_Media from "./Pages/Software/Courses/Update_Media";
+import Upload_Media from "./Pages/Software/Courses/Upload_Media";
+// import EmployeeMaster from "./Pages/Software/EmployeeMaster/EmployeeMaster";
+import FAQView from "./Pages/Management/FAQView";
+import AdhocPayments from "./Pages/Management/PayrollManagement/AdhocPayments";
+import ReportingForm from "./Pages/Management/ReportingForm";
+import Resignation from "./Pages/Management/Resignations/Resignations";
+import Faq from "./Pages/Software/DashBoard/FAQ";
 import LoanPayments from "./Pages/Software/DashBoard/LoanPayments";
-import Quiz from "./Pages/Software/DashBoard/Quiz";
-import EmployeeMaster from "./Pages/Software/EmployeeMaster/EmployeeMaster";
-import SopForm from "./Pages/Software/EmployeesJobs/SopForm";
-import { default as Login, default as Resign } from "./Pages/Software/Login";
+import AddExpense from "./Pages/Software/ExpenseManagements/Addexpense";
+import ExpenseReports from "./Pages/Software/ExpenseManagements/Expensereports";
+import ManageExpenses from "./Pages/Software/ExpenseManagements/ManageExpenses";
+import Login from "./Pages/Software/Login";
 import PHPTutorials from "./Pages/Software/PHPTutorials/PHPTutorials";
-import Profile from "./Pages/Software/Profile/Profile";
-import Setting from "./Pages/Software/Profile/Settings/Setting";
-import Training from "./Pages/Software/Training";
+import Pricing from "./Pages/Software/Pricing";
+import Register from "./Pages/Software/Register";
+import NewEmployeeRegistry from "./Pages/Software/RegisterEmployee/NewEmployeeRegistry";
+import Resign from "./Pages/Software/Resign/Resign";
+import SopPolicies from "./Pages/Software/Sop&Policies/SopPolicies";
+import DelUpdateRegistry from "./Pages/Software/RegisterEmployee/DelUpdateRegistry";
+import HomeSal from "./Components/Software Components/PayRoll/HomeSal";
+
 function App() {
   return (
-    <>
-      <Routes>
-        <Route path="/" element={<Home />} />
-        <Route path="/meet-the-team" element={<MeetTheTeam />} />
-        <Route path="/dashboard" element={<Dashboard />} />
-        <Route path="/employee-master" element={<EmployeeMaster />} />
-        <Route path="/resign" element={<Resign />} />
-        <Route path="/login" element={<Login />} />
-        <Route path="/phptutorials" element={<PHPTutorials />} />
-        <Route path="/loanpayments" element={<LoanPayments />} />
-        <Route path="/Quiz" element={<Quiz />} />
-        <Route path="/FAQ" element={<FAQ />} />
-        <Route path="/profile" element={<Profile />} />
-        <Route path="/EmergencyContact" element={<EmergencyContact />} />
-        <Route path="/PersonalInfo" element={<PersonalInfo />} />
-        <Route path="/FamilyInformation" element={<FamilyInformation />} />
-        <Route path="/Experience" element={<Experience />} />
-        <Route
-          path="/EducationalInformation"
-          element={<EducationalInformation />}
-        />
-        <Route path="/Setting" element={<Setting />} />
-        <Route path="/Training" element={<Training />} />
-        <Route path="/EnrollEmployee" element={<EnrollEmployee />} />
-        <Route path="/Table" element={<Table />} />
-        <Route path="/ApplyforLeave" element={<ApplyforLeave />} />
-        <Route path="/LeaveHistory" element={<LeaveHistory />} />
-        <Route path="/SopForm" element={<SopForm />} />
-        <Route path="/Attendance" element={<Attendance />} />
-        <Route path="/EmployeeDetails" element={<EmployeeDetails />} />
-        <Route path="/AttendanceDetails" element={<AttendanceDetails />} />
-        <Route path="/register" element={<Register />} />
+    <Routes>
+      {/* Landing Pages */}
+      <Route path="/" element={<Home />} />
+      <Route path="/markattendance" element={<Attendance />} />
+      <Route path="/banktransfer" element={<BankTransfer />} />
+      <Route path="/banktransfer2/:month" element={<BankTransferPayout />} />
+      <Route path="/banktransfer1" element={<BankTransferDetails />} />
+      <Route path="/homesalary" element={<HomeSalary />} />
+      <Route path="/addsalary/:emp_emailid" element={<AddSalary />} />
+      <Route path="/homesal" element={<HomeSal />} />
+      <Route path="/paysip" element={<CashChequeTransfer />} />
+      <Route path="/resign" element={<Resign />} />
+      <Route path="/login" element={<Login />} />
+      <Route path="/pricing" element={<Pricing />} />
+      <Route path="/register" element={<Register />} />
+      {/* <Route path="/employeemaster" element={<EmployeeMaster />} /> */}
+      <Route path="/createcase" element={<CreateCase />} />
+      <Route path="/newemp" element={<NewEmployeeRegistry />} />
+      <Route path="/delemp" element={<DelUpdateRegistry />} />
+      {/* Courses */}
+      <Route path="/addcourse" element={<Add_Courses />} />
+      <Route path="/uploadmedia/:course_id" element={<Upload_Media />} />
+      <Route path="/addmedia" element={<Add_Media_Content />} />
+      <Route path="/updatedeletemedia" element={<Update_Delete_Media />} />
+      <Route path="/updatemedia/:course_id" element={<Update_Media />} />
+      {/* Resign */}
+      <Route path="/resign" element={<Resign />} />
+      <Route path="/resignations" element={<Resignation />} />
+      {/* SOP */}
+      <Route path="/sop" element={<SopPolicies />} />
+      {/* PHP Tuts */}
+      <Route path="/phptuts" element={<PHPTutorials />} />
+      {/* FAQ Views */}
+      <Route path="/FAQs" element={<FAQView />} />
+      <Route path="/allfaq" element={<Faq />} />
+      {/* Loans */}
+      <Route path="/addloan" element={<LoanPayments />} />
+      {/* Expense Management */}
+      <Route path="/addexpense" element={<AddExpense />} />
+      <Route path="/expense-report" element={<ExpenseReports />} />
+      <Route path="/manage-expenses" element={<ManageExpenses />} />
 
-      </Routes>
-    </>
+      {/* Reports */}
+      <Route path="/reporting-form" element={<ReportingForm />} />
+
+      <Route path="/adhoc" element={<AdhocPayments />} />
+    </Routes>
   );
 }
 

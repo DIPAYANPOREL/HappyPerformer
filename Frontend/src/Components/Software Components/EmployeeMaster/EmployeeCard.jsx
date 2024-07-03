@@ -79,6 +79,11 @@ const Left = styled.div`
 `;
 
 const EmployeeCard = (props) => {
+
+  const handleDetailsClick = () => {
+    props.onClick(props.id);
+  };
+
   return (
     <Container>
       <Left>
@@ -86,11 +91,11 @@ const EmployeeCard = (props) => {
       </Left>
       <Right>
         <Name>{props.name}</Name>
-        <Department>{props.department}</Department>
-        <Phone>{props.phone}</Phone>
-        <Email> {props.mail}</Email>
+        <Department>Department: {props.department}</Department>
+        <Phone>Mobile No.{props.phone}</Phone>
+        <Email>Email: {props.mail}</Email>
         <Options>
-          <Btn to="/employeeinfo">See Details</Btn>
+          <Btn to={`/Profile/${props.id}`}  onClick={handleDetailsClick}>See Details</Btn>
           <DeleteOutlineOutlined style={{ fontSize: 30, cursor: "pointer" }} />
         </Options>
       </Right>

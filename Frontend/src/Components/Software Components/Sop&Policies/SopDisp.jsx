@@ -1,14 +1,19 @@
-import React, { useState } from 'react';
-import styled from 'styled-components';
-import { FaStar } from 'react-icons/fa';
+import axios from "axios";
+import React, { useEffect, useState } from "react";
+import { FaStar } from "react-icons/fa";
+import styled from "styled-components";
 
 const Container = styled.div`
   padding: 20px;
+  @media (max-width: 768px) {
+    padding: 10px;
+  }
 `;
 
 const Row = styled.div`
   display: flex;
   flex-wrap: wrap;
+  justify-content: center;
 `;
 
 const Col = styled.div`
@@ -21,6 +26,9 @@ const Card = styled.div`
   background-color: #fff;
   border-radius: 0.25rem;
   box-shadow: 0 0.5rem 1rem rgba(0, 0, 0, 0.15);
+  margin-bottom: 20px;
+  width: 100%;
+  max-width: 1200px;
 `;
 
 const CardHeader = styled.div`
@@ -36,6 +44,11 @@ const CardTitle = styled.h5`
     position: absolute;
     right: 20px;
   }
+`;
+
+const TableWrapper = styled.div`
+  width: 100%;
+  overflow-x: auto;
 `;
 
 const Table = styled.table`
@@ -76,26 +89,51 @@ const StarRating = styled.div`
 `;
 
 const SopDisp = () => {
-  const [count, setCount] = useState(10);
-  const [data, setData] = useState([
-    {
-      id: 1,
-      type: 'SOP',
-      name: 'Example SOP',
-      date: '2023-04-20',
-      selfRate: 4,
-      filename: 'example.pdf',
-      managerRating: 5,
-      managerRemark: 'Good job',
-    },
-  ]);
+  const [data, setData] = useState({ tasks: [], sop: [], files: [] });
+  const [loading, setLoading] = useState(true);
 
-  const handleRating = (id, rating) => {
-    setData((prevData) =>
-      prevData.map((item) =>
-        item.id === id ? { ...item, selfRate: rating } : item
-      )
-    );
+  useEffect(() => {
+    fetchData();
+  }, []);
+
+  const fetchData = async () => {
+    try {
+      const response = await axios.get("http://127.0.0.1:8000/soppolicies");
+      setData(response.data);
+    } catch (error) {
+      console.error("Error fetching data:", error);
+    } finally {
+      setLoading(false);
+    }
+  };
+
+  const handleRating = async (sopId, rating) => {
+    try {
+      let newRating = 0;
+      const sopItem = data.sop.find((item) => item.sop_id === sopId);
+
+      if (rating === sopItem.selfRate) {
+        newRating = 0;
+      } else {
+        newRating = rating;
+      }
+
+      setData((prevData) => ({
+        ...prevData,
+        sop: prevData.sop.map((sopItem) =>
+          sopItem.sop_id === sopId
+            ? { ...sopItem, selfRate: newRating }
+            : sopItem
+        ),
+      }));
+
+      await axios.put(`http://127.0.0.1:8000/tasks/${sopId}/`, {
+        selfratings: newRating,
+      });
+      fetchData();
+    } catch (error) {
+      console.error("Error updating rating:", error);
+    }
   };
 
   return (
@@ -104,12 +142,18 @@ const SopDisp = () => {
         <Col>
           <Card>
             <CardHeader>
-              <CardTitle>
-                Your SOP's list & Company's Policies
-              </CardTitle>
+              <CardTitle>Your SOP's list & Company's Policies</CardTitle>
             </CardHeader>
 
-            {count === 0 ? (
+            {loading ? (
+              <NoSOP>
+                <div>
+                  <div>
+                    <h1>Loading...</h1>
+                  </div>
+                </div>
+              </NoSOP>
+            ) : data.sop.length === 0 ? (
               <NoSOP>
                 <div>
                   <div>
@@ -118,46 +162,60 @@ const SopDisp = () => {
                 </div>
               </NoSOP>
             ) : (
-              <Table>
-                <TableHead>
-                  <tr>
-                    <th style={{ width: '5%' }}>ID</th>
-                    <th style={{ width: '25%' }}>Type - Name</th>
-                    <th style={{ width: '15%' }}>Date</th>
-                    <th style={{ width: '10%' }}>Self Rate</th>
-                    <th style={{ width: '17%' }}>Filename</th>
-                    <th style={{ width: '9%' }}>Manager Ratings</th>
-                    <th style={{ width: '20%' }}>Manager Remark</th>
-                  </tr>
-                </TableHead>
-                <TableBody>
-                  {data.map((item) => (
-                    <tr key={item.id}>
-                      <td style={{ width: '3em' }}>{item.id}</td>
-                      <td>{`${item.type} - ${item.name}`}</td>
-                      <td>{item.date}</td>
-                      <td>
-                        <StarRating>
-                          {[...Array(5)].map((_, index) => (
-                            <FaStar
-                              key={index}
-                              color={
-                                index < item.selfRate ? '#ffcc00' : '#e4e5e9'
-                              }
-                              onClick={() => handleRating(item.id, index + 1)}
-                            />
-                          ))}
-                        </StarRating>
-                      </td>
-                      <td>
-                        <a href={`uploads/${item.filename}`}>Open File</a>
-                      </td>
-                      <td>{item.managerRating || '-'}</td>
-                      <td>{item.managerRemark || '-'}</td>
+              <TableWrapper>
+                <Table>
+                  <TableHead>
+                    <tr>
+                      <th style={{ width: "5%" }}>ID</th>
+                      <th style={{ width: "25%" }}>Type - Name</th>
+                      <th style={{ width: "15%" }}>Date</th>
+                      <th style={{ width: "10%" }}>Self Rate</th>
+                      <th style={{ width: "17%" }}>Filename</th>
+                      <th style={{ width: "9%" }}>Manager Ratings</th>
+                      <th style={{ width: "20%" }}>Manager Remark</th>
                     </tr>
-                  ))}
-                </TableBody>
-              </Table>
+                  </TableHead>
+                  <TableBody>
+                    {data.sop.map((sopItem) => {
+                      const task = data.tasks.find(
+                        (taskItem) => taskItem.sop_id === sopItem.sop_id
+                      );
+                      return (
+                        <tr key={sopItem.sop_id}>
+                          <td style={{ width: "3em" }}>{sopItem.sop_id}</td>
+                          <td>{`${sopItem.type} - ${sopItem.s_name}`}</td>
+                          <td>{sopItem.sdate}</td>
+                          <td>
+                            <StarRating>
+                              {[...Array(5)].map((_, index) => (
+                                <FaStar
+                                  key={index}
+                                  color={
+                                    index + 1 <=
+                                    (task ? task.selfratings || 0 : 0)
+                                      ? "#ffcc00"
+                                      : "#e4e5e9"
+                                  }
+                                  onClick={() =>
+                                    handleRating(sopItem.sop_id, index + 1)
+                                  }
+                                />
+                              ))}
+                            </StarRating>
+                          </td>
+                          <td>
+                            <a href={`uploads/${sopItem.file_name}`}>
+                              Open File
+                            </a>
+                          </td>
+                          <td>{task ? task.ratings || "-" : "-"}</td>
+                          <td>{task ? task.remark || "-" : "-"}</td>
+                        </tr>
+                      );
+                    })}
+                  </TableBody>
+                </Table>
+              </TableWrapper>
             )}
           </Card>
         </Col>

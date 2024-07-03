@@ -1,14 +1,22 @@
-import React from 'react';
-import styled from 'styled-components';
+import React, { useEffect, useState } from "react";
+import axios from "axios"; // Import Axios
+import styled from "styled-components";
 
 const Container = styled.div`
   width: 100%;
   padding: 20px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  @media (max-width: 768px) {
+    padding: 10px;
+  }
 `;
 
 const Row = styled.div`
   display: flex;
   justify-content: center;
+  width: 100%;
 `;
 
 const Column = styled.div`
@@ -16,17 +24,22 @@ const Column = styled.div`
   @media (min-width: 1200px) {
     flex-basis: 80%;
   }
+  @media (max-width: 768px) {
+    flex-basis: 100%;
+  }
 `;
 
 const Card = styled.div`
   border: 1px solid #ccc;
   border-radius: 10px;
   padding: 20px;
-  margin: 20px;
-  width: 96%;
-  font-size: 1.4rem;
+  margin: 20px 0;
+  width: 100%;
   background-color: white;
   box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  @media (max-width: 768px) {
+    padding: 10px;
+  }
 `;
 
 const Table = styled.table`
@@ -39,8 +52,8 @@ const Thead = styled.thead`
 `;
 
 const Th = styled.th`
-  width: 3em;
   padding: 8px;
+  text-align: center;
 `;
 
 const Tr = styled.tr`
@@ -48,8 +61,8 @@ const Tr = styled.tr`
 `;
 
 const Td = styled.td`
-  width: 3em;
   padding: 8px;
+  text-align: center;
 `;
 
 const Link = styled.a`
@@ -61,12 +74,20 @@ const Link = styled.a`
 `;
 
 const CoursesDisp = () => {
+  const [courses, setCourses] = useState([]);
 
-  const courses = [
-    { id: 1, title: 'JavaScript in One Video' },
-    { id: 2, title: 'Php Full Course' },
-    { id: 3, title: 'React Complete Course' },
-  ];
+  useEffect(() => {
+    const fetchCourses = async () => {
+      try {
+        const response = await axios.get("http://127.0.0.1:8000/AddMediaContent");
+        setCourses(response.data);
+      } catch (error) {
+        console.error("Error fetching courses:", error);
+      }
+    };
+
+    fetchCourses();
+  }, []);
 
   return (
     <Container>
@@ -87,12 +108,10 @@ const CoursesDisp = () => {
               </Thead>
               <tbody>
                 {courses.map((course) => (
-                  <Tr key={course.id}>
-                    <Td>{course.title}</Td>
+                  <Tr key={course.course_id}>
+                    <Td>{course.course_title}</Td>
                     <Td>
-                      {/* Link with course id, to be activate after backend integrated */}
-                      {/* <Link href={`Upload_Media.jsx?&cd=${course.id}`}>ADD</Link> */}
-                      <Link href={`Upload_Media`}>ADD</Link>
+                      <Link href={`/UploadMedia/${course.course_id}`}>ADD</Link>
                     </Td>
                   </Tr>
                 ))}

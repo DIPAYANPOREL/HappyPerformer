@@ -1,4 +1,6 @@
-import React from "react";
+import axios from "axios";
+import React, { useState } from "react";
+import { useNavigate } from "react-router-dom";
 import styled from "styled-components";
 import Footer from "../../Components/Software Components/Footer";
 import LogoTwo from "../../assets/Login2.svg";
@@ -115,7 +117,31 @@ const ImageContainer = styled.img`
   max-width: 85%;
 `;
 const MainContainer = styled.div``;
+
 const Login = () => {
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
+  const navigate = useNavigate();
+
+  const handleLogin = (e) => {
+    e.preventDefault();
+    const data = {
+      email,
+      password,
+    };
+
+    axios
+      .post("http://127.0.0.1:8000/login/", data)
+      .then((res) => {
+        console.log(res.data);
+        navigate("/homesalary");
+      })
+      .catch((err) => {
+        console.log(err);
+        alert("Login failed. Please check your credentials and try again.");
+      });
+  };
+
   return (
     <MainContainer>
       <Container>
@@ -125,10 +151,26 @@ const Login = () => {
         <Center>
           <Title>Employee's Login</Title>
           <FormLogin>
-            <Input type="email" required placeholder="Email" />
-            <Input type="password" required placeholder="Password" />
+            <Input
+              type="email"
+              value={email}
+              required
+              placeholder="Email"
+              onChange={(e) => {
+                setEmail(e.target.value);
+              }}
+            />
+            <Input
+              type="password"
+              required
+              placeholder="Password"
+              value={password}
+              onChange={(e) => {
+                setPassword(e.target.value);
+              }}
+            />
             <ForgotPass>Forgot Password?</ForgotPass>
-            <Button>Login</Button>
+            <Button onClick={handleLogin}>Login</Button>
           </FormLogin>
         </Center>
         <Right>

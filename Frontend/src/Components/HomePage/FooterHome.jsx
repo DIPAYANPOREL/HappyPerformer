@@ -5,14 +5,22 @@ import {
   LocationOnOutlined,
   Mail,
   Phone,
-  Pinterest,
   Twitter,
 } from "@mui/icons-material";
 import React from "react";
+import { Link } from "react-router-dom";
 import styled from "styled-components";
 
 const Container = styled.div`
   display: flex;
+  flex-wrap: wrap;
+  padding: 10px;
+  background-color: #f9f9f9;
+  box-shadow: 0 -2px 4px rgba(0, 0, 0, 0.1);
+
+  @media (max-width: 768px) {
+    flex-direction: column;
+  }
 `;
 
 const Left = styled.div`
@@ -30,6 +38,11 @@ const Desc = styled.p`
 
 const SocialContainer = styled.div`
   display: flex;
+
+  @media (max-width: 768px) {
+    justify-content: center;
+    margin-bottom: 20px;
+  }
 `;
 
 const SocialIcon = styled.div`
@@ -42,17 +55,34 @@ const SocialIcon = styled.div`
   align-items: center;
   justify-content: center;
   margin-right: 20px;
+  cursor: pointer;
+  transition: transform 0.3s ease-in-out;
+
+  &:hover {
+    transform: scale(1.2);
+  }
 `;
 
 const Right = styled.div`
   flex: 1;
   padding: 20px;
+
+  @media (max-width: 768px) {
+    text-align: left;
+  }
 `;
 
-const ContactItem = styled.div`
+const ContactItem = styled(Link)`
   margin-bottom: 20px;
   display: flex;
   align-items: center;
+  color: #000;
+  text-decoration: none;
+
+  &:hover {
+    color: #000;
+    cursor: pointer;
+  }
 `;
 
 const Center = styled.div`
@@ -70,17 +100,34 @@ const List = styled.ul`
   list-style: none;
   display: flex;
   flex-wrap: wrap;
+
+  @media (max-width: 768px) {
+    flex-direction: column;
+    align-items: flex-start;
+  }
 `;
 
-const ListItem = styled.li`
+const ListItem = styled(Link)`
   width: 50%;
   margin-bottom: 10px;
+  color: #000;
+  text-decoration: none;
+
+  &:hover {
+    color: #000;
+    cursor: pointer;
+  }
+
+  @media (max-width: 768px) {
+    width: 100%;
+  }
 `;
+
 const FooterHome = () => {
   return (
     <Container>
       <Left>
-        <Logo>.UrbanMart!</Logo>
+        <Logo>Salahkaar Consultants</Logo>
         <Desc>
           Lorem ipsum, dolor sit amet consectetur adipisicing elit. Molestias
           error obcaecati voluptates accusantium iste. Beatae dolorem nostrum
@@ -100,36 +147,32 @@ const FooterHome = () => {
           <SocialIcon color="blue">
             <LinkedIn />
           </SocialIcon>
-          <SocialIcon color="#E60023">
-            <Pinterest />
-          </SocialIcon>
         </SocialContainer>
       </Left>
       <Center>
         <Title>Useful links</Title>
         <List>
-          <ListItem>Home</ListItem>
-          <ListItem>Cart</ListItem>
-          <ListItem>Man Fashion</ListItem>
-          <ListItem>Woman Fashion</ListItem>
-          <ListItem>Accessories</ListItem>
-          <ListItem>My Account</ListItem>
-          <ListItem>Order Tracking</ListItem>
-          <ListItem>Wishlist</ListItem>
-          <ListItem>Terms and Conditions</ListItem>
+          <ListItem to={"/"}>Home</ListItem>
+          <ListItem to={"/aboutus"}>About Us</ListItem>
+          <ListItem to={"/meettheteam"}>Meet The Team</ListItem>
+          <ListItem to={"/contactus"}>Contact Us</ListItem>
+          <ListItem to={"/FrequentQuestions"}>FAQ's</ListItem>
+          <ListItem to={"/privacypolicy"}>Privacy Policy</ListItem>
+          <ListItem to={"/termsandconditions"}>Terms and Conditions</ListItem>
+          <ListItem to={"/videoref"}>Video References</ListItem>
         </List>
       </Center>
       <Right>
         <Title>Contact</Title>
         <ContactItem>
-          <LocationOnOutlined /> Pune,Maharashtra - India
+          <LocationOnOutlined /> Pune, Maharashtra - India
         </ContactItem>
         <ContactItem>
-          <Phone /> +91 1234567890
+          <Phone /> +91 9975012222
         </ContactItem>
         <ContactItem>
-          <Mail />
-          email@gmail.com
+          <Mail type="email" />
+          Ren@SalahkaarConsultants.com
         </ContactItem>
       </Right>
     </Container>
