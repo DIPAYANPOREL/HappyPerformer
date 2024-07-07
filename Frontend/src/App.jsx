@@ -25,6 +25,9 @@ import LeaveHistory from "./Pages/Leave Management/LeaveHistory";
 import Letters from "./Pages/Letters";
 import AllEmployeePerformance from "./Pages/Management/AllEmployeePerformances";
 import AssignQuiz from "./Pages/Management/AssignQuiz";
+import AttendanceDetails from "./Pages/Management/Attendance Management/AttendanceDetails";
+import EmployeeDetails from "./Pages/Management/Attendance Management/EmployeeDetails";
+import BulkUpload from "./Pages/Management/BulkUpload";
 import CustomForms from "./Pages/Management/CustomForms";
 import EnrollEmployees from "./Pages/Management/EnrollEmployees";
 import FAQView from "./Pages/Management/FAQView";
@@ -190,8 +193,15 @@ function App() {
       <Route path="/revisionhistory" element={<RevisionHistory />} />
       <Route path="/displaydetails" element={<DisplayDetails />} />
 
+      {/* Attendance Management */}
+      <Route path="/employeedetails" element={<EmployeeDetails />} />
+      <Route path="/attendancedetails" element={<AttendanceDetails />} />
+
       {/* Reports */}
       <Route path="/reporting-form" element={<ReportingForm />} />
+
+      {/* BulkUpload */}
+      <Route path="/bulkupload" element={<BulkUpload />} />
 
       <Route path="/adhoc" element={<AdhocPayments />} />
     </Routes>
