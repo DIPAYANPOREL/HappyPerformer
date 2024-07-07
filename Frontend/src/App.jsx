@@ -15,6 +15,8 @@ import Update_Delete_Media from "./Pages/Software/Courses/Update_Delete_Media";
 import Update_Media from "./Pages/Software/Courses/Update_Media";
 import Upload_Media from "./Pages/Software/Courses/Upload_Media";
 // import EmployeeMaster from "./Pages/Software/EmployeeMaster/EmployeeMaster";
+import DisplayDetails from "../src/Components/Software Components/PayRoll/DisplayDetails";
+import RevisionHistory from "../src/Components/Software Components/PayRoll/RevisionHistory";
 import HomeSal from "./Components/Software Components/PayRoll/HomeSal";
 import EmployeeForm from "./Pages/EmployeeForm";
 import ITdeclaration from "./Pages/ITdeclaration";
@@ -27,9 +29,12 @@ import CustomForms from "./Pages/Management/CustomForms";
 import EnrollEmployees from "./Pages/Management/EnrollEmployees";
 import FAQView from "./Pages/Management/FAQView";
 import AllLeaves from "./Pages/Management/Leave Management/AllLeaves";
+import ApprovedLeaves from "./Pages/Management/Leave Management/ApprovedLeaves";
 import LeaveDashboard from "./Pages/Management/Leave Management/LeaveDashboard";
 import LeaveDetails from "./Pages/Management/Leave Management/LeaveDetails";
 import ManageLeaveTypes from "./Pages/Management/Leave Management/ManageLeaveTypes";
+import PendingLeaves from "./Pages/Management/Leave Management/PendingLeaves";
+import RejectedLeaves from "./Pages/Management/Leave Management/RejectedLeaves";
 import MyPerformance from "./Pages/Management/MyPerformance";
 import AdhocPayments from "./Pages/Management/PayrollManagement/AdhocPayments";
 import ReportingForm from "./Pages/Management/ReportingForm";
@@ -43,6 +48,7 @@ import JobDetails from "./Pages/Software/AddDetails/JobDetails";
 import Personaldetails from "./Pages/Software/AddDetails/Personaldetails";
 import QualificationDetails from "./Pages/Software/AddDetails/QualificationDetails";
 import WorkExperience from "./Pages/Software/AddDetails/WorkExperience";
+import AllCases from "./Pages/Software/CaseManagement/AllCases";
 import Dashboard from "./Pages/Software/DashBoard/Dashboard";
 import Faq from "./Pages/Software/DashBoard/FAQ";
 import LoanPayments from "./Pages/Software/DashBoard/LoanPayments";
@@ -53,6 +59,11 @@ import ExpenseReports from "./Pages/Software/ExpenseManagements/Expensereports";
 import ManageExpenses from "./Pages/Software/ExpenseManagements/ManageExpenses";
 import KRA from "./Pages/Software/KRA/KRA";
 import Login from "./Pages/Software/Login";
+import HoldSalary from "./Pages/Software/Payroll Management/HoldSalary";
+import LeaveEncashment from "./Pages/Software/Payroll Management/LeaveEncashment";
+import OffcyclePayment from "./Pages/Software/Payroll Management/OffcyclePayment";
+import Poi from "./Pages/Software/Payroll Management/Poi";
+import ViewEncashment from "./Pages/Software/Payroll Management/ViewEncashment";
 import PHPTutorials from "./Pages/Software/PHPTutorials/PHPTutorials";
 import Pricing from "./Pages/Software/Pricing";
 import Register from "./Pages/Software/Register";
@@ -134,11 +145,16 @@ function App() {
       <Route path="/leavedashboard" element={<LeaveDashboard />} />
       <Route path="/manageleavetypes" element={<ManageLeaveTypes />} />
       <Route path="/leaves" element={<AllLeaves />} />
+      <Route path="/pendingleave" element={<PendingLeaves />} />
+      <Route path="/rejectedleave" element={<RejectedLeaves />} />
+      <Route path="/approvedleave" element={<ApprovedLeaves />} />
 
       {/* <Route path="/employeemaster" element={<EmployeeMaster />} /> */}
       <Route path="/createcase" element={<CreateCase />} />
       <Route path="/newemp" element={<NewEmployeeRegistry />} />
       <Route path="/delemp" element={<DelUpdateRegistry />} />
+      <Route path="/allcases" element={<AllCases />} />
+
       {/* Courses */}
       <Route path="/addcourse" element={<Add_Courses />} />
       <Route path="/uploadmedia/:course_id" element={<Upload_Media />} />
@@ -163,6 +179,16 @@ function App() {
       <Route path="/addexpense" element={<AddExpense />} />
       <Route path="/expense-report" element={<ExpenseReports />} />
       <Route path="/manage-expenses" element={<ManageExpenses />} />
+      {/* Payroll management */}
+      <Route path="/createleaveencashment" element={<LeaveEncashment />} />
+      <Route path="/viewleaveencashment" element={<ViewEncashment />} />
+      <Route path="/offcyclepayment" element={<OffcyclePayment />} />
+      <Route path="/poi" element={<Poi />} />
+
+      {/* Salary */}
+      <Route path="/holdsalary" element={<HoldSalary />} />
+      <Route path="/revisionhistory" element={<RevisionHistory />} />
+      <Route path="/displaydetails" element={<DisplayDetails />} />
 
       {/* Reports */}
       <Route path="/reporting-form" element={<ReportingForm />} />
