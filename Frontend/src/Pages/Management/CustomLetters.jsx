@@ -166,7 +166,7 @@ const CustomLetters = () => {
   const fetchLetters = async () => {
     setLoading(true);
     try {
-      const response = await axios.get("/api/letters");
+      const response = await axios.get("http://127.0.0.1:8000/CustomLetter");
       if (Array.isArray(response.data)) {
         setLetters(response.data);
       } else {
@@ -182,7 +182,7 @@ const CustomLetters = () => {
   const handleCreateLetter = async () => {
     if (newLetterName.trim()) {
       try {
-        const response = await axios.post("/api/letters", {
+        const response = await axios.post("http://127.0.0.1:8000/CustomLetter", {
           name: newLetterName.trim(),
         });
         if (response.data && response.data.id) {
@@ -200,7 +200,7 @@ const CustomLetters = () => {
   const handleDeleteLetter = async (index) => {
     const letterToDelete = letters[index];
     try {
-      await axios.delete(`/api/letters/${letterToDelete.id}`);
+      await axios.delete(`http://127.0.0.1:8000/CustomLetter/${letterToDelete.id}`);
       const updatedLetters = [...letters];
       updatedLetters.splice(index, 1);
       setLetters(updatedLetters);
