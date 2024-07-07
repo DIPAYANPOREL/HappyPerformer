@@ -138,9 +138,9 @@ function App() {
 
       {/* Forms and Ratings */}
       <Route path="/jdform" element={<JDForm />} />
-      <Route path="kraform" element={<KRAForm />} />
-      <Route path="managerrating" element={<ManagerRating />} />
-      <Route path="sopform" element={<SopForm />} />
+      <Route path="/kraform" element={<KRAForm />} />
+      <Route path="/managerrating" element={<ManagerRating />} />
+      <Route path="/sopform" element={<SopForm />} />
       {/* FAQ Views */}
       <Route path="/FAQs" element={<FAQView />} />
 
