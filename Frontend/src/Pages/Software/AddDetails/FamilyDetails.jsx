@@ -114,8 +114,12 @@ const FamilyDetails = () => {
   useEffect(() => {
     const fetchFamilyDetails = async () => {
       try {
-        const response = await axios.get('/api/family-details');
-        setFamilyDetails(response.data);
+        const response = await axios.get('http://127.0.0.1:8000/UpdateFamilyDetails/');
+        if (Array.isArray(response.data)) {
+          setFamilyDetails(response.data);
+        } else {
+          setFamilyDetails([]);
+        }
       } catch (error) {
         console.error('Error fetching family details:', error);
       }
@@ -143,13 +147,13 @@ const FamilyDetails = () => {
     try {
       let response;
       if (editIndex !== null) {
-        response = await axios.put(`/api/family-details/${familyDetails[editIndex].id}`, newDetails);
+        response = await axios.put(`http://127.0.0.1:8000/UpdateFamilyDetails/${familyDetails[editIndex].id}`, newDetails);
         const updatedFamilyDetails = [...familyDetails];
         updatedFamilyDetails[editIndex] = response.data;
         setFamilyDetails(updatedFamilyDetails);
         setEditIndex(null);
       } else {
-        response = await axios.post('/api/family-details', newDetails);
+        response = await axios.post('http://127.0.0.1:8000/UpdateFamilyDetails/', newDetails);
         setFamilyDetails((prevState) => [...prevState, response.data]);
       }
       alert('Details Updated Successfully');

@@ -114,7 +114,11 @@ const QualificationDetails = () => {
     const fetchQualificationDetails = async () => {
       try {
         const response = await axios.get('http://127.0.0.1:8000/UpdateQualification');
-        setQualificationDetails(response.data);
+        if (Array.isArray(response.data)) {
+          setQualificationDetails(response.data);
+        } else {
+          setQualificationDetails([]);
+        }
       } catch (error) {
         console.error('Error fetching qualification details:', error);
         setError('Error fetching qualification details');

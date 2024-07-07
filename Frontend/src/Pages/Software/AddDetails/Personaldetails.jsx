@@ -278,7 +278,7 @@ const Personaldetails = () => {
     });
 
     try {
-      await axios.post("YOUR_DJANGO_API_URL", data);
+      await axios.post("http://127.0.0.1:8000/UpdatePersonalDetails/", data);
       alert("Details Updated Successfully");
       formRef.current.reset();
     } catch (error) {

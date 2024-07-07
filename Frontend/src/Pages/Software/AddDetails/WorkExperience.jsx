@@ -117,7 +117,7 @@ const WorkExperience = () => {
     };
 
     try {
-      const response = await axios.post("your-django-api-endpoint", newDetails);
+      const response = await axios.post("http://127.0.0.1:8000/UpdateWorkExperience/", newDetails);
       if (response.status === 201) {
         setWorkExperience((prevState) => [...prevState, newDetails]);
         alert("Details Updated Successfully");

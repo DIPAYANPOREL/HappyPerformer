@@ -278,7 +278,7 @@ const BankDetails = () => {
     });
 
     try {
-      await axios.post("YOUR_DJANGO_API_URL", data);
+      await axios.post("http://127.0.0.1:8000/UpdateBankDetails/", data);
       alert("Details Submitted Successfully");
       formRef.current.reset();
     } catch (error) {
