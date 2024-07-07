@@ -17,6 +17,7 @@ import Upload_Media from "./Pages/Software/Courses/Upload_Media";
 // import EmployeeMaster from "./Pages/Software/EmployeeMaster/EmployeeMaster";
 import HomeSal from "./Components/Software Components/PayRoll/HomeSal";
 import FAQView from "./Pages/Management/FAQView";
+import MyPerformance from "./Pages/Management/MyPerformance";
 import AdhocPayments from "./Pages/Management/PayrollManagement/AdhocPayments";
 import ReportingForm from "./Pages/Management/ReportingForm";
 import Resignation from "./Pages/Management/Resignations/Resignations";
@@ -24,7 +25,8 @@ import SettingsPage from "./Pages/SettingsPage";
 import Dashboard from "./Pages/Software/DashBoard/Dashboard";
 import Faq from "./Pages/Software/DashBoard/FAQ";
 import LoanPayments from "./Pages/Software/DashBoard/LoanPayments";
-import EmployeeForm from "./Pages/EmployeeForm";
+import Quiz from "./Pages/Software/DashBoard/Quiz";
+import EmployeeForm from "./Pages/Software/EmployeeMaster/EmployeeForm";
 import AddExpense from "./Pages/Software/ExpenseManagements/Addexpense";
 import ExpenseReports from "./Pages/Software/ExpenseManagements/Expensereports";
 import ManageExpenses from "./Pages/Software/ExpenseManagements/ManageExpenses";
@@ -39,6 +41,7 @@ import Resign from "./Pages/Software/Resign/Resign";
 import Social from "./Pages/Software/Social/Social";
 import SopPolicies from "./Pages/Software/Sop&Policies/SopPolicies";
 import ToDoList from "./Pages/Software/ToDoList";
+import Training from "./Pages/Software/Training";
 
 function App() {
   return (
@@ -58,8 +61,16 @@ function App() {
       {/* SOP */}
       <Route path="/sop" element={<SopPolicies />} />
       <Route path="/forms" element={<EmployeeForm />} />
+      <Route path="/letters" element={<Letters />} />
+      <Route path="/allfaq" element={<Faq />} />
+      <Route path="/training" element={<Training />} />
+      {/* PHP Tuts */}
+      <Route path="/phptuts" element={<PHPTutorials />} />
 
       <Route path="/markattendance" element={<Attendance />} />
+      <Route path="/quiz" element={<Quiz />} />
+      <Route path="/myperformance" element={<MyPerformance />} />
+
       <Route path="/banktransfer" element={<BankTransfer />} />
       <Route path="/banktransfer2/:month" element={<BankTransferPayout />} />
       <Route path="/banktransfer1" element={<BankTransferDetails />} />
@@ -83,11 +94,9 @@ function App() {
       <Route path="/resign" element={<Resign />} />
       <Route path="/resignations" element={<Resignation />} />
 
-      {/* PHP Tuts */}
-      <Route path="/phptuts" element={<PHPTutorials />} />
       {/* FAQ Views */}
       <Route path="/FAQs" element={<FAQView />} />
-      <Route path="/allfaq" element={<Faq />} />
+
       {/* Loans */}
       <Route path="/addloan" element={<LoanPayments />} />
       {/* Expense Management */}
