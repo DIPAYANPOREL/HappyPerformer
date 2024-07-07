@@ -328,7 +328,7 @@ const ApplyforLeave = () => {
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
-      await axios.post("YOUR_API_ENDPOINT/submit-leave", formData); // Replace with your API endpoint
+      await axios.post("http://127.0.0.1:8000/ApplyLeave/", formData); // Replace with your API endpoint
       alert("Leave application submitted successfully");
     } catch (error) {
       console.error("Error submitting leave application:", error);

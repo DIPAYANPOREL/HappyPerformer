@@ -152,7 +152,7 @@ const LeaveHistory = () => {
 
   const fetchLeaveData = async () => {
     try {
-      const response = await axios.get('YOUR_API_ENDPOINT/leaves'); // Replace with your API endpoint
+      const response = await axios.get('http://127.0.0.1:8000/LeaveHistory/'); // Replace with your API endpoint
       if (Array.isArray(response.data)) {
         setLeaveData(response.data);
       } else {

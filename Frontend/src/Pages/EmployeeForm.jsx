@@ -46,21 +46,21 @@ const LastContainer = styled.div`
 `;
 
 const EmployeeForm = () => {
-  const employeeFormNames = ["Form 1", "Form 2", "Form 3", "Form 4"];
+  // const employeeFormNames = ["Form 1", "Form 2", "Form 3", "Form 4"];
 
-  // const [employeeFormNames, setEmployeeFormNames] = useState([]);
+  const [employeeFormNames, setEmployeeFormNames] = useState([]);
 
-  // useEffect(() => {
+  useEffect(() => {
 
-  //   axios.get('/api/employeeForms')
-  //     .then(response => {
-  //       setEmployeeFormNames(response.data);
+    axios.get('http://127.0.0.1:8000/Forms/')
+      .then(response => {
+        setEmployeeFormNames(response.data);
 
-  //     })
-  //     .catch(error => {
-  //       console.error('Error fetching employee form names:', error);
-  //     });
-  // }, []);
+      })
+      .catch(error => {
+        console.error('Error fetching employee form names:', error);
+      });
+  }, []);
 
   return (
     <FormsContainer>
