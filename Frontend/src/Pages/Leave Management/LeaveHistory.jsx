@@ -1,126 +1,30 @@
-// import React from 'react';
-// import styled from 'styled-components';
-// import Footer from '../../Components/Software Components/Footer';
-// import Nav from '../../Components/Software Components/Dashboard/Nav';
-
-
-// const Container = styled.div`
-//   display: flex;
-//   justify-content: center;
-//   height: 100vh;
-// `;
-
-// const LeaveHistoryContainer = styled.div`
-//   max-width: 80%;
-//   padding: 20px;
-//   margin-top: 20px;
-//   background-color: #fff;
-// `;
-
-// const Table = styled.table`
-//   width: 100%;
-//   border-collapse: collapse;
-  
-// `;
-
-// const Th = styled.th`
-//   padding: 10px;
-//   text-align: left;
-//   border-bottom: 1px solid #ddd;
-//   background-color: #f2f2f2;
-// `;
-
-// const Td = styled.td`
-//   padding: 10px;
-//   text-align: left;
-//   border-bottom: 1px solid #ddd;
-// `;
-
-// const LeaveHistory = () => {
-//   const leaveData = [
-//     {
-//       id: 1,
-//       leaveType: 'Medical Leave',
-//       from: '2024-04-10',
-//       to: '2024-04-19',
-//       description: 'MCL Injury',
-//       postingDate: '2024-04-28 11:26:30',
-//       adminRemark: 'Waiting for Approval',
-//       status: 'Waiting for Approval',
-//     },
-//     {
-//       id: 2,
-//       leaveType: 'Vacation Leave',
-//       from: '2024-05-01',
-//       to: '2024-05-05',
-//       description: 'going on a vacation',
-//       postingDate: '2024-04-30 09:15:00',
-//       adminRemark: 'Approved',
-//       status: 'Approved',
-//     },
-//   ];
-
-//   return (
-//     <>
-//     <Nav/>
-//     <Container>
-//       <LeaveHistoryContainer>
-//         <h2>Leave History</h2>
-//         <Table>
-//           <thead>
-//             <tr>
-//               <Th>#</Th>
-//               <Th>Leave Type</Th>
-//               <Th>From</Th>
-//               <Th>To</Th>
-//               <Th>Description</Th>
-//               <Th>Posting Date</Th>
-//               <Th>Admin Remark</Th>
-//               <Th>Status</Th>
-//             </tr>
-//           </thead>
-//           <tbody>
-//             {leaveData.map((leave) => (
-//               <tr key={leave.id}>
-//                 <Td>{leave.id}</Td>
-//                 <Td>{leave.leaveType}</Td>
-//                 <Td>{leave.from}</Td>
-//                 <Td>{leave.to}</Td>
-//                 <Td>{leave.description}</Td>
-//                 <Td>{leave.postingDate}</Td>
-//                 <Td>{leave.adminRemark}</Td>
-//                 <Td>{leave.status}</Td>
-//               </tr>
-              
-//             ))}
-//           </tbody>
-//         </Table>
-//       </LeaveHistoryContainer>
-//     </Container>
-//     <Footer/>
-//     </>
-//   );
-// };
-
-// export default LeaveHistory;
-
 import React, { useState, useEffect } from 'react';
 import styled from 'styled-components';
 import axios from 'axios';
 import Footer from '../../Components/Software Components/Footer';
 import Nav from '../../Components/Software Components/Dashboard/Nav';
+import Layout from '../../Components/Software Components/Dashboard/Layout';
+
+axios.defaults.withCredentials = true;
+axios.defaults.xsrfCookieName = "csrftoken";
+axios.defaults.xsrfHeaderName = "X-CSRFToken";
 
 const Container = styled.div`
   display: flex;
   justify-content: center;
   height: 100vh;
+  padding: 20px;
+  background-color: #f0f0f0; /* Ensure a background color for the whole page */
 `;
 
 const LeaveHistoryContainer = styled.div`
-  max-width: 80%;
+  width: 100%;
+  max-width: 1200px; /* Ensure the container doesn't get too wide */
   padding: 20px;
-  margin-top: 20px;
   background-color: #fff;
+  border-radius: 10px; /* Add rounded corners */
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Add a subtle shadow */
+  overflow-x: auto; /* Enable horizontal scrolling if needed */
 `;
 
 const Table = styled.table`
@@ -133,12 +37,14 @@ const Th = styled.th`
   text-align: left;
   border-bottom: 1px solid #ddd;
   background-color: #f2f2f2;
+  white-space: nowrap; /* Prevent text from wrapping */
 `;
 
 const Td = styled.td`
   padding: 10px;
   text-align: left;
   border-bottom: 1px solid #ddd;
+  white-space: nowrap; /* Prevent text from wrapping */
 `;
 
 const LeaveHistory = () => {
@@ -153,8 +59,8 @@ const LeaveHistory = () => {
   const fetchLeaveData = async () => {
     try {
       const response = await axios.get('http://127.0.0.1:8000/LeaveHistory/'); // Replace with your API endpoint
-      if (Array.isArray(response.data)) {
-        setLeaveData(response.data);
+      if (response.data.Leaves) {
+        setLeaveData(response.data.Leaves);
       } else {
         setLeaveData([]);
       }
@@ -196,7 +102,7 @@ const LeaveHistory = () => {
 
   return (
     <>
-      <Nav />
+      <Layout>
       <Container>
         <LeaveHistoryContainer>
           <h2>Leave History</h2>
@@ -207,7 +113,6 @@ const LeaveHistory = () => {
                 <Th>Leave Type</Th>
                 <Th>From</Th>
                 <Th>To</Th>
-                <Th>Description</Th>
                 <Th>Posting Date</Th>
                 <Th>Admin Remark</Th>
                 <Th>Status</Th>
@@ -218,25 +123,24 @@ const LeaveHistory = () => {
                 leaveData.map((leave) => (
                   <tr key={leave.id}>
                     <Td>{leave.id}</Td>
-                    <Td>{leave.leaveType}</Td>
-                    <Td>{leave.from}</Td>
-                    <Td>{leave.to}</Td>
-                    <Td>{leave.description}</Td>
-                    <Td>{leave.postingDate}</Td>
-                    <Td>{leave.adminRemark}</Td>
-                    <Td>{leave.status}</Td>
+                    <Td>{leave.LeaveType__LeaveType}</Td>
+                    <Td>{leave.FromDate}</Td>
+                    <Td>{leave.ToDate}</Td>
+                    <Td>{leave.PostingDate}</Td>
+                    <Td>{leave.AdminRemark}</Td>
+                    <Td>{leave.Status}</Td>
                   </tr>
                 ))
               ) : (
                 <tr>
-                  <Td colSpan="8">No leave records found.</Td>
+                  <Td colSpan="7">No leave records found.</Td>
                 </tr>
               )}
             </tbody>
           </Table>
         </LeaveHistoryContainer>
       </Container>
-      <Footer />
+      </Layout>
     </>
   );
 };
