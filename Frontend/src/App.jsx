@@ -17,6 +17,7 @@ import Upload_Media from "./Pages/Software/Courses/Upload_Media";
 // import EmployeeMaster from "./Pages/Software/EmployeeMaster/EmployeeMaster";
 import HomeSal from "./Components/Software Components/PayRoll/HomeSal";
 import EmployeeForm from "./Pages/EmployeeForm";
+import ITdeclaration from "./Pages/ITdeclaration";
 import ApplyforLeave from "./Pages/Leave Management/ApplyforLeave";
 import LeaveHistory from "./Pages/Leave Management/LeaveHistory";
 import Letters from "./Pages/Letters";
@@ -45,7 +46,6 @@ import Social from "./Pages/Software/Social/Social";
 import SopPolicies from "./Pages/Software/Sop&Policies/SopPolicies";
 import ToDoList from "./Pages/Software/ToDoList";
 import Training from "./Pages/Training";
-
 function App() {
   return (
     <Routes>
@@ -77,6 +77,11 @@ function App() {
       {/* Leave */}
       <Route path="/applyforeave" element={<ApplyforLeave />} />
       <Route path="/leavehistory" element={<LeaveHistory />} />
+
+      {/* IT DEC */}
+      <Route path="/itdeclaration" element={<ITdeclaration />} />
+
+      {/* Add Details */}
 
       <Route path="/banktransfer" element={<BankTransfer />} />
       <Route path="/banktransfer2/:month" element={<BankTransferPayout />} />
