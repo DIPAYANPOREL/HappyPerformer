@@ -299,7 +299,7 @@ const ApplyforLeave = () => {
 
   const fetchLeaveData = async () => {
     try {
-      const response = await axios.get("YOUR_API_ENDPOINT/leave-data"); // Replace with your API endpoint
+      const response = await axios.get("http://127.0.0.1:8000/ApplyLeave/"); // Replace with your API endpoint
       if (response.data && Array.isArray(response.data)) {
         const updatedLeaveData = leaveData.map((leave) => {
           const fetchedLeave = response.data.find(
