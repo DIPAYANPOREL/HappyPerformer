@@ -9,6 +9,7 @@ const OuterContainer = styled.div`
   align-items: center;
   padding: 20px;
   background-color: #f0f0f0; /* Background color of the outer container */
+  overflow-x: auto; /* Enable horizontal scrolling if needed */
 `;
 
 const InnerContainer = styled.div`
@@ -18,6 +19,7 @@ const InnerContainer = styled.div`
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Optional: adds a subtle shadow */
   width: 100%;
   max-width: 800px; /* Optional: sets a max-width for the inner container */
+  overflow-x: auto; /* Enable horizontal scrolling if needed */
 `;
 
 const Title = styled.h2`
@@ -28,6 +30,7 @@ const Title = styled.h2`
 const Table = styled.table`
   width: 100%;
   border-collapse: collapse;
+  table-layout: auto; /* Allow columns to automatically adjust their width */
 `;
 
 const TableRow = styled.tr`
@@ -43,6 +46,7 @@ const TableHeader = styled.th`
   font-weight: bold;
   color: #000; /* Change the color to black or any other color you prefer */
   background-color: #f9f9f9; /* Change the background to match tbody */
+  white-space: nowrap; /* Prevent the header text from wrapping */
 `;
 
 const TableData = styled.td`
@@ -50,6 +54,7 @@ const TableData = styled.td`
   color: #000; /* Ensure the text color matches */
   background-color: #f9f9f9; /* Ensure the background color matches */
   border: 1px solid #ddd; /* Add borders around the TableData cells */
+  white-space: nowrap; /* Prevent the data text from wrapping */
 `;
 
 const Button = styled.button`
@@ -71,7 +76,7 @@ const KRA = () => {
   useEffect(() => {
     // Fetch KRAs data when the component mounts
     axios
-      .get("/api/kras")
+      .get("http://127.0.0.1:8000/api/kras/")
       .then((response) => {
         setKRAs(response.data); // Update state with fetched KRAs
       })
@@ -80,41 +85,57 @@ const KRA = () => {
       });
   }, []); // Empty dependency array to run only once when the component mounts
 
-  const handleClick = () => {
+  const handleClick = (kra_id) => {
     // Add logic to redirect to the link
-    console.log("Clicked!");
+    console.log(`Clicked on KRA ID: ${kra_id}`);
   };
 
   return (
-    <>
-      <Layout>
-        <OuterContainer>
-          <InnerContainer>
-            <Title>Your KRA's List:</Title>
-            <Table>
-              <thead>
-                <TableRow>
-                  <TableHeader>ID</TableHeader>
-                  <TableHeader>Date</TableHeader>
-                  <TableHeader>Link</TableHeader>
+    <Layout>
+      <OuterContainer>
+        <InnerContainer>
+          <Title>Your KRA's List:</Title>
+          <Table>
+            <thead>
+              <TableRow>
+                <TableHeader>ID</TableHeader>
+                <TableHeader>KRA</TableHeader>
+                <TableHeader>Weightage</TableHeader>
+                <TableHeader>KPI</TableHeader>
+                <TableHeader>Target</TableHeader>
+                <TableHeader>Ratings Scale</TableHeader>
+                <TableHeader>Ratings</TableHeader>
+                <TableHeader>Self Ratings</TableHeader>
+                <TableHeader>Remarks</TableHeader>
+                <TableHeader>Status</TableHeader>
+                <TableHeader>Email ID</TableHeader>
+                <TableHeader>Action</TableHeader>
+              </TableRow>
+            </thead>
+            <tbody>
+              {KRAs.map((kra, index) => (
+                <TableRow key={index}>
+                  <TableData>{kra.kra_no}</TableData>
+                  <TableData>{kra.KRA}</TableData>
+                  <TableData>{kra.Weightage}</TableData>
+                  <TableData>{kra.KPI}</TableData>
+                  <TableData>{kra.Target}</TableData>
+                  <TableData>{kra.ratingsscale}</TableData>
+                  <TableData>{kra.ratings}</TableData>
+                  <TableData>{kra.selfratings}</TableData>
+                  <TableData>{kra.remarks}</TableData>
+                  <TableData>{kra.status}</TableData>
+                  <TableData>{kra.email_id}</TableData>
+                  <TableData>
+                    <Button onClick={() => handleClick(kra.kra_no)}>Click Me</Button>
+                  </TableData>
                 </TableRow>
-              </thead>
-              <tbody>
-                {KRAs.map((kra, index) => (
-                  <TableRow key={index}>
-                    <TableData>{kra.id}</TableData>
-                    <TableData>{kra.date}</TableData>
-                    <TableData>
-                      <Button onClick={handleClick}>Click Me</Button>
-                    </TableData>
-                  </TableRow>
-                ))}
-              </tbody>
-            </Table>
-          </InnerContainer>
-        </OuterContainer>
-      </Layout>
-    </>
+              ))}
+            </tbody>
+          </Table>
+        </InnerContainer>
+      </OuterContainer>
+    </Layout>
   );
 };
 
