@@ -23,7 +23,13 @@ import LeaveHistory from "./Pages/Leave Management/LeaveHistory";
 import Letters from "./Pages/Letters";
 import AllEmployeePerformance from "./Pages/Management/AllEmployeePerformances";
 import AssignQuiz from "./Pages/Management/AssignQuiz";
+import CustomForms from "./Pages/Management/CustomForms";
+import EnrollEmployees from "./Pages/Management/EnrollEmployees";
 import FAQView from "./Pages/Management/FAQView";
+import AllLeaves from "./Pages/Management/Leave Management/AllLeaves";
+import LeaveDashboard from "./Pages/Management/Leave Management/LeaveDashboard";
+import LeaveDetails from "./Pages/Management/Leave Management/LeaveDetails";
+import ManageLeaveTypes from "./Pages/Management/Leave Management/ManageLeaveTypes";
 import MyPerformance from "./Pages/Management/MyPerformance";
 import AdhocPayments from "./Pages/Management/PayrollManagement/AdhocPayments";
 import ReportingForm from "./Pages/Management/ReportingForm";
@@ -95,6 +101,7 @@ function App() {
 
       {/* Add Details */}
       <Route path="/personaldetails" element={<Personaldetails />} />
+      <Route path="/leavedetails" element={<LeaveDetails />} />
       <Route path="/jobdetails" element={<JobDetails />} />
       <Route path="/familydetails" element={<FamilyDetails />} />
       <Route path="/Identitydetails" element={<IdentityDetails />} />
@@ -119,8 +126,14 @@ function App() {
       />
 
       <Route path="/assignquiz" element={<AssignQuiz />} />
-
       <Route path="/enrollemployee" element={<EnrolEmployeeEdit />} />
+      <Route path="/enrollemployees" element={<EnrollEmployees />} />
+      <Route path="/customforms" element={<CustomForms />} />
+
+      {/* Leave Management */}
+      <Route path="/leavedashboard" element={<LeaveDashboard />} />
+      <Route path="/manageleavetypes" element={<ManageLeaveTypes />} />
+      <Route path="/leaves" element={<AllLeaves />} />
 
       {/* <Route path="/employeemaster" element={<EmployeeMaster />} /> */}
       <Route path="/createcase" element={<CreateCase />} />
