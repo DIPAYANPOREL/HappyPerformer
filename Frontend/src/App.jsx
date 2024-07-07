@@ -27,6 +27,14 @@ import AdhocPayments from "./Pages/Management/PayrollManagement/AdhocPayments";
 import ReportingForm from "./Pages/Management/ReportingForm";
 import Resignation from "./Pages/Management/Resignations/Resignations";
 import SettingsPage from "./Pages/SettingsPage";
+import BankDetails from "./Pages/Software/AddDetails/BankDetails";
+import DependentDetails from "./Pages/Software/AddDetails/DependentDetails";
+import FamilyDetails from "./Pages/Software/AddDetails/FamilyDetails";
+import IdentityDetails from "./Pages/Software/AddDetails/IdentityDetails";
+import JobDetails from "./Pages/Software/AddDetails/JobDetails";
+import Personaldetails from "./Pages/Software/AddDetails/Personaldetails";
+import QualificationDetails from "./Pages/Software/AddDetails/QualificationDetails";
+import WorkExperience from "./Pages/Software/AddDetails/WorkExperience";
 import Dashboard from "./Pages/Software/DashBoard/Dashboard";
 import Faq from "./Pages/Software/DashBoard/FAQ";
 import LoanPayments from "./Pages/Software/DashBoard/LoanPayments";
@@ -46,6 +54,7 @@ import Social from "./Pages/Software/Social/Social";
 import SopPolicies from "./Pages/Software/Sop&Policies/SopPolicies";
 import ToDoList from "./Pages/Software/ToDoList";
 import Training from "./Pages/Training";
+
 function App() {
   return (
     <Routes>
@@ -82,6 +91,14 @@ function App() {
       <Route path="/itdeclaration" element={<ITdeclaration />} />
 
       {/* Add Details */}
+      <Route path="/personaldetails" element={<Personaldetails />} />
+      <Route path="/jobdetails" element={<JobDetails />} />
+      <Route path="/familydetails" element={<FamilyDetails />} />
+      <Route path="/Identitydetails" element={<IdentityDetails />} />
+      <Route path="/qualificationdetails" element={<QualificationDetails />} />
+      <Route path="/workexperience" element={<WorkExperience />} />
+      <Route path="/bankdetails" element={<BankDetails />} />
+      <Route path="/dependentdetails" element={<DependentDetails />} />
 
       <Route path="/banktransfer" element={<BankTransfer />} />
       <Route path="/banktransfer2/:month" element={<BankTransferPayout />} />
