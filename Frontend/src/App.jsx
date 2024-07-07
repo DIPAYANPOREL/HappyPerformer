@@ -24,9 +24,11 @@ import SettingsPage from "./Pages/SettingsPage";
 import Dashboard from "./Pages/Software/DashBoard/Dashboard";
 import Faq from "./Pages/Software/DashBoard/FAQ";
 import LoanPayments from "./Pages/Software/DashBoard/LoanPayments";
+import EmployeeForm from "./Pages/Software/EmployeeMaster/EmployeeForm";
 import AddExpense from "./Pages/Software/ExpenseManagements/Addexpense";
 import ExpenseReports from "./Pages/Software/ExpenseManagements/Expensereports";
 import ManageExpenses from "./Pages/Software/ExpenseManagements/ManageExpenses";
+import KRA from "./Pages/Software/KRA/KRA";
 import Login from "./Pages/Software/Login";
 import PHPTutorials from "./Pages/Software/PHPTutorials/PHPTutorials";
 import Pricing from "./Pages/Software/Pricing";
@@ -36,6 +38,7 @@ import NewEmployeeRegistry from "./Pages/Software/RegisterEmployee/NewEmployeeRe
 import Resign from "./Pages/Software/Resign/Resign";
 import Social from "./Pages/Software/Social/Social";
 import SopPolicies from "./Pages/Software/Sop&Policies/SopPolicies";
+import ToDoList from "./Pages/Software/ToDoList";
 
 function App() {
   return (
@@ -50,6 +53,11 @@ function App() {
       <Route path="/dashboard" element={<Dashboard />} />
       <Route path="/social" element={<Social />} />
       <Route path="/settings" element={<SettingsPage />} />
+      <Route path="todo" element={<ToDoList />} />
+      <Route path="/kra" element={<KRA />} />
+      {/* SOP */}
+      <Route path="/sop" element={<SopPolicies />} />
+      <Route path="/forms" element={<EmployeeForm />} />
 
       <Route path="/markattendance" element={<Attendance />} />
       <Route path="/banktransfer" element={<BankTransfer />} />
@@ -74,8 +82,7 @@ function App() {
       {/* Resign */}
       <Route path="/resign" element={<Resign />} />
       <Route path="/resignations" element={<Resignation />} />
-      {/* SOP */}
-      <Route path="/sop" element={<SopPolicies />} />
+
       {/* PHP Tuts */}
       <Route path="/phptuts" element={<PHPTutorials />} />
       {/* FAQ Views */}
