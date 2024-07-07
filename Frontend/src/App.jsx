@@ -16,6 +16,7 @@ import Update_Media from "./Pages/Software/Courses/Update_Media";
 import Upload_Media from "./Pages/Software/Courses/Upload_Media";
 // import EmployeeMaster from "./Pages/Software/EmployeeMaster/EmployeeMaster";
 import HomeSal from "./Components/Software Components/PayRoll/HomeSal";
+import Letters from "./Pages/Letters";
 import FAQView from "./Pages/Management/FAQView";
 import MyPerformance from "./Pages/Management/MyPerformance";
 import AdhocPayments from "./Pages/Management/PayrollManagement/AdhocPayments";
@@ -41,7 +42,7 @@ import Resign from "./Pages/Software/Resign/Resign";
 import Social from "./Pages/Software/Social/Social";
 import SopPolicies from "./Pages/Software/Sop&Policies/SopPolicies";
 import ToDoList from "./Pages/Software/ToDoList";
-import Training from "./Pages/Software/Training";
+import Training from "./Pages/Training";
 
 function App() {
   return (
