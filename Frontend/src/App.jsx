@@ -15,31 +15,69 @@ import Update_Delete_Media from "./Pages/Software/Courses/Update_Delete_Media";
 import Update_Media from "./Pages/Software/Courses/Update_Media";
 import Upload_Media from "./Pages/Software/Courses/Upload_Media";
 // import EmployeeMaster from "./Pages/Software/EmployeeMaster/EmployeeMaster";
+import HomeSal from "./Components/Software Components/PayRoll/HomeSal";
+import EmployeeForm from "./Pages/EmployeeForm";
+import ApplyforLeave from "./Pages/Leave Management/ApplyforLeave";
+import LeaveHistory from "./Pages/Leave Management/LeaveHistory";
+import Letters from "./Pages/Letters";
 import FAQView from "./Pages/Management/FAQView";
+import MyPerformance from "./Pages/Management/MyPerformance";
 import AdhocPayments from "./Pages/Management/PayrollManagement/AdhocPayments";
 import ReportingForm from "./Pages/Management/ReportingForm";
 import Resignation from "./Pages/Management/Resignations/Resignations";
+import SettingsPage from "./Pages/SettingsPage";
+import Dashboard from "./Pages/Software/DashBoard/Dashboard";
 import Faq from "./Pages/Software/DashBoard/FAQ";
 import LoanPayments from "./Pages/Software/DashBoard/LoanPayments";
+import Quiz from "./Pages/Software/DashBoard/Quiz";
 import AddExpense from "./Pages/Software/ExpenseManagements/Addexpense";
 import ExpenseReports from "./Pages/Software/ExpenseManagements/Expensereports";
 import ManageExpenses from "./Pages/Software/ExpenseManagements/ManageExpenses";
+import KRA from "./Pages/Software/KRA/KRA";
 import Login from "./Pages/Software/Login";
 import PHPTutorials from "./Pages/Software/PHPTutorials/PHPTutorials";
 import Pricing from "./Pages/Software/Pricing";
 import Register from "./Pages/Software/Register";
+import DelUpdateRegistry from "./Pages/Software/RegisterEmployee/DelUpdateRegistry";
 import NewEmployeeRegistry from "./Pages/Software/RegisterEmployee/NewEmployeeRegistry";
 import Resign from "./Pages/Software/Resign/Resign";
+import Social from "./Pages/Software/Social/Social";
 import SopPolicies from "./Pages/Software/Sop&Policies/SopPolicies";
-import DelUpdateRegistry from "./Pages/Software/RegisterEmployee/DelUpdateRegistry";
-import HomeSal from "./Components/Software Components/PayRoll/HomeSal";
+import ToDoList from "./Pages/Software/ToDoList";
+import Training from "./Pages/Training";
 
 function App() {
   return (
     <Routes>
       {/* Landing Pages */}
       <Route path="/" element={<Home />} />
+      <Route path="/login" element={<Login />} />
+      <Route path="/pricing" element={<Pricing />} />
+      <Route path="/register" element={<Register />} />
+      {/* Software */}
+      {/* Common */}
+      <Route path="/dashboard" element={<Dashboard />} />
+      <Route path="/social" element={<Social />} />
+      <Route path="/settings" element={<SettingsPage />} />
+      <Route path="todo" element={<ToDoList />} />
+      <Route path="/kra" element={<KRA />} />
+      {/* SOP */}
+      <Route path="/sop" element={<SopPolicies />} />
+      <Route path="/forms" element={<EmployeeForm />} />
+      <Route path="/letters" element={<Letters />} />
+      <Route path="/allfaq" element={<Faq />} />
+      <Route path="/training" element={<Training />} />
+      {/* PHP Tuts */}
+      <Route path="/phptuts" element={<PHPTutorials />} />
+
       <Route path="/markattendance" element={<Attendance />} />
+      <Route path="/quiz" element={<Quiz />} />
+      <Route path="/myperformance" element={<MyPerformance />} />
+
+      {/* Leave */}
+      <Route path="/applyforeave" element={<ApplyforLeave />} />
+      <Route path="/leavehistory" element={<LeaveHistory />} />
+
       <Route path="/banktransfer" element={<BankTransfer />} />
       <Route path="/banktransfer2/:month" element={<BankTransferPayout />} />
       <Route path="/banktransfer1" element={<BankTransferDetails />} />
@@ -48,9 +86,7 @@ function App() {
       <Route path="/homesal" element={<HomeSal />} />
       <Route path="/paysip" element={<CashChequeTransfer />} />
       <Route path="/resign" element={<Resign />} />
-      <Route path="/login" element={<Login />} />
-      <Route path="/pricing" element={<Pricing />} />
-      <Route path="/register" element={<Register />} />
+
       {/* <Route path="/employeemaster" element={<EmployeeMaster />} /> */}
       <Route path="/createcase" element={<CreateCase />} />
       <Route path="/newemp" element={<NewEmployeeRegistry />} />
@@ -64,13 +100,10 @@ function App() {
       {/* Resign */}
       <Route path="/resign" element={<Resign />} />
       <Route path="/resignations" element={<Resignation />} />
-      {/* SOP */}
-      <Route path="/sop" element={<SopPolicies />} />
-      {/* PHP Tuts */}
-      <Route path="/phptuts" element={<PHPTutorials />} />
+
       {/* FAQ Views */}
       <Route path="/FAQs" element={<FAQView />} />
-      <Route path="/allfaq" element={<Faq />} />
+
       {/* Loans */}
       <Route path="/addloan" element={<LoanPayments />} />
       {/* Expense Management */}

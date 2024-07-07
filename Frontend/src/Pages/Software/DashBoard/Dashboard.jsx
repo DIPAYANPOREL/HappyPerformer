@@ -6,6 +6,7 @@ import ProfileCard from "../../../Components/Software Components/Dashboard/Profi
 import SideBar from "../../../Components/Software Components/Dashboard/SideBar";
 import TargetCard from "../../../Components/Software Components/Dashboard/TargetCard";
 import Footer from "../../../Components/Software Components/Footer";
+import Layout from "../../../Components/Software Components/Dashboard/Layout";
 
 const Container = styled.div`
   display: flex;
@@ -71,11 +72,11 @@ const Cards = styled.div`
 const Dashboard = () => {
   return (
     <Container>
-      <Nav />
+      <Layout>
+
+
       <ContentContainer>
-        <SideBarContainer>
-          <SideBar />
-        </SideBarContainer>
+
         <ContentArea>
           <MiddleContainer>
             <Cards>
@@ -100,7 +101,7 @@ const Dashboard = () => {
           </BottomContainer>
         </ContentArea>
       </ContentContainer>
-      <Footer />
+      </Layout>
     </Container>
   );
 };
