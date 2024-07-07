@@ -1,13 +1,13 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import styled from 'styled-components';
-import Footer from '../../../Components/Software Components/Footer'
-import Nav from '../../../Components/Software Components/Dashboard/Nav'
+import axios from 'axios';
+import Footer from '../../../Components/Software Components/Footer';
+import Nav from '../../../Components/Software Components/Dashboard/Nav';
 
 const SelectEmployee = styled.select`
   padding: 0.5rem;
   margin-top: 10rem;
   margin-bottom: 1rem;
-
 `;
 
 const TableContainer = styled.div`
@@ -19,7 +19,7 @@ const TableContainer = styled.div`
   display: flex;
   justify-content: center;
   align-items: center;
-  margin-left:10%;
+  margin-left: 10%;
 `;
 
 const Table = styled.table`
@@ -39,26 +39,40 @@ const Table = styled.table`
 `;
 
 const MyCase = () => {
-  const employees = [
-    { id: 1, name: 'John Doe' },
-    { id: 2, name: 'Jane Doe' },
-    { id: 3, name: 'Bob Smith' },
-  ];
+  // const employees = [
+  //   { id: 1, name: 'John Doe' },
+  //   { id: 2, name: 'Jane Doe' },
+  //   { id: 3, name: 'Bob Smith' },
+  // ];
 
   const [selectedEmployee, setSelectedEmployee] = useState(null);
+  const [caseData, setCaseData] = useState([]);
 
   const handleEmployeeSelect = (event) => {
     setSelectedEmployee(event.target.value);
   };
 
-  const selectedEmployeeData = selectedEmployee
-    ? employees.find((employee) => employee.id === parseInt(selectedEmployee))
-    : null;
+  useEffect(() => {
+    if (selectedEmployee) {
+      axios.get(`http://127.0.0.1:8000/MyCases/${selectedEmployee}`)
+        .then(response => {
+          if (Array.isArray(response.data)) {
+            setCaseData(response.data);
+          }
+          else {
+            setCaseData([]);
+          }
+        })
+        .catch(error => {
+          console.error('Error fetching case data:', error);
+        });
+    }
+  }, [selectedEmployee]);
 
   return (
     <>
-    <Nav/>
-      <label htmlFor="employeeSelect" style={{marginLeft:'40%'}}>Select Employee: </label>
+      <Nav />
+      <label htmlFor="employeeSelect" style={{ marginLeft: '40%' }}>Select Employee: </label>
       <SelectEmployee id="employeeSelect" value={selectedEmployee || ''} onChange={handleEmployeeSelect}>
         <option value="">Select an employee</option>
         {employees.map((employee) => (
@@ -78,25 +92,26 @@ const MyCase = () => {
             </tr>
           </thead>
           <tbody>
-            {selectedEmployeeData ? (
-              <tr>
-                <td>{selectedEmployeeData.name}</td>
-                <td>Benefits</td>
-                <td>Benefits</td>
-                <td>xyzzz</td>
-              </tr>
+            {caseData.length > 0 ? (
+              caseData.map((caseItem) => (
+                <tr key={caseItem.id}>
+                  <td>{caseItem.createdFor}</td>
+                  <td>{caseItem.caseType}</td>
+                  <td>{caseItem.caseTitle}</td>
+                  <td>{caseItem.description}</td>
+                </tr>
+              ))
             ) : (
               <tr>
                 <td colSpan="4">Select an employee to view details</td>
               </tr>
             )}
-            {/* Add more rows as needed */}
           </tbody>
         </Table>
       </TableContainer>
-    <div style={{position: 'fixed', left: 0, bottom: 0, width: '100%'}}>
-      <Footer/>
-    </div>
+      <div style={{ position: 'fixed', left: 0, bottom: 0, width: '100%' }}>
+        <Footer />
+      </div>
     </>
   );
 };

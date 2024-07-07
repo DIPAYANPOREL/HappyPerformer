@@ -54,7 +54,12 @@ const EmployeeForm = () => {
 
     axios.get('http://127.0.0.1:8000/Forms/')
       .then(response => {
-        setEmployeeFormNames(response.data);
+        if (Array.isArray(response.data)) {
+          setEmployeeFormNames(response.data);
+        }
+        else {
+          setEmployeeFormNames([]);
+        }
 
       })
       .catch(error => {
