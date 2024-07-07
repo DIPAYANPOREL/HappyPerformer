@@ -15,10 +15,13 @@ import Update_Delete_Media from "./Pages/Software/Courses/Update_Delete_Media";
 import Update_Media from "./Pages/Software/Courses/Update_Media";
 import Upload_Media from "./Pages/Software/Courses/Upload_Media";
 // import EmployeeMaster from "./Pages/Software/EmployeeMaster/EmployeeMaster";
+import HomeSal from "./Components/Software Components/PayRoll/HomeSal";
 import FAQView from "./Pages/Management/FAQView";
 import AdhocPayments from "./Pages/Management/PayrollManagement/AdhocPayments";
 import ReportingForm from "./Pages/Management/ReportingForm";
 import Resignation from "./Pages/Management/Resignations/Resignations";
+import SettingsPage from "./Pages/SettingsPage";
+import Dashboard from "./Pages/Software/DashBoard/Dashboard";
 import Faq from "./Pages/Software/DashBoard/FAQ";
 import LoanPayments from "./Pages/Software/DashBoard/LoanPayments";
 import AddExpense from "./Pages/Software/ExpenseManagements/Addexpense";
@@ -28,17 +31,26 @@ import Login from "./Pages/Software/Login";
 import PHPTutorials from "./Pages/Software/PHPTutorials/PHPTutorials";
 import Pricing from "./Pages/Software/Pricing";
 import Register from "./Pages/Software/Register";
+import DelUpdateRegistry from "./Pages/Software/RegisterEmployee/DelUpdateRegistry";
 import NewEmployeeRegistry from "./Pages/Software/RegisterEmployee/NewEmployeeRegistry";
 import Resign from "./Pages/Software/Resign/Resign";
+import Social from "./Pages/Software/Social/Social";
 import SopPolicies from "./Pages/Software/Sop&Policies/SopPolicies";
-import DelUpdateRegistry from "./Pages/Software/RegisterEmployee/DelUpdateRegistry";
-import HomeSal from "./Components/Software Components/PayRoll/HomeSal";
 
 function App() {
   return (
     <Routes>
       {/* Landing Pages */}
       <Route path="/" element={<Home />} />
+      <Route path="/login" element={<Login />} />
+      <Route path="/pricing" element={<Pricing />} />
+      <Route path="/register" element={<Register />} />
+      {/* Software */}
+      {/* Common */}
+      <Route path="/dashboard" element={<Dashboard />} />
+      <Route path="/social" element={<Social />} />
+      <Route path="/settings" element={<SettingsPage />} />
+
       <Route path="/markattendance" element={<Attendance />} />
       <Route path="/banktransfer" element={<BankTransfer />} />
       <Route path="/banktransfer2/:month" element={<BankTransferPayout />} />
@@ -48,9 +60,7 @@ function App() {
       <Route path="/homesal" element={<HomeSal />} />
       <Route path="/paysip" element={<CashChequeTransfer />} />
       <Route path="/resign" element={<Resign />} />
-      <Route path="/login" element={<Login />} />
-      <Route path="/pricing" element={<Pricing />} />
-      <Route path="/register" element={<Register />} />
+
       {/* <Route path="/employeemaster" element={<EmployeeMaster />} /> */}
       <Route path="/createcase" element={<CreateCase />} />
       <Route path="/newemp" element={<NewEmployeeRegistry />} />
