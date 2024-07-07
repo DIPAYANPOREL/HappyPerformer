@@ -16,6 +16,9 @@ import Update_Media from "./Pages/Software/Courses/Update_Media";
 import Upload_Media from "./Pages/Software/Courses/Upload_Media";
 // import EmployeeMaster from "./Pages/Software/EmployeeMaster/EmployeeMaster";
 import HomeSal from "./Components/Software Components/PayRoll/HomeSal";
+import EmployeeForm from "./Pages/EmployeeForm";
+import ApplyforLeave from "./Pages/Leave Management/ApplyforLeave";
+import LeaveHistory from "./Pages/Leave Management/LeaveHistory";
 import Letters from "./Pages/Letters";
 import FAQView from "./Pages/Management/FAQView";
 import MyPerformance from "./Pages/Management/MyPerformance";
@@ -27,7 +30,6 @@ import Dashboard from "./Pages/Software/DashBoard/Dashboard";
 import Faq from "./Pages/Software/DashBoard/FAQ";
 import LoanPayments from "./Pages/Software/DashBoard/LoanPayments";
 import Quiz from "./Pages/Software/DashBoard/Quiz";
-import EmployeeForm from "./Pages/EmployeeForm";
 import AddExpense from "./Pages/Software/ExpenseManagements/Addexpense";
 import ExpenseReports from "./Pages/Software/ExpenseManagements/Expensereports";
 import ManageExpenses from "./Pages/Software/ExpenseManagements/ManageExpenses";
@@ -71,6 +73,10 @@ function App() {
       <Route path="/markattendance" element={<Attendance />} />
       <Route path="/quiz" element={<Quiz />} />
       <Route path="/myperformance" element={<MyPerformance />} />
+
+      {/* Leave */}
+      <Route path="/applyforeave" element={<ApplyforLeave />} />
+      <Route path="/leavehistory" element={<LeaveHistory />} />
 
       <Route path="/banktransfer" element={<BankTransfer />} />
       <Route path="/banktransfer2/:month" element={<BankTransferPayout />} />
