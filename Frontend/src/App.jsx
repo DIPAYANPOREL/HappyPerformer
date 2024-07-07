@@ -77,7 +77,7 @@ import Social from "./Pages/Software/Social/Social";
 import SopPolicies from "./Pages/Software/Sop&Policies/SopPolicies";
 import ToDoList from "./Pages/Software/ToDoList";
 import Training from "./Pages/Training";
-import SopForm from "./Pages/Software/Sop&Policies/SopForm";
+import SopForm from "./Pages/Software/Sop&Policies/SopPolicies";
 import ManagerRating from "./Pages/Software/ManagerRating";
 import JDForm from "./Pages/Software/JDForm";
 
