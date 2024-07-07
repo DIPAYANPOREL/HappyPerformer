@@ -63,6 +63,10 @@ import Social from "./Pages/Software/Social/Social";
 import SopPolicies from "./Pages/Software/Sop&Policies/SopPolicies";
 import ToDoList from "./Pages/Software/ToDoList";
 import Training from "./Pages/Training";
+import SopForm from "./Pages/Software/Sop&Policies/SopForm";
+import ManagerRating from "./Pages/Software/ManagerRating";
+import JDForm from "./Pages/Software/JDForm";
+
 
 function App() {
   return (
@@ -151,7 +155,7 @@ function App() {
 
       {/* Forms and Ratings */}
       <Route path="/jdform" element={<JDForm />} />
-      <Route path="/kraform" element={<KRAForm />} />
+      <Route path="/kraform" element={<KRA />} />
       <Route path="/managerrating" element={<ManagerRating />} />
       <Route path="/sopform" element={<SopForm />} />
       {/* FAQ Views */}
