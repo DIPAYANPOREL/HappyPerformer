@@ -21,6 +21,8 @@ import ITdeclaration from "./Pages/ITdeclaration";
 import ApplyforLeave from "./Pages/Leave Management/ApplyforLeave";
 import LeaveHistory from "./Pages/Leave Management/LeaveHistory";
 import Letters from "./Pages/Letters";
+import AllEmployeePerformance from "./Pages/Management/AllEmployeePerformances";
+import AssignQuiz from "./Pages/Management/AssignQuiz";
 import FAQView from "./Pages/Management/FAQView";
 import MyPerformance from "./Pages/Management/MyPerformance";
 import AdhocPayments from "./Pages/Management/PayrollManagement/AdhocPayments";
@@ -39,6 +41,7 @@ import Dashboard from "./Pages/Software/DashBoard/Dashboard";
 import Faq from "./Pages/Software/DashBoard/FAQ";
 import LoanPayments from "./Pages/Software/DashBoard/LoanPayments";
 import Quiz from "./Pages/Software/DashBoard/Quiz";
+import EnrolEmployeeEdit from "./Pages/Software/EnrolEmployeeEdit";
 import AddExpense from "./Pages/Software/ExpenseManagements/Addexpense";
 import ExpenseReports from "./Pages/Software/ExpenseManagements/Expensereports";
 import ManageExpenses from "./Pages/Software/ExpenseManagements/ManageExpenses";
@@ -109,6 +112,16 @@ function App() {
       <Route path="/paysip" element={<CashChequeTransfer />} />
       <Route path="/resign" element={<Resign />} />
 
+      {/* All Employee Performance */}
+      <Route
+        path="/allemployeeperformance"
+        element={<AllEmployeePerformance />}
+      />
+
+      <Route path="/assignquiz" element={<AssignQuiz />} />
+
+      <Route path="/enrollemployee" element={<EnrolEmployeeEdit />} />
+
       {/* <Route path="/employeemaster" element={<EmployeeMaster />} /> */}
       <Route path="/createcase" element={<CreateCase />} />
       <Route path="/newemp" element={<NewEmployeeRegistry />} />
@@ -123,6 +136,11 @@ function App() {
       <Route path="/resign" element={<Resign />} />
       <Route path="/resignations" element={<Resignation />} />
 
+      {/* Forms and Ratings */}
+      <Route path="/jdform" element={<JDForm />} />
+      <Route path="kraform" element={<KRAForm />} />
+      <Route path="managerrating" element={<ManagerRating />} />
+      <Route path="sopform" element={<SopForm />} />
       {/* FAQ Views */}
       <Route path="/FAQs" element={<FAQView />} />
 
