@@ -51,17 +51,22 @@ import JobDetails from "./Pages/Software/AddDetails/JobDetails";
 import Personaldetails from "./Pages/Software/AddDetails/Personaldetails";
 import QualificationDetails from "./Pages/Software/AddDetails/QualificationDetails";
 import WorkExperience from "./Pages/Software/AddDetails/WorkExperience";
+import AllQuiz from "./Pages/Software/AllQuiz";
 import AllCases from "./Pages/Software/CaseManagement/AllCases";
+import CreateQuizForm from "./Pages/Software/CreateQuizForm";
 import Dashboard from "./Pages/Software/DashBoard/Dashboard";
 import Faq from "./Pages/Software/DashBoard/FAQ";
 import LoanPayments from "./Pages/Software/DashBoard/LoanPayments";
 import Quiz from "./Pages/Software/DashBoard/Quiz";
 import EnrolEmployeeEdit from "./Pages/Software/EnrolEmployeeEdit";
+import EnrollForm from "./Pages/Software/EnrollForm";
 import AddExpense from "./Pages/Software/ExpenseManagements/Addexpense";
 import ExpenseReports from "./Pages/Software/ExpenseManagements/Expensereports";
 import ManageExpenses from "./Pages/Software/ExpenseManagements/ManageExpenses";
+import JDForm from "./Pages/Software/JDForm";
 import KRA from "./Pages/Software/KRA/KRA";
 import Login from "./Pages/Software/Login";
+import ManagerRating from "./Pages/Software/ManagerRating";
 import HoldSalary from "./Pages/Software/Payroll Management/HoldSalary";
 import LeaveEncashment from "./Pages/Software/Payroll Management/LeaveEncashment";
 import OffcyclePayment from "./Pages/Software/Payroll Management/OffcyclePayment";
@@ -69,18 +74,19 @@ import Poi from "./Pages/Software/Payroll Management/Poi";
 import ViewEncashment from "./Pages/Software/Payroll Management/ViewEncashment";
 import PHPTutorials from "./Pages/Software/PHPTutorials/PHPTutorials";
 import Pricing from "./Pages/Software/Pricing";
+import QuizApp from "./Pages/Software/QuizApp";
 import Register from "./Pages/Software/Register";
 import DelUpdateRegistry from "./Pages/Software/RegisterEmployee/DelUpdateRegistry";
 import NewEmployeeRegistry from "./Pages/Software/RegisterEmployee/NewEmployeeRegistry";
 import Resign from "./Pages/Software/Resign/Resign";
 import Social from "./Pages/Software/Social/Social";
-import SopPolicies from "./Pages/Software/Sop&Policies/SopPolicies";
+import {
+  default as SopForm,
+  default as SopPolicies,
+} from "./Pages/Software/Sop&Policies/SopPolicies";
 import ToDoList from "./Pages/Software/ToDoList";
+import ViewEmployeesPage from "./Pages/Software/ViewEmployeePages";
 import Training from "./Pages/Training";
-import SopForm from "./Pages/Software/Sop&Policies/SopPolicies";
-import ManagerRating from "./Pages/Software/ManagerRating";
-import JDForm from "./Pages/Software/JDForm";
-
 
 function App() {
   return (
@@ -208,6 +214,16 @@ function App() {
       <Route path="/bulkupload" element={<BulkUpload />} />
 
       <Route path="/adhoc" element={<AdhocPayments />} />
+
+      {/* Quizes */}
+      <Route path="/createquiz" element={<CreateQuizForm />} />
+      <Route path="/allquiz" element={<AllQuiz />} />
+
+      <Route path="/attendance" element={<Attendance />} />
+      <Route path="/enroll" element={<EnrollForm />} />
+      <Route path="/viewemployees" element={<ViewEmployeesPage />} />
+      <Route path="/enrollform" element={<EnrollForm />} />
+      <Route path="/quiz" element={<QuizApp />} />
     </Routes>
   );
 }
