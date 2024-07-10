@@ -170,11 +170,10 @@
 
 // export default ApplyforLeave;
 
-import React, { useState, useEffect } from "react";
-import styled from "styled-components";
 import axios from "axios";
-import Footer from "../../Components/Software Components/Footer";
-import Nav from "../../Components/Software Components/Dashboard/Nav";
+import React, { useEffect, useState } from "react";
+import styled from "styled-components";
+import Layout from "../../Components/Software Components/Dashboard/Layout";
 
 const Container = styled.div`
   align-items: center;
@@ -338,72 +337,72 @@ const ApplyforLeave = () => {
 
   return (
     <>
-      <Nav />
-      <Container>
-        <Heading>Available Leaves</Heading>
-        <Table>
-          <THead>
-            <tr>
-              <TH>Leave Type</TH>
-              <TH>Alloted</TH>
-              <TH>Used</TH>
-            </tr>
-          </THead>
-          <tbody>
-            {leaveData.map((leave, index) => (
-              <tr key={index}>
-                <TD>{leave.type}</TD>
-                <TD>{leave.alloted}</TD>
-                <TD>{leave.used}</TD>
+      <Layout>
+        <Container>
+          <Heading>Available Leaves</Heading>
+          <Table>
+            <THead>
+              <tr>
+                <TH>Leave Type</TH>
+                <TH>Alloted</TH>
+                <TH>Used</TH>
               </tr>
-            ))}
-          </tbody>
-        </Table>
-        <FormGroup>
-          <Label htmlFor="leaveType">Select Leave</Label>
-          <Select
-            id="leaveType"
-            value={formData.leaveType}
-            onChange={handleInputChange}
-          >
-            <option>Please Select Option</option>
-            <option value="Casual Leave">Casual Leave</option>
-            <option value="Medical Leave">Medical Leave</option>
-            <option value="LOP">LOP</option>
-            <option value="Earned Leave">Earned Leave</option>
-          </Select>
-        </FormGroup>
-        <FormGroup>
-          <Label>Date Range</Label>
-          <div style={{ display: "flex", flexWrap: "wrap" }}>
-            <Input
-              type="date"
-              id="fromDate"
-              value={formData.fromDate}
+            </THead>
+            <tbody>
+              {leaveData.map((leave, index) => (
+                <tr key={index}>
+                  <TD>{leave.type}</TD>
+                  <TD>{leave.alloted}</TD>
+                  <TD>{leave.used}</TD>
+                </tr>
+              ))}
+            </tbody>
+          </Table>
+          <FormGroup>
+            <Label htmlFor="leaveType">Select Leave</Label>
+            <Select
+              id="leaveType"
+              value={formData.leaveType}
               onChange={handleInputChange}
-              placeholder="From Date"
-            />
-            <Input
-              type="date"
-              id="toDate"
-              value={formData.toDate}
+            >
+              <option>Please Select Option</option>
+              <option value="Casual Leave">Casual Leave</option>
+              <option value="Medical Leave">Medical Leave</option>
+              <option value="LOP">LOP</option>
+              <option value="Earned Leave">Earned Leave</option>
+            </Select>
+          </FormGroup>
+          <FormGroup>
+            <Label>Date Range</Label>
+            <div style={{ display: "flex", flexWrap: "wrap" }}>
+              <Input
+                type="date"
+                id="fromDate"
+                value={formData.fromDate}
+                onChange={handleInputChange}
+                placeholder="From Date"
+              />
+              <Input
+                type="date"
+                id="toDate"
+                value={formData.toDate}
+                onChange={handleInputChange}
+                placeholder="To Date"
+              />
+            </div>
+          </FormGroup>
+          <FormGroup>
+            <Label htmlFor="leaveDescription">Description</Label>
+            <Textarea
+              id="leaveDescription"
+              value={formData.leaveDescription}
               onChange={handleInputChange}
-              placeholder="To Date"
-            />
-          </div>
-        </FormGroup>
-        <FormGroup>
-          <Label htmlFor="leaveDescription">Description</Label>
-          <Textarea
-            id="leaveDescription"
-            value={formData.leaveDescription}
-            onChange={handleInputChange}
-            rows="4"
-          ></Textarea>
-        </FormGroup>
-        <Button onClick={handleSubmit}>Submit</Button>
-      </Container>
-      <Footer />
+              rows="4"
+            ></Textarea>
+          </FormGroup>
+          <Button onClick={handleSubmit}>Submit</Button>
+        </Container>
+      </Layout>
     </>
   );
 };

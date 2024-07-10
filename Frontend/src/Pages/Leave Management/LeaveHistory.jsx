@@ -1,9 +1,7 @@
-import React, { useState, useEffect } from 'react';
-import styled from 'styled-components';
-import axios from 'axios';
-import Footer from '../../Components/Software Components/Footer';
-import Nav from '../../Components/Software Components/Dashboard/Nav';
-import Layout from '../../Components/Software Components/Dashboard/Layout';
+import axios from "axios";
+import React, { useEffect, useState } from "react";
+import styled from "styled-components";
+import Layout from "../../Components/Software Components/Dashboard/Layout";
 
 axios.defaults.withCredentials = true;
 axios.defaults.xsrfCookieName = "csrftoken";
@@ -58,15 +56,15 @@ const LeaveHistory = () => {
 
   const fetchLeaveData = async () => {
     try {
-      const response = await axios.get('http://127.0.0.1:8000/LeaveHistory/'); // Replace with your API endpoint
+      const response = await axios.get("http://127.0.0.1:8000/LeaveHistory/"); // Replace with your API endpoint
       if (response.data.Leaves) {
         setLeaveData(response.data.Leaves);
       } else {
         setLeaveData([]);
       }
     } catch (error) {
-      console.error('Error fetching leave data:', error);
-      setError('Error fetching leave data');
+      console.error("Error fetching leave data:", error);
+      setError("Error fetching leave data");
     } finally {
       setLoading(false);
     }
@@ -75,13 +73,13 @@ const LeaveHistory = () => {
   if (loading) {
     return (
       <>
-        <Nav />
-        <Container>
-          <LeaveHistoryContainer>
-            <h2>Loading...</h2>
-          </LeaveHistoryContainer>
-        </Container>
-        <Footer />
+        <Layout>
+          <Container>
+            <LeaveHistoryContainer>
+              <h2>Loading...</h2>
+            </LeaveHistoryContainer>
+          </Container>
+        </Layout>
       </>
     );
   }
@@ -89,13 +87,13 @@ const LeaveHistory = () => {
   if (error) {
     return (
       <>
-        <Nav />
-        <Container>
-          <LeaveHistoryContainer>
-            <h2>{error}</h2>
-          </LeaveHistoryContainer>
-        </Container>
-        <Footer />
+        <Layout>
+          <Container>
+            <LeaveHistoryContainer>
+              <h2>{error}</h2>
+            </LeaveHistoryContainer>
+          </Container>
+        </Layout>
       </>
     );
   }
@@ -103,43 +101,43 @@ const LeaveHistory = () => {
   return (
     <>
       <Layout>
-      <Container>
-        <LeaveHistoryContainer>
-          <h2>Leave History</h2>
-          <Table>
-            <thead>
-              <tr>
-                <Th>#</Th>
-                <Th>Leave Type</Th>
-                <Th>From</Th>
-                <Th>To</Th>
-                <Th>Posting Date</Th>
-                <Th>Admin Remark</Th>
-                <Th>Status</Th>
-              </tr>
-            </thead>
-            <tbody>
-              {leaveData.length > 0 ? (
-                leaveData.map((leave) => (
-                  <tr key={leave.id}>
-                    <Td>{leave.id}</Td>
-                    <Td>{leave.LeaveType__LeaveType}</Td>
-                    <Td>{leave.FromDate}</Td>
-                    <Td>{leave.ToDate}</Td>
-                    <Td>{leave.PostingDate}</Td>
-                    <Td>{leave.AdminRemark}</Td>
-                    <Td>{leave.Status}</Td>
-                  </tr>
-                ))
-              ) : (
+        <Container>
+          <LeaveHistoryContainer>
+            <h2>Leave History</h2>
+            <Table>
+              <thead>
                 <tr>
-                  <Td colSpan="7">No leave records found.</Td>
+                  <Th>#</Th>
+                  <Th>Leave Type</Th>
+                  <Th>From</Th>
+                  <Th>To</Th>
+                  <Th>Posting Date</Th>
+                  <Th>Admin Remark</Th>
+                  <Th>Status</Th>
                 </tr>
-              )}
-            </tbody>
-          </Table>
-        </LeaveHistoryContainer>
-      </Container>
+              </thead>
+              <tbody>
+                {leaveData.length > 0 ? (
+                  leaveData.map((leave) => (
+                    <tr key={leave.id}>
+                      <Td>{leave.id}</Td>
+                      <Td>{leave.LeaveType__LeaveType}</Td>
+                      <Td>{leave.FromDate}</Td>
+                      <Td>{leave.ToDate}</Td>
+                      <Td>{leave.PostingDate}</Td>
+                      <Td>{leave.AdminRemark}</Td>
+                      <Td>{leave.Status}</Td>
+                    </tr>
+                  ))
+                ) : (
+                  <tr>
+                    <Td colSpan="7">No leave records found.</Td>
+                  </tr>
+                )}
+              </tbody>
+            </Table>
+          </LeaveHistoryContainer>
+        </Container>
       </Layout>
     </>
   );
