@@ -66,7 +66,7 @@ import ManageExpenses from "./Pages/Software/ExpenseManagements/ManageExpenses";
 import JDForm from "./Pages/Software/EmployeesJobs/JDForm";
 import KRA from "./Pages/Software/KRA/KRA";
 import Login from "./Pages/Software/Login";
-import ManagerRating from "./Pages/Software/ManagerRating";
+import ManagerRating from "./Pages/Software/EmployeesJobs/ManagerRating";
 import HoldSalary from "./Pages/Software/Payroll Management/HoldSalary";
 import LeaveEncashment from "./Pages/Software/Payroll Management/LeaveEncashment";
 import OffcyclePayment from "./Pages/Software/Payroll Management/OffcyclePayment";
