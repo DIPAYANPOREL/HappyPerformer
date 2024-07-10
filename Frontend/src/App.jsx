@@ -63,7 +63,7 @@ import EnrollForm from "./Pages/Software/EnrollForm";
 import AddExpense from "./Pages/Software/ExpenseManagements/Addexpense";
 import ExpenseReports from "./Pages/Software/ExpenseManagements/Expensereports";
 import ManageExpenses from "./Pages/Software/ExpenseManagements/ManageExpenses";
-import JDForm from "./Pages/Software/JDForm";
+import JDForm from "./Pages/Software/EmployeesJobs/JDForm";
 import KRA from "./Pages/Software/KRA/KRA";
 import Login from "./Pages/Software/Login";
 import ManagerRating from "./Pages/Software/ManagerRating";
