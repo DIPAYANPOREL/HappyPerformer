@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import styled, { createGlobalStyle } from "styled-components";
-import AllQuizzes from "./AllQuizzes";
+import Header from "../../Components/Software Components/Dashboard/Header";
+import Layout from "../../Components/Software Components/Dashboard/Layout";
 import CreateQuizForm from "./CreateQuizForm";
 
 const GlobalStyle = createGlobalStyle`
@@ -65,7 +66,7 @@ const QuizApp = () => {
     setShowCreateForm(true);
   };
 
-  const handleToggleAllQuizzes = () => {
+  const handleToggleAllQuiz = () => {
     setShowCreateForm(false);
   };
 
@@ -77,30 +78,36 @@ const QuizApp = () => {
 
   return (
     <>
-      <GlobalStyle />
-      <CenteredContainer>
-        <QuizAppContainer>
-          <ButtonContainer>
-            <ToggleButton isActive={showCreateForm} onClick={handleToggleForm}>
-              Create Quiz
-            </ToggleButton>
-            <ToggleButton
-              isActive={!showCreateForm}
-              onClick={handleToggleAllQuizzes}
-            >
-              All Quizzes
-            </ToggleButton>
-          </ButtonContainer>
-          <HRLine />
-          <div>
-            {showCreateForm ? (
-              <CreateQuizForm onCreateQuiz={handleCreateQuiz} />
-            ) : (
-              <AllQuizzes />
-            )}
-          </div>
-        </QuizAppContainer>
-      </CenteredContainer>
+      <Layout>
+        <Header title="Quiz Details" />
+        <GlobalStyle />
+        <CenteredContainer>
+          <QuizAppContainer>
+            <ButtonContainer>
+              <ToggleButton
+                isActive={showCreateForm}
+                onClick={handleToggleForm}
+              >
+                Create Quiz
+              </ToggleButton>
+              <ToggleButton
+                isActive={!showCreateForm}
+                onClick={handleToggleAllQuiz}
+              >
+                All Quizzes
+              </ToggleButton>
+            </ButtonContainer>
+            <HRLine />
+            <div>
+              {showCreateForm ? (
+                <CreateQuizForm onCreateQuiz={handleCreateQuiz} />
+              ) : (
+                <AllQuiz />
+              )}
+            </div>
+          </QuizAppContainer>
+        </CenteredContainer>
+      </Layout>
     </>
   );
 };

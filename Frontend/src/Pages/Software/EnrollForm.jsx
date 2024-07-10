@@ -257,6 +257,8 @@
 
 import React, { useState } from "react";
 import styled from "styled-components";
+import Header from "../../Components/Software Components/Dashboard/Header";
+import Layout from "../../Components/Software Components/Dashboard/Layout";
 
 const CenteredContainer = styled.div`
   display: flex;
@@ -310,7 +312,7 @@ const SelectField = styled.select`
 const SubmitButton = styled.button`
   width: 100%;
   padding: 10px;
-  background-color: purple;
+  background-color: #0077b6;
   color: #ffffff;
   border: none;
   border-radius: 5px;
@@ -338,42 +340,45 @@ const EnrollForm = () => {
   };
 
   return (
-    <CenteredContainer>
-      <FormContainer>
-        <StyledForm onSubmit={handleSubmit}>
-          <FormField>
-            <Label htmlFor="course-title">Course Title:</Label>
-            <SelectField
-              id="course-title"
-              value={courseTitle}
-              onChange={(e) => setCourseTitle(e.target.value)}
-              required
-            >
-              <option value="">Select an option</option>
-              <option value="HTML">HTML</option>
-              <option value="CSS">CSS</option>
-              <option value="Bootstrap">Bootstrap</option>
-              <option value="Tailwind">Tailwind</option>
-              <option value="Styled Components">Styled Components</option>
-              <option value="React">React</option>
-              <option value="JavaScript">JavaScript</option>
-            </SelectField>
-          </FormField>
-          <FormField>
-            <Label htmlFor="email">Email:</Label>
-            <InputField
-              type="email"
-              id="email"
-              placeholder="Enter Email ID"
-              value={email}
-              onChange={(e) => setEmail(e.target.value)}
-              required
-            />
-          </FormField>
-          <SubmitButton type="submit">Submit</SubmitButton>
-        </StyledForm>
-      </FormContainer>
-    </CenteredContainer>
+    <Layout>
+      <Header title="Enroll Employee Course" />
+      <CenteredContainer>
+        <FormContainer>
+          <StyledForm onSubmit={handleSubmit}>
+            <FormField>
+              <Label htmlFor="course-title">Course Title:</Label>
+              <SelectField
+                id="course-title"
+                value={courseTitle}
+                onChange={(e) => setCourseTitle(e.target.value)}
+                required
+              >
+                <option value="">Select an option</option>
+                <option value="HTML">HTML</option>
+                <option value="CSS">CSS</option>
+                <option value="Bootstrap">Bootstrap</option>
+                <option value="Tailwind">Tailwind</option>
+                <option value="Styled Components">Styled Components</option>
+                <option value="React">React</option>
+                <option value="JavaScript">JavaScript</option>
+              </SelectField>
+            </FormField>
+            <FormField>
+              <Label htmlFor="email">Email:</Label>
+              <InputField
+                type="email"
+                id="email"
+                placeholder="Enter Email ID"
+                value={email}
+                onChange={(e) => setEmail(e.target.value)}
+                required
+              />
+            </FormField>
+            <SubmitButton type="submit">Submit</SubmitButton>
+          </StyledForm>
+        </FormContainer>
+      </CenteredContainer>
+    </Layout>
   );
 };
 

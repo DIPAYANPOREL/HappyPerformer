@@ -1,5 +1,7 @@
 import React, { useEffect, useState } from "react";
 import styled, { createGlobalStyle } from "styled-components";
+import Header from "../../Components/Software Components/Dashboard/Header";
+import Layout from "../../Components/Software Components/Dashboard/Layout";
 
 const GlobalStyle = createGlobalStyle`
   html, body {
@@ -71,7 +73,7 @@ const Button = styled.button`
   }
 `;
 
-const Attendance = () => {
+const AttendancePunch = () => {
   const [dateTime, setDateTime] = useState(new Date());
   const loggedInUserEmail = "loggedinuser@example.com"; // Mock logged-in user's email
 
@@ -103,27 +105,34 @@ const Attendance = () => {
 
   return (
     <>
-      <GlobalStyle />
-      <AttendanceContainer>
-        <AttendanceBox>
-          <DateTime>
-            {dateTime.toLocaleDateString()} {dateTime.toLocaleTimeString()}
-          </DateTime>
-          <InputGroup>
-            <Label htmlFor="employee-email">Enter Employee Email:</Label>
-            <br />
-            <Input type="email" id="employee-email" required />
-          </InputGroup>
-          <div>
-            <Button onClick={() => handleButtonClick("In AM")}>In AM</Button>
-            <Button onClick={() => handleButtonClick("Out AM")}>Out AM</Button>
-            <Button onClick={() => handleButtonClick("In PM")}>In PM</Button>
-            <Button onClick={() => handleButtonClick("Out PM")}>Out PM</Button>
-          </div>
-        </AttendanceBox>
-      </AttendanceContainer>
+      <Layout>
+        <Header title="Attendance" />
+        <GlobalStyle />
+        <AttendanceContainer>
+          <AttendanceBox>
+            <DateTime>
+              {dateTime.toLocaleDateString()} {dateTime.toLocaleTimeString()}
+            </DateTime>
+            <InputGroup>
+              <Label htmlFor="employee-email">Enter Employee Email:</Label>
+              <br />
+              <Input type="email" id="employee-email" required />
+            </InputGroup>
+            <div>
+              <Button onClick={() => handleButtonClick("In AM")}>In AM</Button>
+              <Button onClick={() => handleButtonClick("Out AM")}>
+                Out AM
+              </Button>
+              <Button onClick={() => handleButtonClick("In PM")}>In PM</Button>
+              <Button onClick={() => handleButtonClick("Out PM")}>
+                Out PM
+              </Button>
+            </div>
+          </AttendanceBox>
+        </AttendanceContainer>
+      </Layout>
     </>
   );
 };
 
-export default Attendance;
+export default AttendancePunch;

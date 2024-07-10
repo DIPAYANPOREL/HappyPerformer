@@ -52,21 +52,22 @@ import Personaldetails from "./Pages/Software/AddDetails/Personaldetails";
 import QualificationDetails from "./Pages/Software/AddDetails/QualificationDetails";
 import WorkExperience from "./Pages/Software/AddDetails/WorkExperience";
 import AllQuiz from "./Pages/Software/AllQuiz";
+import AttendancePunch from "./Pages/Software/AttendancePunch";
 import AllCases from "./Pages/Software/CaseManagement/AllCases";
 import CreateQuizForm from "./Pages/Software/CreateQuizForm";
 import Dashboard from "./Pages/Software/DashBoard/Dashboard";
 import Faq from "./Pages/Software/DashBoard/FAQ";
 import LoanPayments from "./Pages/Software/DashBoard/LoanPayments";
 import Quiz from "./Pages/Software/DashBoard/Quiz";
+import JDForm from "./Pages/Software/EmployeesJobs/JDForm";
+import ManagerRating from "./Pages/Software/EmployeesJobs/ManagerRating";
 import EnrolEmployeeEdit from "./Pages/Software/EnrolEmployeeEdit";
 import EnrollForm from "./Pages/Software/EnrollForm";
 import AddExpense from "./Pages/Software/ExpenseManagements/Addexpense";
 import ExpenseReports from "./Pages/Software/ExpenseManagements/Expensereports";
 import ManageExpenses from "./Pages/Software/ExpenseManagements/ManageExpenses";
-import JDForm from "./Pages/Software/EmployeesJobs/JDForm";
 import KRA from "./Pages/Software/KRA/KRA";
 import Login from "./Pages/Software/Login";
-import ManagerRating from "./Pages/Software/EmployeesJobs/ManagerRating";
 import HoldSalary from "./Pages/Software/Payroll Management/HoldSalary";
 import LeaveEncashment from "./Pages/Software/Payroll Management/LeaveEncashment";
 import OffcyclePayment from "./Pages/Software/Payroll Management/OffcyclePayment";
@@ -219,11 +220,11 @@ function App() {
       <Route path="/createquiz" element={<CreateQuizForm />} />
       <Route path="/allquiz" element={<AllQuiz />} />
 
-      <Route path="/attendance" element={<Attendance />} />
+      <Route path="/attendancePunch" element={<AttendancePunch />} />
       <Route path="/enroll" element={<EnrollForm />} />
       <Route path="/viewemployees" element={<ViewEmployeesPage />} />
       <Route path="/enrollform" element={<EnrollForm />} />
-      <Route path="/quiz" element={<QuizApp />} />
+      <Route path="/quizz" element={<QuizApp />} />
     </Routes>
   );
 }
