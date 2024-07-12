@@ -88,6 +88,7 @@ import {
 import ToDoList from "./Pages/Software/ToDoList";
 import ViewEmployeesPage from "./Pages/Software/ViewEmployeePages";
 import Training from "./Pages/Training";
+import SalaryDetails from "../src/Components/Software Components/PayRoll/DisplayDetails";
 
 function App() {
   return (
@@ -141,6 +142,7 @@ function App() {
       <Route path="/homesalary" element={<HomeSalary />} />
       <Route path="/addsalary/:emp_emailid" element={<AddSalary />} />
       <Route path="/homesal" element={<HomeSal />} />
+      <Route path="/DisplayDetails/:emp_emailid" element={<SalaryDetails />} />
       <Route path="/paysip" element={<CashChequeTransfer />} />
       <Route path="/resign" element={<Resign />} />
 

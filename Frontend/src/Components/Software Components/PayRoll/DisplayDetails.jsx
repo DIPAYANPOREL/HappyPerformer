@@ -34,7 +34,6 @@ const TableContainer = styled.div`
   margin-bottom: 20px;
   width: 100%;
   max-width: 100%;
-  overflow-x: auto;
   -webkit-overflow-scrolling: touch;
 
   @media screen and (max-width: 768px) {
@@ -149,9 +148,9 @@ const SalaryDetails = () => {
   }, []);
 
   const fetchData = () => {
-    axios.get('your_api_endpoint_here')
+    axios.get('http://127.0.0.1:8000/DisplaySalaryDetails/')
       .then(response => {
-        setData(response.data);
+        setData(response.data.salaries);
       })
       .catch(error => {
         console.error('Error fetching data:', error);
@@ -197,7 +196,6 @@ const SalaryDetails = () => {
           <Table>
             <TableHead>
               <TableRow>
-                <TableHeader>Id</TableHeader>
                 <TableHeader>Email</TableHeader>
                 <TableHeader>Payout Month</TableHeader>
                 <TableHeader>Monthly CTC</TableHeader>
@@ -214,17 +212,16 @@ const SalaryDetails = () => {
               {currentEntries.length > 0 ? (
                 currentEntries.map((item, index) => (
                   <TableRow key={index}>
-                    <TableData>{item.id}</TableData>
-                    <TableData>{item.email}</TableData>
-                    <TableData>{item.payoutMonth}</TableData>
-                    <TableData>{item.monthlyCTC}</TableData>
-                    <TableData>{item.eligibleDeductions}</TableData>
-                    <TableData>{item.yearlyTaxableSalary}</TableData>
-                    <TableData>{item.totalTaxLiability}</TableData>
-                    <TableData>{item.monthlyTDS}</TableData>
-                    <TableData>{item.monthlyEPF}</TableData>
-                    <TableData>{item.monthlyProfessionalTax}</TableData>
-                    <TableData>{item.netSalary}</TableData>
+                    <TableData>{item.emp_emailid}</TableData>
+                    <TableData>{item.payout_month}</TableData>
+                    <TableData>{item.monthly_ctc}</TableData>
+                    <TableData>{item.Eligible_Deductions}</TableData>
+                    <TableData>{item.Yearly_Taxable_Salary}</TableData>
+                    <TableData>{item.Total_Tax_Liability}</TableData>
+                    <TableData>{item.Monthly_TDS}</TableData>
+                    <TableData>{item.Monthly_EPF}</TableData>
+                    <TableData>{item.Monthly_Professional_Tax}</TableData>
+                    <TableData>{item.Net_Salary}</TableData>
                   </TableRow>
                 ))
               ) : (
