@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import { Link } from "react-router-dom";
 import styled, { createGlobalStyle } from "styled-components";
 import Coder from "../../../assets/coding.svg";
 import Item from "../Dashboard/Item";
@@ -75,9 +76,11 @@ const DropdownMenu = styled.div`
   margin-left: 10px;
 `;
 
-const DropdownItem = styled.div`
+const DropdownItem = styled(Link)`
   padding: 5px;
   cursor: pointer;
+  color: white;
+  text-decoration: none;
   &:hover {
     background-color: rgba(255, 255, 255, 0.2);
   }
@@ -100,6 +103,19 @@ const HamburgerIcon = styled.div`
   display: flex;
   justify-content: center;
   align-items: center;
+`;
+
+const ItemContainer = styled(Link)`
+  display: flex;
+  align-items: center;
+  padding: 0.5rem 1rem;
+  color: white;
+  text-decoration: none;
+  transition: background-color 0.3s ease;
+
+  &:hover {
+    background-color: rgba(255, 255, 255, 0.1);
+  }
 `;
 
 const SideBar = ({ isCollapsed, onToggle }) => {
@@ -126,56 +142,96 @@ const SideBar = ({ isCollapsed, onToggle }) => {
         </HamburgerIcon>
         <LogoContainer isCollapsed={isCollapsed}>HappyPerformer</LogoContainer>
         <MenuItems isCollapsed={isCollapsed}>
-          <Item name="Dashboard" icon="💼" />
-          <Item name="Calendar" icon="🕵🏻‍♂️" />
-          <Item name="Social" icon="📲" />
-          <Item name="Settings" icon="🕵🏻‍♂️" />
-          <Item name="To-do-list" icon="📋" />
-          <Item name="KRA" icon="💼" />
-          <Item name="SOP" icon="📋" />
-          <Item name="JD" icon="💼" />
-          <Item name="Forms" icon="📋" />
-          <Item name="Letters" icon="📋" />
-          <Item name="FAQs" icon="🕵🏻‍♂️" />
-          <Item name="Training" icon="📋" />
-          <Item name="Quiz" icon="📋" />
-          <Item name="PHP Tutorials" icon="📋" />
-          <Item name="My Performance" icon="📈" />
-          <Item name="Mark Attendance" icon="📈" />
+          <ItemContainer to="/dashboard">
+            <Item name="Dashboard" icon="💼" />
+          </ItemContainer>
+          <ItemContainer to="/calendar">
+            <Item name="Calendar" icon="🕵🏻‍♂️" />
+          </ItemContainer>
+          <ItemContainer to="/social">
+            <Item name="Social" icon="📲" />
+          </ItemContainer>
+          <ItemContainer to="/settings">
+            <Item name="Settings" icon="🕵🏻‍♂️" />
+          </ItemContainer>
+          <ItemContainer to="/to-do-list">
+            <Item name="To-do-list" icon="📋" />
+          </ItemContainer>
+          <ItemContainer to="/kra">
+            <Item name="KRA" icon="💼" />
+          </ItemContainer>
+          <ItemContainer to="/sop">
+            <Item name="SOP" icon="📋" />
+          </ItemContainer>
+          <ItemContainer to="/jd">
+            <Item name="JD" icon="💼" />
+          </ItemContainer>
+          <ItemContainer to="/forms">
+            <Item name="Forms" icon="📋" />
+          </ItemContainer>
+          <ItemContainer to="/letters">
+            <Item name="Letters" icon="📋" />
+          </ItemContainer>
+          <ItemContainer to="/faqs">
+            <Item name="FAQs" icon="🕵🏻‍♂️" />
+          </ItemContainer>
+          <ItemContainer to="/training">
+            <Item name="Training" icon="📋" />
+          </ItemContainer>
+          <ItemContainer to="/quiz">
+            <Item name="Quiz" icon="📋" />
+          </ItemContainer>
+          <ItemContainer to="/php-tutorials">
+            <Item name="PHP Tutorials" icon="📋" />
+          </ItemContainer>
+          <ItemContainer to="/my-performance">
+            <Item name="My Performance" icon="📈" />
+          </ItemContainer>
+          <ItemContainer to="/mark-attendance">
+            <Item name="Mark Attendance" icon="📈" />
+          </ItemContainer>
           <MenuItem onClick={() => toggleDropdown("leaves")}>
             <span>Leaves</span>
             <span>&#9660;</span>
           </MenuItem>
           <DropdownMenu isOpen={dropdowns.leaves}>
-            <DropdownItem>Apply for Leave</DropdownItem>
-            <DropdownItem>Leave History</DropdownItem>
+            <DropdownItem to="/apply-for-leave">Apply for Leave</DropdownItem>
+            <DropdownItem to="/leave-history">Leave History</DropdownItem>
           </DropdownMenu>
-          <Item name="Add Loan" icon="🕵🏻‍♂️" />
-          <Item name="IT Declaration" icon="📋" />
+          <ItemContainer to="/add-loan">
+            <Item name="Add Loan" icon="🕵🏻‍♂️" />
+          </ItemContainer>
+          <ItemContainer to="/it-declaration">
+            <Item name="IT Declaration" icon="📋" />
+          </ItemContainer>
           <MenuItem onClick={() => toggleDropdown("expense")}>
             <span>Expense Management</span>
             <span>&#9660;</span>
           </MenuItem>
           <DropdownMenu isOpen={dropdowns.expense}>
-            <DropdownItem>Submit Expense</DropdownItem>
-            <DropdownItem>Expense History</DropdownItem>
+            <DropdownItem to="/submit-expense">Submit Expense</DropdownItem>
+            <DropdownItem to="/expense-history">Expense History</DropdownItem>
           </DropdownMenu>
-          <Item name="Resign" icon="📋" />
+          <ItemContainer to="/resign">
+            <Item name="Resign" icon="📋" />
+          </ItemContainer>
           <MenuItem onClick={() => toggleDropdown("caseManagement")}>
             <span>Case Management</span>
             <span>&#9660;</span>
           </MenuItem>
           <DropdownMenu isOpen={dropdowns.caseManagement}>
-            <DropdownItem>New Case</DropdownItem>
-            <DropdownItem>Case History</DropdownItem>
+            <DropdownItem to="/new-case">New Case</DropdownItem>
+            <DropdownItem to="/case-history">Case History</DropdownItem>
           </DropdownMenu>
           <MenuItem onClick={() => toggleDropdown("addDetails")}>
             <span>Add Details</span>
             <span>&#9660;</span>
           </MenuItem>
           <DropdownMenu isOpen={dropdowns.addDetails}>
-            <DropdownItem>Add Work Experience</DropdownItem>
-            <DropdownItem>Add Project</DropdownItem>
+            <DropdownItem to="/add-work-experience">
+              Add Work Experience
+            </DropdownItem>
+            <DropdownItem to="/add-project">Add Project</DropdownItem>
           </DropdownMenu>
         </MenuItems>
         <SVGContainer src={Coder} alt="coding" isCollapsed={isCollapsed} />
