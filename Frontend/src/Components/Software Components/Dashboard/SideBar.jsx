@@ -154,7 +154,7 @@ const SideBar = ({ isCollapsed, onToggle }) => {
           <ItemContainer to="/settings">
             <Item name="Settings" icon="🕵🏻‍♂️" />
           </ItemContainer>
-          <ItemContainer to="/to-do-list">
+          <ItemContainer to="/todo">
             <Item name="To-do-list" icon="📋" />
           </ItemContainer>
           <ItemContainer to="/kra">
@@ -172,7 +172,7 @@ const SideBar = ({ isCollapsed, onToggle }) => {
           <ItemContainer to="/letters">
             <Item name="Letters" icon="📋" />
           </ItemContainer>
-          <ItemContainer to="/faqs">
+          <ItemContainer to="/allfaq">
             <Item name="FAQs" icon="🕵🏻‍♂️" />
           </ItemContainer>
           <ItemContainer to="/training">
@@ -181,13 +181,13 @@ const SideBar = ({ isCollapsed, onToggle }) => {
           <ItemContainer to="/quiz">
             <Item name="Quiz" icon="📋" />
           </ItemContainer>
-          <ItemContainer to="/php-tutorials">
+          <ItemContainer to="/phptuts">
             <Item name="PHP Tutorials" icon="📋" />
           </ItemContainer>
-          <ItemContainer to="/my-performance">
+          <ItemContainer to="/myperformance">
             <Item name="My Performance" icon="📈" />
           </ItemContainer>
-          <ItemContainer to="/mark-attendance">
+          <ItemContainer to="/markattendance">
             <Item name="Mark Attendance" icon="📈" />
           </ItemContainer>
           <MenuItem onClick={() => toggleDropdown("leaves")}>
@@ -195,13 +195,13 @@ const SideBar = ({ isCollapsed, onToggle }) => {
             <span>&#9660;</span>
           </MenuItem>
           <DropdownMenu isOpen={dropdowns.leaves}>
-            <DropdownItem to="/apply-for-leave">Apply for Leave</DropdownItem>
-            <DropdownItem to="/leave-history">Leave History</DropdownItem>
+            <DropdownItem to="/applyforeave">Apply for Leave</DropdownItem>
+            <DropdownItem to="/leavehistory">Leave History</DropdownItem>
           </DropdownMenu>
           <ItemContainer to="/add-loan">
             <Item name="Add Loan" icon="🕵🏻‍♂️" />
           </ItemContainer>
-          <ItemContainer to="/it-declaration">
+          <ItemContainer to="/itdeclaration">
             <Item name="IT Declaration" icon="📋" />
           </ItemContainer>
           <MenuItem onClick={() => toggleDropdown("expense")}>
