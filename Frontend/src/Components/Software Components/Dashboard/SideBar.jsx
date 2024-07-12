@@ -77,6 +77,7 @@ const DropdownMenu = styled.div`
 `;
 
 const DropdownItem = styled(Link)`
+  display: block; /* Added to ensure items are on separate lines */
   padding: 5px;
   cursor: pointer;
   color: white;
@@ -177,6 +178,12 @@ const SideBar = ({ isCollapsed, onToggle }) => {
           </ItemContainer>
           <ItemContainer to="/phptuts">
             <Item name="PHP Tutorials" icon="📋" />
+          </ItemContainer>
+          <ItemContainer to="/itdeclaration">
+            <Item name="IT Declaration" icon="📋" />
+          </ItemContainer>
+          <ItemContainer to="/addloan">
+            <Item name="Add Loan" icon="📋" />
           </ItemContainer>
           <ItemContainer to="/markattendance">
             <Item name="Mark Attendance" icon="📈" />
