@@ -3,6 +3,10 @@ import axios from "axios"; // Import Axios
 import styled from "styled-components";
 import Layout from "../../../Components/Software Components/Dashboard/Layout";
 
+axios.defaults.withCredentials = true;
+axios.defaults.xsrfCookieName = "csrftoken";
+axios.defaults.xsrfHeaderName = "X-CSRFToken";
+
 const OuterContainer = styled.div`
   display: flex;
   justify-content: center;
@@ -76,7 +80,7 @@ const KRA = () => {
   useEffect(() => {
     // Fetch KRAs data when the component mounts
     axios
-      .get("http://127.0.0.1:8000/api/kras/")
+      .get("http://127.0.0.1:8000/Kra/")
       .then((response) => {
         setKRAs(response.data); // Update state with fetched KRAs
       })

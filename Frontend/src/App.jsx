@@ -89,6 +89,7 @@ import ToDoList from "./Pages/Software/ToDoList";
 import ViewEmployeesPage from "./Pages/Software/ViewEmployeePages";
 import Training from "./Pages/Training";
 import SalaryDetails from "../src/Components/Software Components/PayRoll/DisplayDetails";
+import JDList from "./Pages/Software/JDList";
 
 function App() {
   return (
@@ -105,6 +106,7 @@ function App() {
       <Route path="/settings" element={<SettingsPage />} />
       <Route path="todo" element={<ToDoList />} />
       <Route path="/kra" element={<KRA />} />
+      <Route path="/jdlist" element={<JDList />} />
       {/* SOP */}
       <Route path="/sop" element={<SopPolicies />} />
       <Route path="/forms" element={<EmployeeForm />} />
@@ -114,7 +116,7 @@ function App() {
       {/* PHP Tuts */}
       <Route path="/phptuts" element={<PHPTutorials />} />
 
-      <Route path="/markattendance" element={<Attendance />} />
+      <Route path="/markattendance" element={<AttendancePunch />} />
       <Route path="/quiz" element={<Quiz />} />
       <Route path="/myperformance" element={<MyPerformance />} />
 
@@ -222,7 +224,7 @@ function App() {
       <Route path="/createquiz" element={<CreateQuizForm />} />
       <Route path="/allquiz" element={<AllQuiz />} />
 
-      <Route path="/attendancePunch" element={<AttendancePunch />} />
+
       <Route path="/enroll" element={<EnrollForm />} />
       <Route path="/viewemployees" element={<ViewEmployeesPage />} />
       <Route path="/enrollform" element={<EnrollForm />} />

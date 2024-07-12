@@ -46,19 +46,15 @@ const LastContainer = styled.div`
 `;
 
 const Letters = () => {
-  // const letterNames = ["Letter 1", "Letter 2", "Letter 3", "Letter 4"];
-
   const [letterNames, setLetterNames] = useState([]);
 
   useEffect(() => {
-
     axios.get('http://127.0.0.1:8000/Letters/')
-      .then(response =>
-      {
-        if (Array.isArray(response.data)) {
-          setLetterNames(response.data);
-        }
-        else {
+      .then(response => {
+        if (response.data.allocated_letters) {
+          const letters = response.data.allocated_letters.map(letter => letter.letter_name);
+          setLetterNames(letters);
+        } else {
           setLetterNames([]);
         }
       })
@@ -73,7 +69,7 @@ const Letters = () => {
       <YourForms>
         <YourFormsHeading>Your Letters</YourFormsHeading>
         <YourFormsList>
-          {employeeFormNames.map((formName, index) => (
+          {letterNames.map((formName, index) => (
             <FormsList key={index}>{formName}</FormsList>
           ))}
         </YourFormsList>
