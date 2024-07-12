@@ -145,9 +145,6 @@ const SideBar = ({ isCollapsed, onToggle }) => {
           <ItemContainer to="/dashboard">
             <Item name="Dashboard" icon="💼" />
           </ItemContainer>
-          <ItemContainer to="/calendar">
-            <Item name="Calendar" icon="🕵🏻‍♂️" />
-          </ItemContainer>
           <ItemContainer to="/social">
             <Item name="Social" icon="📲" />
           </ItemContainer>
@@ -155,16 +152,16 @@ const SideBar = ({ isCollapsed, onToggle }) => {
             <Item name="Settings" icon="🕵🏻‍♂️" />
           </ItemContainer>
           <ItemContainer to="/todo">
-            <Item name="To-do-list" icon="📋" />
+            <Item name="To-do List" icon="📋" />
           </ItemContainer>
           <ItemContainer to="/kra">
             <Item name="KRA" icon="💼" />
           </ItemContainer>
+          <ItemContainer to="/jdlist">
+            <Item name="JD List" icon="💼" />
+          </ItemContainer>
           <ItemContainer to="/sop">
             <Item name="SOP" icon="📋" />
-          </ItemContainer>
-          <ItemContainer to="/jd">
-            <Item name="JD" icon="💼" />
           </ItemContainer>
           <ItemContainer to="/forms">
             <Item name="Forms" icon="📋" />
@@ -173,22 +170,22 @@ const SideBar = ({ isCollapsed, onToggle }) => {
             <Item name="Letters" icon="📋" />
           </ItemContainer>
           <ItemContainer to="/allfaq">
-            <Item name="FAQs" icon="🕵🏻‍♂️" />
+            <Item name="All FAQs" icon="🕵🏻‍♂️" />
           </ItemContainer>
           <ItemContainer to="/training">
             <Item name="Training" icon="📋" />
           </ItemContainer>
-          <ItemContainer to="/quiz">
-            <Item name="Quiz" icon="📋" />
-          </ItemContainer>
           <ItemContainer to="/phptuts">
             <Item name="PHP Tutorials" icon="📋" />
           </ItemContainer>
-          <ItemContainer to="/myperformance">
-            <Item name="My Performance" icon="📈" />
-          </ItemContainer>
           <ItemContainer to="/markattendance">
             <Item name="Mark Attendance" icon="📈" />
+          </ItemContainer>
+          <ItemContainer to="/quiz">
+            <Item name="Quiz" icon="📋" />
+          </ItemContainer>
+          <ItemContainer to="/myperformance">
+            <Item name="My Performance" icon="📈" />
           </ItemContainer>
           <MenuItem onClick={() => toggleDropdown("leaves")}>
             <span>Leaves</span>
@@ -197,20 +194,21 @@ const SideBar = ({ isCollapsed, onToggle }) => {
           <DropdownMenu isOpen={dropdowns.leaves}>
             <DropdownItem to="/applyforeave">Apply for Leave</DropdownItem>
             <DropdownItem to="/leavehistory">Leave History</DropdownItem>
+            <DropdownItem to="/leavedashboard">Leave Dashboard</DropdownItem>
+            <DropdownItem to="/manageleavetypes">Manage Leave Types</DropdownItem>
+            <DropdownItem to="/leaves">All Leaves</DropdownItem>
+            <DropdownItem to="/pendingleave">Pending Leaves</DropdownItem>
+            <DropdownItem to="/rejectedleave">Rejected Leaves</DropdownItem>
+            <DropdownItem to="/approvedleave">Approved Leaves</DropdownItem>
           </DropdownMenu>
-          <ItemContainer to="/add-loan">
-            <Item name="Add Loan" icon="🕵🏻‍♂️" />
-          </ItemContainer>
-          <ItemContainer to="/itdeclaration">
-            <Item name="IT Declaration" icon="📋" />
-          </ItemContainer>
           <MenuItem onClick={() => toggleDropdown("expense")}>
             <span>Expense Management</span>
             <span>&#9660;</span>
           </MenuItem>
           <DropdownMenu isOpen={dropdowns.expense}>
-            <DropdownItem to="/submit-expense">Submit Expense</DropdownItem>
-            <DropdownItem to="/expense-history">Expense History</DropdownItem>
+            <DropdownItem to="/addexpense">Add Expense</DropdownItem>
+            <DropdownItem to="/expense-report">Expense Report</DropdownItem>
+            <DropdownItem to="/manage-expenses">Manage Expenses</DropdownItem>
           </DropdownMenu>
           <ItemContainer to="/resign">
             <Item name="Resign" icon="📋" />
@@ -220,8 +218,8 @@ const SideBar = ({ isCollapsed, onToggle }) => {
             <span>&#9660;</span>
           </MenuItem>
           <DropdownMenu isOpen={dropdowns.caseManagement}>
-            <DropdownItem to="/new-case">New Case</DropdownItem>
-            <DropdownItem to="/case-history">Case History</DropdownItem>
+            <DropdownItem to="/createcase">Create Case</DropdownItem>
+            <DropdownItem to="/allcases">All Cases</DropdownItem>
           </DropdownMenu>
           <MenuItem onClick={() => toggleDropdown("addDetails")}>
             <span>Add Details</span>
@@ -232,7 +230,25 @@ const SideBar = ({ isCollapsed, onToggle }) => {
               Add Work Experience
             </DropdownItem>
             <DropdownItem to="/add-project">Add Project</DropdownItem>
+            <DropdownItem to="/personaldetails">Personal Details</DropdownItem>
+            <DropdownItem to="/leavedetails">Leave Details</DropdownItem>
+            <DropdownItem to="/jobdetails">Job Details</DropdownItem>
+            <DropdownItem to="/familydetails">Family Details</DropdownItem>
+            <DropdownItem to="/Identitydetails">Identity Details</DropdownItem>
+            <DropdownItem to="/qualificationdetails">Qualification Details</DropdownItem>
+            <DropdownItem to="/workexperience">Work Experience</DropdownItem>
+            <DropdownItem to="/bankdetails">Bank Details</DropdownItem>
+            <DropdownItem to="/dependentdetails">Dependent Details</DropdownItem>
           </DropdownMenu>
+          <ItemContainer to="/banktransfer">
+            <Item name="Bank Transfer" icon="📋" />
+          </ItemContainer>
+          <ItemContainer to="/trainingcalender">
+            <Item name="Training Calender" icon="📋" />
+          </ItemContainer>
+          <ItemContainer to="/employeetraining">
+            <Item name="Employee Training" icon="📋" />
+          </ItemContainer>
         </MenuItems>
         <SVGContainer src={Coder} alt="coding" isCollapsed={isCollapsed} />
       </Container>
