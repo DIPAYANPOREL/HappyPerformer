@@ -4,6 +4,10 @@ import axios from "axios";
 import Footer from "../Components/Software Components/Footer.jsx";
 import Nav from "../Components/Software Components/Dashboard/Nav";
 
+axios.defaults.withCredentials = true;
+axios.defaults.xsrfCookieName = "csrftoken";
+axios.defaults.xsrfHeaderName = "X-CSRFToken";
+
 const Container = styled.div`
   width: 50%;
   margin: 0 auto;
@@ -46,7 +50,7 @@ const CardText = styled.p`
   margin: 5px 0;
 `;
 
-const VideoPlayer = styled.iframe`
+const Thumbnail = styled.img`
   width: 100%;
   height: 145px;
   border: none;
@@ -67,24 +71,20 @@ const Button = styled.a`
 `;
 
 const Training = () => {
-  const [videos, setVideos] = useState([]);
+  const [courses, setCourses] = useState([]);
 
   useEffect(() => {
     const fetchData = async () => {
       try {
         const response = await axios.get("http://127.0.0.1:8000/DisplayTraining/");
-        if (
-          response.data &&
-          Array.isArray(response.data) &&
-          response.data.length > 0
-        ) {
-          setVideos(response.data);
+        if (response.data && Array.isArray(response.data)) {
+          setCourses(response.data);
         } else {
-          setVideos([]);
-          console.log("No videos found");
+          setCourses([]);
+          console.log("No courses found");
         }
       } catch (error) {
-        console.error(error);
+        console.error("Error fetching courses:", error);
       }
     };
 
@@ -99,22 +99,18 @@ const Training = () => {
           <Title>Training Page</Title>
           <hr />
           <Row>
-            {videos.length > 0 ? (
-              videos.map((video) => (
-                <Col key={video.id}>
-                  <YouTubeVideoCard
-                    title={video.title}
-                    channel={video.channel}
-                    views={video.views}
-                    image={video.image}
-                    link={video.link}
+            {courses.length > 0 ? (
+              courses.map((course) => (
+                <Col key={course.course_id}>
+                  <CourseCard
+                    title={course.course_title}
+                    description={course.description}
+                    thumbnail={course.thumbnail}
                   />
-                  <PdfCard title={video.title} pdf={video.pdf} />
-                  <hr />
                 </Col>
               ))
             ) : (
-              <p>No videos found</p>
+              <p>No courses found</p>
             )}
           </Row>
         </CardContainer>
@@ -124,34 +120,13 @@ const Training = () => {
   );
 };
 
-const YouTubeVideoCard = ({ title, channel, views, image, link }) => {
+const CourseCard = ({ title, description, thumbnail }) => {
   return (
     <Card>
+      <Thumbnail src={thumbnail} alt={title} />
       <CardBody>
         <CardTitle>{title}</CardTitle>
-        <CardText>{channel}</CardText>
-        <CardText>{views}</CardText>
-      </CardBody>
-      <VideoPlayer
-        width="100%"
-        height="145"
-        src={link}
-        title="YouTube video player"
-        allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-        allowFullScreen
-      />
-    </Card>
-  );
-};
-
-const PdfCard = ({ title, pdf }) => {
-  return (
-    <Card>
-      <CardBody>
-        <CardTitle>{title}</CardTitle>
-        <Button href={pdf} target="_blank" rel="noopener noreferrer">
-          Study Material
-        </Button>
+        <CardText>{description}</CardText>
       </CardBody>
     </Card>
   );
