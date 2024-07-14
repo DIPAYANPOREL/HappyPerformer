@@ -25,18 +25,7 @@ const ContentContainer = styled.div`
     margin-bottom: 100vh;
   }
 `;
-const Header = styled.h1`
-  text-align: center;
-  margin-bottom: 20px;
-  font-family: Arial, sans-serif;
-  font-size: 20px;
-  font-weight: bold;
 
-  @media (max-width: 768px) {
-    font-size: 15px;
-    margin-bottom: 10px;
-  }
-`;
 const TaskInput = styled.input`
   width: 100%;
   padding: 10px;
@@ -265,7 +254,6 @@ const ToDoList = () => {
         <Header title="To-Do-List" />
         <Container>
           <FoldersContainer>
-            <Header>Folders</Header>
             <FolderList>
               <Folder onClick={() => handleFolderClick("All Tasks")}>
                 <FolderName>All Tasks</FolderName>
