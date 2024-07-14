@@ -1,8 +1,8 @@
-import React, { useState, useEffect } from "react";
-import styled from "styled-components";
-import Nav from "../Components/Software Components/Dashboard/Nav";
-import Footer from "../Components/Software Components/Footer";
 import axios from "axios";
+import React, { useEffect, useState } from "react";
+import styled from "styled-components";
+import Header from "../Components/Software Components/Dashboard/Header";
+import Layout from "../Components/Software Components/Dashboard/Layout";
 
 const FormsContainer = styled.div`
   display: flex;
@@ -51,37 +51,37 @@ const EmployeeForm = () => {
   const [employeeFormNames, setEmployeeFormNames] = useState([]);
 
   useEffect(() => {
-
-    axios.get('http://127.0.0.1:8000/Forms/')
-      .then(response => {
+    axios
+      .get("http://127.0.0.1:8000/Forms/")
+      .then((response) => {
         if (Array.isArray(response.data)) {
           setEmployeeFormNames(response.data);
-        }
-        else {
+        } else {
           setEmployeeFormNames([]);
         }
-
       })
-      .catch(error => {
-        console.error('Error fetching employee form names:', error);
+      .catch((error) => {
+        console.error("Error fetching employee form names:", error);
       });
   }, []);
 
   return (
-    <FormsContainer>
-      <Nav />
-      <YourForms>
-        <YourFormsHeading>Your Forms</YourFormsHeading>
-        <YourFormsList>
-          {employeeFormNames.map((formName, index) => (
-            <FormsList key={index}>{formName}</FormsList>
-          ))}
-        </YourFormsList>
-      </YourForms>
-      <LastContainer>
-        <Footer />
-      </LastContainer>
-    </FormsContainer>
+    <>
+      <Layout>
+        <Header title="Letter" />
+        <FormsContainer>
+          <YourForms>
+            <YourFormsHeading>Your Forms</YourFormsHeading>
+            <YourFormsList>
+              {employeeFormNames.map((formName, index) => (
+                <FormsList key={index}>{formName}</FormsList>
+              ))}
+            </YourFormsList>
+          </YourForms>
+          <LastContainer></LastContainer>
+        </FormsContainer>
+      </Layout>
+    </>
   );
 };
 

@@ -1,8 +1,8 @@
-import React, { useState, useEffect } from 'react';
-import styled from 'styled-components';
-import Lama from '../../assets/Lama.png';
-import Footer from '../../Components/Software Components/Footer';
-import Nav from '../../Components/Software Components/Dashboard/Nav';
+import React, { useEffect, useState } from "react";
+import styled from "styled-components";
+import Lama from "../../assets/Lama.png";
+import Header from "../../Components/Software Components/Dashboard/Header";
+import Layout from "../../Components/Software Components/Dashboard/Layout";
 
 const Container = styled.div`
   max-width: 90%;
@@ -95,8 +95,8 @@ const DataItem = styled.div`
 `;
 
 const MyPerformance = () => {
-  const [selectedEmployee, setSelectedEmployee] = useState('');
-  const [selectedYear, setSelectedYear] = useState('');
+  const [selectedEmployee, setSelectedEmployee] = useState("");
+  const [selectedYear, setSelectedYear] = useState("");
   const [yearWiseCount, setYearWiseCount] = useState({
     totalSopAssigned: 0,
     totalSopAccomplished: 0,
@@ -134,58 +134,76 @@ const MyPerformance = () => {
   }, [selectedEmployee, selectedYear]);
 
   const data = [
-    { label: 'Total SOP Assigned:', value: yearWiseCount.totalSopAssigned },
-    { label: 'Total SOP Accomplished:', value: yearWiseCount.totalSopAccomplished },
-    { label: 'Total KRA Assigned:', value: yearWiseCount.totalKraAssigned },
-    { label: 'Total KRA Accomplished:', value: yearWiseCount.totalKraAccomplished },
-    { label: 'Total JD Assigned:', value: yearWiseCount.totalJdAssigned },
-    { label: 'Total JD Accomplished:', value: yearWiseCount.totalJdAccomplished },
-    { label: 'Total Training Assigned:', value: yearWiseCount.totalTrainingAssigned },
-    { label: 'Total Training Accomplished:', value: yearWiseCount.totalTrainingAccomplished },
+    { label: "Total SOP Assigned:", value: yearWiseCount.totalSopAssigned },
+    {
+      label: "Total SOP Accomplished:",
+      value: yearWiseCount.totalSopAccomplished,
+    },
+    { label: "Total KRA Assigned:", value: yearWiseCount.totalKraAssigned },
+    {
+      label: "Total KRA Accomplished:",
+      value: yearWiseCount.totalKraAccomplished,
+    },
+    { label: "Total JD Assigned:", value: yearWiseCount.totalJdAssigned },
+    {
+      label: "Total JD Accomplished:",
+      value: yearWiseCount.totalJdAccomplished,
+    },
+    {
+      label: "Total Training Assigned:",
+      value: yearWiseCount.totalTrainingAssigned,
+    },
+    {
+      label: "Total Training Accomplished:",
+      value: yearWiseCount.totalTrainingAccomplished,
+    },
   ];
 
   const performers = [
-    { name: 'Shawn Pinto', score: 10 },
-    { name: 'John Cena', score: 9 },
-    { name: 'Jayson Bourne', score: 9 },
+    { name: "Shawn Pinto", score: 10 },
+    { name: "John Cena", score: 9 },
+    { name: "Jayson Bourne", score: 9 },
   ];
 
   return (
     <>
-    < Nav />
-    <Container>
-      <Title>Employees of the Month</Title>
-      <PerformerList>
-        {performers.map((performer, index) => (
-          <PerformerItem key={index}>
-            <Avatar src={Lama} alt="Lama" />
-            <PerformerName>{performer.name}</PerformerName>
-            <PerformerScore>With a total of {performer.score}</PerformerScore>
-          </PerformerItem>
-        ))}
-      </PerformerList>
-      <Title>All Employee Performances</Title>
-      <SelectContainer>
-        <Select value={selectedYear} onChange={handleYearChange}>
-          <option value="">Select Year</option>
-          <option value="2022">2022</option>
-          <option value="2023">2023</option>
-          <option value="2024">2024</option>
-        </Select>
-      </SelectContainer>
-      <YearWiseCountContainer>
-        <YearWiseCountHeader>Year Wise Count</YearWiseCountHeader>
-        <DataContainer>
-          {data.map((item, index) => (
-            <DataItem key={index}>
-              <span>{item.label}</span>
-              <span>{item.value}</span>
-            </DataItem>
-          ))}
-        </DataContainer>
-      </YearWiseCountContainer>
-    </Container>
-    <Footer />
+      <Layout>
+        <Header title="My Performance" />
+        <Container>
+          <Title>Employees of the Month</Title>
+          <PerformerList>
+            {performers.map((performer, index) => (
+              <PerformerItem key={index}>
+                <Avatar src={Lama} alt="Lama" />
+                <PerformerName>{performer.name}</PerformerName>
+                <PerformerScore>
+                  With a total of {performer.score}
+                </PerformerScore>
+              </PerformerItem>
+            ))}
+          </PerformerList>
+          <Title>All Employee Performances</Title>
+          <SelectContainer>
+            <Select value={selectedYear} onChange={handleYearChange}>
+              <option value="">Select Year</option>
+              <option value="2022">2022</option>
+              <option value="2023">2023</option>
+              <option value="2024">2024</option>
+            </Select>
+          </SelectContainer>
+          <YearWiseCountContainer>
+            <YearWiseCountHeader>Year Wise Count</YearWiseCountHeader>
+            <DataContainer>
+              {data.map((item, index) => (
+                <DataItem key={index}>
+                  <span>{item.label}</span>
+                  <span>{item.value}</span>
+                </DataItem>
+              ))}
+            </DataContainer>
+          </YearWiseCountContainer>
+        </Container>
+      </Layout>
     </>
   );
 };

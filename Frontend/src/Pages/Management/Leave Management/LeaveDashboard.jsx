@@ -1,8 +1,10 @@
-import React, { useState, useEffect } from 'react';
-import { Link } from 'react-router-dom';
-import styled from 'styled-components';
+import React, { useEffect, useState } from "react";
+import { Link } from "react-router-dom";
+import styled from "styled-components";
+import Layout from "../../../Components/Software Components/Dashboard/Layout";
 // import Footer from '../../Components/Software Components/Footer';
 // import Nav from '../../Components/Software Components/Dashboard/Nav';
+import Header from "../../../Components/Software Components/Dashboard/Header";
 
 const Container = styled.div`
   max-width: 1200px;
@@ -11,23 +13,6 @@ const Container = styled.div`
   min-height: 100vh;
   @media (max-width: 768px) {
     padding: 10px;
-  }
-`;
-
-const Header = styled.header`
-  text-align: center;
-  margin-bottom: 40px;
-  @media (max-width: 768px) {
-    margin-bottom: 20px;
-  }
-`;
-
-const Title = styled.h1`
-  font-size: 2rem;
-  margin-bottom: 10px;
-  @media (max-width: 768px) {
-    font-size: 1.5rem;
-    margin-bottom: 5px;
   }
 `;
 
@@ -83,14 +68,14 @@ const TableHeader = styled.th`
 const StatusSpan = styled.span`
   color: ${({ status }) => {
     switch (status) {
-      case 'Approved':
-        return 'green';
-      case 'Pending':
-        return 'blue';
-      case 'Rejected':
-        return 'red';
+      case "Approved":
+        return "green";
+      case "Pending":
+        return "blue";
+      case "Rejected":
+        return "red";
       default:
-        return 'inherit';
+        return "inherit";
     }
   }};
 `;
@@ -104,7 +89,6 @@ const Button = styled.button`
   cursor: pointer;
 `;
 
-
 const LeaveDashboard = () => {
   const [registeredEmployees, setRegisteredEmployees] = useState(0);
   const [departments, setDepartments] = useState(0);
@@ -112,7 +96,6 @@ const LeaveDashboard = () => {
   const [leaveApplications, setLeaveApplications] = useState([]);
 
   useEffect(() => {
- 
     fetchData();
   }, []);
 
@@ -124,91 +107,94 @@ const LeaveDashboard = () => {
       setLeaveApplications([
         {
           id: 1,
-          employeeName: 'Shawn Pinto',
-          leaveType: 'Medical Leave',
-          postingDate: '2023-05-01',
-          status: 'Approved',
+          employeeName: "Shawn Pinto",
+          leaveType: "Medical Leave",
+          postingDate: "2023-05-01",
+          status: "Approved",
         },
         {
           id: 2,
-          employeeName: 'Arthur Morgan',
-          leaveType: 'Casual Leave',
-          postingDate: '2023-04-15',
-          status: 'Pending',
+          employeeName: "Arthur Morgan",
+          leaveType: "Casual Leave",
+          postingDate: "2023-04-15",
+          status: "Pending",
         },
         {
           id: 3,
-          employeeName: 'Michael Jackson',
-          leaveType: 'Medical Leave',
-          postingDate: '2023-03-20',
-          status: 'Rejected',
+          employeeName: "Michael Jackson",
+          leaveType: "Medical Leave",
+          postingDate: "2023-03-20",
+          status: "Rejected",
         },
         {
           id: 4,
-          employeeName: 'Peter Griffin',
-          leaveType: 'Medical Leave',
-          postingDate: '2023-03-20',
-          status: 'Rejected',
+          employeeName: "Peter Griffin",
+          leaveType: "Medical Leave",
+          postingDate: "2023-03-20",
+          status: "Rejected",
         },
       ]);
     } catch (error) {
-      console.error('Error fetching data:', error);
+      console.error("Error fetching data:", error);
     }
   };
 
   return (
     <>
-    {/* <Nav /> */}
-    <Container>
-      <Header>
-        <Title>Leave Dashboard</Title>
-      </Header>
-      <StatisticsContainer>
-        <Statistic>
-          <h3>Total Registered Employees</h3>
-          <p>{registeredEmployees}</p>
-        </Statistic>
-        <Statistic>
-          <h3>Listed Departments</h3>
-          <p>{departments}</p>
-        </Statistic>
-        <Statistic>
-          <h3>Listed Leave Types</h3>
-          <p>{leaveTypes}</p>
-        </Statistic>
-      </StatisticsContainer>
-      <Table>
-        <TableHead>
-          <TableRow>
-            <TableHeader>#</TableHeader>
-            <TableHeader>Employee Name</TableHeader>
-            <TableHeader>Leave Type</TableHeader>
-            <TableHeader>Posting Date</TableHeader>
-            <TableHeader>Status</TableHeader>
-            <TableHeader>Details</TableHeader>
-          </TableRow>
-        </TableHead>
-        <tbody>
-          {leaveApplications.map((application, index) => (
-            <TableRow key={application.id}>
-              <TableCell>{index + 1}</TableCell>
-              <TableCell>{application.employeeName}</TableCell>
-              <TableCell>{application.leaveType}</TableCell>
-              <TableCell>{application.postingDate}</TableCell>
-              <TableCell>
-                <StatusSpan status={application.status}>{application.status}</StatusSpan>
-              </TableCell>
-              <TableCell>
-                <Link to={`/LeaveDetails/${application.id}`}>
-                  <Button>View Details</Button>
-                </Link>
-              </TableCell>
-            </TableRow>
-          ))}
-        </tbody>
-      </Table>
-    </Container>
-    {/* < Footer /> */}
+      {/* <Nav /> */}
+      <Layout>
+        <Header title="Leaves" />
+        <Container>
+          <StatisticsContainer>
+            <Statistic>
+              <h3>Total Registered Employees</h3>
+              <p>{registeredEmployees}</p>
+            </Statistic>
+            <Statistic>
+              <h3>Listed Departments</h3>
+              <p>{departments}</p>
+            </Statistic>
+            <Statistic>
+              <h3>Listed Leave Types</h3>
+              <p>{leaveTypes}</p>
+            </Statistic>
+          </StatisticsContainer>
+          <Table>
+            <TableHead>
+              <TableRow>
+                <TableHeader>#</TableHeader>
+                <TableHeader>Employee Name</TableHeader>
+                <TableHeader>Leave Type</TableHeader>
+                <TableHeader>Posting Date</TableHeader>
+                <TableHeader>Status</TableHeader>
+                <TableHeader>Details</TableHeader>
+              </TableRow>
+            </TableHead>
+            <tbody>
+              {leaveApplications.map((application, index) => (
+                <TableRow key={application.id}>
+                  <TableCell>{index + 1}</TableCell>
+                  <TableCell>{application.employeeName}</TableCell>
+                  <TableCell>{application.leaveType}</TableCell>
+                  <TableCell>{application.postingDate}</TableCell>
+                  <TableCell>
+                    <StatusSpan status={application.status}>
+                      {application.status}
+                    </StatusSpan>
+                  </TableCell>
+                  <TableCell>
+                    <Link to={`/LeaveDetails/${application.id}`}>
+                      <Button>View Details</Button>
+                    </Link>
+                  </TableCell>
+                </TableRow>
+              ))}
+            </tbody>
+          </Table>
+        </Container>
+      </Layout>
+
+      {/* < Footer /> */}
     </>
   );
 };

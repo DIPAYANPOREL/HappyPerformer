@@ -1,6 +1,8 @@
 import React from "react";
 import { Link } from "react-router-dom";
 import styled from "styled-components";
+import Header from "../../Components/Software Components/Dashboard/Header";
+import Layout from "../../Components/Software Components/Dashboard/Layout";
 
 const jobs = [
   { id: 1, date: "2024-07-10", link: "/detail/1" },
@@ -58,28 +60,31 @@ const StyledLink = styled(Link)`
 
 const JDList = () => {
   return (
-    <Container>
-      <StyledTable>
-        <thead>
-          <tr>
-            <th>ID</th>
-            <th>Date</th>
-            <th>Link</th>
-          </tr>
-        </thead>
-        <tbody>
-          {jobs.map((job) => (
-            <tr key={job.id}>
-              <td>{job.id}</td>
-              <td>{job.date}</td>
-              <td>
-                <StyledLink to={job.link}>Details</StyledLink>
-              </td>
+    <Layout>
+      <Header title="JD" />
+      <Container>
+        <StyledTable>
+          <thead>
+            <tr>
+              <th>ID</th>
+              <th>Date</th>
+              <th>Link</th>
             </tr>
-          ))}
-        </tbody>
-      </StyledTable>
-    </Container>
+          </thead>
+          <tbody>
+            {jobs.map((job) => (
+              <tr key={job.id}>
+                <td>{job.id}</td>
+                <td>{job.date}</td>
+                <td>
+                  <StyledLink to={job.link}>Details</StyledLink>
+                </td>
+              </tr>
+            ))}
+          </tbody>
+        </StyledTable>
+      </Container>
+    </Layout>
   );
 };
 
