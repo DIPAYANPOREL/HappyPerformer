@@ -157,11 +157,12 @@
 
 // export default BankDetails;
 
+import axios from "axios";
 import React, { useRef, useState } from "react";
 import styled from "styled-components";
-import axios from "axios";
+import Header from "../../../Components/Software Components/Dashboard/Header";
+import Layout from "../../../Components/Software Components/Dashboard/Layout";
 import Footer from "../../../Components/Software Components/Footer";
-import Nav from "../../../Components/Software Components/Dashboard/Nav";
 
 const CaseContainer = styled.div`
   display: flex;
@@ -288,93 +289,97 @@ const BankDetails = () => {
 
   return (
     <>
-      <Nav />
-      <CaseContainer>
-        <Form ref={formRef} onSubmit={submitHandler}>
-          <UIDivider />
-          <UIForm>
-            <Title style={{ textAlign: "center" }}>Bank Details</Title>
-            <CaseField>
-              <Label>
-                Account Holder's Name <Mandatory>*</Mandatory>
-              </Label>
-              <Input
-                type="text"
-                name="accountName"
-                placeholder="Account Holder's Name"
-                style={{ width: "100%" }} // Full width for Account Holder's Name
-              />
-              {formErrors.accountName && (
-                <Error>{formErrors.accountName}</Error>
-              )}
-            </CaseField>
-            <CaseField>
-              <Label>
-                Name Of Bank <Mandatory>*</Mandatory>
-              </Label>
-              <Input type="text" name="bankName" placeholder="Name Of Bank" />
-              {formErrors.bankName && <Error>{formErrors.bankName}</Error>}
-              <Label>
-                Account Number <Mandatory>*</Mandatory>
-              </Label>
-              <Input
-                type="text"
-                name="accountNumber"
-                placeholder="Account Number"
-              />
-              {formErrors.accountNumber && (
-                <Error>{formErrors.accountNumber}</Error>
-              )}
-            </CaseField>
-            <CaseField>
-              <Label>
-                Branch (City) <Mandatory>*</Mandatory>
-              </Label>
-              <Input type="text" name="branch" placeholder="Branch" />
-              {formErrors.branch && <Error>{formErrors.branch}</Error>}
-              <Label>
-                Bank Account Type <Mandatory>*</Mandatory>
-              </Label>
-              <Select name="accountType">
-                <option value="" disabled selected>
-                  Select
-                </option>
-                <option value="Savings Account">Savings Account</option>
-                <option value="Current Accounts">Current Accounts</option>
-                <option value="Fixed Deposit Account">
-                  Fixed Deposit Account
-                </option>
-                <option value="Recurring Deposit Account">
-                  Recurring Deposit Account
-                </option>
-              </Select>
-              {formErrors.accountType && (
-                <Error>{formErrors.accountType}</Error>
-              )}
-            </CaseField>
-            <CaseField>
-              <Label>
-                Branch Code (IFSC) Number <Mandatory>*</Mandatory>
-              </Label>
-              <Input
-                type="text"
-                name="branchCode"
-                placeholder="Branch Code (IFSC) Number"
-              />
-              {formErrors.branchCode && <Error>{formErrors.branchCode}</Error>}
-              <Label>
-                PAN Number <Mandatory>*</Mandatory>
-              </Label>
-              <Input type="text" name="panNumber" placeholder="Pan Number" />
-              {formErrors.panNumber && <Error>{formErrors.panNumber}</Error>}
-            </CaseField>
-            <SubmitButton type="submit">Submit</SubmitButton>
-          </UIForm>
-        </Form>
-      </CaseContainer>
-      <div style={{ position: "fixed", left: 0, bottom: 0, width: "100%" }}>
-        <Footer />
-      </div>
+      <Layout>
+        <Header title="Bank Details" />
+        <CaseContainer>
+          <Form ref={formRef} onSubmit={submitHandler}>
+            <UIDivider />
+            <UIForm>
+              <Title style={{ textAlign: "center" }}>Bank Details</Title>
+              <CaseField>
+                <Label>
+                  Account Holder's Name <Mandatory>*</Mandatory>
+                </Label>
+                <Input
+                  type="text"
+                  name="accountName"
+                  placeholder="Account Holder's Name"
+                  style={{ width: "100%" }} // Full width for Account Holder's Name
+                />
+                {formErrors.accountName && (
+                  <Error>{formErrors.accountName}</Error>
+                )}
+              </CaseField>
+              <CaseField>
+                <Label>
+                  Name Of Bank <Mandatory>*</Mandatory>
+                </Label>
+                <Input type="text" name="bankName" placeholder="Name Of Bank" />
+                {formErrors.bankName && <Error>{formErrors.bankName}</Error>}
+                <Label>
+                  Account Number <Mandatory>*</Mandatory>
+                </Label>
+                <Input
+                  type="text"
+                  name="accountNumber"
+                  placeholder="Account Number"
+                />
+                {formErrors.accountNumber && (
+                  <Error>{formErrors.accountNumber}</Error>
+                )}
+              </CaseField>
+              <CaseField>
+                <Label>
+                  Branch (City) <Mandatory>*</Mandatory>
+                </Label>
+                <Input type="text" name="branch" placeholder="Branch" />
+                {formErrors.branch && <Error>{formErrors.branch}</Error>}
+                <Label>
+                  Bank Account Type <Mandatory>*</Mandatory>
+                </Label>
+                <Select name="accountType">
+                  <option value="" disabled selected>
+                    Select
+                  </option>
+                  <option value="Savings Account">Savings Account</option>
+                  <option value="Current Accounts">Current Accounts</option>
+                  <option value="Fixed Deposit Account">
+                    Fixed Deposit Account
+                  </option>
+                  <option value="Recurring Deposit Account">
+                    Recurring Deposit Account
+                  </option>
+                </Select>
+                {formErrors.accountType && (
+                  <Error>{formErrors.accountType}</Error>
+                )}
+              </CaseField>
+              <CaseField>
+                <Label>
+                  Branch Code (IFSC) Number <Mandatory>*</Mandatory>
+                </Label>
+                <Input
+                  type="text"
+                  name="branchCode"
+                  placeholder="Branch Code (IFSC) Number"
+                />
+                {formErrors.branchCode && (
+                  <Error>{formErrors.branchCode}</Error>
+                )}
+                <Label>
+                  PAN Number <Mandatory>*</Mandatory>
+                </Label>
+                <Input type="text" name="panNumber" placeholder="Pan Number" />
+                {formErrors.panNumber && <Error>{formErrors.panNumber}</Error>}
+              </CaseField>
+              <SubmitButton type="submit">Submit</SubmitButton>
+            </UIForm>
+          </Form>
+        </CaseContainer>
+        <div style={{ position: "fixed", left: 0, bottom: 0, width: "100%" }}>
+          <Footer />
+        </div>
+      </Layout>
     </>
   );
 };

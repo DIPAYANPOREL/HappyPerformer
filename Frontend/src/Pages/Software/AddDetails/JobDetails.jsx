@@ -153,11 +153,11 @@
 
 // export default JobDetails
 
+import axios from "axios";
 import React, { useRef, useState } from "react";
 import styled from "styled-components";
-import axios from "axios";
-import Footer from "../../../Components/Software Components/Footer";
-import Nav from "../../../Components/Software Components/Dashboard/Nav";
+import Header from "../../../Components/Software Components/Dashboard/Header";
+import Layout from "../../../Components/Software Components/Dashboard/Layout";
 
 const CaseContainer = styled.div`
   display: flex;
@@ -278,7 +278,9 @@ const JobDetails = () => {
 
   return (
     <>
-      <Nav />
+      <Layout>
+        <Header title="Job Details" />
+      </Layout>
       <CaseContainer>
         <Form ref={formRef} onSubmit={submitHandler}>
           <UIDivider />
@@ -332,9 +334,6 @@ const JobDetails = () => {
           </UIForm>
         </Form>
       </CaseContainer>
-      <div style={{ position: "fixed", left: 0, bottom: 0, width: "100%" }}>
-        <Footer />
-      </div>
     </>
   );
 };
