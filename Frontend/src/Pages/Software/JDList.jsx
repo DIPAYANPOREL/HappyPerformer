@@ -4,6 +4,7 @@ import styled from "styled-components";
 import Header from "../../Components/Software Components/Dashboard/Header";
 import Layout from "../../Components/Software Components/Dashboard/Layout";
 
+
 const jobs = [
   { id: 1, date: "2024-07-10", link: "/detail/1" },
   { id: 2, date: "2024-07-11", link: "/detail/2" },
