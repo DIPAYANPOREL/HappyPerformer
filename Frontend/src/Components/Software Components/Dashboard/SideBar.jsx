@@ -16,54 +16,59 @@ const Container = styled.div`
   flex-direction: column;
   justify-content: space-between;
   align-items: center;
-  padding: 30px;
+  padding: 20px;
   background-color: #0a1128;
   height: 100vh;
   color: white;
-  width: ${({ isCollapsed }) => (isCollapsed ? "50px" : "250px")};
+  width: ${({ isCollapsed }) => (isCollapsed ? "60px" : "250px")};
   transition: width 0.3s ease-in-out;
   overflow: hidden;
+  position: relative;
 `;
 
 const LogoContainer = styled.div`
   display: ${({ isCollapsed }) => (isCollapsed ? "none" : "flex")};
   justify-content: center;
   align-items: center;
-  width: 80%;
+  width: 100%;
   color: white;
   background-color: #758bfd;
-  height: 5%;
-  border-radius: 50px;
+  height: 60px;
+  border-radius: 8px;
+  margin-bottom: 20px;
 `;
 
 const MenuItems = styled.div`
   width: 100%;
-  height: 60%;
+  flex-grow: 1;
   overflow-y: auto;
-  overflow-x: hidden;
-  display: ${({ isCollapsed }) => (isCollapsed ? "none" : "block")};
   padding-right: 10px;
 
   ::-webkit-scrollbar {
-    width: 5px;
+    width: 6px;
   }
   ::-webkit-scrollbar-track {
     background: #0a1128;
   }
   ::-webkit-scrollbar-thumb {
-    background: #0a1128;
+    background: #758bfd;
   }
   -ms-overflow-style: none;
   scrollbar-width: thin;
-  scrollbar-color: #0a1128 #0a1128;
+  scrollbar-color: #758bfd #0a1128;
 `;
 
 const MenuItem = styled.div`
   display: flex;
   justify-content: space-between;
   align-items: center;
-  padding: 10px;
+  padding: 12px 15px;
   cursor: pointer;
+  color: white;
+  font-size: 1rem;
+  border-radius: 6px;
+  transition: background-color 0.3s ease;
+
   &:hover {
     background-color: rgba(255, 255, 255, 0.1);
   }
@@ -72,16 +77,18 @@ const MenuItem = styled.div`
 const DropdownMenu = styled.div`
   display: ${({ isOpen }) => (isOpen ? "block" : "none")};
   background-color: rgba(255, 255, 255, 0.1);
-  padding: 5px 20px;
-  margin-left: 10px;
+  padding: 5px 0;
+  margin-left: ${({ isCollapsed }) => (isCollapsed ? "0" : "10px")};
 `;
 
 const DropdownItem = styled(Link)`
-  display: block; /* Added to ensure items are on separate lines */
-  padding: 5px;
-  cursor: pointer;
+  display: block;
+  padding: 8px 20px;
   color: white;
   text-decoration: none;
+  font-size: 0.9rem;
+  border-radius: 4px;
+
   &:hover {
     background-color: rgba(255, 255, 255, 0.2);
   }
@@ -91,12 +98,13 @@ const SVGContainer = styled.img`
   height: 120px;
   width: 100%;
   display: ${({ isCollapsed }) => (isCollapsed ? "none" : "block")};
+  margin-top: auto;
 `;
 
 const HamburgerIcon = styled.div`
   position: absolute;
   top: 20px;
-  left: ${({ isCollapsed }) => (isCollapsed ? "10px" : "220px")};
+  left: ${({ isCollapsed }) => (isCollapsed ? "10px" : "250px")};
   font-size: 24px;
   cursor: pointer;
   z-index: 3;
@@ -104,6 +112,7 @@ const HamburgerIcon = styled.div`
   display: flex;
   justify-content: center;
   align-items: center;
+  color: white;
 `;
 
 const ItemContainer = styled(Link)`
@@ -141,9 +150,11 @@ const SideBar = ({ isCollapsed, onToggle }) => {
         <HamburgerIcon isCollapsed={isCollapsed} onClick={onToggle}>
           ≡
         </HamburgerIcon>
-        <LogoContainer isCollapsed={isCollapsed}>HappyPerformer</LogoContainer>
-        <MenuItems isCollapsed={isCollapsed}>
-          <ItemContainer to="/dashboard">
+        <LogoContainer isCollapsed={isCollapsed}>
+          {!isCollapsed && "HappyPerformer"}
+        </LogoContainer>
+        <MenuItems>
+        <ItemContainer to="/dashboard">
             <Item name="Dashboard" icon="💼" />
           </ItemContainer>
           <ItemContainer to="/social">
@@ -194,11 +205,12 @@ const SideBar = ({ isCollapsed, onToggle }) => {
           <ItemContainer to="/myperformance">
             <Item name="My Performance" icon="📈" />
           </ItemContainer>
+          {/* Additional Menu Items */}
           <MenuItem onClick={() => toggleDropdown("leaves")}>
-            <span>Leaves</span>
+            Leaves
             <span>&#9660;</span>
           </MenuItem>
-          <DropdownMenu isOpen={dropdowns.leaves}>
+          <DropdownMenu isOpen={dropdowns.leaves} isCollapsed={isCollapsed}>
             <DropdownItem to="/applyforeave">Apply for Leave</DropdownItem>
             <DropdownItem to="/leavehistory">Leave History</DropdownItem>
             <DropdownItem to="/leavedashboard">Leave Dashboard</DropdownItem>
@@ -209,33 +221,28 @@ const SideBar = ({ isCollapsed, onToggle }) => {
             <DropdownItem to="/approvedleave">Approved Leaves</DropdownItem>
           </DropdownMenu>
           <MenuItem onClick={() => toggleDropdown("expense")}>
-            <span>Expense Management</span>
+            Expense Management
             <span>&#9660;</span>
           </MenuItem>
-          <DropdownMenu isOpen={dropdowns.expense}>
+          <DropdownMenu isOpen={dropdowns.expense} isCollapsed={isCollapsed}>
             <DropdownItem to="/addexpense">Add Expense</DropdownItem>
             <DropdownItem to="/expense-report">Expense Report</DropdownItem>
             <DropdownItem to="/manage-expenses">Manage Expenses</DropdownItem>
           </DropdownMenu>
-          <ItemContainer to="/resign">
-            <Item name="Resign" icon="📋" />
-          </ItemContainer>
           <MenuItem onClick={() => toggleDropdown("caseManagement")}>
-            <span>Case Management</span>
+            Case Management
             <span>&#9660;</span>
           </MenuItem>
-          <DropdownMenu isOpen={dropdowns.caseManagement}>
+          <DropdownMenu isOpen={dropdowns.caseManagement} isCollapsed={isCollapsed}>
             <DropdownItem to="/createcase">Create Case</DropdownItem>
             <DropdownItem to="/allcases">All Cases</DropdownItem>
           </DropdownMenu>
           <MenuItem onClick={() => toggleDropdown("addDetails")}>
-            <span>Add Details</span>
+            Add Details
             <span>&#9660;</span>
           </MenuItem>
-          <DropdownMenu isOpen={dropdowns.addDetails}>
-            <DropdownItem to="/add-work-experience">
-              Add Work Experience
-            </DropdownItem>
+          <DropdownMenu isOpen={dropdowns.addDetails} isCollapsed={isCollapsed}>
+            <DropdownItem to="/add-work-experience">Add Work Experience</DropdownItem>
             <DropdownItem to="/add-project">Add Project</DropdownItem>
             <DropdownItem to="/personaldetails">Personal Details</DropdownItem>
             <DropdownItem to="/leavedetails">Leave Details</DropdownItem>
