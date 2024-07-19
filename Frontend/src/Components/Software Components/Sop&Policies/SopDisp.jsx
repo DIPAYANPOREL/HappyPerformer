@@ -98,8 +98,15 @@ const SopDisp = () => {
 
   const fetchData = async () => {
     try {
-      const response = await axios.get("http://127.0.0.1:8000/soppolicies");
-      setData(response.data);
+      const response = await axios.get("http://127.0.0.1:8000/SopAndPolicies/");
+      console.log("Fetched data:", response.data); // Log data to inspect
+
+      // Adjust this line to correctly set the state
+      setData({
+        tasks: response.data.tasks || [],
+        sop: response.data.data || [], // Update this line based on your API response
+        files: response.data.files || []
+      });
     } catch (error) {
       console.error("Error fetching data:", error);
     } finally {
@@ -112,25 +119,27 @@ const SopDisp = () => {
       let newRating = 0;
       const sopItem = data.sop.find((item) => item.sop_id === sopId);
 
-      if (rating === sopItem.selfRate) {
-        newRating = 0;
-      } else {
-        newRating = rating;
+      if (sopItem) {
+        if (rating === sopItem.selfratings) {
+          newRating = 0;
+        } else {
+          newRating = rating;
+        }
+
+        setData((prevData) => ({
+          ...prevData,
+          sop: prevData.sop.map((item) =>
+            item.sop_id === sopId
+              ? { ...item, selfratings: newRating }
+              : item
+          ),
+        }));
+
+        await axios.put(`http://127.0.0.1:8000/tasks/${sopId}/`, {
+          selfratings: newRating,
+        });
+        fetchData();
       }
-
-      setData((prevData) => ({
-        ...prevData,
-        sop: prevData.sop.map((sopItem) =>
-          sopItem.sop_id === sopId
-            ? { ...sopItem, selfRate: newRating }
-            : sopItem
-        ),
-      }));
-
-      await axios.put(`http://127.0.0.1:8000/tasks/${sopId}/`, {
-        selfratings: newRating,
-      });
-      fetchData();
     } catch (error) {
       console.error("Error updating rating:", error);
     }
@@ -147,19 +156,11 @@ const SopDisp = () => {
 
             {loading ? (
               <NoSOP>
-                <div>
-                  <div>
-                    <h1>Loading...</h1>
-                  </div>
-                </div>
+                <h1>Loading...</h1>
               </NoSOP>
-            ) : data.sop.length === 0 ? (
+            ) : (!data.sop || data.sop.length === 0) ? (
               <NoSOP>
-                <div>
-                  <div>
-                    <h1>No SOP</h1>
-                  </div>
-                </div>
+                <h1>No SOP</h1>
               </NoSOP>
             ) : (
               <TableWrapper>
@@ -182,9 +183,9 @@ const SopDisp = () => {
                       );
                       return (
                         <tr key={sopItem.sop_id}>
-                          <td style={{ width: "3em" }}>{sopItem.sop_id}</td>
-                          <td>{`${sopItem.type} - ${sopItem.s_name}`}</td>
-                          <td>{sopItem.sdate}</td>
+                          <td>{sopItem.sop_id}</td>
+                          <td>{`${sopItem.sop_info.type} - ${sopItem.sop_info.s_name}`}</td>
+                          <td>{sopItem.sop_info.sdate}</td>
                           <td>
                             <StarRating>
                               {[...Array(5)].map((_, index) => (
@@ -204,7 +205,7 @@ const SopDisp = () => {
                             </StarRating>
                           </td>
                           <td>
-                            <a href={`uploads/${sopItem.file_name}`}>
+                            <a href={`uploads/${sopItem.files[0]}`}>
                               Open File
                             </a>
                           </td>
