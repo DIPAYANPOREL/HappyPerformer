@@ -1,8 +1,8 @@
-import React, { useState, useEffect } from "react";
-import styled from "styled-components";
 import axios from "axios";
-import Footer from "../Components/Software Components/Footer.jsx";
-import Nav from "../Components/Software Components/Dashboard/Nav";
+import React, { useEffect, useState } from "react";
+import styled from "styled-components";
+import Header from "../Components/Software Components/Dashboard/Header.jsx";
+import Layout from "../Components/Software Components/Dashboard/Layout.jsx";
 
 axios.defaults.withCredentials = true;
 axios.defaults.xsrfCookieName = "csrftoken";
@@ -76,7 +76,9 @@ const Training = () => {
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const response = await axios.get("http://127.0.0.1:8000/DisplayTraining/");
+        const response = await axios.get(
+          "http://127.0.0.1:8000/DisplayTraining/"
+        );
         if (response.data && Array.isArray(response.data)) {
           setCourses(response.data);
         } else {
@@ -93,29 +95,29 @@ const Training = () => {
 
   return (
     <>
-      <Nav />
-      <Container>
-        <CardContainer>
-          <Title>Training Page</Title>
-          <hr />
-          <Row>
-            {courses.length > 0 ? (
-              courses.map((course) => (
-                <Col key={course.course_id}>
-                  <CourseCard
-                    title={course.course_title}
-                    description={course.description}
-                    thumbnail={course.thumbnail}
-                  />
-                </Col>
-              ))
-            ) : (
-              <p>No courses found</p>
-            )}
-          </Row>
-        </CardContainer>
-      </Container>
-      <Footer />
+      <Layout>
+        <Header title="Training" />
+        <Container>
+          <CardContainer>
+            <hr />
+            <Row>
+              {courses.length > 0 ? (
+                courses.map((course) => (
+                  <Col key={course.course_id}>
+                    <CourseCard
+                      title={course.course_title}
+                      description={course.description}
+                      thumbnail={course.thumbnail}
+                    />
+                  </Col>
+                ))
+              ) : (
+                <p>No courses found</p>
+              )}
+            </Row>
+          </CardContainer>
+        </Container>
+      </Layout>
     </>
   );
 };

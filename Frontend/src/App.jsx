@@ -7,7 +7,6 @@ import BankTransferDetails from "./Pages/Management/BankTransfers/BankTransferDe
 import BankTransferPayout from "./Pages/Management/BankTransfers/BankTransferPayout";
 import CashChequeTransfer from "./Pages/Management/PayrollManagement/CashChequeTransfer";
 import HomeSalary from "./Pages/Management/PayrollManagement/HomeSalary";
-import Attendance from "./Pages/Software/Attendance/Attendance";
 import CreateCase from "./Pages/Software/CaseManagement/CreateCase";
 import Add_Courses from "./Pages/Software/Courses/Add_Courses";
 import Add_Media_Content from "./Pages/Software/Courses/Add_Media_Content";
@@ -15,9 +14,13 @@ import Update_Delete_Media from "./Pages/Software/Courses/Update_Delete_Media";
 import Update_Media from "./Pages/Software/Courses/Update_Media";
 import Upload_Media from "./Pages/Software/Courses/Upload_Media";
 // import EmployeeMaster from "./Pages/Software/EmployeeMaster/EmployeeMaster";
-import DisplayDetails from "../src/Components/Software Components/PayRoll/DisplayDetails";
+import {
+  default as DisplayDetails,
+  default as SalaryDetails,
+} from "../src/Components/Software Components/PayRoll/DisplayDetails";
 import RevisionHistory from "../src/Components/Software Components/PayRoll/RevisionHistory";
 import HomeSal from "./Components/Software Components/PayRoll/HomeSal";
+import Calendar from "./Pages/Calendar";
 import EmployeeForm from "./Pages/EmployeeForm";
 import ITdeclaration from "./Pages/ITdeclaration";
 import ApplyforLeave from "./Pages/Leave Management/ApplyforLeave";
@@ -66,6 +69,7 @@ import EnrollForm from "./Pages/Software/EnrollForm";
 import AddExpense from "./Pages/Software/ExpenseManagements/Addexpense";
 import ExpenseReports from "./Pages/Software/ExpenseManagements/Expensereports";
 import ManageExpenses from "./Pages/Software/ExpenseManagements/ManageExpenses";
+import JDList from "./Pages/Software/JDList";
 import KRA from "./Pages/Software/KRA/KRA";
 import Login from "./Pages/Software/Login";
 import HoldSalary from "./Pages/Software/Payroll Management/HoldSalary";
@@ -88,9 +92,6 @@ import {
 import ToDoList from "./Pages/Software/ToDoList";
 import ViewEmployeesPage from "./Pages/Software/ViewEmployeePages";
 import Training from "./Pages/Training";
-import SalaryDetails from "../src/Components/Software Components/PayRoll/DisplayDetails";
-import JDList from "./Pages/Software/JDList";
-
 function App() {
   return (
     <Routes>
@@ -103,10 +104,12 @@ function App() {
       {/* Common */}
       <Route path="/dashboard" element={<Dashboard />} />
       <Route path="/social" element={<Social />} />
+      <Route path="/calendar" element={<Calendar />} />
       <Route path="/settings" element={<SettingsPage />} />
-      <Route path="todo" element={<ToDoList />} />
+      <Route path="/todo" element={<ToDoList />} />
       <Route path="/kra" element={<KRA />} />
       <Route path="/jdlist" element={<JDList />} />
+      <Route path="/training" element={<Training />} />
       {/* SOP */}
       <Route path="/sop" element={<SopPolicies />} />
       <Route path="/forms" element={<EmployeeForm />} />
@@ -223,7 +226,6 @@ function App() {
       {/* Quizes */}
       <Route path="/createquiz" element={<CreateQuizForm />} />
       <Route path="/allquiz" element={<AllQuiz />} />
-
 
       <Route path="/enroll" element={<EnrollForm />} />
       <Route path="/viewemployees" element={<ViewEmployeesPage />} />
