@@ -178,11 +178,11 @@
 
 // export default Personaldetails;
 
+import axios from "axios";
 import React, { useRef } from "react";
 import styled from "styled-components";
-import axios from "axios";
-import Footer from "../../../Components/Software Components/Footer";
-import Nav from "../../../Components/Software Components/Dashboard/Nav";
+import Header from "../../../Components/Software Components/Dashboard/Header";
+import Layout from "../../../Components/Software Components/Dashboard/Layout";
 
 const ProfileCard = styled.div`
   display: flex;
