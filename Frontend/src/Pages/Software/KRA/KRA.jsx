@@ -80,8 +80,9 @@ const KRA = () => {
   useEffect(() => {
     // Fetch KRAs data when the component mounts
     axios
-      .get("http://127.0.0.1:8000/Kra/")
+      .get("http://127.0.0.1:8000/kra_list/")
       .then((response) => {
+        console.log("Fetched KRAs:", response.data); // Log fetched data
         setKRAs(response.data); // Update state with fetched KRAs
       })
       .catch((error) => {
